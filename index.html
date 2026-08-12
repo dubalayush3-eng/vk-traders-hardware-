@@ -23,6 +23,8 @@ h1{font-size:22px;margin:0}header small{opacity:.9}.cart{background:white;color:
 
 <div id="adminPanel" class="panel"><div class="box"><button class="close" onclick="closeAdmin()">Close</button><h2>Add Product</h2>
 <input id="pname" placeholder="Product name"><input id="pprice" type="number" placeholder="Price ₹"><input id="pcat" placeholder="Category (e.g. Plumbing)"><input id="pemoji" placeholder="Emoji (e.g. 🔧)" value="🔧"><button onclick="addProduct()">Add Product</button>
+ <label>Choose Photo</label>
+<input type="file" id="productPhoto" accept="image/*">
 <div class="notice">Products are saved in this browser. You can add 100+ products without changing the website code.</div><hr><div id="manage"></div></div></div>
 
 <div id="cartPanel" class="panel"><div class="box"><button class="close" onclick="closeCart()">Close</button><h2>Your Cart</h2><div id="cart"></div><div class="notice">🏠 Home Delivery: <b>Additional Charges Apply</b><br>🏪 Self Pickup: Free</div><button onclick="orderWhatsApp()">Order on WhatsApp</button></div></div>
