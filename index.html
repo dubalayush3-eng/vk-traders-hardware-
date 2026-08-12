@@ -17,6 +17,12 @@ h1{font-size:22px;margin:0}header small{opacity:.9}.cart{background:white;color:
 <body>
 <header><div><h1>V K Traders and Hardware</h1><small>Good Quality Material • Home Delivery Available</small></div><button class="cart" onclick="openCart()">🛒 Cart (<span id="count">0</span>)</button></header>
 <section class="hero"><h2>Hardware & Plumbing Products</h2><p>Find products quickly and place your order.</p></section>
+ <section class="hero">
+<h2>Hardware & Plumbing Products</h2>
+<a href="https://maps.app.goo.gl/cnreYKyo2iWvuaAa8" target="_blank">
+📍 Get Directions on Google Maps
+</a>
+ <div class="controls">
 <div class="controls"><input id="search" placeholder="🔍 Search products..." oninput="render()"><select id="cat" onchange="render()"><option value="">All Categories</option></select></div>
 <div id="products" class="grid"></div>
 <div class="admin"><button onclick="openAdmin()">⚙️ Manage Products</button></div>
