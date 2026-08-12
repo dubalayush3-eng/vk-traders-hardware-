@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>V K Traders and Hardware</title>
+<style>
+*{box-sizing:border-box}body{margin:0;font-family:Arial,sans-serif;background:#f5f7fb;color:#172033}
+header{background:#0d47a1;color:white;padding:18px 5%;display:flex;justify-content:space-between;align-items:center;gap:15px;position:sticky;top:0;z-index:5}
+h1{font-size:22px;margin:0}header small{opacity:.9}.cart{background:white;color:#0d47a1;border:0;border-radius:22px;padding:10px 16px;font-weight:bold}
+.hero{padding:28px 5%;background:white}.hero h2{margin:0 0 8px;font-size:28px}.hero p{margin:0 0 16px;color:#596579}
+.controls{padding:15px 5%;display:flex;gap:10px;flex-wrap:wrap}.controls input,.controls select{padding:12px;border:1px solid #ccd3df;border-radius:10px;flex:1;min-width:180px}
+.grid{padding:5px 5% 100px;display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:16px}
+.card{background:white;border-radius:14px;padding:15px;box-shadow:0 2px 10px #00000010}.photo{height:130px;background:#eef2f7;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:48px;margin-bottom:12px}.card h3{margin:5px 0;font-size:17px}.price{font-weight:bold;color:#0d47a1;font-size:18px}.card button,.admin button{border:0;border-radius:9px;padding:10px 12px;background:#0d47a1;color:white;font-weight:bold;cursor:pointer;margin-top:9px}.admin{position:fixed;right:15px;bottom:15px;z-index:10}.panel{display:none;position:fixed;inset:0;background:#0008;z-index:20;padding:20px}.box{background:white;max-width:520px;margin:30px auto;padding:20px;border-radius:16px;max-height:90vh;overflow:auto}.box input{width:100%;padding:11px;margin:7px 0;border:1px solid #ccd3df;border-radius:8px}.row{display:flex;gap:8px}.row>*{flex:1}.close{float:right;background:#eee!important;color:#222!important}.notice{background:#fff8e1;padding:12px;border-radius:10px;margin-top:12px}
+</style>
+</head>
+<body>
+<header><div><h1>V K Traders and Hardware</h1><small>Good Quality Material • Home Delivery Available</small></div><button class="cart" onclick="openCart()">🛒 Cart (<span id="count">0</span>)</button></header>
+<section class="hero"><h2>Hardware & Plumbing Products</h2><p>Find products quickly and place your order.</p></section>
+<div class="controls"><input id="search" placeholder="🔍 Search products..." oninput="render()"><select id="cat" onchange="render()"><option value="">All Categories</option></select></div>
+<div id="products" class="grid"></div>
+<div class="admin"><button onclick="openAdmin()">⚙️ Manage Products</button></div>
+
+<div id="adminPanel" class="panel"><div class="box"><button class="close" onclick="closeAdmin()">Close</button><h2>Add Product</h2>
+<input id="pname" placeholder="Product name"><input id="pprice" type="number" placeholder="Price ₹"><input id="pcat" placeholder="Category (e.g. Plumbing)"><input id="pemoji" placeholder="Emoji (e.g. 🔧)" value="🔧"><button onclick="addProduct()">Add Product</button>
+<div class="notice">Products are saved in this browser. You can add 100+ products without changing the website code.</div><hr><div id="manage"></div></div></div>
+
+<div id="cartPanel" class="panel"><div class="box"><button class="close" onclick="closeCart()">Close</button><h2>Your Cart</h2><div id="cart"></div><div class="notice">🏠 Home Delivery: <b>Additional Charges Apply</b><br>🏪 Self Pickup: Free</div><button onclick="orderWhatsApp()">Order on WhatsApp</button></div></div>
+
+<script>
+const defaultProducts=[
+["PVC Pipe","120","Plumbing","🔵"],["PVC Elbow","25","Plumbing","🔧"],["Ball Valve","180","Plumbing","⚙️"],["Teflon Tape","20","Plumbing","🧰"],["Pipe Clamp","15","Hardware","🔩"],["CPVC Pipe","150","Plumbing","🔵"],["GI Nipple","35","Plumbing","🔩"],["Bib Cock","260","Sanitary","🚰"],["PTMT Tap","180","Sanitary","🚰"],["Hose Pipe","220","Plumbing","🟢"],["Screw Set","80","Hardware","🔩"],["Wall Plug","30","Hardware","🧱"]];
+let products=JSON.parse(localStorage.getItem("vk_products")||"null")||defaultProducts;
+let cart=JSON.parse(localStorage.getItem("vk_cart")||"{}");
+function save(){localStorage.setItem("vk_products",JSON.stringify(products));localStorage.setItem("vk_cart",JSON.stringify(cart));}
+function render(){
+ let s=document.getElementById("search").value.toLowerCase(), c=document.getElementById("cat").value;
+ let cats=[...new Set(products.map(p=>p[2]))], sel=document.getElementById("cat"); let old=sel.value;
+ sel.innerHTML='<option value="">All Categories</option>'+cats.map(x=>`<option>${x}</option>`).join("");sel.value=c||old;
+ document.getElementById("products").innerHTML=products.filter(p=>(!s||p[0].toLowerCase().includes(s))&&(!sel.value||p[2]===sel.value)).map((p,i)=>`<div class="card"><div class="photo">${p[3]}</div><h3>${p[0]}</h3><div>${p[2]}</div><div class="price">₹${p[1]}</div><button onclick="add(${i})">Add to Cart</button></div>`).join("");
+ document.getElementById("count").textContent=Object.values(cart).reduce((a,b)=>a+b,0);
+}
+function add(i){cart[i]=(cart[i]||0)+1;save();render();}
+function openCart(){document.getElementById("cartPanel").style.display="block";let items=Object.keys(cart).filter(i=>cart[i]);let total=items.reduce((t,i)=>t+products[i][1]*cart[i],0);document.getElementById("cart").innerHTML=items.length?items.map(i=>`<p><b>${products[i][0]}</b> × ${cart[i]} — ₹${products[i][1]*cart[i]}</p>`).join("")+`<hr><h3>Total: ₹${total}</h3>`:"<p>Your cart is empty.</p>";}
+function closeCart(){document.getElementById("cartPanel").style.display="none"}
+function openAdmin(){document.getElementById("adminPanel").style.display="block";manage()}
+function closeAdmin(){document.getElementById("adminPanel").style.display="none"}
+function addProduct(){let n=pname.value.trim(),pr=pprice.value,ca=pcat.value.trim(),e=pemoji.value||"🔧";if(!n||!pr||!ca)return alert("Please fill product name, price and category.");products.push([n,pr,ca,e]);save();pname.value=pprice.value=pcat.value="";render();manage();}
+function manage(){document.getElementById("manage").innerHTML="<h3>Products: "+products.length+"</h3>"+products.map((p,i)=>`<div style="padding:7px 0;border-bottom:1px solid #eee">${p[3]} ${p[0]} — ₹${p[1]} <button onclick="del(${i})">Delete</button></div>`).join("")}
+function del(i){if(confirm("Delete this product?")){products.splice(i,1);save();render();manage();}}
+function orderWhatsApp(){let items=Object.keys(cart).filter(i=>cart[i]);if(!items.length)return alert("Cart is empty.");let msg="V K Traders and Hardware Order%0A%0A"+items.map(i=>`${products[i][0]} x ${cart[i]} = ₹${products[i][1]*cart[i]}`).join("%0A");msg+="%0A%0AHome Delivery: Additional Charges Apply";window.open("https://wa.me/919623009626?text="+msg,"_blank");}
+render();
+</script>
+</body></html>
