@@ -1,114 +1,547 @@
 <!doctype html>
 <html lang="en">
 <head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
 <title>VK Traders & Hardware | Hardware Shop in Maharashtra</title>
-<meta name="description" content="VK Traders & Hardware - Good quality hardware material and Kapila Company products. Home delivery available in Maharashtra.">
+<meta name="description" content="VK Traders & Hardware - Good quality hardware material and Kapila Company products. Home delivery available.">
 <style>
-*{box-sizing:border-box}body{margin:0;font-family:Arial,sans-serif;background:#f5f7fb;color:#172033}
-header{background:#0d47a1;color:white;padding:18px 5%;display:flex;justify-content:space-between;align-items:center;gap:15px;position:sticky;top:0;z-index:5}
-h1{font-size:22px;margin:0}header small{opacity:.9}.cart{background:white;color:#0d47a1;border:0;border-radius:22px;padding:10px 16px;font-weight:bold}
-.hero{padding:28px 5%;background:white}.hero h2{margin:0 0 8px;font-size:28px}.hero p{margin:0 0 16px;color:#596579}
-.controls{padding:15px 5%;display:flex;gap:10px;flex-wrap:wrap}.controls input,.controls select{padding:12px;border:1px solid #ccd3df;border-radius:10px;flex:1;min-width:180px}
-.controls{
-  padding:15px 5%;
-  display:flex;
-  gap:10px;
-  align-items:center;
-}
+*{box-sizing:border-box}
+body{margin:0;font-family:Arial,sans-serif;background:#f5f7fb;color:#172033}
+header{background:#0d47a1;color:#fff;padding:14px 5%;display:flex;justify-content:space-between;align-items:center;gap:12px;position:sticky;top:0;z-index:10}
+h1{font-size:22px;margin:0}
+header small{opacity:.9}
+.cart{background:#fff;color:#0d47a1;border:0;border-radius:22px;padding:10px 16px;font-weight:bold}
+.hero{padding:24px 5%;background:#fff}
+.hero h2{margin:0 0 8px;font-size:27px}
+.hero p{margin:0;color:#596579}
+.map-link{display:inline-block;margin-top:4px;color:#0d47a1;font-weight:bold}
+.controls{padding:15px 5%;display:flex;gap:10px;align-items:center;flex-wrap:wrap;background:#f5f7fb}
+.controls input,.controls select{padding:12px;border:1px solid #ccd3df;border-radius:10px;min-width:0;font-size:16px}
+.controls input{flex:2}
+.controls select{flex:1}
+.grid{padding:10px 5% 100px;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;align-items:start}
+.card{background:#fff;border-radius:14px;padding:12px;box-shadow:0 2px 10px #00000012;width:100%;min-width:0}
+.photo{height:135px;background:#eef3f9;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:58px;margin-bottom:10px;overflow:hidden}
+.photo img{width:100%;height:100%;object-fit:contain}
+.card h3{font-size:17px;margin:5px 0}
+.card .category{color:#596579;font-size:14px}
+.price{color:#0d47a1;font-size:18px;font-weight:bold;margin:5px 0 10px}
+.card button,.admin button,.box button{background:#0d47a1;color:#fff;border:0;border-radius:8px;padding:9px 12px;font-weight:bold}
+.admin{position:fixed;right:12px;bottom:14px;z-index:9}
+.panel{display:none;position:fixed;inset:0;background:#0008;z-index:20;overflow:auto;padding:25px 12px}
+.box{background:#fff;max-width:700px;margin:20px auto;padding:20px;border-radius:14px}
+.close{float:right;background:#555!important}
+.box input{display:block;width:100%;padding:12px;margin:9px 0;border:1px solid #ccd3df;border-radius:8px}
+.notice{background:#fff7d6;padding:12px;border-radius:10px;margin:12px 0}
+#manage div{padding:7px 0;border-bottom:1px solid #eee}
+.load{text-align:center;padding:0 0 110px}
+.load button{background:#0d47a1;color:#fff;border:0;border-radius:9px;padding:12px 20px;font-weight:bold}
 
-.controls input,
-.controls select{
-  flex:1;
-  padding:12px;
-  border:1px solid #ddd;
-  border-radius:8px;
-  font-size:16px;
-  min-width:0;
-}
-
-.grid{
-  padding:15px 5% 100px;
-  display:grid;
-  grid-template-columns:repeat(auto-fill,minmax(220px,1fr));
-  gap:14px;
-  align-items:start;
-}
-
-.card{
-  background:white;
-  border-radius:14px;
-  padding:15px;
-  box-shadow:0 2px 10px #00000012;
-  width:100%;
-}
-
-.card img{
-  width:100%;
-  height:160px;
-  object-fit:contain;
-  border-radius:10px;
+@media(max-width:900px){
+.grid{grid-template-columns:repeat(3,minmax(0,1fr))}
 }
 
 @media(max-width:600px){
-  .controls{
-    flex-direction:column;
-    align-items:stretch;
-  }
-
-  .grid{
-    grid-template-columns:1fr 1fr;
-    padding:10px 15px 100px;
-  }
-
-  .card{
-    padding:10px;
-  }
+header{padding:12px 4%}
+h1{font-size:18px}
+header small{font-size:11px}
+.hero{padding:20px 5%}
+.hero h2{font-size:22px}
+.controls{padding:12px 5%;flex-direction:row;align-items:stretch}
+.controls input,.controls select{width:100%;flex:1 1 100%}
+.grid{grid-template-columns:repeat(2,minmax(0,1fr));padding:8px 12px 70px;gap:10px}
+.card{padding:9px}
+.photo{height:105px;font-size:45px}
+.card h3{font-size:15px}
+.card .category{font-size:12px}
+.price{font-size:16px}
+.card button{padding:8px;font-size:12px}
 }
 </style>
 </head>
+
 <body>
-<header><div><h1>V K Traders and Hardware</h1><small>Good Quality Material • Home Delivery Available</small></div><button class="cart" onclick="openCart()">🛒 Cart (<span id="count">0</span>)</button></header>
-<section class="hero"><h2>Hardware & Plumbing Products</h2><p>Find products quickly and place your order.</p></section>
- <section class="hero">
+
+<header>
+<div>
+<h1>V K Traders and Hardware</h1>
+<small>Good Quality Material • Home Delivery Available</small>
+</div>
+<button class="cart" onclick="openCart()">🛒 Cart (<span id="count">0</span>)</button>
+</header>
+
+<section class="hero">
 <h2>Hardware & Plumbing Products</h2>
-<a href="https://maps.app.goo.gl/cnreYKyo2iWvuaAa8" target="_blank">
+<p>Find products quickly and place your order.</p>
+
+<a class="map-link" href="https://maps.app.goo.gl/cnreYKyo2iWvuaAa8" target="_blank" rel="noopener">
 📍 Get Directions on Google Maps
 </a>
- <div class="controls">
-<div class="controls"><input id="search" placeholder="🔍 Search products..." oninput="render()"><select id="cat" onchange="render()"><option value="">All Categories</option></select></div>
+</section>
+
+<div class="controls">
+<input id="search" placeholder="🔍 Search products..." oninput="render()">
+
+<select id="cat" onchange="render()">
+<option value="">All Categories</option>
+</select>
+</div>
+
 <div id="products" class="grid"></div>
-<div class="admin"><button onclick="openAdmin()">⚙️ Manage Products</button></div>
 
-<div id="adminPanel" class="panel"><div class="box"><button class="close" onclick="closeAdmin()">Close</button><h2>Add Product</h2>
-<input id="pname" placeholder="Product name"><input id="pprice" type="number" placeholder="Price ₹"><input id="pcat" placeholder="Category (e.g. Plumbing)"><input id="pemoji" placeholder="Emoji (e.g. 🔧)" value="🔧"><button onclick="addProduct()">Add Product</button>
- <label>Choose Photo</label>
+<div class="load">
+<button id="loadBtn" onclick="loadMore()">Show More Products</button>
+</div>
+
+<div class="admin">
+<button onclick="openAdmin()">⚙️ Manage Products</button>
+</div>
+
+<div id="adminPanel" class="panel">
+<div class="box">
+
+<button class="close" onclick="closeAdmin()">Close</button>
+
+<h2>Add Product</h2>
+
+<input id="pname" placeholder="Product name">
+
+<input id="pprice" type="number" placeholder="Price ₹">
+
+<input id="pcat" placeholder="Category (e.g. Plumbing)">
+
+<input id="pemoji" placeholder="Emoji (e.g. 🔧)" value="🔧">
+
+<label><b>Choose Product Photo</b></label>
+
 <input type="file" id="productPhoto" accept="image/*">
-<div class="notice">Products are saved in this browser. You can add 100+ products without changing the website code.</div><hr><div id="manage"></div></div></div>
 
-<div id="cartPanel" class="panel"><div class="box"><button class="close" onclick="closeCart()">Close</button><h2>Your Cart</h2><div id="cart"></div><div class="notice">🏠 Home Delivery: <b>Additional Charges Apply</b><br>🏪 Self Pickup: Free</div><button onclick="orderWhatsApp()">Order on WhatsApp</button></div></div>
+<button onclick="addProduct()">Add Product</button>
+
+<div class="notice">
+Products are saved in this browser. You can add 500+ products without changing the website code.
+</div>
+
+<hr>
+
+<div id="manage"></div>
+
+</div>
+</div>
+
+<div id="cartPanel" class="panel">
+<div class="box">
+
+<button class="close" onclick="closeCart()">Close</button>
+
+<h2>Your Cart</h2>
+
+<div id="cart"></div>
+
+<div class="notice">
+🏠 Home Delivery: <b>Additional Charges Apply</b><br>
+🏪 Self Pickup: Free
+</div>
+
+<button onclick="orderWhatsApp()">Order on WhatsApp</button>
+
+</div>
+</div>
 
 <script>
-const defaultProducts=[
-["PVC Pipe","120","Plumbing","🔵"],["PVC Elbow","25","Plumbing","🔧"],["Ball Valve","180","Plumbing","⚙️"],["Teflon Tape","20","Plumbing","🧰"],["Pipe Clamp","15","Hardware","🔩"],["CPVC Pipe","150","Plumbing","🔵"],["GI Nipple","35","Plumbing","🔩"],["Bib Cock","260","Sanitary","🚰"],["PTMT Tap","180","Sanitary","🚰"],["Hose Pipe","220","Plumbing","🟢"],["Screw Set","80","Hardware","🔩"],["Wall Plug","30","Hardware","🧱"]];
-let products=JSON.parse(localStorage.getItem("vk_products")||"null")||defaultProducts;
-let cart=JSON.parse(localStorage.getItem("vk_cart")||"{}");
-function save(){localStorage.setItem("vk_products",JSON.stringify(products));localStorage.setItem("vk_cart",JSON.stringify(cart));}
-function render(){
- let s=document.getElementById("search").value.toLowerCase(), c=document.getElementById("cat").value;
- let cats=[...new Set(products.map(p=>p[2]))], sel=document.getElementById("cat"); let old=sel.value;
- sel.innerHTML='<option value="">All Categories</option>'+cats.map(x=>`<option>${x}</option>`).join("");sel.value=c||old;
- document.getElementById("products").innerHTML=products.filter(p=>(!s||p[0].toLowerCase().includes(s))&&(!sel.value||p[2]===sel.value)).map((p,i)=>`<div class="card"><div class="photo">${p[3]}</div><h3>${p[0]}</h3><div>${p[2]}</div><div class="price">₹${p[1]}</div><button onclick="add(${i})">Add to Cart</button></div>`).join("");
- document.getElementById("count").textContent=Object.values(cart).reduce((a,b)=>a+b,0);
+
+const defaultProducts = [
+["PVC Pipe","120","Plumbing","🔵"],
+["PVC Elbow","25","Plumbing","🔧"],
+["Ball Valve","180","Plumbing","⚙️"],
+["Teflon Tape","20","Plumbing","🧰"],
+["Pipe Clamp","15","Hardware","🔩"],
+["CPVC Pipe","150","Plumbing","🔵"],
+["GI Nipple","35","Plumbing","🔩"],
+["Bib Cock","260","Sanitary","🚰"],
+["PTMT Tap","180","Sanitary","🚰"],
+["Hose Pipe","220","Plumbing","🟢"],
+["Screw Set","80","Hardware","🔩"],
+["Wall Plug","30","Hardware","🧱"]
+];
+
+const catalog = [
+["PVC Pipe",120,"Plumbing","🔵"],
+["PVC Elbow",25,"Plumbing","🔧"],
+["PVC Tee",35,"Plumbing","🔧"],
+["PVC Socket",30,"Plumbing","🔧"],
+["PVC Reducer",40,"Plumbing","🔧"],
+["PVC Coupler",30,"Plumbing","🔧"],
+["CPVC Pipe",150,"Plumbing","🔵"],
+["CPVC Elbow",35,"Plumbing","🔧"],
+["CPVC Tee",45,"Plumbing","🔧"],
+["CPVC Socket",40,"Plumbing","🔧"],
+["GI Nipple",35,"Plumbing","🔩"],
+["GI Elbow",45,"Plumbing","🔩"],
+["GI Tee",55,"Plumbing","🔩"],
+["GI Socket",50,"Plumbing","🔩"],
+["Ball Valve",180,"Plumbing","⚙️"],
+["Gate Valve",320,"Plumbing","⚙️"],
+["Check Valve",250,"Plumbing","⚙️"],
+["Foot Valve",280,"Plumbing","⚙️"],
+["Teflon Tape",20,"Plumbing","🧰"],
+["Hose Pipe",220,"Plumbing","🟢"],
+["Pipe Clamp",15,"Hardware","🔩"],
+["Bib Cock",260,"Sanitary","🚰"],
+["PTMT Tap",180,"Sanitary","🚰"],
+["Angle Cock",240,"Sanitary","🚰"],
+["Pillar Tap",350,"Sanitary","🚰"],
+["Sink Cock",550,"Sanitary","🚰"],
+["Waste Coupling",90,"Sanitary","🔧"],
+["Bottle Trap",180,"Sanitary","🔧"],
+["Floor Trap",120,"Sanitary","🔧"],
+["Wall Plug",30,"Hardware","🧱"],
+["Screw Set",80,"Hardware","🔩"],
+["Nut Bolt Set",120,"Hardware","🔩"],
+["Washer Set",60,"Hardware","🔩"],
+["Door Hinge",90,"Hardware","🚪"],
+["Tower Bolt",120,"Hardware","🔒"],
+["Door Handle",220,"Hardware","🚪"],
+["L Bracket",75,"Hardware","📐"],
+["Metal Clamp",35,"Hardware","🔩"],
+["Pipe Wrench",450,"Tools","🔧"],
+["Adjustable Wrench",250,"Tools","🔧"],
+["Spanner Set",380,"Tools","🛠️"],
+["Plier",180,"Tools","🔧"],
+["Screwdriver",90,"Tools","🪛"],
+["Hammer",280,"Tools","🔨"],
+["Drill Bit",80,"Tools","🛠️"],
+["Cutting Disc",45,"Tools","⭕"],
+["Grinding Disc",70,"Tools","⭕"],
+["Measuring Tape",120,"Tools","📏"],
+["Spirit Level",180,"Tools","📏"],
+["PVC Solvent",90,"Plumbing","🧴"],
+["PVC Glue",75,"Plumbing","🧴"]
+];
+
+const variants = [
+"1/2 inch","3/4 inch","1 inch","1.25 inch","1.5 inch",
+"2 inch","2.5 inch","3 inch","4 inch","6 inch"
+];
+
+let products = JSON.parse(localStorage.getItem("vk_products") || "null");
+
+if(!products){
+
+products = [];
+
+catalog.forEach((p,idx)=>{
+
+products.push([p[0],String(p[1]),p[2],p[3]]);
+
+if(idx < 48){
+
+variants.forEach((v,n)=>{
+
+products.push([
+p[0]+" "+v,
+String(p[1]+n*10),
+p[2],
+p[3]
+]);
+
+});
+
 }
-function add(i){cart[i]=(cart[i]||0)+1;save();render();}
-function openCart(){document.getElementById("cartPanel").style.display="block";let items=Object.keys(cart).filter(i=>cart[i]);let total=items.reduce((t,i)=>t+products[i][1]*cart[i],0);document.getElementById("cart").innerHTML=items.length?items.map(i=>`<p><b>${products[i][0]}</b> × ${cart[i]} — ₹${products[i][1]*cart[i]}</p>`).join("")+`<hr><h3>Total: ₹${total}</h3>`:"<p>Your cart is empty.</p>";}
-function closeCart(){document.getElementById("cartPanel").style.display="none"}
-function openAdmin(){document.getElementById("adminPanel").style.display="block";manage()}
-function closeAdmin(){document.getElementById("adminPanel").style.display="none"}
-function addProduct(){let n=pname.value.trim(),pr=pprice.value,ca=pcat.value.trim(),e=pemoji.value||"🔧";if(!n||!pr||!ca)return alert("Please fill product name, price and category.");products.push([n,pr,ca,e]);save();pname.value=pprice.value=pcat.value="";render();manage();}
-function manage(){document.getElementById("manage").innerHTML="<h3>Products: "+products.length+"</h3>"+products.map((p,i)=>`<div style="padding:7px 0;border-bottom:1px solid #eee">${p[3]} ${p[0]} — ₹${p[1]} <button onclick="del(${i})">Delete</button></div>`).join("")}
-function del(i){if(confirm("Delete this product?")){products.splice(i,1);save();render();manage();}}
-function orderWhatsApp(){let items=Object.keys(cart).filter(i=>cart[i]);if(!items.length)return alert("Cart is empty.");let msg="V K Traders and Hardware Order%0A%0A"+items.map(i=>`${products[i][0]} x ${cart[i]} = ₹${products[i][1]*cart[i]}`).join("%0A");msg+="%0A%0AHome Delivery: Additional Charges Apply";window.open("https://wa.me/919623009626?text="+msg,"_blank");}
+
+});
+
+products = products.slice(0,530);
+
+localStorage.setItem("vk_products",JSON.stringify(products));
+
+}
+
+let cart = JSON.parse(localStorage.getItem("vk_cart") || "{}");
+
+let visibleCount = 24;
+
+function save(){
+
+localStorage.setItem("vk_products",JSON.stringify(products));
+
+localStorage.setItem("vk_cart",JSON.stringify(cart));
+
+}
+
+function render(){
+
+const s=document.getElementById("search").value.toLowerCase().trim();
+
+const selected=document.getElementById("cat").value;
+
+const cats=[...new Set(products.map(p=>p[2]))].sort();
+
+const sel=document.getElementById("cat");
+
+sel.innerHTML='<option value="">All Categories</option>'+
+cats.map(x=>`<option value="${escapeHtml(x)}">${escapeHtml(x)}</option>`).join("");
+
+sel.value=selected;
+
+const filtered=products.filter(p=>
+(!s || p[0].toLowerCase().includes(s)) &&
+(!sel.value || p[2]===sel.value)
+);
+
+const shown=filtered.slice(0,visibleCount);
+
+document.getElementById("products").innerHTML=shown.map((p)=>{
+
+const realIndex=products.indexOf(p);
+
+return `
+<div class="card">
+
+<div class="photo">
+
+${p[4] ?
+`<img src="${p[4]}" alt="${escapeHtml(p[0])}">`
+:
+escapeHtml(p[3])
+}
+
+</div>
+
+<h3>${escapeHtml(p[0])}</h3>
+
+<div class="category">${escapeHtml(p[2])}</div>
+
+<div class="price">₹${escapeHtml(p[1])}</div>
+
+<button onclick="add(${realIndex})">
+Add to Cart
+</button>
+
+</div>
+`;
+
+}).join("");
+
+document.getElementById("count").textContent=
+Object.values(cart).reduce((a,b)=>a+b,0);
+
+const btn=document.getElementById("loadBtn");
+
+btn.style.display=
+filtered.length>visibleCount ? "inline-block" : "none";
+
+}
+
+function loadMore(){
+
+visibleCount += 24;
+
 render();
+
+}
+
+function add(i){
+
+cart[i]=(cart[i]||0)+1;
+
+save();
+
+render();
+
+}
+
+function openCart(){
+
+document.getElementById("cartPanel").style.display="block";
+
+const items=Object.keys(cart).filter(i=>cart[i]);
+
+const total=items.reduce(
+(t,i)=>t+Number(products[i][1])*cart[i],0
+);
+
+document.getElementById("cart").innerHTML=items.length
+
+? items.map(i=>
+`<p><b>${escapeHtml(products[i][0])}</b> × ${cart[i]} — ₹${Number(products[i][1])*cart[i]}</p>`
+).join("")
++
+`<hr><h3>Total: ₹${total}</h3>`
+
+: "<p>Your cart is empty.</p>";
+
+}
+
+function closeCart(){
+
+document.getElementById("cartPanel").style.display="none";
+
+}
+
+function openAdmin(){
+
+document.getElementById("adminPanel").style.display="block";
+
+manage();
+
+}
+
+function closeAdmin(){
+
+document.getElementById("adminPanel").style.display="none";
+
+}
+
+function addProduct(){
+
+let n=document.getElementById("pname").value.trim();
+
+let pr=document.getElementById("pprice").value;
+
+let ca=document.getElementById("pcat").value.trim();
+
+let e=document.getElementById("pemoji").value||"🔧";
+
+let photo=document.getElementById("productPhoto").files[0];
+
+if(!n||!pr||!ca)
+
+return alert("Please fill product name, price and category.");
+
+const finishAdd = (photoData="") => {
+
+products.push([
+n,
+pr,
+ca,
+e,
+photoData
+]);
+
+save();
+
+document.getElementById("pname").value="";
+
+document.getElementById("pprice").value="";
+
+document.getElementById("pcat").value="";
+
+document.getElementById("pemoji").value="🔧";
+
+document.getElementById("productPhoto").value="";
+
+visibleCount=24;
+
+render();
+
+manage();
+
+alert("Product added successfully!");
+
+};
+
+if(photo){
+
+const reader=new FileReader();
+
+reader.onload=()=>finishAdd(reader.result);
+
+reader.readAsDataURL(photo);
+
+}else{
+
+finishAdd("");
+
+}
+
+}
+
+function manage(){
+
+document.getElementById("manage").innerHTML=
+"<h3>Products: "+products.length+"</h3>"+
+products.map((p,i)=>
+`<div>
+${escapeHtml(p[3])} ${escapeHtml(p[0])} — ₹${escapeHtml(p[1])}
+<button onclick="del(${i})">Delete</button>
+</div>`
+).join("");
+
+}
+
+function del(i){
+
+if(confirm("Delete this product?")){
+
+products.splice(i,1);
+
+save();
+
+render();
+
+manage();
+
+}
+
+}
+
+function orderWhatsApp(){
+
+const items=Object.keys(cart).filter(i=>cart[i]);
+
+if(!items.length)
+
+return alert("Cart is empty.");
+
+let msg=
+"V K Traders and Hardware Order%0A%0A"+
+items.map(i=>
+`${encodeURIComponent(products[i][0])} x ${cart[i]} = ₹${products[i][1]*cart[i]}`
+).join("%0A");
+
+msg+="%0A%0AHome Delivery: Additional Charges Apply";
+
+window.open(
+"https://wa.me/919623009626?text="+msg,
+"_blank"
+);
+
+}
+
+function escapeHtml(value){
+
+return String(value).replace(
+/[&<>"']/g,
+m=>({
+"&":"&amp;",
+"<":"&lt;",
+">":"&gt;",
+'"':"&quot;",
+"'":"&#039;"
+}[m])
+);
+
+}
+
+document.getElementById("search").addEventListener(
+"input",
+()=>{
+visibleCount=24;
+}
+);
+
+document.getElementById("cat").addEventListener(
+"change",
+()=>{
+visibleCount=24;
+}
+);
+
+render();
+
 </script>
-</body></html>
+
+</body>
+</html>
