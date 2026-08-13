@@ -124,7 +124,7 @@ header small{font-size:11px}
 .bill-footer{margin-top:30px;text-align:center;font-size:13px}
 .bill-buttons{display:flex;gap:10px;justify-content:center;margin-top:18px}
 .bill-buttons button{padding:11px 18px;border:0;border-radius:8px;color:#fff;font-weight:700}
-.bill-print{background:#1459a5}
+.bill-print{background:#087f3f}
 .bill-close{background:#555}
 @media(max-width:600px){
   .bill-wrap{padding:12px}
@@ -223,7 +223,7 @@ header small{font-size:11px}
   <div class="bill-wrap">
     <div id="billPreview"></div>
     <div class="bill-buttons">
-      <button class="bill-print" type="button" onclick="printBill()">🖨️ Print / Save PDF</button>
+      <button class="bill-print" type="button" onclick="orderWhatsApp()">💬 Order on WhatsApp</button>
       <button class="bill-close" type="button" onclick="closeBill()">Close</button>
     </div>
   </div>
@@ -587,9 +587,11 @@ function closeBill(){
 function orderWhatsApp(){
   const data=buildInvoiceData();
   if(!data)return;
+
   const type=data.customer.orderType==="delivery"?"Home Delivery":"Self Pickup";
   const grandTotal=data.subtotal;
   const lines=data.items.map(x=>`${x.product.name} x ${x.qty} = ₹${x.lineTotal.toFixed(2)}`);
+
   const message=[
     "*V K Traders and Hardware*",
     `Invoice: ${data.invoiceNo}`,
@@ -603,11 +605,21 @@ function orderWhatsApp(){
     "*Order Items*",
     ...lines,
     "",
-    `Subtotal: ₹${data.subtotal.toFixed(2)}`, `*Grand Total: ₹${grandTotal.toFixed(2)}*`,
+    `Subtotal: ₹${data.subtotal.toFixed(2)}`,
+    `*Grand Total: ₹${grandTotal.toFixed(2)}*`,
     type==="Home Delivery"?"Delivery charges: Additional charges apply":"Pickup: Free",
     "",
     "Please confirm my order."
   ].filter(Boolean).join("\n");
+
+  // Order has been sent to WhatsApp: clear the cart so the same items
+  // are not left in the cart for the next order.
+  cart={};
+  saveCart();
+  render();
+  closeBill();
+  closeCart();
+
   window.location.href="https://wa.me/919623009626?text="+encodeURIComponent(message);
 }
 
