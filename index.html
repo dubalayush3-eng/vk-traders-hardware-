@@ -171,7 +171,7 @@ header small{font-size:11px}
 <label><b>Choose Product Photo</b></label>
 <input type="file" id="productPhoto" accept="image/*">
     <button type="button" onclick="addProduct()">Add Product</button>
-    <div class="notice">Products are saved in this browser. You can add 500+ products without changing the website code.</div>
+    <div class="notice">Products are saved online in Firebase. Products added here will appear on other mobiles too.</div>
     <hr>
     <div id="manage"></div>
   </div>
@@ -187,81 +187,67 @@ header small{font-size:11px}
   </div>
 </div>
 
-<script>
-const defaultProducts = [
-["PVC Pipe","120","Plumbing","🔵"],["PVC Elbow","25","Plumbing","🔧"],["Ball Valve","180","Plumbing","⚙️"],
-["Teflon Tape","20","Plumbing","🧰"],["Pipe Clamp","15","Hardware","🔩"],["CPVC Pipe","150","Plumbing","🔵"],
-["GI Nipple","35","Plumbing","🔩"],["Bib Cock","260","Sanitary","🚰"],["PTMT Tap","180","Sanitary","🚰"],
-["Hose Pipe","220","Plumbing","🟢"],["Screw Set","80","Hardware","🔩"],["Wall Plug","30","Hardware","🧱"]
-];
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js";
+import { getFirestore, collection, getDocs, addDoc, deleteDoc, doc, query, orderBy } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
 
-const catalog = [
-["PVC Pipe",120,"Plumbing","🔵"],["PVC Elbow",25,"Plumbing","🔧"],["PVC Tee",35,"Plumbing","🔧"],
-["PVC Socket",30,"Plumbing","🔧"],["PVC Reducer",40,"Plumbing","🔧"],["PVC Coupler",30,"Plumbing","🔧"],
-["CPVC Pipe",150,"Plumbing","🔵"],["CPVC Elbow",35,"Plumbing","🔧"],["CPVC Tee",45,"Plumbing","🔧"],
-["CPVC Socket",40,"Plumbing","🔧"],["GI Nipple",35,"Plumbing","🔩"],["GI Elbow",45,"Plumbing","🔩"],
-["GI Tee",55,"Plumbing","🔩"],["GI Socket",50,"Plumbing","🔩"],["Ball Valve",180,"Plumbing","⚙️"],
-["Gate Valve",320,"Plumbing","⚙️"],["Check Valve",250,"Plumbing","⚙️"],["Foot Valve",280,"Plumbing","⚙️"],
-["Teflon Tape",20,"Plumbing","🧰"],["Hose Pipe",220,"Plumbing","🟢"],["Pipe Clamp",15,"Hardware","🔩"],
-["Bib Cock",260,"Sanitary","🚰"],["PTMT Tap",180,"Sanitary","🚰"],["Angle Cock",240,"Sanitary","🚰"],
-["Pillar Tap",350,"Sanitary","🚰"],["Sink Cock",550,"Sanitary","🚰"],["Waste Coupling",90,"Sanitary","🔧"],
-["Bottle Trap",180,"Sanitary","🔧"],["Floor Trap",120,"Sanitary","🔧"],["Wall Plug",30,"Hardware","🧱"],
-["Screw Set",80,"Hardware","🔩"],["Nut Bolt Set",120,"Hardware","🔩"],["Washer Set",60,"Hardware","🔩"],
-["Door Hinge",90,"Hardware","🚪"],["Tower Bolt",120,"Hardware","🔒"],["Door Handle",220,"Hardware","🚪"],
-["L Bracket",75,"Hardware","📐"],["Metal Clamp",35,"Hardware","🔩"],["Pipe Wrench",450,"Tools","🔧"],
-["Adjustable Wrench",250,"Tools","🔧"],["Spanner Set",380,"Tools","🛠️"],["Plier",180,"Tools","🔧"],
-["Screwdriver",90,"Tools","🪛"],["Hammer",280,"Tools","🔨"],["Drill Bit",80,"Tools","🛠️"],
-["Cutting Disc",45,"Tools","⭕"],["Grinding Disc",70,"Tools","⭕"],["Measuring Tape",120,"Tools","📏"],
-["Spirit Level",180,"Tools","📏"],["PVC Solvent",90,"Plumbing","🧴"],["PVC Glue",75,"Plumbing","🧴"]
-];
+const firebaseConfig = {
+  apiKey: "AIzaSyDjxyqqRQ_tA5Cr73Dac6s7j32UT9M6QpA",
+  authDomain: "vk-traders-hardware.firebaseapp.com",
+  projectId: "vk-traders-hardware",
+  storageBucket: "vk-traders-hardware.firebasestorage.app",
+  messagingSenderId: "598417742404",
+  appId: "1:598417742404:web:3e4fc94c246022fb167a11",
+  measurementId: "G-08X6GP7N26"
+};
 
-const variants = [
-"1/2 inch","3/4 inch","1 inch","1.25 inch","1.5 inch","2 inch","2.5 inch","3 inch","4 inch","6 inch"
-];
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+const productsRef = collection(db, "products");
 
-let products = JSON.parse(localStorage.getItem("vk_products") || "null");
-if(!products){
-  products = [];
-  catalog.forEach((p,idx)=>{
-    products.push([p[0],String(p[1]),p[2],p[3]]);
-    if(idx < 48){
-      variants.forEach((v,n)=>{
-        products.push([p[0]+" "+v,String(p[1]+n*10),p[2],p[3]]);
-      });
-    }
-  });
-  products = products.slice(0, 530);
-  localStorage.setItem("vk_products",JSON.stringify(products));
-}
+let products = [];
 let cart = JSON.parse(localStorage.getItem("vk_cart") || "{}");
 let visibleCount = 24;
 
-function save(){
-  localStorage.setItem("vk_products",JSON.stringify(products));
-  localStorage.setItem("vk_cart",JSON.stringify(cart));
+function saveCart(){
+  localStorage.setItem("vk_cart", JSON.stringify(cart));
+}
+
+async function loadProducts(){
+  const snapshot = await getDocs(query(productsRef, orderBy("name")));
+  products = snapshot.docs.map(d => ({
+    id: d.id,
+    name: String(d.data().name || ""),
+    price: Number(d.data().price || 0),
+    category: String(d.data().category || ""),
+    emoji: String(d.data().emoji || "🔧"),
+    photo: String(d.data().photo || "")
+  }));
+  render();
+  manage();
 }
 
 function render(){
   const s=document.getElementById("search").value.toLowerCase().trim();
   const selected=document.getElementById("cat").value;
-  const cats=[...new Set(products.map(p=>p[2]))].sort();
+  const cats=[...new Set(products.map(p=>p.category).filter(Boolean))].sort();
   const sel=document.getElementById("cat");
   sel.innerHTML='<option value="">All Categories</option>'+cats.map(x=>`<option value="${escapeHtml(x)}">${escapeHtml(x)}</option>`).join("");
   sel.value=selected;
 
   const filtered=products.filter(p=>
-    (!s || p[0].toLowerCase().includes(s)) &&
-    (!sel.value || p[2]===sel.value)
+    (!s || p.name.toLowerCase().includes(s)) &&
+    (!sel.value || p.category===sel.value)
   );
 
   const shown=filtered.slice(0,visibleCount);
-  document.getElementById("products").innerHTML=shown.map((p,i)=>{
+  document.getElementById("products").innerHTML=shown.map(p=>{
     const realIndex=products.indexOf(p);
     return `<div class="card">
-      <div class="photo">${p[4] ? `<img src="${p[4]}" alt="${escapeHtml(p[0])}">` : escapeHtml(p[3])}</div>
-      <h3>${escapeHtml(p[0])}</h3>
-      <div class="category">${escapeHtml(p[2])}</div>
-      <div class="price">₹${escapeHtml(p[1])}</div>
+      <div class="photo">${p.photo ? `<img src="${p.photo}" alt="${escapeHtml(p.name)}">` : escapeHtml(p.emoji)}</div>
+      <h3>${escapeHtml(p.name)}</h3>
+      <div class="category">${escapeHtml(p.category)}</div>
+      <div class="price">₹${escapeHtml(p.price)}</div>
       <button onclick="add(${realIndex})">Add to Cart</button>
     </div>`;
   }).join("");
@@ -271,40 +257,33 @@ function render(){
   btn.style.display=filtered.length>visibleCount ? "inline-block" : "none";
 }
 
-function loadMore(){
-  visibleCount += 24;
-  render();
-}
+function loadMore(){ visibleCount += 24; render(); }
 
 function add(i){
   cart[i]=(cart[i]||0)+1;
-  save();
+  saveCart();
   render();
 }
 
 function openCart(){
   document.getElementById("cartPanel").style.display="block";
-  const items=Object.keys(cart).filter(i=>cart[i]);
-  const total=items.reduce((t,i)=>t+Number(products[i][1])*cart[i],0);
+  const items=Object.keys(cart).filter(i=>cart[i] && products[i]);
+  const total=items.reduce((t,i)=>t+products[i].price*cart[i],0);
   document.getElementById("cart").innerHTML=items.length
-    ? items.map(i=>`<p><b>${escapeHtml(products[i][0])}</b> × ${cart[i]} — ₹${Number(products[i][1])*cart[i]}</p>`).join("")+`<hr><h3>Total: ₹${total}</h3>`
+    ? items.map(i=>`<p><b>${escapeHtml(products[i].name)}</b> × ${cart[i]} — ₹${products[i].price*cart[i]}</p>`).join("")+`<hr><h3>Total: ₹${total}</h3>`
     : "<p>Your cart is empty.</p>";
 }
 
 function closeCart(){document.getElementById("cartPanel").style.display="none"}
+
 function openAdmin(){
   const password = prompt("🔐 Admin Password:");
-
   if(password !== "VK1234"){
     if(password !== null) alert("❌ Wrong password!");
     return;
   }
-
   const panel = document.getElementById("adminPanel");
-  if(panel){
-    panel.style.display = "block";
-    document.body.style.overflow = "hidden";
-  }
+  if(panel){ panel.style.display="block"; document.body.style.overflow="hidden"; }
   manage();
 }
 
@@ -314,159 +293,112 @@ function closeAdmin(){
   document.body.style.overflow = "";
 }
 
-function addProduct(){
+async function addProduct(){
   try{
-    const nameEl = document.getElementById("pname");
-    const priceEl = document.getElementById("pprice");
-    const catEl = document.getElementById("pcat");
-    const emojiEl = document.getElementById("pemoji");
-    const photoEl = document.getElementById("productPhoto");
+    const nameEl=document.getElementById("pname");
+    const priceEl=document.getElementById("pprice");
+    const catEl=document.getElementById("pcat");
+    const emojiEl=document.getElementById("pemoji");
+    const photoEl=document.getElementById("productPhoto");
+    const name=nameEl.value.trim();
+    const price=Number(priceEl.value);
+    const category=catEl.value.trim();
+    const emoji=emojiEl.value.trim()||"🔧";
 
-    const name = nameEl.value.trim();
-    const price = priceEl.value.trim();
-    const category = catEl.value.trim();
-    const emoji = emojiEl.value.trim() || "🔧";
-
-    if(!name || !price || !category){
-      alert("Please enter Product Name, Price and Category.");
+    if(!name || !Number.isFinite(price) || price<0 || !category){
+      alert("Please enter Product Name, valid Price and Category.");
       return;
     }
 
-    const numericPrice = Number(price);
-    if(!Number.isFinite(numericPrice) || numericPrice < 0){
-      alert("Please enter a valid price.");
-      return;
-    }
-
-    const finishAdd = (photoData) => {
-      const newProduct = [
-        name,
-        String(numericPrice),
-        category,
-        emoji,
-        photoData || ""
-      ];
-
-      products.push(newProduct);
-
-      try{
-        save();
-      }catch(storageError){
-        products.pop();
-        alert("Product could not be saved. Your browser storage may be full. Try adding it without a photo.");
-        return;
-      }
-
-      nameEl.value = "";
-      priceEl.value = "";
-      catEl.value = "";
-      emojiEl.value = "🔧";
-      if(photoEl) photoEl.value = "";
-
-      render();
-      manage();
-      alert("✅ Product added successfully!");
+    const finishAdd = async (photoData) => {
+      await addDoc(productsRef,{name,price,category,emoji,photo:photoData||""});
+      nameEl.value=""; priceEl.value=""; catEl.value=""; emojiEl.value="🔧";
+      if(photoEl) photoEl.value="";
+      await loadProducts();
+      alert("✅ Product added to Firebase successfully!");
     };
 
-    // Save a small compressed image so localStorage does not fill quickly.
     if(photoEl && photoEl.files && photoEl.files[0]){
-      const file = photoEl.files[0];
-      const reader = new FileReader();
-
-      reader.onload = function(){
-        const img = new Image();
-
-        img.onload = function(){
-          const max = 700;
-          let w = img.width;
-          let h = img.height;
-
-          if(w > max || h > max){
-            if(w >= h){
-              h = Math.round(h * max / w);
-              w = max;
-            }else{
-              w = Math.round(w * max / h);
-              h = max;
-            }
+      const file=photoEl.files[0];
+      const reader=new FileReader();
+      reader.onload=function(){
+        const img=new Image();
+        img.onload=async function(){
+          const max=700;
+          let w=img.width,h=img.height;
+          if(w>max||h>max){
+            if(w>=h){h=Math.round(h*max/w);w=max;}
+            else{w=Math.round(w*max/h);h=max;}
           }
-
-          const canvas = document.createElement("canvas");
-          canvas.width = w;
-          canvas.height = h;
-
-          const ctx = canvas.getContext("2d");
-          ctx.drawImage(img, 0, 0, w, h);
-
-          const compressed = canvas.toDataURL("image/jpeg", 0.72);
-          finishAdd(compressed);
+          const canvas=document.createElement("canvas");
+          canvas.width=w; canvas.height=h;
+          canvas.getContext("2d").drawImage(img,0,0,w,h);
+          await finishAdd(canvas.toDataURL("image/jpeg",0.72));
         };
-
-        img.onerror = function(){
-          alert("Could not process the product photo.");
-        };
-
-        img.src = reader.result;
+        img.onerror=()=>alert("Could not process the product photo.");
+        img.src=reader.result;
       };
-
-      reader.onerror = function(){
-        alert("Could not read the product photo.");
-      };
-
+      reader.onerror=()=>alert("Could not read the product photo.");
       reader.readAsDataURL(file);
     }else{
-      finishAdd("");
+      await finishAdd("");
     }
   }catch(error){
     console.error(error);
-    alert("Something went wrong while adding the product.");
+    alert("❌ Firebase error: " + error.message);
   }
 }
 
 function manage(){
-  document.getElementById("manage").innerHTML="<h3>Products: "+products.length+"</h3>"+
-  products.map((p,i)=>`<div>${escapeHtml(p[3])} ${escapeHtml(p[0])} — ₹${escapeHtml(p[1])} <button onclick="del(${i})">Delete</button></div>`).join("");
+  document.getElementById("manage").innerHTML="<h3>Products: "+products.length+" (Firebase)</h3>"+
+  products.map((p,i)=>`<div>${escapeHtml(p.emoji)} ${escapeHtml(p.name)} — ₹${escapeHtml(p.price)} <button onclick="del(${i})">Delete</button></div>`).join("");
 }
 
-function del(i){
-  if(confirm("Delete this product?")){
-    products.splice(i,1);
-    save();
-    render();
-    manage();
+async function del(i){
+  if(!products[i]) return;
+  if(confirm("Delete this product from Firebase?")){
+    try{
+      await deleteDoc(doc(db,"products",products[i].id));
+      delete cart[i];
+      saveCart();
+      await loadProducts();
+    }catch(error){
+      alert("❌ Could not delete product: " + error.message);
+    }
   }
 }
 
 function orderWhatsApp(){
-  const items=Object.keys(cart).filter(i=>cart[i]);
-  if(!items.length){
-    alert("Cart is empty.");
-    return;
-  }
-
-  const lines = items.map(i =>
-    `${products[i][0]} x ${cart[i]} = ₹${Number(products[i][1]) * cart[i]}`
-  );
-
-  const message =
-    "V K Traders and Hardware Order\\n\\n" +
-    lines.join("\\n") +
-    "\\n\\nHome Delivery: Additional Charges Apply";
-
-  const whatsappUrl =
-    "https://wa.me/919623009626?text=" + encodeURIComponent(message);
-
-  // Direct navigation is more reliable on mobile browsers than window.open().
-  window.location.href = whatsappUrl;
+  const items=Object.keys(cart).filter(i=>cart[i] && products[i]);
+  if(!items.length){ alert("Cart is empty."); return; }
+  const lines=items.map(i=>`${products[i].name} x ${cart[i]} = ₹${products[i].price*cart[i]}`);
+  const message="V K Traders and Hardware Order\\n\\n"+lines.join("\\n")+"\\n\\nHome Delivery: Additional Charges Apply";
+  window.location.href="https://wa.me/919623009626?text="+encodeURIComponent(message);
 }
 
 function escapeHtml(value){
-  return String(value).replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[m]));
+  return String(value).replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#039;"}[m]));
 }
 
-document.getElementById("search").addEventListener("input",()=>{visibleCount=24});
-document.getElementById("cat").addEventListener("change",()=>{visibleCount=24});
-render();
+window.openCart=openCart;
+window.closeCart=closeCart;
+window.openAdmin=openAdmin;
+window.closeAdmin=closeAdmin;
+window.addProduct=addProduct;
+window.del=del;
+window.add=add;
+window.loadMore=loadMore;
+window.orderWhatsApp=orderWhatsApp;
+
+window.addEventListener("DOMContentLoaded", async ()=>{
+  document.getElementById("search").addEventListener("input",()=>{visibleCount=24;render();});
+  document.getElementById("cat").addEventListener("change",()=>{visibleCount=24;render();});
+  try{ await loadProducts(); }
+  catch(error){
+    console.error(error);
+    document.getElementById("products").innerHTML='<div class="notice">❌ Could not load products from Firebase. Check Firestore Rules and internet connection.</div>';
+  }
+});
 </script>
 
 <script>
