@@ -53,6 +53,36 @@ header small{font-size:11px}
 .price{font-size:16px}
 .card button{padding:8px;font-size:12px}
 }
+
+.contact-section{padding:35px 5% 0;background:#fff}
+.contact-card{background:#f7931e;border-radius:0 0 38px 38px;padding:28px 9%;min-height:180px}
+.contact-card h2{color:#fff;font-size:28px;font-weight:500;margin:0 0 28px}
+.contact-whatsapp{display:inline-block;background:#fff;color:#172033;text-decoration:none;font-weight:bold;font-size:20px;padding:18px 34px;border-radius:18px}
+.site-footer{background:#06162b;color:#d9e1ee;margin-top:90px;padding:80px 5% 105px}
+.footer-inner{max-width:1100px;margin:auto;display:grid;grid-template-columns:1.4fr 1fr 1.4fr;gap:55px}
+.site-footer h2{color:#fff;font-size:29px;margin:0 0 24px}
+.site-footer h3{color:#fff;font-size:22px;margin:0 0 22px}
+.site-footer p{font-size:18px;line-height:1.65;margin:0}
+.footer-links a,.footer-contact a{display:block;color:#d9e1ee;text-decoration:none;font-size:18px;margin:0 0 12px}
+.footer-contact p{margin-top:8px}
+.copyright{grid-column:1/-1;border-top:1px solid #ffffff18;padding-top:35px;text-align:center;font-size:16px}
+.bottom-actions{position:fixed;left:20px;right:20px;bottom:16px;display:flex;gap:14px;z-index:50}
+.bottom-actions a{flex:1;text-align:center;text-decoration:none;color:#fff;font-weight:bold;font-size:20px;padding:17px 10px;border-radius:40px;box-shadow:0 4px 14px #0004}
+.call-btn{background:#1459a5}
+.whatsapp-btn{background:#12a84f}
+@media(max-width:600px){
+  .contact-section{padding:25px 0 0}
+  .contact-card{padding:28px 9%;min-height:225px}
+  .contact-card h2{font-size:25px;line-height:1.25}
+  .contact-whatsapp{font-size:18px;padding:17px 34px}
+  .site-footer{margin-top:70px;padding:75px 7% 105px}
+  .footer-inner{display:block}
+  .footer-about,.footer-links,.footer-contact{margin-bottom:52px}
+  .site-footer h2{font-size:28px}
+  .bottom-actions{left:20px;right:20px;bottom:14px}
+  .bottom-actions a{font-size:18px;padding:17px 8px}
+}
+
 </style>
 </head>
 <body>
@@ -65,7 +95,7 @@ header small{font-size:11px}
   <button class="cart" onclick="openCart()">🛒 Cart (<span id="count">0</span>)</button>
 </header>
 
-<section class="hero">
+<section class="hero" id="about">
   <h2>Hardware & Plumbing Products</h2>
   <p>Find products quickly and place your order.</p>
   <a class="map-link" href="https://maps.app.goo.gl/cnreYKyo2iWvuaAa8" target="_blank" rel="noopener">
@@ -84,6 +114,46 @@ header small{font-size:11px}
 
 <div class="load">
   <button id="loadBtn" onclick="loadMore()">Show More Products</button>
+</div>
+
+<div class="contact-section" id="contact">
+  <div class="contact-card">
+    <h2>Contact V K Traders &amp; Hardware today.</h2>
+    <a class="contact-whatsapp" href="https://wa.me/919623009626" target="_blank" rel="noopener">
+      WhatsApp Us
+    </a>
+  </div>
+</div>
+
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-about">
+      <h2>V K Traders &amp; Hardware</h2>
+      <p>Quality hardware and construction materials for your needs.</p>
+    </div>
+
+    <div class="footer-links">
+      <h3>Quick Links</h3>
+      <a href="#">Home</a>
+      <a href="#products">Products</a>
+      <a href="#about">About</a>
+      <a href="#contact">Contact</a>
+    </div>
+
+    <div class="footer-contact">
+      <h3>Contact</h3>
+      <a href="tel:9623009626">9623009626</a>
+      <a href="mailto:dhairyashilduba9626@gmaip.com">dhairyashilduba9626@gmaip.com</a>
+      <p>A/P Retre Karkhana, Shivnagar, Maharashtra</p>
+    </div>
+
+    <div class="copyright">© 2026 V K Traders &amp; Hardware. All rights reserved.</div>
+  </div>
+</footer>
+
+<div class="bottom-actions">
+  <a class="call-btn" href="tel:9623009626">📞 Call</a>
+  <a class="whatsapp-btn" href="https://wa.me/919623009626" target="_blank" rel="noopener">💬 WhatsApp</a>
 </div>
 
 <div class="admin">
@@ -222,39 +292,19 @@ function openCart(){
 }
 
 function closeCart(){document.getElementById("cartPanel").style.display="none"}
-function openAdmin(){document.getElementById("adminPanel").style.display="block";manage()}
-function closeAdmin(){document.getElementById("adminPanel").style.display="none"}
+function openAdmin(){
 
-function addProduct(){
-  let n=document.getElementById("pname").value.trim();
-  let pr=document.getElementById("pprice").value;
-  let ca=document.getElementById("pcat").value.trim();
-  let e=document.getElementById("pemoji").value||"🔧";
-  let photo=document.getElementById("productPhoto").files[0];
+  const password = prompt("🔐 Admin Password:");
 
-  if(!n||!pr||!ca)return alert("Please fill product name, price and category.");
-
-  const finishAdd = (photoData="") => {
-    products.push([n,pr,ca,e,photoData]);
-    save();
-    document.getElementById("pname").value="";
-    document.getElementById("pprice").value="";
-    document.getElementById("pcat").value="";
-    document.getElementById("pemoji").value="🔧";
-    document.getElementById("productPhoto").value="";
-    visibleCount=24;
-    render();
-    manage();
-    alert("Product added successfully!");
-  };
-
-  if(photo){
-    const reader=new FileReader();
-    reader.onload=()=>finishAdd(reader.result);
-    reader.readAsDataURL(photo);
-  }else{
-    finishAdd("");
+  if(password !== "VK1234"){
+    alert("❌ Wrong password!");
+    return;
   }
+
+  document.getElementById("adminPanel").style.display="block";
+
+  manage();
+
 }
 function manage(){
   document.getElementById("manage").innerHTML="<h3>Products: "+products.length+"</h3>"+
@@ -272,11 +322,25 @@ function del(i){
 
 function orderWhatsApp(){
   const items=Object.keys(cart).filter(i=>cart[i]);
-  if(!items.length)return alert("Cart is empty.");
-  let msg="V K Traders and Hardware Order%0A%0A"+
-    items.map(i=>`${encodeURIComponent(products[i][0])} x ${cart[i]} = ₹${products[i][1]*cart[i]}`).join("%0A");
-  msg+="%0A%0AHome Delivery: Additional Charges Apply";
-  window.open("https://wa.me/919623009626?text="+msg,"_blank");
+  if(!items.length){
+    alert("Cart is empty.");
+    return;
+  }
+
+  const lines = items.map(i =>
+    `${products[i][0]} x ${cart[i]} = ₹${Number(products[i][1]) * cart[i]}`
+  );
+
+  const message =
+    "V K Traders and Hardware Order\\n\\n" +
+    lines.join("\\n") +
+    "\\n\\nHome Delivery: Additional Charges Apply";
+
+  const whatsappUrl =
+    "https://wa.me/919623009626?text=" + encodeURIComponent(message);
+
+  // Direct navigation is more reliable on mobile browsers than window.open().
+  window.location.href = whatsappUrl;
 }
 
 function escapeHtml(value){
