@@ -95,6 +95,16 @@ header small{font-size:11px}
   .bottom-actions a{font-size:18px;padding:17px 8px}
 }
 
+.invoice-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}
+.invoice-actions button{flex:1;min-width:180px}
+.whatsapp-order-btn{background:#12a84f!important}
+.bill-btn{background:#1459a5!important}
+.customer-form{background:#f5f7fb;border-radius:12px;padding:12px;margin:14px 0}
+.customer-form label{display:block;font-weight:bold;margin-top:9px}
+.customer-form input,.customer-form textarea,.customer-form select{display:block;width:100%;padding:11px;margin-top:5px;border:1px solid #ccd3df;border-radius:8px;font:inherit}
+.customer-form textarea{min-height:75px;resize:vertical}
+.invoice-summary{background:#fff;border:1px solid #e3e7ef;border-radius:10px;padding:12px;margin-top:12px}
+
 </style>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"HardwareStore","name":"V K Traders & Hardware","description":"Hardware, plumbing, sanitary products and tools. Good quality material and home delivery available.","telephone":"+91-9623009626","address":{"@type":"PostalAddress","streetAddress":"A/P Retre Karkhana, Shivnagar","addressRegion":"Maharashtra","addressCountry":"IN"},"openingHours":"Mo-Fr 09:00-20:30, Su 09:00-20:30","url":"https://vk-traders-hardware.web.app/","hasMap":"https://maps.app.goo.gl/cnreYKyo2iWvuaAa8"}</script>
 </head>
@@ -195,10 +205,27 @@ header small{font-size:11px}
 <div id="cartPanel" class="panel">
   <div class="box">
     <button class="close" onclick="closeCart()">Close</button>
-    <h2>Your Cart</h2>
+    <h2>🛒 Your Cart</h2>
     <div id="cart"></div>
+    <div class="customer-form">
+      <h3 style="margin-top:0">Customer Details</h3>
+      <label for="customerName">Name *</label>
+      <input id="customerName" placeholder="Your name" autocomplete="name">
+      <label for="customerPhone">Mobile Number *</label>
+      <input id="customerPhone" type="tel" inputmode="numeric" placeholder="10-digit mobile number" autocomplete="tel">
+      <label for="customerAddress">Delivery Address</label>
+      <textarea id="customerAddress" placeholder="Enter address (required for home delivery)" autocomplete="street-address"></textarea>
+      <label for="orderType">Order Type</label>
+      <select id="orderType">
+        <option value="delivery">🏠 Home Delivery</option>
+        <option value="pickup">🏪 Self Pickup (Free)</option>
+      </select>
+    </div>
     <div class="notice">🏠 Home Delivery: <b>Additional Charges Apply</b><br>🏪 Self Pickup: Free</div>
-    <button onclick="orderWhatsApp()">Order on WhatsApp</button>
+    <div class="invoice-actions">
+      <button class="bill-btn" onclick="generateBill()">🧾 Generate Bill</button>
+      <button class="whatsapp-order-btn" onclick="orderWhatsApp()">💬 Order on WhatsApp</button>
+    </div>
   </div>
 </div>
 
@@ -280,13 +307,45 @@ function add(i){
   render();
 }
 
+function getCartItems(){
+  return Object.keys(cart).filter(i=>cart[i] && products[i]).map(i=>({
+    index:i,
+    product:products[i],
+    qty:Number(cart[i]),
+    lineTotal:products[i].price*Number(cart[i])
+  }));
+}
+
+function getCustomerDetails(){
+  const name=document.getElementById("customerName").value.trim();
+  const phone=document.getElementById("customerPhone").value.trim().replace(/\D/g,"");
+  const address=document.getElementById("customerAddress").value.trim();
+  const orderType=document.getElementById("orderType").value;
+  if(!name){alert("Please enter customer name.");return null;}
+  if(!/^\d{10}$/.test(phone)){alert("Please enter a valid 10-digit mobile number.");return null;}
+  if(orderType==="delivery" && !address){alert("Please enter delivery address.");return null;}
+  return {name,phone,address,orderType};
+}
+
+function makeInvoiceNumber(){
+  const d=new Date();
+  const stamp=d.getFullYear().toString().slice(-2)+String(d.getMonth()+1).padStart(2,"0")+String(d.getDate()).padStart(2,"0");
+  const seq=String(Date.now()).slice(-5);
+  return "VK-"+stamp+"-"+seq;
+}
+
 function openCart(){
   document.getElementById("cartPanel").style.display="block";
-  const items=Object.keys(cart).filter(i=>cart[i] && products[i]);
-  const total=items.reduce((t,i)=>t+products[i].price*cart[i],0);
+  const items=getCartItems();
+  const total=items.reduce((t,x)=>t+x.lineTotal,0);
   document.getElementById("cart").innerHTML=items.length
-    ? items.map(i=>`<p><b>${escapeHtml(products[i].name)}</b> × ${cart[i]} — ₹${products[i].price*cart[i]}</p>`).join("")+`<hr><h3>Total: ₹${total}</h3>`
+    ? items.map(x=>`<p><b>${escapeHtml(x.product.name)}</b> × ${x.qty} — ₹${x.lineTotal.toFixed(2)}</p>`).join("")+`<div class="invoice-summary"><h3 style="margin:0">Subtotal: ₹${total.toFixed(2)}</h3></div>`
     : "<p>Your cart is empty.</p>";
+  const saved=JSON.parse(localStorage.getItem("vk_customer")||"{}");
+  if(saved.name)document.getElementById("customerName").value=saved.name;
+  if(saved.phone)document.getElementById("customerPhone").value=saved.phone;
+  if(saved.address)document.getElementById("customerAddress").value=saved.address;
+  if(saved.orderType)document.getElementById("orderType").value=saved.orderType;
 }
 
 function closeCart(){document.getElementById("cartPanel").style.display="none"}
@@ -383,11 +442,55 @@ async function del(i){
   }
 }
 
+function saveCustomer(details){
+  localStorage.setItem("vk_customer",JSON.stringify(details));
+}
+
+function buildInvoiceData(){
+  const items=getCartItems();
+  if(!items.length){alert("Cart is empty.");return null;}
+  const customer=getCustomerDetails();
+  if(!customer)return null;
+  saveCustomer(customer);
+  const subtotal=items.reduce((t,x)=>t+x.lineTotal,0);
+  const invoiceNo=makeInvoiceNumber();
+  return {items,customer,subtotal,invoiceNo,date:new Date()};
+}
+
+function generateBill(){
+  const data=buildInvoiceData();
+  if(!data)return;
+  const rows=data.items.map(x=>`<tr><td>${escapeHtml(x.product.name)}</td><td>${x.qty}</td><td>₹${x.product.price.toFixed(2)}</td><td>₹${x.lineTotal.toFixed(2)}</td></tr>`).join("");
+  const type=data.customer.orderType==="delivery"?"Home Delivery":"Self Pickup";
+  const html=`<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>${data.invoiceNo} - V K Traders & Hardware</title><style>body{font-family:Arial,sans-serif;margin:0;padding:24px;color:#172033} .bill{max-width:800px;margin:auto}h1{margin:0 0 5px;color:#0d47a1}p{margin:6px 0}.meta{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;border-bottom:2px solid #0d47a1;padding:12px 0 18px}table{width:100%;border-collapse:collapse;margin-top:22px}th,td{border:1px solid #ddd;padding:10px;text-align:left}th{background:#f1f5fb}.total{text-align:right;font-size:20px;font-weight:bold;margin-top:18px}.thanks{text-align:center;margin-top:40px;color:#596579}@media print{body{padding:0}.no-print{display:none}}</style></head><body><div class="bill"><h1>V K Traders & Hardware</h1><p>Hardware & Plumbing Store</p><p>A/P Retre Karkhana, Shivnagar, Maharashtra</p><p>Phone: 9623009626</p><div class="meta"><div><b>Invoice:</b> ${data.invoiceNo}<br><b>Date:</b> ${data.date.toLocaleString("en-IN")}</div><div><b>Customer:</b> ${escapeHtml(data.customer.name)}<br><b>Mobile:</b> ${escapeHtml(data.customer.phone)}<br><b>Order:</b> ${type}</div></div>${data.customer.address?`<p><b>Address:</b> ${escapeHtml(data.customer.address)}</p>`:""}<table><thead><tr><th>Product</th><th>Qty</th><th>Price</th><th>Amount</th></tr></thead><tbody>${rows}</tbody></table><div class="total">Total: ₹${data.subtotal.toFixed(2)}</div><p>Delivery charges: ${type==="Home Delivery"?"Additional charges apply":"Free"}</p><p class="thanks">Thank you for shopping with V K Traders & Hardware!</p><p class="no-print" style="text-align:center;margin-top:30px"><button onclick="window.print()">🖨️ Print / Save as PDF</button></p></div></body></html>`;
+  const win=window.open("","_blank");
+  if(!win){alert("Please allow pop-ups to generate the bill.");return;}
+  win.document.write(html);win.document.close();
+}
+
 function orderWhatsApp(){
-  const items=Object.keys(cart).filter(i=>cart[i] && products[i]);
-  if(!items.length){ alert("Cart is empty."); return; }
-  const lines=items.map(i=>`${products[i].name} x ${cart[i]} = ₹${products[i].price*cart[i]}`);
-  const message="V K Traders and Hardware Order\\n\\n"+lines.join("\\n")+"\\n\\nHome Delivery: Additional Charges Apply";
+  const data=buildInvoiceData();
+  if(!data)return;
+  const type=data.customer.orderType==="delivery"?"Home Delivery":"Self Pickup";
+  const lines=data.items.map(x=>`${x.product.name} x ${x.qty} = ₹${x.lineTotal.toFixed(2)}`);
+  const message=[
+    "*V K Traders and Hardware*",
+    `Invoice: ${data.invoiceNo}`,
+    "",
+    "*Customer Details*",
+    `Name: ${data.customer.name}`,
+    `Mobile: ${data.customer.phone}`,
+    `Order Type: ${type}`,
+    data.customer.address?`Address: ${data.customer.address}`:"",
+    "",
+    "*Order Items*",
+    ...lines,
+    "",
+    `*Total: ₹${data.subtotal.toFixed(2)}*`,
+    type==="Home Delivery"?"Delivery charges: Additional charges apply":"Pickup: Free",
+    "",
+    "Please confirm my order."
+  ].filter(Boolean).join("\n");
   window.location.href="https://wa.me/919623009626?text="+encodeURIComponent(message);
 }
 
