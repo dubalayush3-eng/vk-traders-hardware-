@@ -157,12 +157,12 @@ header small{font-size:11px}
 </div>
 
 <div class="admin">
-  <button onclick="openAdmin()">⚙️ Manage Products</button>
+  <button type="button" onclick="openAdmin()">⚙️ Manage Products</button>
 </div>
 
 <div id="adminPanel" class="panel">
   <div class="box">
-    <button class="close" onclick="closeAdmin()">Close</button>
+    <button type="button" class="close" onclick="closeAdmin()">Close</button>
     <h2>Add Product</h2>
     <input id="pname" placeholder="Product name">
     <input id="pprice" type="number" placeholder="Price ₹">
@@ -170,7 +170,7 @@ header small{font-size:11px}
     <input id="pemoji" placeholder="Emoji (e.g. 🔧)" value="🔧">
 <label><b>Choose Product Photo</b></label>
 <input type="file" id="productPhoto" accept="image/*">
-    <button onclick="addProduct()">Add Product</button>
+    <button type="button" onclick="addProduct()">Add Product</button>
     <div class="notice">Products are saved in this browser. You can add 500+ products without changing the website code.</div>
     <hr>
     <div id="manage"></div>
@@ -293,19 +293,136 @@ function openCart(){
 
 function closeCart(){document.getElementById("cartPanel").style.display="none"}
 function openAdmin(){
-
   const password = prompt("🔐 Admin Password:");
 
   if(password !== "VK1234"){
-    alert("❌ Wrong password!");
+    if(password !== null) alert("❌ Wrong password!");
     return;
   }
 
-  document.getElementById("adminPanel").style.display="block";
-
+  const panel = document.getElementById("adminPanel");
+  if(panel){
+    panel.style.display = "block";
+    document.body.style.overflow = "hidden";
+  }
   manage();
-
 }
+
+function closeAdmin(){
+  const panel = document.getElementById("adminPanel");
+  if(panel) panel.style.display = "none";
+  document.body.style.overflow = "";
+}
+
+function addProduct(){
+  try{
+    const nameEl = document.getElementById("pname");
+    const priceEl = document.getElementById("pprice");
+    const catEl = document.getElementById("pcat");
+    const emojiEl = document.getElementById("pemoji");
+    const photoEl = document.getElementById("productPhoto");
+
+    const name = nameEl.value.trim();
+    const price = priceEl.value.trim();
+    const category = catEl.value.trim();
+    const emoji = emojiEl.value.trim() || "🔧";
+
+    if(!name || !price || !category){
+      alert("Please enter Product Name, Price and Category.");
+      return;
+    }
+
+    const numericPrice = Number(price);
+    if(!Number.isFinite(numericPrice) || numericPrice < 0){
+      alert("Please enter a valid price.");
+      return;
+    }
+
+    const finishAdd = (photoData) => {
+      const newProduct = [
+        name,
+        String(numericPrice),
+        category,
+        emoji,
+        photoData || ""
+      ];
+
+      products.push(newProduct);
+
+      try{
+        save();
+      }catch(storageError){
+        products.pop();
+        alert("Product could not be saved. Your browser storage may be full. Try adding it without a photo.");
+        return;
+      }
+
+      nameEl.value = "";
+      priceEl.value = "";
+      catEl.value = "";
+      emojiEl.value = "🔧";
+      if(photoEl) photoEl.value = "";
+
+      render();
+      manage();
+      alert("✅ Product added successfully!");
+    };
+
+    // Save a small compressed image so localStorage does not fill quickly.
+    if(photoEl && photoEl.files && photoEl.files[0]){
+      const file = photoEl.files[0];
+      const reader = new FileReader();
+
+      reader.onload = function(){
+        const img = new Image();
+
+        img.onload = function(){
+          const max = 700;
+          let w = img.width;
+          let h = img.height;
+
+          if(w > max || h > max){
+            if(w >= h){
+              h = Math.round(h * max / w);
+              w = max;
+            }else{
+              w = Math.round(w * max / h);
+              h = max;
+            }
+          }
+
+          const canvas = document.createElement("canvas");
+          canvas.width = w;
+          canvas.height = h;
+
+          const ctx = canvas.getContext("2d");
+          ctx.drawImage(img, 0, 0, w, h);
+
+          const compressed = canvas.toDataURL("image/jpeg", 0.72);
+          finishAdd(compressed);
+        };
+
+        img.onerror = function(){
+          alert("Could not process the product photo.");
+        };
+
+        img.src = reader.result;
+      };
+
+      reader.onerror = function(){
+        alert("Could not read the product photo.");
+      };
+
+      reader.readAsDataURL(file);
+    }else{
+      finishAdd("");
+    }
+  }catch(error){
+    console.error(error);
+    alert("Something went wrong while adding the product.");
+  }
+}
+
 function manage(){
   document.getElementById("manage").innerHTML="<h3>Products: "+products.length+"</h3>"+
   products.map((p,i)=>`<div>${escapeHtml(p[3])} ${escapeHtml(p[0])} — ₹${escapeHtml(p[1])} <button onclick="del(${i})">Delete</button></div>`).join("");
@@ -351,5 +468,13 @@ document.getElementById("search").addEventListener("input",()=>{visibleCount=24}
 document.getElementById("cat").addEventListener("change",()=>{visibleCount=24});
 render();
 </script>
+
+<script>
+document.addEventListener("click", function(e){
+  if(e.target && e.target.id === "adminPanel") closeAdmin();
+  if(e.target && e.target.id === "cartPanel") closeCart();
+});
+</script>
+
 </body>
 </html>
