@@ -105,6 +105,43 @@ header small{font-size:11px}
 .customer-form textarea{min-height:75px;resize:vertical}
 .invoice-summary{background:#fff;border:1px solid #e3e7ef;border-radius:10px;padding:12px;margin-top:12px}
 
+
+/* ===== Printable invoice ===== */
+.bill-panel{display:none;position:fixed;inset:0;background:#0009;z-index:100;overflow:auto;padding:18px 10px}
+.bill-wrap{background:#fff;max-width:900px;margin:10px auto;padding:22px;color:#111;border-radius:8px}
+.bill-head{text-align:center;border-bottom:2px solid #222;padding-bottom:12px;margin-bottom:12px}
+.bill-head h1{font-size:26px;color:#111;margin:0 0 4px}
+.bill-head p{margin:3px 0;font-size:14px}
+.bill-meta{display:flex;justify-content:space-between;gap:18px;border-bottom:1px solid #999;padding:10px 0;font-size:14px}
+.bill-table{width:100%;border-collapse:collapse;margin-top:16px;font-size:13px}
+.bill-table th,.bill-table td{border:1px solid #777;padding:8px 7px}
+.bill-table th{font-weight:700;text-align:center;background:#f3f3f3}
+.bill-table td:nth-child(1),.bill-table td:nth-child(3),.bill-table td:nth-child(5){text-align:center}
+.bill-table td:nth-child(4),.bill-table td:nth-child(6){text-align:right}
+.bill-totals{margin-left:auto;width:320px;margin-top:10px;font-size:14px}
+.bill-totals div{display:flex;justify-content:space-between;padding:5px 0}
+.bill-totals .grand{border-top:2px solid #222;font-size:18px;font-weight:700;padding-top:8px}
+.bill-footer{margin-top:30px;text-align:center;font-size:13px}
+.bill-buttons{display:flex;gap:10px;justify-content:center;margin-top:18px}
+.bill-buttons button{padding:11px 18px;border:0;border-radius:8px;color:#fff;font-weight:700}
+.bill-print{background:#1459a5}
+.bill-close{background:#555}
+@media(max-width:600px){
+  .bill-wrap{padding:12px}
+  .bill-head h1{font-size:21px}
+  .bill-meta{font-size:12px}
+  .bill-table{font-size:11px}
+  .bill-table th,.bill-table td{padding:6px 4px}
+  .bill-totals{width:100%}
+}
+@media print{
+  body *{visibility:hidden!important}
+  #billPanel,#billPanel *{visibility:visible!important}
+  #billPanel{display:block!important;position:absolute!important;inset:0!important;background:#fff!important;padding:0!important;overflow:visible!important}
+  .bill-wrap{max-width:none!important;margin:0!important;border-radius:0!important;padding:10mm!important}
+  .bill-buttons{display:none!important}
+  @page{size:A4;margin:8mm}
+}
 </style>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"HardwareStore","name":"V K Traders & Hardware","description":"Hardware, plumbing, sanitary products and tools. Good quality material and home delivery available.","telephone":"+91-9623009626","address":{"@type":"PostalAddress","streetAddress":"A/P Retre Karkhana, Shivnagar","addressRegion":"Maharashtra","addressCountry":"IN"},"openingHours":"Mo-Fr 09:00-20:30, Su 09:00-20:30","url":"https://vk-traders-hardware.web.app/","hasMap":"https://maps.app.goo.gl/cnreYKyo2iWvuaAa8"}</script>
 </head>
@@ -179,6 +216,17 @@ header small{font-size:11px}
 <div class="bottom-actions">
   <a class="call-btn" href="tel:9623009626">📞 Call</a>
   <a class="whatsapp-btn" href="https://wa.me/919623009626" target="_blank" rel="noopener">💬 WhatsApp</a>
+</div>
+
+
+<div id="billPanel" class="bill-panel">
+  <div class="bill-wrap">
+    <div id="billPreview"></div>
+    <div class="bill-buttons">
+      <button class="bill-print" type="button" onclick="printBill()">🖨️ Print / Save PDF</button>
+      <button class="bill-close" type="button" onclick="closeBill()">Close</button>
+    </div>
+  </div>
 </div>
 
 <div class="admin">
@@ -460,18 +508,87 @@ function buildInvoiceData(){
 function generateBill(){
   const data=buildInvoiceData();
   if(!data)return;
-  const rows=data.items.map(x=>`<tr><td>${escapeHtml(x.product.name)}</td><td>${x.qty}</td><td>₹${x.product.price.toFixed(2)}</td><td>₹${x.lineTotal.toFixed(2)}</td></tr>`).join("");
+
+  const grandTotal=data.subtotal;
   const type=data.customer.orderType==="delivery"?"Home Delivery":"Self Pickup";
-  const html=`<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>${data.invoiceNo} - V K Traders & Hardware</title><style>body{font-family:Arial,sans-serif;margin:0;padding:24px;color:#172033} .bill{max-width:800px;margin:auto}h1{margin:0 0 5px;color:#0d47a1}p{margin:6px 0}.meta{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;border-bottom:2px solid #0d47a1;padding:12px 0 18px}table{width:100%;border-collapse:collapse;margin-top:22px}th,td{border:1px solid #ddd;padding:10px;text-align:left}th{background:#f1f5fb}.total{text-align:right;font-size:20px;font-weight:bold;margin-top:18px}.thanks{text-align:center;margin-top:40px;color:#596579}@media print{body{padding:0}.no-print{display:none}}</style></head><body><div class="bill"><h1>V K Traders & Hardware</h1><p>Hardware & Plumbing Store</p><p>A/P Retre Karkhana, Shivnagar, Maharashtra</p><p>Phone: 9623009626</p><div class="meta"><div><b>Invoice:</b> ${data.invoiceNo}<br><b>Date:</b> ${data.date.toLocaleString("en-IN")}</div><div><b>Customer:</b> ${escapeHtml(data.customer.name)}<br><b>Mobile:</b> ${escapeHtml(data.customer.phone)}<br><b>Order:</b> ${type}</div></div>${data.customer.address?`<p><b>Address:</b> ${escapeHtml(data.customer.address)}</p>`:""}<table><thead><tr><th>Product</th><th>Qty</th><th>Price</th><th>Amount</th></tr></thead><tbody>${rows}</tbody></table><div class="total">Total: ₹${data.subtotal.toFixed(2)}</div><p>Delivery charges: ${type==="Home Delivery"?"Additional charges apply":"Free"}</p><p class="thanks">Thank you for shopping with V K Traders & Hardware!</p><p class="no-print" style="text-align:center;margin-top:30px"><button onclick="window.print()">🖨️ Print / Save as PDF</button></p></div></body></html>`;
-  const win=window.open("","_blank");
-  if(!win){alert("Please allow pop-ups to generate the bill.");return;}
-  win.document.write(html);win.document.close();
+  const date=data.date.toLocaleDateString("en-IN");
+  const time=data.date.toLocaleTimeString("en-IN",{hour:"2-digit",minute:"2-digit"});
+
+  const rows=data.items.map((x,i)=>`
+    <tr>
+      <td>${i+1}</td>
+      <td><b>${escapeHtml(x.product.name)}</b></td>
+      <td>${x.qty} nos</td>
+      <td>₹${x.product.price.toFixed(2)}</td>
+      <td>nos</td>
+      <td>₹${x.lineTotal.toFixed(2)}</td>
+    </tr>`).join("");
+
+  document.getElementById("billPreview").innerHTML=`
+    <div class="bill-head">
+      <h1>V K Traders &amp; Hardware</h1>
+      <p>Good Quality Material • Hardware &amp; Plumbing Store</p>
+      <p>A/P Retre Karkhana, Shivnagar, Maharashtra</p>
+      <p>Phone: 9623009626</p>
+    </div>
+
+    <div class="bill-meta">
+      <div>
+        <b>Invoice No:</b> ${escapeHtml(data.invoiceNo)}<br>
+        <b>Date:</b> ${date} &nbsp; <b>Time:</b> ${time}
+      </div>
+      <div>
+        <b>Customer:</b> ${escapeHtml(data.customer.name)}<br>
+        <b>Mobile:</b> ${escapeHtml(data.customer.phone)}<br>
+        <b>Order:</b> ${type}
+      </div>
+    </div>
+
+    ${data.customer.address ? `<p style="margin:10px 0 0"><b>Delivery Address:</b> ${escapeHtml(data.customer.address)}</p>` : ""}
+
+    <table class="bill-table">
+      <thead>
+        <tr>
+          <th>Sl No.</th>
+          <th>Description of Goods</th>
+          <th>Quantity</th>
+          <th>Rate</th>
+          <th>Per</th>
+          <th>Amount</th>
+        </tr>
+      </thead>
+      <tbody>${rows}</tbody>
+    </table>
+
+    <div class="bill-totals">
+      <div><span>Subtotal</span><span>₹${data.subtotal.toFixed(2)}</span></div>
+      <div class="grand"><span>Grand Total</span><span>₹${grandTotal.toFixed(2)}</span></div>
+    </div>
+
+    <div class="bill-footer">
+      <p><b>${type}</b> • ${type==="Self Pickup" ? "Pickup is free" : "Delivery charges may apply"}</p>
+      <p>Thank you for shopping with V K Traders &amp; Hardware!</p>
+    </div>
+  `;
+
+  document.getElementById("billPanel").style.display="block";
+  document.body.style.overflow="hidden";
+}
+
+function printBill(){
+  window.print();
+}
+
+function closeBill(){
+  document.getElementById("billPanel").style.display="none";
+  document.body.style.overflow="";
 }
 
 function orderWhatsApp(){
   const data=buildInvoiceData();
   if(!data)return;
   const type=data.customer.orderType==="delivery"?"Home Delivery":"Self Pickup";
+  const grandTotal=data.subtotal;
   const lines=data.items.map(x=>`${x.product.name} x ${x.qty} = ₹${x.lineTotal.toFixed(2)}`);
   const message=[
     "*V K Traders and Hardware*",
@@ -486,7 +603,7 @@ function orderWhatsApp(){
     "*Order Items*",
     ...lines,
     "",
-    `*Total: ₹${data.subtotal.toFixed(2)}*`,
+    `Subtotal: ₹${data.subtotal.toFixed(2)}`, `*Grand Total: ₹${grandTotal.toFixed(2)}*`,
     type==="Home Delivery"?"Delivery charges: Additional charges apply":"Pickup: Free",
     "",
     "Please confirm my order."
@@ -507,6 +624,9 @@ window.del=del;
 window.add=add;
 window.loadMore=loadMore;
 window.orderWhatsApp=orderWhatsApp;
+window.generateBill=generateBill;
+window.printBill=printBill;
+window.closeBill=closeBill;
 
 window.addEventListener("DOMContentLoaded", async ()=>{
   document.getElementById("search").addEventListener("input",()=>{visibleCount=24;render();});
@@ -523,6 +643,7 @@ window.addEventListener("DOMContentLoaded", async ()=>{
 document.addEventListener("click", function(e){
   if(e.target && e.target.id === "adminPanel") closeAdmin();
   if(e.target && e.target.id === "cartPanel") closeCart();
+  if(e.target && e.target.id === "billPanel") closeBill();
 });
 </script>
 
