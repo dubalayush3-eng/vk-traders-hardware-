@@ -44,6 +44,13 @@ header small{opacity:.9}
 .box{background:#fff;max-width:700px;margin:20px auto;padding:20px;border-radius:14px}
 .close{float:right;background:#555!important}
 .box input{display:block;width:100%;padding:12px;margin:9px 0;border:1px solid #ccd3df;border-radius:8px}
+.cart-item-row{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:12px 0;border-bottom:1px solid #e8ecf2}
+.cart-item-info{display:flex;flex-direction:column;gap:4px;min-width:0}.cart-item-info b{overflow-wrap:anywhere}.cart-item-info span{color:#596579}
+.cart-remove-btn{background:#d32f2f!important;white-space:nowrap;padding:8px 10px!important}
+.admin-product-row{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:10px 0;border-bottom:1px solid #eee}
+.admin-product-info{min-width:0;overflow-wrap:anywhere}.admin-product-info small{display:block;color:#596579;margin-top:3px}
+.admin-product-actions{display:flex;gap:7px;flex-wrap:wrap;justify-content:flex-end}.edit-btn{background:#0d47a1!important}
+@media(max-width:600px){.admin-product-row{align-items:flex-start;flex-direction:column}.admin-product-actions{width:100%;justify-content:flex-start}.cart-item-row{align-items:flex-start}.cart-remove-btn{font-size:12px!important}}
 .notice{background:#fff7d6;padding:12px;border-radius:10px;margin:12px 0}
 #manage div{padding:7px 0;border-bottom:1px solid #eee}
 .load{text-align:center;padding:0 0 110px}
@@ -142,6 +149,12 @@ header small{font-size:11px}
   .bill-buttons{display:none!important}
   @page{size:A4;margin:8mm}
 }
+
+/* ===== Admin photo edit ===== */
+.edit-photo-box{display:inline-flex;flex-direction:column;gap:6px;margin-right:10px;margin-bottom:8px;vertical-align:top}
+.edit-photo-box img{width:110px;height:85px;object-fit:contain;border:1px solid #d9e1ec;border-radius:8px;background:#f8fafc}
+.edit-photo-box button{background:#b42318!important;font-size:12px;padding:7px 9px}
+
 </style>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"HardwareStore","name":"V K Traders & Hardware","description":"Hardware, plumbing, sanitary products and tools. Good quality material and home delivery available.","telephone":"+91-9623009626","address":{"@type":"PostalAddress","streetAddress":"A/P Retre Karkhana, Shivnagar","addressRegion":"Maharashtra","addressCountry":"IN"},"openingHours":"Mo-Fr 09:00-20:30, Su 09:00-20:30","url":"https://vk-traders-hardware.web.app/","hasMap":"https://maps.app.goo.gl/cnreYKyo2iWvuaAa8"}</script>
 </head>
@@ -241,12 +254,37 @@ header small{font-size:11px}
     <input id="pprice" type="number" placeholder="Price ₹">
     <input id="pcat" placeholder="Category (e.g. Plumbing)">
     <input id="pemoji" placeholder="Emoji (e.g. 🔧)" value="🔧">
-<label><b>Choose Product Photo</b></label>
-<input type="file" id="productPhoto" accept="image/*">
+<label><b>Choose Product Photo 1</b></label>
+<input type="file" id="productPhoto1" accept="image/*">
+<label><b>Choose Product Photo 2</b></label>
+<input type="file" id="productPhoto2" accept="image/*">
     <button type="button" onclick="addProduct()">Add Product</button>
     <div class="notice">Products are saved online in Firebase. Products added here will appear on other mobiles too.</div>
     <hr>
     <div id="manage"></div>
+  </div>
+</div>
+
+
+<div id="editProductPanel" class="panel">
+  <div class="box">
+    <button type="button" class="close" onclick="closeEditProduct()">Close</button>
+    <h2>✏️ Edit Product</h2>
+    <input id="editProductId" type="hidden">
+    <input id="editPname" placeholder="Product name">
+    <input id="editPprice" type="number" placeholder="Price ₹" min="0">
+    <input id="editPcat" placeholder="Category">
+    <input id="editPemoji" placeholder="Emoji (e.g. 🔧)">
+    <label><b>Current Photo 1</b></label>
+    <div id="editPhotoPreview1" style="margin:8px 0"></div>
+    <label><b>Change Photo 1 (optional)</b></label>
+    <input type="file" id="editProductPhoto1" accept="image/*">
+    <label><b>Current Photo 2</b></label>
+    <div id="editPhotoPreview2" style="margin:8px 0"></div>
+    <label><b>Change Photo 2 (optional)</b></label>
+    <input type="file" id="editProductPhoto2" accept="image/*">
+    <div class="notice">Leave a photo file empty to keep the existing photo. Use the remove buttons if you want to delete a photo.</div>
+    <button type="button" onclick="saveProductEdit()">💾 Save Changes</button>
   </div>
 </div>
 
@@ -279,7 +317,7 @@ header small{font-size:11px}
 
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js";
-import { getFirestore, collection, getDocs, addDoc, deleteDoc, doc, query, orderBy } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
+import { getFirestore, collection, getDocs, addDoc, updateDoc, deleteDoc, doc } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
 
 const firebaseConfig = {
   apiKey: "AIzaSyDjxyqqRQ_tA5Cr73Dac6s7j32UT9M6QpA",
@@ -304,15 +342,18 @@ function saveCart(){
 }
 
 async function loadProducts(){
-  const snapshot = await getDocs(query(productsRef, orderBy("name")));
+  const snapshot = await getDocs(productsRef);
   products = snapshot.docs.map(d => ({
     id: d.id,
     name: String(d.data().name || ""),
     price: Number(d.data().price || 0),
     category: String(d.data().category || ""),
     emoji: String(d.data().emoji || "🔧"),
-    photo: String(d.data().photo || "")
-  }));
+    photo: String(d.data().photo || ""),
+    photo2: String(d.data().photo2 || "")
+  })).filter(p => p.name);
+
+  products.sort((a,b) => a.name.localeCompare(b.name, undefined, {numeric:true, sensitivity:"base"}));
   render();
   manage();
 }
@@ -331,10 +372,15 @@ function render(){
   );
 
   const shown=filtered.slice(0,visibleCount);
-  document.getElementById("products").innerHTML=shown.map(p=>{
+  if(!products.length){
+    document.getElementById("products").innerHTML='<div class="notice" style="grid-column:1/-1;text-align:center">⏳ No products loaded yet. Please wait a moment and refresh the page.</div>';
+  } else if(!shown.length){
+    document.getElementById("products").innerHTML='<div class="notice" style="grid-column:1/-1;text-align:center">🔎 No products found. Try another search.</div>';
+  }
+  if(products.length && shown.length) document.getElementById("products").innerHTML=shown.map(p=>{
     const realIndex=products.indexOf(p);
     return `<div class="card">
-      <div class="photo">${p.photo ? `<img src="${p.photo}" alt="${escapeHtml(p.name)}">` : escapeHtml(p.emoji)}</div>
+      <div class="photo" onclick="openImageGallery(${realIndex})" style="cursor:zoom-in" title="View photos">${p.photo ? `<img src="${p.photo}" alt="${escapeHtml(p.name)}">` : escapeHtml(p.emoji)}</div>
       <h3>${escapeHtml(p.name)}</h3>
       <div class="category">${escapeHtml(p.category)}</div>
       <div class="price">₹${escapeHtml(p.price)}</div>
@@ -345,6 +391,14 @@ function render(){
   document.getElementById("count").textContent=Object.values(cart).reduce((a,b)=>a+b,0);
   const btn=document.getElementById("loadBtn");
   btn.style.display=filtered.length>visibleCount ? "inline-block" : "none";
+}
+
+function retryProducts(){
+  document.getElementById("products").innerHTML='<div class="notice" style="grid-column:1/-1;text-align:center">🔄 Loading products...</div>';
+  loadProducts().catch(error=>{
+    console.error(error);
+    document.getElementById("products").innerHTML='<div class="notice" style="grid-column:1/-1;text-align:center">❌ Could not load products. Please check internet/Firebase rules and try again.</div>';
+  });
 }
 
 function loadMore(){ visibleCount += 24; render(); }
@@ -387,7 +441,7 @@ function openCart(){
   const items=getCartItems();
   const total=items.reduce((t,x)=>t+x.lineTotal,0);
   document.getElementById("cart").innerHTML=items.length
-    ? items.map(x=>`<p><b>${escapeHtml(x.product.name)}</b> × ${x.qty} — ₹${x.lineTotal.toFixed(2)}</p>`).join("")+`<div class="invoice-summary"><h3 style="margin:0">Subtotal: ₹${total.toFixed(2)}</h3></div>`
+    ? items.map(x=>`<div class="cart-item-row"><div class="cart-item-info"><b>${escapeHtml(x.product.name)}</b><span>× ${x.qty} — ₹${x.lineTotal.toFixed(2)}</span></div><button class="cart-remove-btn" type="button" onclick="removeFromCart('${escapeHtml(x.index)}')">🗑️ Remove</button></div>`).join("")+`<div class="invoice-summary"><h3 style="margin:0">Subtotal: ₹${total.toFixed(2)}</h3></div>`
     : "<p>Your cart is empty.</p>";
   const saved=JSON.parse(localStorage.getItem("vk_customer")||"{}");
   if(saved.name)document.getElementById("customerName").value=saved.name;
@@ -417,63 +471,169 @@ function closeAdmin(){
 
 async function addProduct(){
   try{
-    const nameEl=document.getElementById("pname");
-    const priceEl=document.getElementById("pprice");
-    const catEl=document.getElementById("pcat");
-    const emojiEl=document.getElementById("pemoji");
-    const photoEl=document.getElementById("productPhoto");
-    const name=nameEl.value.trim();
-    const price=Number(priceEl.value);
-    const category=catEl.value.trim();
-    const emoji=emojiEl.value.trim()||"🔧";
+    const name=document.getElementById("pname").value.trim(), price=Number(document.getElementById("pprice").value), category=document.getElementById("pcat").value.trim(), emoji=document.getElementById("pemoji").value.trim()||"🔧";
+    const f1=document.getElementById("productPhoto1")?.files?.[0], f2=document.getElementById("productPhoto2")?.files?.[0];
+    if(!name || !Number.isFinite(price) || price<0 || !category){alert("Please enter Product Name, valid Price and Category.");return;}
+    const readImg=f=>new Promise((res,rej)=>{if(!f)return res("");const r=new FileReader();r.onload=()=>{const im=new Image();im.onload=()=>{let w=im.width,h=im.height,max=700;if(w>max||h>max){if(w>=h){h=Math.round(h*max/w);w=max}else{w=Math.round(w*max/h);h=max}}const c=document.createElement("canvas");c.width=w;c.height=h;c.getContext("2d").drawImage(im,0,0,w,h);res(c.toDataURL("image/jpeg",.72))};im.onerror=()=>rej(new Error("Could not process photo"));im.src=r.result};r.onerror=()=>rej(new Error("Could not read photo"));r.readAsDataURL(f)});
+    const [photo,photo2]=await Promise.all([readImg(f1),readImg(f2)]);
+    await addDoc(productsRef,{name,price,category,emoji,photo,photo2});
+    document.getElementById("pname").value="";document.getElementById("pprice").value="";document.getElementById("pcat").value="";document.getElementById("pemoji").value="🔧";if(document.getElementById("productPhoto1"))document.getElementById("productPhoto1").value="";if(document.getElementById("productPhoto2"))document.getElementById("productPhoto2").value="";await loadProducts();alert("✅ Product added successfully!");
+  }catch(error){console.error(error);alert("❌ Firebase error: "+error.message)}
+}
 
+function manage(){
+  document.getElementById("manage").innerHTML="<h3>Products: "+products.length+" (Firebase)</h3>"+
+  products.map((p,i)=>`<div>${escapeHtml(p.emoji)} ${escapeHtml(p.name)} — ₹${escapeHtml(p.price)}
+    <button onclick="editProduct(${i})">✏️ Edit</button>
+    <button onclick="del(${i})">Delete</button>
+  </div>`).join("");
+}
+
+async function editProduct(i){
+  const p=products[i];
+  if(!p) return;
+  const nameInput=prompt("✏️ Product Name:", p.name);
+  if(nameInput===null) return;
+  const name=nameInput.trim();
+  if(!name){alert("Product name cannot be empty.");return;}
+
+  const priceInput=prompt("💰 Product Price (₹):", String(p.price));
+  if(priceInput===null) return;
+  const price=Number(priceInput);
+  if(!Number.isFinite(price) || price<0){alert("Please enter a valid price.");return;}
+
+  const categoryInput=prompt("📂 Category:", p.category);
+  if(categoryInput===null) return;
+  const category=categoryInput.trim();
+  if(!category){alert("Category cannot be empty.");return;}
+
+  const emojiInput=prompt("🔧 Emoji/Icon:", p.emoji || "🔧");
+  if(emojiInput===null) return;
+  const emoji=emojiInput.trim() || "🔧";
+
+  try{
+    await updateDoc(doc(db,"products",p.id),{name,price,category,emoji});
+    await loadProducts();
+    alert("✅ Product updated successfully!\n\nName, price, category and icon are saved to Firebase.");
+  }catch(error){
+    console.error(error);
+    alert("❌ Could not update product: "+error.message);
+  }
+}
+
+function removeFromCart(index){
+  if(cart[index]){
+    delete cart[index];
+    saveCart();
+    render();
+    openCart();
+  }
+}
+
+
+function compressImageFile(file){
+  return new Promise((resolve,reject)=>{
+    if(!file){resolve(null);return;}
+    const reader=new FileReader();
+    reader.onload=function(){
+      const img=new Image();
+      img.onload=function(){
+        const max=700;
+        let w=img.width,h=img.height;
+        if(w>max||h>max){
+          if(w>=h){h=Math.round(h*max/w);w=max;}
+          else{w=Math.round(w*max/h);h=max;}
+        }
+        const canvas=document.createElement("canvas");
+        canvas.width=w; canvas.height=h;
+        const ctx=canvas.getContext("2d");
+        ctx.drawImage(img,0,0,w,h);
+        resolve(canvas.toDataURL("image/jpeg",0.72));
+      };
+      img.onerror=()=>reject(new Error("Could not process image."));
+      img.src=reader.result;
+    };
+    reader.onerror=()=>reject(new Error("Could not read image."));
+    reader.readAsDataURL(file);
+  });
+}
+
+function editProduct(i){
+  const p=products[i];
+  if(!p)return;
+  document.getElementById("editProductId").value=i;
+  document.getElementById("editPname").value=p.name;
+  document.getElementById("editPprice").value=p.price;
+  document.getElementById("editPcat").value=p.category;
+  document.getElementById("editPemoji").value=p.emoji||"🔧";
+  document.getElementById("editProductPhoto1").value="";
+  document.getElementById("editProductPhoto2").value="";
+  document.getElementById("editPhotoPreview1").innerHTML=p.photo
+    ? `<div class="edit-photo-box"><img src="${p.photo}" alt="Photo 1"><button type="button" onclick="removeEditPhoto(1)">🗑️ Remove Photo 1</button></div>`
+    : "<span>No Photo 1</span>";
+  document.getElementById("editPhotoPreview2").innerHTML=p.photo2
+    ? `<div class="edit-photo-box"><img src="${p.photo2}" alt="Photo 2"><button type="button" onclick="removeEditPhoto(2)">🗑️ Remove Photo 2</button></div>`
+    : "<span>No Photo 2</span>";
+  document.getElementById("editProductPanel").style.display="block";
+  document.body.style.overflow="hidden";
+}
+
+function removeEditPhoto(which){
+  const i=Number(document.getElementById("editProductId").value);
+  const p=products[i];
+  if(!p)return;
+  if(which===1)p._removePhoto1=true;
+  if(which===2)p._removePhoto2=true;
+  const target=which===1?"editPhotoPreview1":"editPhotoPreview2";
+  document.getElementById(target).innerHTML="<span>Photo will be removed when you save.</span>";
+}
+
+async function saveProductEdit(){
+  try{
+    const i=Number(document.getElementById("editProductId").value);
+    const p=products[i];
+    if(!p)return;
+
+    const name=document.getElementById("editPname").value.trim();
+    const price=Number(document.getElementById("editPprice").value);
+    const category=document.getElementById("editPcat").value.trim();
+    const emoji=document.getElementById("editPemoji").value.trim()||"🔧";
     if(!name || !Number.isFinite(price) || price<0 || !category){
       alert("Please enter Product Name, valid Price and Category.");
       return;
     }
 
-    const finishAdd = async (photoData) => {
-      await addDoc(productsRef,{name,price,category,emoji,photo:photoData||""});
-      nameEl.value=""; priceEl.value=""; catEl.value=""; emojiEl.value="🔧";
-      if(photoEl) photoEl.value="";
-      await loadProducts();
-      alert("✅ Product added to Firebase successfully!");
-    };
+    const f1=document.getElementById("editProductPhoto1").files[0];
+    const f2=document.getElementById("editProductPhoto2").files[0];
+    const newPhoto1=await compressImageFile(f1);
+    const newPhoto2=await compressImageFile(f2);
 
-    if(photoEl && photoEl.files && photoEl.files[0]){
-      const file=photoEl.files[0];
-      const reader=new FileReader();
-      reader.onload=function(){
-        const img=new Image();
-        img.onload=async function(){
-          const max=700;
-          let w=img.width,h=img.height;
-          if(w>max||h>max){
-            if(w>=h){h=Math.round(h*max/w);w=max;}
-            else{w=Math.round(w*max/h);h=max;}
-          }
-          const canvas=document.createElement("canvas");
-          canvas.width=w; canvas.height=h;
-          canvas.getContext("2d").drawImage(img,0,0,w,h);
-          await finishAdd(canvas.toDataURL("image/jpeg",0.72));
-        };
-        img.onerror=()=>alert("Could not process the product photo.");
-        img.src=reader.result;
-      };
-      reader.onerror=()=>alert("Could not read the product photo.");
-      reader.readAsDataURL(file);
-    }else{
-      await finishAdd("");
-    }
+    const updateData={name,price,category,emoji};
+    if(p._removePhoto1) updateData.photo="";
+    else if(newPhoto1) updateData.photo=newPhoto1;
+
+    if(p._removePhoto2) updateData.photo2="";
+    else if(newPhoto2) updateData.photo2=newPhoto2;
+
+    await import("https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js").then(async m=>{
+      await m.updateDoc(m.doc(db,"products",p.id),updateData);
+    });
+
+    delete p._removePhoto1;
+    delete p._removePhoto2;
+    closeEditProduct();
+    await loadProducts();
+    alert("✅ Product updated successfully!");
   }catch(error){
     console.error(error);
-    alert("❌ Firebase error: " + error.message);
+    alert("❌ Could not update product: "+error.message);
   }
 }
 
-function manage(){
-  document.getElementById("manage").innerHTML="<h3>Products: "+products.length+" (Firebase)</h3>"+
-  products.map((p,i)=>`<div>${escapeHtml(p.emoji)} ${escapeHtml(p.name)} — ₹${escapeHtml(p.price)} <button onclick="del(${i})">Delete</button></div>`).join("");
+function closeEditProduct(){
+  const panel=document.getElementById("editProductPanel");
+  if(panel)panel.style.display="none";
+  document.body.style.overflow="";
 }
 
 async function del(i){
@@ -623,6 +783,12 @@ function orderWhatsApp(){
   window.location.href="https://wa.me/919623009626?text="+encodeURIComponent(message);
 }
 
+let galleryImages=[],galleryIndex=0;
+function openImageGallery(i){const p=products[i];if(!p)return;galleryImages=[p.photo,p.photo2].filter(Boolean);if(!galleryImages.length)return;galleryIndex=0;document.getElementById("galleryImg").src=galleryImages[0];document.getElementById("galleryModal").style.display="flex";updateGallery();}
+function updateGallery(){document.getElementById("galleryImg").src=galleryImages[galleryIndex];document.getElementById("galleryCount").textContent=(galleryIndex+1)+" / "+galleryImages.length;document.getElementById("galleryPrev").style.display=galleryImages.length>1?"block":"none";document.getElementById("galleryNext").style.display=galleryImages.length>1?"block":"none";}
+function galleryPrev(){if(galleryImages.length>1){galleryIndex=(galleryIndex-1+galleryImages.length)%galleryImages.length;updateGallery()}}
+function galleryNext(){if(galleryImages.length>1){galleryIndex=(galleryIndex+1)%galleryImages.length;updateGallery()}}
+function closeGallery(){document.getElementById("galleryModal").style.display="none"}
 function escapeHtml(value){
   return String(value).replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#039;"}[m]));
 }
@@ -633,12 +799,14 @@ window.openAdmin=openAdmin;
 window.closeAdmin=closeAdmin;
 window.addProduct=addProduct;
 window.del=del;
+window.editProduct=editProduct;
+window.removeFromCart=removeFromCart;
 window.add=add;
 window.loadMore=loadMore;
 window.orderWhatsApp=orderWhatsApp;
 window.generateBill=generateBill;
 window.printBill=printBill;
-window.closeBill=closeBill;
+window.closeBill=closeBill;window.openImageGallery=openImageGallery;window.galleryPrev=galleryPrev;window.galleryNext=galleryNext;window.closeGallery=closeGallery;
 
 window.addEventListener("DOMContentLoaded", async ()=>{
   document.getElementById("search").addEventListener("input",()=>{visibleCount=24;render();});
@@ -646,7 +814,7 @@ window.addEventListener("DOMContentLoaded", async ()=>{
   try{ await loadProducts(); }
   catch(error){
     console.error(error);
-    document.getElementById("products").innerHTML='<div class="notice">❌ Could not load products from Firebase. Check Firestore Rules and internet connection.</div>';
+    document.getElementById("products").innerHTML='<div class="notice" style="grid-column:1/-1;text-align:center">❌ Could not load products from Firebase. Check internet/Firebase Rules, then refresh.</div>';
   }
 });
 </script>
@@ -654,10 +822,11 @@ window.addEventListener("DOMContentLoaded", async ()=>{
 <script>
 document.addEventListener("click", function(e){
   if(e.target && e.target.id === "adminPanel") closeAdmin();
+  if(e.target && e.target.id === "editProductPanel") closeEditProduct();
   if(e.target && e.target.id === "cartPanel") closeCart();
   if(e.target && e.target.id === "billPanel") closeBill();
 });
 </script>
 
-</body>
+<div id="galleryModal" style="display:none;position:fixed;inset:0;background:#000e;z-index:300;align-items:center;justify-content:center;padding:15px" onclick="if(event.target===this)closeGallery()"><button onclick="closeGallery()" style="position:absolute;right:15px;top:15px;background:#fff;border:0;border-radius:50%;width:42px;height:42px;font-size:25px">×</button><button id="galleryPrev" onclick="galleryPrev()" style="position:absolute;left:15px;background:#fff;border:0;border-radius:50%;width:45px;height:45px;font-size:30px">‹</button><img id="galleryImg" style="max-width:90vw;max-height:82vh;object-fit:contain;border-radius:10px"><button id="galleryNext" onclick="galleryNext()" style="position:absolute;right:15px;background:#fff;border:0;border-radius:50%;width:45px;height:45px;font-size:30px">›</button><div id="galleryCount" style="position:absolute;bottom:20px;background:#000b;color:#fff;padding:6px 12px;border-radius:20px"></div></div></body>
 </html>
