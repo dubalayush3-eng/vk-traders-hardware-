@@ -17,816 +17,744 @@
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="V K Traders & Hardware">
 <meta name="twitter:description" content="Hardware, plumbing, sanitary and tools in Maharashtra. Home delivery available.">
+
 <style>
-/* PREMIUM V6 */
-.hero{background:linear-gradient(135deg,#071a33,#0d47a1,#1768c4);color:#fff;border-radius:0 0 28px 28px;box-shadow:0 10px 30px #071a3330}.hero p{color:#e8f0ff}.map-link{color:#fff;background:#ffffff14;padding:10px 14px;border-radius:12px;text-decoration:none}.card{border:1px solid #e5eaf1;box-shadow:0 6px 22px #071a3312;transition:.18s}.card:hover{transform:translateY(-3px);box-shadow:0 12px 30px #071a3322}.photo{background:linear-gradient(135deg,#f8fafc,#eaf0f7)}
+:root{--blue:#0d47a1;--blue2:#1565c0;--green:#12a84f;--orange:#f7931e;--red:#d32f2f;--ink:#172033;--muted:#667085;--bg:#f5f7fb;--card:#fff;--line:#e3e8f0}
+*{box-sizing:border-box}html{scroll-behavior:smooth}
+body{margin:0;font-family:Arial,sans-serif;background:var(--bg);color:var(--ink)}
+button,input,select,textarea{font:inherit}button{cursor:pointer}
+header{background:linear-gradient(135deg,#0d47a1,#1565c0);color:#fff;padding:13px 5%;display:flex;justify-content:space-between;align-items:center;gap:12px;position:sticky;top:0;z-index:100;box-shadow:0 3px 14px #0002}
+h1{font-size:22px;margin:0}#secretAdminLogo{cursor:pointer;user-select:none;-webkit-user-select:none;-webkit-touch-callout:none;touch-action:manipulation}.brand-sub{opacity:.9;font-size:13px;margin-top:4px}
+.cart{background:#fff;color:var(--blue);border:0;border-radius:25px;padding:11px 17px;font-weight:800;white-space:nowrap}.header-actions{display:flex;align-items:center;gap:8px}
+.orders-top-btn{background:#eaf2ff;color:#0d47a1;border:0;border-radius:25px;padding:11px 14px;font-weight:800;white-space:nowrap}
+.orders-subtitle{color:var(--muted);margin-top:-6px}
+.orders-search{display:flex;gap:8px;margin:14px 0}.orders-search input{flex:1!important;margin:0!important}.orders-search button{white-space:nowrap}
+.order-card{border:1px solid #e3e8f0;border-radius:14px;padding:14px;margin:12px 0;background:#fff;box-shadow:0 3px 12px #0000000d}
+.order-card-head{display:flex;justify-content:space-between;gap:10px;align-items:flex-start}
+.order-no{font-weight:900;color:var(--blue);font-size:16px}.order-date{color:var(--muted);font-size:12px;margin-top:3px}
+.order-status{padding:6px 9px;border-radius:999px;background:#eef5ff;color:var(--blue);font-size:12px;font-weight:800;white-space:nowrap}
+.order-status.delivered{background:#e9f9ef;color:#087f3f}.order-status.cancelled{background:#fff0f0;color:#c62828}
+.order-items{margin:10px 0;padding:10px;background:#f7f9fc;border-radius:10px}
+.order-item-line{display:flex;justify-content:space-between;gap:10px;padding:5px 0;font-size:14px}
+.order-total{display:flex;justify-content:space-between;border-top:1px solid #e3e8f0;padding-top:10px;font-size:17px;font-weight:900}
+.order-actions{display:flex;gap:8px;margin-top:12px}.order-actions button{flex:1}
+.admin-order-card{border:1px solid #e2e7ef;border-radius:14px;padding:13px;margin:10px 0;background:#fff}
+.admin-order-top{display:flex;justify-content:space-between;gap:10px;align-items:flex-start}
+.admin-order-name{font-weight:900}.admin-order-meta{font-size:12px;color:var(--muted);margin-top:3px}
+.admin-order-items{background:#f7f9fc;border-radius:9px;padding:8px;margin:9px 0;font-size:13px}
+.admin-order-total{font-weight:900;margin:7px 0}
+.admin-order-status{display:flex;gap:7px;align-items:center}
+.admin-order-status select{padding:9px;border:1px solid #ccd3df;border-radius:8px;font:inherit;flex:1}
+.admin-order-status button{padding:9px 12px}
 
-*{box-sizing:border-box}
-body{margin:0;font-family:Arial,sans-serif;background:#f5f7fb;color:#172033}
-header{background:#0d47a1;color:#fff;padding:14px 5%;display:flex;justify-content:space-between;align-items:center;gap:12px;position:sticky;top:0;z-index:10;-webkit-user-select:none;user-select:none;-webkit-touch-callout:none;touch-action:manipulation}
-h1{font-size:22px;margin:0;-webkit-user-select:none;user-select:none}
-header small{opacity:.9}
-.cart{background:#fff;color:#0d47a1;border:0;border-radius:22px;padding:10px 16px;font-weight:bold}
-.hero{padding:30px 5% 34px;background:linear-gradient(135deg,#071a33 0%,#0d47a1 55%,#1768c4 100%);color:#fff;border-radius:0 0 28px 28px;box-shadow:0 10px 30px #071a3330}
-.hero h2{margin:0 0 10px;font-size:29px;line-height:1.18;color:#fff;font-weight:800}
-.hero p{margin:0;color:#e8f0ff;font-size:17px;line-height:1.55}
-.map-link{display:inline-block;margin-top:14px;color:#fff;background:#ffffff18;border:1px solid #ffffff30;padding:11px 14px;border-radius:12px;font-weight:bold;text-decoration:none}
-.controls{padding:15px 5%;display:flex;gap:10px;align-items:center;flex-wrap:wrap;background:#f5f7fb}
-.controls input,.controls select{padding:12px;border:1px solid #ccd3df;border-radius:10px;min-width:0;font-size:16px}
-.controls input{flex:2}
-.controls select{flex:1}
-.grid{padding:10px 5% 100px;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;align-items:start}
-.card{background:#fff;border-radius:14px;padding:12px;box-shadow:0 2px 10px #00000012;width:100%;min-width:0}
-.photo{height:135px;background:#eef3f9;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:58px;margin-bottom:10px;overflow:hidden}.photo img{width:100%;height:100%;object-fit:contain}
-.card h3{font-size:17px;margin:5px 0}
-.card .category{color:#596579;font-size:14px}
-.price{color:#0d47a1;font-size:18px;font-weight:bold;margin:5px 0 10px}
-.card button,.admin button,.box button{background:#0d47a1;color:#fff;border:0;border-radius:8px;padding:9px 12px;font-weight:bold}
-.admin{display:none}
-.panel{display:none;position:fixed;inset:0;background:#0008;z-index:200;overflow:auto;padding:25px 12px}
-.box{background:#fff;max-width:700px;margin:20px auto;padding:20px;border-radius:14px}
-.close{float:right;background:#555!important}
-.box input{display:block;width:100%;padding:12px;margin:9px 0;border:1px solid #ccd3df;border-radius:8px}
-.cart-item-row{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:12px 0;border-bottom:1px solid #e8ecf2}
-.cart-item-info{display:flex;flex-direction:column;gap:4px;min-width:0}.cart-item-info b{overflow-wrap:anywhere}.cart-item-info span{color:#596579}
-.cart-remove-btn{background:#d32f2f!important;white-space:nowrap;padding:8px 10px!important}
-.admin-product-row{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:10px 0;border-bottom:1px solid #eee}
-.admin-product-info{min-width:0;overflow-wrap:anywhere}.admin-product-info small{display:block;color:#596579;margin-top:3px}
-.admin-product-actions{display:flex;gap:7px;flex-wrap:wrap;justify-content:flex-end}.edit-btn{background:#0d47a1!important}
-@media(max-width:600px){.admin-product-row{align-items:flex-start;flex-direction:column}.admin-product-actions{width:100%;justify-content:flex-start}.cart-item-row{align-items:flex-start}.cart-remove-btn{font-size:12px!important}}
-.notice{background:#fff7d6;padding:12px;border-radius:10px;margin:12px 0}
-#manage div{padding:7px 0;border-bottom:1px solid #eee}
-.load{text-align:center;padding:0 0 110px}.load button{display:none}
-.load button{background:#0d47a1;color:#fff;border:0;border-radius:9px;padding:12px 20px;font-weight:bold}
-@media(max-width:900px){.grid{grid-template-columns:repeat(3,minmax(0,1fr))}}
-@media(max-width:600px){
-header{padding:12px 4%}
-h1{font-size:18px}
-header small{font-size:11px}
-.hero{padding:20px 5%}
-.hero h2{font-size:22px}
-.controls{padding:12px 5%;flex-direction:row;align-items:stretch}
-.controls input,.controls select{width:100%;flex:1 1 100%}
-.grid{grid-template-columns:repeat(2,minmax(0,1fr));padding:8px 12px 70px;gap:10px}
-.card{padding:9px}
-.photo{height:105px;font-size:45px}
-.card h3{font-size:15px}
-.card .category{font-size:12px}
-.price{font-size:16px}
-.card button{padding:8px;font-size:12px}
-}
+.status-line{font-size:12px;color:var(--muted);margin-top:8px}
 
-.contact-section{padding:35px 5% 0;background:#fff}
-.contact-card{background:#f7931e;border-radius:0 0 38px 38px;padding:28px 9%;min-height:180px}
-.contact-card h2{color:#fff;font-size:28px;font-weight:500;margin:0 0 28px}
-.contact-whatsapp{display:inline-block;background:#fff;color:#172033;text-decoration:none;font-weight:bold;font-size:20px;padding:18px 34px;border-radius:18px}
-.site-footer{background:#06162b;color:#d9e1ee;margin-top:90px;padding:80px 5% 105px}
-.footer-inner{max-width:1100px;margin:auto;display:grid;grid-template-columns:1.4fr 1fr 1.4fr;gap:55px}
-.site-footer h2{color:#fff;font-size:29px;margin:0 0 24px}
-.site-footer h3{color:#fff;font-size:22px;margin:0 0 22px}
-.site-footer p{font-size:18px;line-height:1.65;margin:0}
-.footer-links a,.footer-contact a{display:block;color:#d9e1ee;text-decoration:none;font-size:18px;margin:0 0 12px}
-.footer-contact p{margin-top:8px}
-.copyright{grid-column:1/-1;border-top:1px solid #ffffff18;padding-top:35px;text-align:center;font-size:16px}
-.bottom-actions{position:fixed;left:20px;right:20px;bottom:16px;display:flex;gap:14px;z-index:50}
-.bottom-actions a{flex:1;text-align:center;text-decoration:none;color:#fff;font-weight:bold;font-size:20px;padding:17px 10px;border-radius:40px;box-shadow:0 4px 14px #0004}
-.call-btn{background:#1459a5}
-.whatsapp-btn{background:#12a84f}
-@media(max-width:600px){
-  .contact-section{padding:25px 0 0}
-  .contact-card{padding:28px 9%;min-height:225px}
-  .contact-card h2{font-size:25px;line-height:1.25}
-  .contact-whatsapp{font-size:18px;padding:17px 34px}
-  .site-footer{margin-top:70px;padding:75px 7% 105px}
-  .footer-inner{display:block}
-  .footer-about,.footer-links,.footer-contact{margin-bottom:52px}
-  .site-footer h2{font-size:28px}
-  .bottom-actions{left:20px;right:20px;bottom:14px}
-  .bottom-actions a{font-size:18px;padding:17px 8px}
-}
-
-.invoice-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}
-.invoice-actions button{flex:1;min-width:180px}
-.whatsapp-order-btn{background:#12a84f!important}
-.bill-btn{background:#1459a5!important}
-.customer-form{background:#f5f7fb;border-radius:12px;padding:12px;margin:14px 0}
-.customer-form label{display:block;font-weight:bold;margin-top:9px}
-.customer-form input,.customer-form textarea,.customer-form select{display:block;width:100%;padding:11px;margin-top:5px;border:1px solid #ccd3df;border-radius:8px;font:inherit}
-.customer-form textarea{min-height:75px;resize:vertical}
+.hero{padding:34px 5%;background:linear-gradient(180deg,#fff,#f8fbff)}
+.hero-inner{max-width:1180px;margin:auto;display:grid;grid-template-columns:1.5fr .8fr;gap:28px;align-items:center}
+.hero h2{margin:0 0 10px;font-size:34px;line-height:1.12}.hero p{margin:0;color:var(--muted);font-size:18px;line-height:1.55}
+.hero-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}.hero-btn{display:inline-block;text-decoration:none;border-radius:12px;padding:12px 16px;font-weight:800}.hero-primary{background:var(--blue);color:#fff}.hero-secondary{background:#eaf2ff;color:var(--blue)}
+.hero-box{background:#fff;border:1px solid var(--line);border-radius:20px;padding:22px;box-shadow:0 8px 30px #0d47a112}.hero-box strong{font-size:29px;color:var(--blue)}.hero-box p{font-size:14px;margin-top:4px}
+.store-chips{display:flex;gap:8px;flex-wrap:wrap;margin-top:18px}.store-chip{background:#eef5ff;color:var(--blue);padding:8px 11px;border-radius:999px;font-size:13px;font-weight:700}
+.section{max-width:1180px;margin:0 auto;padding:28px 5%}.section-head{display:flex;justify-content:space-between;align-items:end;gap:12px;margin-bottom:15px}.section-head h2{margin:0;font-size:26px}.section-head p{margin:5px 0 0;color:var(--muted)}
+.mini-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:13px}
+.controls{padding:16px 5%;display:flex;gap:10px;align-items:center;flex-wrap:wrap;background:#f5f7fb;border-top:1px solid #eef1f5;border-bottom:1px solid #eef1f5}
+.controls input,.controls select{padding:13px;border:1px solid #ccd3df;border-radius:12px;min-width:0;font-size:16px;background:#fff}.controls input{flex:2}.controls select{flex:1}
+.search-wrap{position:relative;flex:2}.search-wrap input{width:100%;padding-left:42px}.search-icon{position:absolute;left:14px;top:12px;font-size:20px}
+.grid{padding:10px 5% 30px;max-width:1180px;margin:auto;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;align-items:start}
+.card{background:var(--card);border-radius:17px;padding:12px;box-shadow:0 3px 15px #00000010;width:100%;min-width:0;border:1px solid #edf0f5;position:relative;transition:.18s transform,.18s box-shadow}
+.card:hover{transform:translateY(-2px);box-shadow:0 8px 24px #0002}.photo{height:155px;background:#eef3f9;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:58px;margin-bottom:10px;overflow:hidden;position:relative}
+.photo img{width:100%;height:100%;object-fit:contain}.photo .photo-count{position:absolute;right:7px;bottom:7px;background:#000b;color:#fff;border-radius:999px;padding:4px 7px;font-size:11px}
+.badges{position:absolute;left:16px;top:16px;display:flex;gap:5px;flex-wrap:wrap;z-index:2}.badge{padding:5px 7px;border-radius:999px;color:#fff;font-size:10px;font-weight:800}.badge-featured{background:var(--orange)}.badge-popular{background:#7b1fa2}.badge-offer{background:var(--red)}.badge-stock{background:#555}
+.card h3{font-size:16px;margin:7px 0 4px;line-height:1.3}.card .category{color:var(--muted);font-size:12px}
+.price{color:var(--blue);font-size:18px;font-weight:800;margin:6px 0}.old-price{text-decoration:line-through;color:#8b95a7;font-size:13px;margin-left:5px;font-weight:400}.card-actions{display:flex;gap:7px}.card-actions button{flex:1}
+.card button,.admin button,.box button{background:var(--blue);color:#fff;border:0;border-radius:9px;padding:9px 11px;font-weight:800}.heart-btn{flex:0 0 42px!important;background:#f0f4fa!important;color:#d32f2f!important;font-size:18px}
+.out-btn{background:#8b95a7!important;cursor:not-allowed!important}.stock-off{opacity:.72}
+.load{text-align:center;padding:15px 0 55px}.load button{background:var(--blue);color:#fff;border:0;border-radius:10px;padding:12px 20px;font-weight:800}
+.panel{display:none;position:fixed;inset:0;background:#0009;z-index:200;overflow:auto;padding:25px 12px}.box{background:#fff;max-width:760px;margin:20px auto;padding:20px;border-radius:16px;box-shadow:0 15px 60px #0004}.close{float:right;background:#555!important}.box input,.box select,.box textarea{display:block;width:100%;padding:12px;margin:8px 0;border:1px solid #ccd3df;border-radius:9px}.box textarea{min-height:80px;resize:vertical}
+.notice{background:#fff7d6;padding:12px;border-radius:10px;margin:12px 0}.success{background:#e9f9ef;padding:12px;border-radius:10px;margin:12px 0}
+.admin{position:fixed;right:12px;bottom:86px;z-index:160}.admin button{box-shadow:0 5px 18px #0003}
+.admin-product-row{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:11px 0;border-bottom:1px solid #eee}.admin-product-info{min-width:0;overflow-wrap:anywhere}.admin-product-info small{display:block;color:var(--muted);margin-top:3px}.admin-product-actions{display:flex;gap:7px;flex-wrap:wrap;justify-content:flex-end}.edit-btn{background:var(--blue)!important}.danger-btn{background:var(--red)!important}.secondary-btn{background:#667085!important}
+.edit-photo-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}.edit-photo-box{border:1px solid var(--line);border-radius:10px;padding:8px}.edit-photo-box img{width:100%;height:130px;object-fit:contain;background:#f4f6f8;border-radius:8px}
+.check-row{display:flex;gap:15px;flex-wrap:wrap;margin:10px 0}.check-row label{display:flex;align-items:center;gap:6px;font-weight:700}.check-row input{width:auto;margin:0}
+.cart-item-row{display:flex;align-items:center;gap:10px;padding:12px 0;border-bottom:1px solid #e8ecf2}.cart-item-info{display:flex;flex-direction:column;gap:4px;min-width:0;flex:1}.cart-item-info b{overflow-wrap:anywhere}.cart-item-info span{color:var(--muted)}.qty{display:flex;align-items:center;gap:7px}.qty button{width:30px;height:30px;padding:0;border-radius:8px}.cart-remove-btn{background:var(--red)!important;white-space:nowrap;padding:8px 10px!important}.invoice-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}.invoice-actions button{flex:1;min-width:180px}.whatsapp-order-btn{background:var(--green)!important}.bill-btn{background:#1459a5!important}
+.customer-form{background:#f5f7fb;border-radius:12px;padding:12px;margin:14px 0}.customer-form label{display:block;font-weight:bold;margin-top:9px}.customer-form input,.customer-form textarea,.customer-form select{display:block;width:100%;padding:11px;margin-top:5px;border:1px solid #ccd3df;border-radius:8px;font:inherit}.customer-form textarea{min-height:75px;resize:vertical}
 .invoice-summary{background:#fff;border:1px solid #e3e7ef;border-radius:10px;padding:12px;margin-top:12px}
-
-
-/* ===== Printable invoice ===== */
-.bill-panel{display:none;position:fixed;inset:0;background:#0009;z-index:100;overflow:auto;padding:18px 10px}
-.bill-wrap{background:#fff;max-width:900px;margin:10px auto;padding:22px;color:#111;border-radius:8px}
-.bill-head{text-align:center;border-bottom:2px solid #222;padding-bottom:12px;margin-bottom:12px}
-.bill-head h1{font-size:26px;color:#111;margin:0 0 4px}
-.bill-head p{margin:3px 0;font-size:14px}
-.bill-meta{display:flex;justify-content:space-between;gap:18px;border-bottom:1px solid #999;padding:10px 0;font-size:14px}
-.bill-table{width:100%;border-collapse:collapse;margin-top:16px;font-size:13px}
-.bill-table th,.bill-table td{border:1px solid #777;padding:8px 7px}
-.bill-table th{font-weight:700;text-align:center;background:#f3f3f3}
-.bill-table td:nth-child(1),.bill-table td:nth-child(3),.bill-table td:nth-child(5){text-align:center}
-.bill-table td:nth-child(4),.bill-table td:nth-child(6){text-align:right}
-.bill-totals{margin-left:auto;width:320px;margin-top:10px;font-size:14px}
-.bill-totals div{display:flex;justify-content:space-between;padding:5px 0}
-.bill-totals .grand{border-top:2px solid #222;font-size:18px;font-weight:700;padding-top:8px}
-.bill-footer{margin-top:30px;text-align:center;font-size:13px}
-.bill-buttons{display:flex;gap:10px;justify-content:center;margin-top:18px}
-.bill-buttons button{padding:11px 18px;border:0;border-radius:8px;color:#fff;font-weight:700}
-.bill-print{background:#087f3f}
-.bill-close{background:#555}
+.wish-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.wish-item{border:1px solid var(--line);border-radius:10px;padding:10px;display:flex;justify-content:space-between;gap:8px}
+.gallery{display:none;position:fixed;inset:0;background:#000e;z-index:400;align-items:center;justify-content:center;padding:18px}.gallery-inner{max-width:900px;width:100%;text-align:center;position:relative}.gallery img{max-width:100%;max-height:75vh;object-fit:contain;border-radius:12px}.gallery-close{position:absolute;right:0;top:-42px;background:#fff;color:#111;border:0;border-radius:50%;width:36px;height:36px;font-size:20px}.gallery-nav{display:flex;justify-content:center;gap:10px;margin-top:12px}.gallery-nav button{background:#fff;color:#111;border:0;border-radius:9px;padding:10px 15px;font-weight:800}
+.contact-section{padding:35px 5% 0;background:#fff}.contact-card{max-width:1180px;margin:auto;background:linear-gradient(135deg,#f7931e,#ef6c00);border-radius:22px;padding:28px 7%;min-height:180px}.contact-card h2{color:#fff;font-size:28px;font-weight:600;margin:0 0 20px}.contact-whatsapp{display:inline-block;background:#fff;color:var(--ink);text-decoration:none;font-weight:bold;font-size:18px;padding:15px 25px;border-radius:14px}
+.site-footer{background:#06162b;color:#d9e1ee;margin-top:55px;padding:60px 5% 105px}.footer-inner{max-width:1180px;margin:auto;display:grid;grid-template-columns:1.4fr 1fr 1.4fr;gap:45px}.site-footer h2{color:#fff;font-size:27px;margin:0 0 18px}.site-footer h3{color:#fff;font-size:20px;margin:0 0 18px}.site-footer p{font-size:16px;line-height:1.65;margin:0}.footer-links a,.footer-contact a{display:block;color:#d9e1ee;text-decoration:none;font-size:16px;margin:0 0 11px}.copyright{grid-column:1/-1;border-top:1px solid #ffffff18;padding-top:25px;text-align:center;font-size:14px}
+.bottom-actions{position:fixed;left:20px;right:20px;bottom:14px;display:flex;gap:14px;z-index:150}.bottom-actions a{flex:1;text-align:center;text-decoration:none;color:#fff;font-weight:bold;font-size:18px;padding:16px 10px;border-radius:40px;box-shadow:0 4px 14px #0004}.call-btn{background:#1459a5}.whatsapp-btn{background:#12a84f}
+.bill-panel{display:none;position:fixed;inset:0;background:#0009;z-index:350;overflow:auto;padding:18px 10px}.bill-wrap{background:#fff;max-width:900px;margin:10px auto;padding:22px;color:#111;border-radius:8px}.bill-head{text-align:center;border-bottom:2px solid #222;padding-bottom:12px;margin-bottom:12px}.bill-head h1{font-size:26px;color:#111;margin:0 0 4px}.bill-head p{margin:3px 0;font-size:14px}.bill-meta{display:flex;justify-content:space-between;gap:18px;border-bottom:1px solid #999;padding:10px 0;font-size:14px}.bill-table{width:100%;border-collapse:collapse;margin-top:16px;font-size:13px}.bill-table th,.bill-table td{border:1px solid #777;padding:8px 7px}.bill-table th{font-weight:700;text-align:center;background:#f3f3f3}.bill-table td:nth-child(1),.bill-table td:nth-child(3),.bill-table td:nth-child(5){text-align:center}.bill-table td:nth-child(4),.bill-table td:nth-child(6){text-align:right}.bill-totals{margin-left:auto;width:320px;margin-top:10px;font-size:14px}.bill-totals div{display:flex;justify-content:space-between;padding:5px 0}.bill-totals .grand{border-top:2px solid #222;font-size:18px;font-weight:700;padding-top:8px}.bill-footer{margin-top:30px;text-align:center;font-size:13px}.bill-buttons{display:flex;gap:10px;justify-content:center;margin-top:18px}.bill-buttons button{padding:11px 18px;border:0;border-radius:8px;color:#fff;font-weight:700}.bill-print{background:#087f3f}.bill-close{background:#555}
+@media(max-width:900px){.grid{grid-template-columns:repeat(3,minmax(0,1fr))}.mini-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.hero-inner{grid-template-columns:1fr}}
 @media(max-width:600px){
-  .bill-wrap{padding:12px}
-  .bill-head h1{font-size:21px}
-  .bill-meta{font-size:12px}
-  .bill-table{font-size:11px}
-  .bill-table th,.bill-table td{padding:6px 4px}
-  .bill-totals{width:100%}
+.header-actions{gap:5px}.orders-top-btn{padding:9px 10px;font-size:11px}.cart{padding:9px 11px;font-size:12px}
+.orders-search{flex-direction:column}.orders-search button{width:100%}
+.order-card-head{flex-direction:column}.order-status{align-self:flex-start}.order-actions{flex-direction:column}
+header{padding:12px 4%}h1{font-size:18px}.brand-sub{font-size:11px}.hero{padding:24px 5%}.hero h2{font-size:25px}.hero p{font-size:16px}.hero-box{display:none}
+.section{padding:22px 4%}.section-head h2{font-size:22px}.mini-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}
+.controls{padding:12px 4%;flex-direction:row}.controls input,.controls select{width:100%;flex:1 1 100%}.grid{grid-template-columns:repeat(2,minmax(0,1fr));padding:8px 12px 35px;gap:10px}.card{padding:9px}.photo{height:110px;font-size:45px}.card h3{font-size:14px}.price{font-size:16px}.card button{padding:8px;font-size:12px}.badges{left:12px;top:12px}
+.contact-section{padding:25px 0 0}.contact-card{border-radius:0;padding:28px 9%;min-height:200px}.contact-card h2{font-size:24px}.site-footer{margin-top:45px;padding:60px 7% 105px}.footer-inner{display:block}.footer-about,.footer-links,.footer-contact{margin-bottom:42px}
+.bottom-actions{left:20px;right:20px;bottom:14px}.bottom-actions a{font-size:17px;padding:16px 8px}.admin{bottom:82px;right:10px}.admin button{font-size:11px;padding:8px 9px}
+.edit-photo-grid{grid-template-columns:1fr}.wish-grid{grid-template-columns:1fr}.cart-item-row{align-items:flex-start;flex-wrap:wrap}.qty{order:3;width:100%}
+.bill-wrap{padding:12px}.bill-head h1{font-size:21px}.bill-meta{font-size:12px}.bill-table{font-size:11px}.bill-table th,.bill-table td{padding:6px 4px}.bill-totals{width:100%}
 }
-@media print{
-  body *{visibility:hidden!important}
-  #billPanel,#billPanel *{visibility:visible!important}
-  #billPanel{display:block!important;position:absolute!important;inset:0!important;background:#fff!important;padding:0!important;overflow:visible!important}
-  .bill-wrap{max-width:none!important;margin:0!important;border-radius:0!important;padding:10mm!important}
-  .bill-buttons{display:none!important}
-  @page{size:A4;margin:8mm}
+@media print{body *{visibility:hidden!important}#billPanel,#billPanel *{visibility:visible!important}#billPanel{display:block!important;position:absolute!important;inset:0!important;background:#fff!important;padding:0!important;overflow:visible!important}.bill-wrap{max-width:none!important;margin:0!important;border-radius:0!important;padding:10mm!important}.bill-buttons{display:none!important}@page{size:A4;margin:8mm}}
+
+/* ===== V6 PREMIUM LOOK ===== */
+:root{--premium-blue:#0d47a1;--premium-dark:#071a33;--premium-soft:#f5f8fc;--premium-gold:#f4a62a}
+body{background:linear-gradient(180deg,#f7f9fc 0%,#eef3f9 100%)}
+header{box-shadow:0 4px 18px #071a3318;backdrop-filter:blur(10px)}
+.hero{position:relative;overflow:hidden;background:linear-gradient(135deg,#071a33 0%,#0d47a1 58%,#1768c4 100%);color:#fff;border-radius:0 0 28px 28px;padding:30px 5% 34px;box-shadow:0 8px 28px #071a3320}
+.hero:after{content:"";position:absolute;width:190px;height:190px;border-radius:50%;right:-55px;top:-70px;background:#ffffff12}
+.hero h2{position:relative;z-index:1;font-size:clamp(25px,4vw,38px);line-height:1.12;max-width:700px}
+.hero p{position:relative;z-index:1;color:#e8f0ff;max-width:680px;line-height:1.55}
+.map-link{position:relative;z-index:1;color:#fff;text-decoration:none;margin-top:12px;display:inline-flex;padding:10px 14px;border:1px solid #ffffff40;border-radius:12px;background:#ffffff12}
+.premium-strip{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px;position:relative;z-index:1}
+.premium-pill{background:#ffffff16;border:1px solid #ffffff2b;color:#fff;border-radius:999px;padding:8px 12px;font-size:13px;font-weight:700}
+.controls{background:transparent;padding-top:20px}
+.controls input,.controls select{background:#fff;box-shadow:0 3px 14px #071a3310;border-color:#dce3ed}
+.grid{gap:16px}
+.card{position:relative;border:1px solid #e5eaf1;box-shadow:0 5px 20px #071a3310;transition:transform .18s ease,box-shadow .18s ease;border-radius:17px}
+.card:hover{transform:translateY(-3px);box-shadow:0 10px 28px #071a3320}
+.photo{background:linear-gradient(135deg,#f7f9fc,#eaf0f7);position:relative}
+.photo img{cursor:zoom-in}
+.product-badge{position:absolute;left:9px;top:9px;background:#fff;color:#0d47a1;padding:5px 8px;border-radius:999px;font-size:10px;font-weight:900;box-shadow:0 3px 10px #0002;z-index:2}
+.featured-section{padding:28px 5% 4px}
+.section-head{display:flex;justify-content:space-between;align-items:end;gap:10px;margin-bottom:12px}
+.section-head h2{margin:0;font-size:24px;color:#071a33}
+.section-head p{margin:3px 0 0;color:#687589;font-size:13px}
+.featured-row{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+.featured-card{background:#fff;border:1px solid #e6ebf2;border-radius:16px;padding:10px;box-shadow:0 4px 16px #071a330d}
+.featured-card .mini-photo{height:105px;border-radius:11px;background:#eef3f9;overflow:hidden;display:flex;align-items:center;justify-content:center;font-size:42px}
+.featured-card .mini-photo img{width:100%;height:100%;object-fit:contain}
+.featured-card h3{font-size:14px;margin:8px 0 3px}
+.featured-card .mini-price{font-weight:900;color:#0d47a1}
+.gallery-panel{display:none;position:fixed;inset:0;background:#000d;z-index:300;align-items:center;justify-content:center;padding:18px}
+.gallery-box{width:min(900px,100%);background:#fff;border-radius:18px;padding:12px;position:relative}
+.gallery-main{height:min(68vh,560px);display:flex;align-items:center;justify-content:center;background:#f2f5f9;border-radius:12px;overflow:hidden}
+.gallery-main img{max-width:100%;max-height:100%;object-fit:contain}
+.gallery-close{position:absolute;right:10px;top:10px;border:0;background:#071a33;color:#fff;border-radius:50%;width:38px;height:38px;font-size:20px}
+.gallery-thumbs{display:flex;gap:8px;margin-top:10px;overflow:auto}
+.gallery-thumbs img{width:72px;height:58px;object-fit:cover;border-radius:8px;border:2px solid transparent;cursor:pointer;background:#eef3f9}
+.gallery-thumbs img.active{border-color:#0d47a1}
+@media(max-width:800px){.featured-row{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:600px){
+  .hero{padding:24px 5% 28px;border-radius:0 0 22px 22px}
+  .featured-section{padding:22px 12px 4px}
+  .featured-row{gap:9px}
+  .featured-card{padding:8px}
+  .featured-card .mini-photo{height:92px}
 }
 
-/* ===== Admin photo edit ===== */
-.edit-photo-box{display:inline-flex;flex-direction:column;gap:6px;margin-right:10px;margin-bottom:8px;vertical-align:top}
-.edit-photo-box img{width:110px;height:85px;object-fit:contain;border:1px solid #d9e1ec;border-radius:8px;background:#f8fafc}
-.edit-photo-box button{background:#b42318!important;font-size:12px;padding:7px 9px}
-
-
-@media(max-width:600px){.hero{padding:28px 5% 30px}.hero h2{font-size:28px}.hero p{font-size:16px}.map-link{font-size:16px}}
 </style>
+
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"HardwareStore","name":"V K Traders & Hardware","description":"Hardware, plumbing, sanitary products and tools. Good quality material and home delivery available.","telephone":"+91-9623009626","address":{"@type":"PostalAddress","streetAddress":"A/P Retre Karkhana, Shivnagar","addressRegion":"Maharashtra","addressCountry":"IN"},"openingHours":"Mo-Fr 09:00-20:30, Su 09:00-20:30","url":"https://vk-traders-hardware.web.app/","hasMap":"https://maps.app.goo.gl/cnreYKyo2iWvuaAa8"}</script>
 </head>
-<body>
 
+<body>
 <header>
   <div>
-    <h1 id="storeTitle">V K Traders and Hardware</h1>
-    <small>Good Quality Material • Home Delivery Available</small>
+    <h1 id="secretAdminLogo" aria-label="V K Traders and Hardware">V K Traders &amp; Hardware</h1>
+    <div class="brand-sub">Quality Hardware • Plumbing • Sanitary • Tools</div>
   </div>
-  <button class="cart" onclick="openCart()">🛒 Cart (<span id="count">0</span>)</button>
+  <div class="header-actions">
+    <button class="orders-top-btn" onclick="openOrders()">📦 My Orders</button>
+    <button class="cart" onclick="openCart()">🛒 Cart (<span id="count">0</span>)</button>
+  </div>
 </header>
 
-<section class="hero" id="about">
-  <h2>Hardware & Plumbing Products in Maharashtra</h2>
-  <p>Shop quality hardware, plumbing, sanitary and tools from V K Traders & Hardware. Home delivery available.</p>
-  <a class="map-link" href="https://maps.app.goo.gl/cnreYKyo2iWvuaAa8" target="_blank" rel="noopener">
-    📍 Get Directions on Google Maps
-  </a>
+<section class="hero" id="home">
+  <div class="hero-inner">
+    <div>
+      <div class="store-chips">
+        <span class="store-chip">🚚 Home Delivery</span><span class="store-chip">🏪 Self Pickup</span><span class="store-chip">⭐ Good Quality Material</span>
+      </div>
+      <h2>Hardware &amp; Plumbing Products You Can Trust</h2>
+      <p>Shop hardware, plumbing, sanitary products, construction material and tools from V K Traders &amp; Hardware.</p>
+      <div class="hero-actions">
+        <a class="hero-btn hero-primary" href="#products">🛍️ Browse Products</a>
+        <a class="hero-btn hero-secondary" href="https://maps.app.goo.gl/cnreYKyo2iWvuaAa8" target="_blank" rel="noopener">📍 Get Directions</a>
+      </div>
+    </div>
+    <div class="hero-box">
+      <strong>9:00 AM – 8:30 PM</strong>
+      <p>Open Monday–Friday &amp; Sunday<br><b>Saturday: Closed</b></p>
+      <hr>
+      <p><b>📞 9623009626</b><br>A/P Retre Karkhana, Shivnagar, Maharashtra</p>
+    </div>
+  </div>
 </section>
 
-<div class="controls">
-  <input id="search" placeholder="🔍 Search products..." oninput="render()">
-  <select id="cat" onchange="render()">
-    <option value="">All Categories</option>
-  </select>
+<section class="section" id="featuredSection">
+  <div class="section-head"><div><h2>⭐ Featured Products</h2><p>Our highlighted products</p></div></div>
+  <div id="featured" class="mini-grid"></div>
+</section>
+
+<section class="section" id="popularSection">
+  <div class="section-head"><div><h2>🔥 Popular Products</h2><p>Popular choices from our store</p></div></div>
+  <div id="popular" class="mini-grid"></div>
+</section>
+
+<div class="controls" id="products">
+  <div class="search-wrap"><span class="search-icon">🔍</span><input id="search" placeholder="Search products, plumbing, tools..." oninput="render()"></div>
+  <select id="cat" onchange="render()"><option value="">All Categories</option></select>
+  <button class="hero-btn hero-secondary" type="button" onclick="openWishlist()">❤️ Wishlist (<span id="wishCount">0</span>)</button>
+  <button class="hero-btn hero-secondary" type="button" onclick="openRequest()">📦 Request Product</button>
 </div>
 
-<div id="productStatus" style="padding:0 5% 4px;background:#f5f7fb;color:#596579;font-size:13px;font-weight:600"></div>
+<div id="productsGrid" class="grid"></div>
+<div class="load"><button id="loadBtn" onclick="loadMore()">Show More Products</button></div>
 
-<div id="products" class="grid"><div class="notice" style="grid-column:1/-1;text-align:center">⏳ Loading products...</div></div>
-
-<div class="load">
-  <button id="loadBtn" onclick="loadMore()">Show More Products</button>
-</div>
-
-<section id="business-info" style="padding:30px 5%;background:#fff"><h2>V K Traders & Hardware</h2><p><strong>Hardware and plumbing store in Retre Karkhana, Shivnagar, Maharashtra.</strong></p><p>Hardware, plumbing, sanitary products and tools with good quality material and home delivery availability.</p><p><strong>Phone:</strong> <a href="tel:9623009626">9623009626</a></p><p><strong>Address:</strong> A/P Retre Karkhana, Shivnagar, Maharashtra</p></section>
+<section id="business-info" style="padding:35px 5%;background:#fff">
+  <div style="max-width:1180px;margin:auto">
+    <h2>V K Traders &amp; Hardware</h2>
+    <p><strong>Hardware and plumbing store in Retre Karkhana, Shivnagar, Maharashtra.</strong></p>
+    <p>Hardware, plumbing, sanitary products, construction material and tools with good quality material and home delivery availability.</p>
+    <p><strong>Phone:</strong> <a href="tel:9623009626">9623009626</a></p>
+    <p><strong>Address:</strong> A/P Retre Karkhana, Shivnagar, Maharashtra</p>
+    <p><strong>Hours:</strong> 9:00 AM–8:30 PM • Saturday Closed • Sunday Open</p>
+  </div>
+</section>
 
 <div class="contact-section" id="contact">
   <div class="contact-card">
-    <h2>Contact V K Traders &amp; Hardware today.</h2>
-    <a class="contact-whatsapp" href="https://wa.me/919623009626" target="_blank" rel="noopener">
-      WhatsApp Us
-    </a>
+    <h2>Need a product that you don't see here?</h2>
+    <a class="contact-whatsapp" href="https://wa.me/919623009626" target="_blank" rel="noopener">💬 Ask us on WhatsApp</a>
   </div>
 </div>
 
 <footer class="site-footer">
   <div class="footer-inner">
-    <div class="footer-about">
-      <h2>V K Traders &amp; Hardware</h2>
-      <p>Quality hardware and construction materials for your needs.</p>
-    </div>
-
-    <div class="footer-links">
-      <h3>Quick Links</h3>
-      <a href="#">Home</a>
-      <a href="#products">Products</a>
-      <a href="#about">About</a>
-      <a href="#contact">Contact</a>
-    </div>
-
-    <div class="footer-contact">
-      <h3>Contact</h3>
-      <a href="tel:9623009626">9623009626</a>
-      <a href="mailto:dhairyashilduba9626@gmaip.com">dhairyashilduba9626@gmaip.com</a>
-      <p>A/P Retre Karkhana, Shivnagar, Maharashtra</p>
-    </div>
-
+    <div class="footer-about"><h2>V K Traders &amp; Hardware</h2><p>Quality hardware and construction materials for your needs.</p></div>
+    <div class="footer-links"><h3>Quick Links</h3><a href="#home">Home</a><a href="#products">Products</a><a href="#business-info">About</a><a href="#contact">Contact</a></div>
+    <div class="footer-contact"><h3>Contact</h3><a href="tel:9623009626">9623009626</a><a href="mailto:dhairyashilduba9626@gmaip.com">dhairyashilduba9626@gmaip.com</a><p>A/P Retre Karkhana, Shivnagar, Maharashtra</p></div>
     <div class="copyright">© 2026 V K Traders &amp; Hardware. All rights reserved.</div>
   </div>
 </footer>
 
-<div class="bottom-actions">
-  <a class="call-btn" href="tel:9623009626">📞 Call</a>
-  <a class="whatsapp-btn" href="https://wa.me/919623009626" target="_blank" rel="noopener">💬 WhatsApp</a>
-</div>
+<div class="bottom-actions"><a class="call-btn" href="tel:9623009626">📞 Call</a><a class="whatsapp-btn" href="https://wa.me/919623009626" target="_blank" rel="noopener">💬 WhatsApp</a></div>
 
-
-<div id="billPanel" class="bill-panel">
-  <div class="bill-wrap">
-    <div id="billPreview"></div>
-    <div class="bill-buttons">
-      <button class="bill-print" type="button" onclick="orderWhatsApp()">💬 Order on WhatsApp</button>
-      <button class="bill-close" type="button" onclick="closeBill()">Close</button>
-    </div>
+<div id="galleryPanel" class="gallery-panel" onclick="closeGallery(event)">
+  <div class="gallery-box" onclick="event.stopPropagation()">
+    <button class="gallery-close" onclick="closeGallery()">×</button>
+    <div class="gallery-main"><img id="galleryMain" src="" alt="Product image"></div>
+    <div id="galleryThumbs" class="gallery-thumbs"></div>
   </div>
 </div>
 
-<div class="admin">
-  <button type="button" onclick="openAdmin()">⚙️ Manage Products</button>
+<div id="billPanel" class="bill-panel"><div class="bill-wrap"><div id="billPreview"></div><div class="bill-buttons"><button class="bill-print" onclick="printBill()">🖨️ Print / Save PDF</button><button class="whatsapp-btn" onclick="orderWhatsApp()">💬 Order on WhatsApp</button><button class="bill-close" onclick="closeBill()">Close</button></div></div></div>
+
+<div id="galleryModal" class="gallery">
+  <div class="gallery-inner">
+    <button class="gallery-close" onclick="closeGallery()">×</button>
+    <img id="galleryImg" alt="Product photo">
+    <div id="galleryCounter" style="color:#fff;margin-top:8px"></div>
+    <div class="gallery-nav"><button onclick="prevGallery()">← Previous</button><button onclick="nextGallery()">Next →</button></div>
+  </div>
 </div>
 
 <div id="adminPanel" class="panel">
   <div class="box">
-    <button type="button" class="close" onclick="closeAdmin()">Close</button>
-    <h2>Add Product</h2>
+    <button class="close" onclick="closeAdmin()">Close</button>
+    <h2>⚙️ Admin — Manage Products</h2>
+        <div class="notice">Changes are saved to Firebase and will appear on other mobiles too.</div>
+    <h3>Add Product</h3>
     <input id="pname" placeholder="Product name">
-    <input id="pprice" type="number" placeholder="Price ₹">
-    <input id="pcat" placeholder="Category (e.g. Plumbing)">
-    <input id="pemoji" placeholder="Emoji (e.g. 🔧)" value="🔧">
-<label><b>Choose Product Photo 1</b></label>
-<input type="file" id="productPhoto1" accept="image/*">
-<label><b>Choose Product Photo 2</b></label>
-<input type="file" id="productPhoto2" accept="image/*">
-    <button type="button" onclick="addProduct()">Add Product</button>
-    <div class="notice">Products are saved online in Firebase. Products added here will appear on other mobiles too.</div>
+    <input id="pprice" type="number" min="0" placeholder="Price ₹">
+    <input id="pcat" placeholder="Category (Hardware / Plumbing / Sanitary / Tools)">
+    <input id="pemoji" placeholder="Emoji" value="🔧">
+    <label><b>Product Photo 1</b></label><input type="file" id="productPhoto" accept="image/*">
+    <label><b>Product Photo 2 (optional)</b></label><input type="file" id="productPhoto2" accept="image/*">
+    <div class="check-row"><label><input type="checkbox" id="pfeatured"> ⭐ Featured</label><label><input type="checkbox" id="ppopular"> 🔥 Popular</label><label><input type="checkbox" id="pstock" checked> ✅ In Stock</label></div>
+    <input id="pdiscount" type="number" min="0" max="90" placeholder="Discount % (optional)">
+    <button onclick="addProduct()">➕ Add Product</button>
     <hr>
+    <h3>Product Management</h3>
+    <input id="adminSearch" placeholder="Search products in admin..." oninput="manage()">
     <div id="manage"></div>
+    <hr>
+    <h3>📦 Customer Orders</h3>
+    <div class="notice">Update an order status here. The customer will see the latest status in <b>My Orders</b>.</div>
+    <div id="adminOrders"><div class="notice">Loading orders...</div></div>
   </div>
 </div>
 
-
-<div id="editProductPanel" class="panel">
+<div id="editPanel" class="panel">
   <div class="box">
-    <button type="button" class="close" onclick="closeEditProduct()">Close</button>
+    <button class="close" onclick="closeEdit()">Close</button>
     <h2>✏️ Edit Product</h2>
-    <input id="editProductId" type="hidden">
-    <input id="editPname" placeholder="Product name">
-    <input id="editPprice" type="number" placeholder="Price ₹" min="0">
-    <input id="editPcat" placeholder="Category">
-    <input id="editPemoji" placeholder="Emoji (e.g. 🔧)">
-    <label><b>Current Photo 1</b></label>
-    <div id="editPhotoPreview1" style="margin:8px 0"></div>
-    <label><b>Change Photo 1 (optional)</b></label>
-    <input type="file" id="editProductPhoto1" accept="image/*">
-    <label><b>Current Photo 2</b></label>
-    <div id="editPhotoPreview2" style="margin:8px 0"></div>
-    <label><b>Change Photo 2 (optional)</b></label>
-    <input type="file" id="editProductPhoto2" accept="image/*">
-    <div class="notice">Leave a photo file empty to keep the existing photo. Use the remove buttons if you want to delete a photo.</div>
-    <button type="button" onclick="saveProductEdit()">💾 Save Changes</button>
+    <input id="editName" placeholder="Product name">
+    <input id="editPrice" type="number" min="0" placeholder="Price ₹">
+    <input id="editCat" placeholder="Category">
+    <input id="editEmoji" placeholder="Emoji">
+    <div class="check-row"><label><input type="checkbox" id="editFeatured"> ⭐ Featured</label><label><input type="checkbox" id="editPopular"> 🔥 Popular</label><label><input type="checkbox" id="editStock"> ✅ In Stock</label></div>
+    <input id="editDiscount" type="number" min="0" max="90" placeholder="Discount %">
+    <div class="edit-photo-grid">
+      <div><b>Photo 1</b><div id="editPhotoPreview1"></div><input type="file" id="editPhoto1" accept="image/*"></div>
+      <div><b>Photo 2</b><div id="editPhotoPreview2"></div><input type="file" id="editPhoto2" accept="image/*"></div>
+    </div>
+    <div class="invoice-actions"><button onclick="saveEdit()">💾 Save Changes</button><button class="secondary-btn" onclick="closeEdit()">Cancel</button></div>
   </div>
 </div>
 
 <div id="cartPanel" class="panel">
   <div class="box">
-    <button class="close" onclick="closeCart()">Close</button>
-    <h2>🛒 Your Cart</h2>
-    <div id="cart"></div>
+    <button class="close" onclick="closeCart()">Close</button><h2>🛒 Your Cart</h2><div id="cart"></div>
     <div class="customer-form">
       <h3 style="margin-top:0">Customer Details</h3>
-      <label for="customerName">Name *</label>
-      <input id="customerName" placeholder="Your name" autocomplete="name">
-      <label for="customerPhone">Mobile Number *</label>
-      <input id="customerPhone" type="tel" inputmode="numeric" placeholder="10-digit mobile number" autocomplete="tel">
-      <label for="customerAddress">Delivery Address</label>
-      <textarea id="customerAddress" placeholder="Enter address (required for home delivery)" autocomplete="street-address"></textarea>
-      <label for="orderType">Order Type</label>
-      <select id="orderType">
-        <option value="delivery">🏠 Home Delivery</option>
-        <option value="pickup">🏪 Self Pickup (Free)</option>
-      </select>
+      <label>Name *</label><input id="customerName" placeholder="Your name">
+      <label>Mobile Number *</label><input id="customerPhone" type="tel" inputmode="numeric" placeholder="10-digit mobile number">
+      <label>Delivery Address</label><textarea id="customerAddress" placeholder="Address (required for home delivery)"></textarea>
+      <label>Order Type</label><select id="orderType"><option value="delivery">🏠 Home Delivery</option><option value="pickup">🏪 Self Pickup (Free)</option></select>
     </div>
-    <div class="notice">🏠 Home Delivery: <b>Additional Charges Apply</b><br>🏪 Self Pickup: Free</div>
-    <div class="invoice-actions">
-      <button class="bill-btn" onclick="generateBill()">🧾 Generate Bill</button>
-      <button class="whatsapp-order-btn" onclick="orderWhatsApp()">💬 Order on WhatsApp</button>
+    <div class="notice">🏠 Home Delivery: Additional Charges Apply<br>🏪 Self Pickup: Free</div>
+    <div class="invoice-actions"><button class="bill-btn" onclick="generateBill()">🧾 Generate Bill</button><button class="whatsapp-order-btn" onclick="orderWhatsApp()">💬 Order on WhatsApp</button></div>
+  </div>
+</div>
+
+<div id="ordersPanel" class="panel">
+  <div class="box orders-box">
+    <button class="close" onclick="closeOrders()">Close</button>
+    <h2>📦 My Orders</h2>
+    <p class="orders-subtitle">Enter the mobile number used for your order to see your order history.</p>
+    <div class="orders-search">
+      <input id="historyPhone" type="tel" inputmode="numeric" maxlength="10" placeholder="10-digit mobile number">
+      <button onclick="loadOrderHistory()">🔍 View Orders</button>
+    </div>
+    <div id="orderHistory">
+      <div class="notice">Your previous WhatsApp orders will appear here after they are saved.</div>
     </div>
   </div>
 </div>
 
-<script type="module">
-import { initializeApp } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js";
-import { getFirestore, collection, getDocs, addDoc, updateDoc, deleteDoc, doc } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
+<div id="wishlistPanel" class="panel"><div class="box"><button class="close" onclick="closeWishlist()">Close</button><h2>❤️ Wishlist</h2><div id="wishlist"></div></div></div>
+
+<div id="requestPanel" class="panel"><div class="box"><button class="close" onclick="closeRequest()">Close</button><h2>📦 Request a Product</h2><p>Can't find something? Tell us what you need and we'll check availability.</p><input id="requestProduct" placeholder="Product name"><input id="requestQty" placeholder="Quantity (optional)"><textarea id="requestNote" placeholder="Brand / size / extra details"></textarea><button onclick="sendProductRequest()">💬 Send Request on WhatsApp</button></div></div>
+
+<div class="admin" id="adminButton" style="display:none"></div>
+
+<script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore-compat.js"></script>
+<script>
 
 const firebaseConfig = {
-  apiKey: "AIzaSyDjxyqqRQ_tA5Cr73Dac6s7j32UT9M6QpA",
-  authDomain: "vk-traders-hardware.firebaseapp.com",
-  projectId: "vk-traders-hardware",
-  storageBucket: "vk-traders-hardware.firebasestorage.app",
-  messagingSenderId: "598417742404",
-  appId: "1:598417742404:web:3e4fc94c246022fb167a11",
-  measurementId: "G-08X6GP7N26"
+  apiKey:"AIzaSyDjxyqqRQ_tA5Cr73Dac6s7j32UT9M6QpA",
+  authDomain:"vk-traders-hardware.firebaseapp.com",
+  projectId:"vk-traders-hardware",
+  storageBucket:"vk-traders-hardware.firebasestorage.app",
+  messagingSenderId:"598417742404",
+  appId:"1:598417742404:web:3e4fc94c246022fb167a11",
+  measurementId:"G-08X6GP7N26"
 };
+const app=firebase.initializeApp(firebaseConfig), db=firebase.firestore(), productsRef=db.collection("products"), ordersRef=db.collection("orders");
 
-const app = initializeApp(firebaseConfig);
-const db = getFirestore(app);
-const productsRef = collection(db, "products");
+let products=[], visibleCount=24, editingId=null, galleryImages=[], galleryIndex=0;
+let cart=JSON.parse(localStorage.getItem("vk_cart")||"{}");
+let wishlist=JSON.parse(localStorage.getItem("vk_wishlist")||"[]");
 
-let products = [];
-let cart = JSON.parse(localStorage.getItem("vk_cart") || "{}");
-let visibleCount = 24;
+const blockedWords=["electric","electrical","wire","wiring","switchboard","mcb","fan","bulb","led","socket electrical"];
+const isAllowed=p=>!blockedWords.some(w=>String(p.name+" "+p.category).toLowerCase().includes(w));
 
-function saveCart(){
-  localStorage.setItem("vk_cart", JSON.stringify(cart));
-}
+function saveCart(){localStorage.setItem("vk_cart",JSON.stringify(cart));}
+function saveWishlist(){localStorage.setItem("vk_wishlist",JSON.stringify(wishlist));}
+function money(n){return "₹"+Number(n||0).toFixed(0);}
+function finalPrice(p){const d=Number(p.discount||0);return Math.max(0,Number(p.price||0)*(1-d/100));}
+function escapeHtml(v){return String(v??"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#039;"}[m]));}
 
 async function loadProducts(){
-  const snapshot = await getDocs(productsRef);
-  products = snapshot.docs.map(d => ({
-    id: d.id,
-    name: String(d.data().name || ""),
-    price: Number(d.data().price || 0),
-    category: String(d.data().category || ""),
-    emoji: String(d.data().emoji || "🔧"),
-    photo: String(d.data().photo || ""),
-    photo2: String(d.data().photo2 || "")
-  })).filter(p => p.name);
+  const snap=await productsRef.orderBy("name").get();
+  products=snap.docs.map(d=>({id:d.id,...d.data(),name:String(d.data().name||""),price:Number(d.data().price||0),category:String(d.data().category||""),emoji:String(d.data().emoji||"🔧"),photo:String(d.data().photo||""),photo2:String(d.data().photo2||""),featured:!!d.data().featured,popular:!!d.data().popular,stock:d.data().stock!==false,discount:Number(d.data().discount||0)})).filter(isAllowed);
+  migrateOldCart(); render(); renderHighlights(); manage(); updateWishCount();
+}
+function migrateOldCart(){
+  const keys=Object.keys(cart); if(!keys.length)return;
+  const looksOld=keys.some(k=>/^\d+$/.test(k));
+  if(!looksOld)return;
+  const next={}; keys.forEach(k=>{const p=products[Number(k)];if(p&&cart[k])next[p.id]=Number(cart[k]);}); cart=next; saveCart();
+}
+function cardHtml(p,compact=false){
+  const i=products.findIndex(x=>x.id===p.id), wished=wishlist.includes(p.id), pics=[p.photo,p.photo2].filter(Boolean);
+  const badge=(p.featured?'<span class="badge badge-featured">⭐ Featured</span>':'')+(p.popular?'<span class="badge badge-popular">🔥 Popular</span>':'')+(p.discount>0?`<span class="badge badge-offer">${p.discount}% OFF</span>`:'')+(!p.stock?'<span class="badge badge-stock">Out of Stock</span>':'');
+  const photo=pics.length?`<img src="${p.photo}" alt="${escapeHtml(p.name)}" onclick="openImageGalleryById('${p.id}')" loading="lazy">`:`<span>${escapeHtml(p.emoji)}</span>`;
+  const count=pics.length>1?`<span class="photo-count">📷 ${pics.length}</span>`:"";
+  const old=p.discount>0?`<span class="old-price">${money(p.price)}</span>`:"";
+  return `<div class="card ${!p.stock?'stock-off':''}">
+    <div class="badges">${badge}</div>
+    <div class="photo">${photo}${count}</div>
+    <h3>${escapeHtml(p.name)}</h3><div class="category">${escapeHtml(p.category)}</div>
+    <div class="price">${money(finalPrice(p))}${old}</div>
+    <div class="card-actions">
+      <button class="heart-btn" onclick="toggleWishlist('${p.id}')">${wished?'♥':'♡'}</button>
+      <button ${!p.stock?'disabled class="out-btn"':''} onclick="addById('${p.id}')">${p.stock?'🛒 Add to Cart':'Out of Stock'}</button>
+    </div>
+  </div>`;
+}
 
-  products.sort((a,b) => a.name.localeCompare(b.name, undefined, {numeric:true, sensitivity:"base"}));
-  render();
-  manage();
+function renderFeaturedProducts(){
+  const row=document.getElementById("featuredRow");
+  if(!row)return;
+  const list=products.filter(p=>p.photo).slice(0,4);
+  const fallback=products.slice(0,4);
+  const items=list.length?list:fallback;
+  row.innerHTML=items.map(p=>{
+    const idx=products.indexOf(p);
+    return `<div class="featured-card" onclick="add(${idx})">
+      <div class="mini-photo">${p.photo?`<img src="${p.photo}" alt="${escapeHtml(p.name)}">`:escapeHtml(p.emoji)}</div>
+      <h3>${escapeHtml(p.name)}</h3>
+      <div class="mini-price">₹${Number(p.price).toFixed(2)}</div>
+    </div>`;
+  }).join("");
+}
+
+function openGallery(index){
+  const p=products[index];
+  if(!p)return;
+  const imgs=[];
+  if(p.photo)imgs.push(p.photo);
+  if(p.photo2)imgs.push(p.photo2);
+  if(!imgs.length)return;
+  const panel=document.getElementById("galleryPanel");
+  const main=document.getElementById("galleryMain");
+  const thumbs=document.getElementById("galleryThumbs");
+  main.src=imgs[0];
+  thumbs.innerHTML=imgs.map((src,i)=>`<img class="${i===0?"active":""}" src="${src}" onclick="showGalleryImage('${src.replace(/'/g,"&#039;")}',this)">`).join("");
+  panel.style.display="flex";
+}
+function showGalleryImage(src,el){
+  document.getElementById("galleryMain").src=src;
+  document.querySelectorAll("#galleryThumbs img").forEach(x=>x.classList.remove("active"));
+  if(el)el.classList.add("active");
+}
+function closeGallery(e){
+  if(e && e.target && e.target.id!=="galleryPanel")return;
+  document.getElementById("galleryPanel").style.display="none";
 }
 
 function render(){
-  const s=document.getElementById("search").value.toLowerCase().trim();
-  const selected=document.getElementById("cat").value;
-  const cats=[...new Set(products.map(p=>p.category).filter(Boolean))].sort();
-  const sel=document.getElementById("cat");
-  sel.innerHTML='<option value="">All Categories</option>'+cats.map(x=>`<option value="${escapeHtml(x)}">${escapeHtml(x)}</option>`).join("");
-  sel.value=selected;
-
-  const filtered=products.filter(p=>
-    (!s || p.name.toLowerCase().includes(s)) &&
-    (!sel.value || p.category===sel.value)
-  );
-
-  const shown=filtered.slice(0,visibleCount);
-  if(!products.length){
-    document.getElementById("products").innerHTML='<div class="notice" style="grid-column:1/-1;text-align:center">⏳ No products loaded yet. Please wait a moment and refresh the page.</div>';
-  } else if(!shown.length){
-    document.getElementById("products").innerHTML='<div class="notice" style="grid-column:1/-1;text-align:center">🔎 No products found. Try another search.</div>';
-  }
-  if(products.length && shown.length) document.getElementById("products").innerHTML=shown.map(p=>{
-    const realIndex=products.indexOf(p);
-    return `<div class="card">
-      <div class="photo" onclick="openImageGallery(${realIndex})" style="cursor:zoom-in" title="Tap to view product photos">${p.photo ? `<img src="${p.photo}" alt="${escapeHtml(p.name)}">` : escapeHtml(p.emoji)}</div>
-      ${p.photo2 ? `<div style="font-size:11px;color:#596579;margin:-4px 0 4px">📷 2 photos • Tap image to view</div>` : ""}
-      <h3>${escapeHtml(p.name)}</h3>
-      <div class="category">${escapeHtml(p.category)}</div>
-      <div class="price">₹${escapeHtml(p.price)}</div>
-      <button onclick="add(${realIndex})">Add to Cart</button>
-    </div>`;
-  }).join("");
-
-  document.getElementById("count").textContent=Object.values(cart).reduce((a,b)=>a+b,0);
-  const status=document.getElementById("productStatus");
-  if(status) status.textContent=products.length ? `${filtered.length} product${filtered.length===1?"":"s"} available` : "";
-  const btn=document.getElementById("loadBtn");
-  btn.style.display=filtered.length>visibleCount ? "inline-block" : "none";
+  const s=document.getElementById("search").value.toLowerCase().trim(), selected=document.getElementById("cat").value;
+  const cats=[...new Set(products.map(p=>p.category).filter(Boolean))].sort(), sel=document.getElementById("cat");
+  sel.innerHTML='<option value="">All Categories</option>'+cats.map(x=>`<option value="${escapeHtml(x)}">${escapeHtml(x)}</option>`).join(""); sel.value=selected;
+  const filtered=products.filter(p=>(!s||(p.name+" "+p.category).toLowerCase().includes(s))&&(!sel.value||p.category===sel.value));
+  document.getElementById("productsGrid").innerHTML=filtered.slice(0,visibleCount).map(p=>cardHtml(p)).join("")||'<div class="notice" style="grid-column:1/-1">No products found. Try another search.</div>';
+  document.getElementById("count").textContent=Object.values(cart).reduce((a,b)=>a+Number(b),0);
+  document.getElementById("loadBtn").style.display=filtered.length>visibleCount?"inline-block":"none";
 }
-
-function retryProducts(){
-  document.getElementById("products").innerHTML='<div class="notice" style="grid-column:1/-1;text-align:center">🔄 Loading products...</div>';
-  loadProducts().catch(error=>{
-    console.error(error);
-    document.getElementById("products").innerHTML='<div class="notice" style="grid-column:1/-1;text-align:center">❌ Could not load products. Please check internet/Firebase rules and try again.</div>';
-  });
+function renderHighlights(){
+  const f=products.filter(p=>p.featured&&p.stock).slice(0,4), pop=products.filter(p=>p.popular&&p.stock).slice(0,4);
+  document.getElementById("featured").innerHTML=f.length?f.map(p=>cardHtml(p,true)).join(""):'<div class="notice" style="grid-column:1/-1">Admin can mark products as Featured.</div>';
+  document.getElementById("popular").innerHTML=pop.length?pop.map(p=>cardHtml(p,true)).join(""):'<div class="notice" style="grid-column:1/-1">Admin can mark products as Popular.</div>';
 }
-
-function loadMore(){ visibleCount += 24; render(); }
-
-function add(i){
-  cart[i]=(cart[i]||0)+1;
-  saveCart();
-  render();
-}
-
-function getCartItems(){
-  return Object.keys(cart).filter(i=>cart[i] && products[i]).map(i=>({
-    index:i,
-    product:products[i],
-    qty:Number(cart[i]),
-    lineTotal:products[i].price*Number(cart[i])
-  }));
-}
-
+function loadMore(){visibleCount+=24;render();}
+function addById(id){const p=products.find(x=>x.id===id);if(!p||!p.stock)return;cart[id]=(cart[id]||0)+1;saveCart();render();}
+function removeFromCart(id){delete cart[id];saveCart();openCart();}
+function changeQty(id,delta){const n=Number(cart[id]||0)+delta;if(n<=0)delete cart[id];else cart[id]=n;saveCart();openCart();render();}
+function getCartItems(){return Object.keys(cart).map(id=>({id,p:products.find(x=>x.id===id),qty:Number(cart[id])})).filter(x=>x.p&&x.qty>0);}
 function getCustomerDetails(){
-  const name=document.getElementById("customerName").value.trim();
-  const phone=document.getElementById("customerPhone").value.trim().replace(/\D/g,"");
-  const address=document.getElementById("customerAddress").value.trim();
-  const orderType=document.getElementById("orderType").value;
-  if(!name){alert("Please enter customer name.");return null;}
-  if(!/^\d{10}$/.test(phone)){alert("Please enter a valid 10-digit mobile number.");return null;}
-  if(orderType==="delivery" && !address){alert("Please enter delivery address.");return null;}
-  return {name,phone,address,orderType};
+  const name=document.getElementById("customerName").value.trim(),phone=document.getElementById("customerPhone").value.replace(/\D/g,""),address=document.getElementById("customerAddress").value.trim(),orderType=document.getElementById("orderType").value;
+  if(!name){alert("Please enter customer name.");return null} if(!/^\d{10}$/.test(phone)){alert("Please enter a valid 10-digit mobile number.");return null} if(orderType==="delivery"&&!address){alert("Please enter delivery address.");return null}
+  const d={name,phone,address,orderType};localStorage.setItem("vk_customer",JSON.stringify(d));return d;
 }
-
-function makeInvoiceNumber(){
-  const d=new Date();
-  const stamp=d.getFullYear().toString().slice(-2)+String(d.getMonth()+1).padStart(2,"0")+String(d.getDate()).padStart(2,"0");
-  const seq=String(Date.now()).slice(-5);
-  return "VK-"+stamp+"-"+seq;
-}
-
+function makeInvoiceNumber(){const d=new Date();return "VK-"+String(d.getFullYear()).slice(-2)+String(d.getMonth()+1).padStart(2,"0")+String(d.getDate()).padStart(2,"0")+"-"+String(Date.now()).slice(-5);}
 function openCart(){
-  document.getElementById("cartPanel").style.display="block";
-  const items=getCartItems();
-  const total=items.reduce((t,x)=>t+x.lineTotal,0);
-  document.getElementById("cart").innerHTML=items.length
-    ? items.map(x=>`<div class="cart-item-row"><div class="cart-item-info"><b>${escapeHtml(x.product.name)}</b><span>× ${x.qty} — ₹${x.lineTotal.toFixed(2)}</span></div><button class="cart-remove-btn" type="button" onclick="removeFromCart('${escapeHtml(x.index)}')">🗑️ Remove</button></div>`).join("")+`<div class="invoice-summary"><h3 style="margin:0">Subtotal: ₹${total.toFixed(2)}</h3></div>`
-    : "<p>Your cart is empty.</p>";
-  const saved=JSON.parse(localStorage.getItem("vk_customer")||"{}");
-  if(saved.name)document.getElementById("customerName").value=saved.name;
-  if(saved.phone)document.getElementById("customerPhone").value=saved.phone;
-  if(saved.address)document.getElementById("customerAddress").value=saved.address;
-  if(saved.orderType)document.getElementById("orderType").value=saved.orderType;
+  document.getElementById("cartPanel").style.display="block"; const items=getCartItems(), total=items.reduce((t,x)=>t+finalPrice(x.p)*x.qty,0);
+  document.getElementById("cart").innerHTML=items.length?items.map(x=>`<div class="cart-item-row"><div class="cart-item-info"><b>${escapeHtml(x.p.name)}</b><span>${money(finalPrice(x.p))} each</span></div><div class="qty"><button onclick="changeQty('${x.id}',-1)">−</button><b>${x.qty}</b><button onclick="changeQty('${x.id}',1)">+</button></div><button class="cart-remove-btn" onclick="removeFromCart('${x.id}')">🗑️ Remove</button></div>`).join("")+`<div class="invoice-summary"><h3 style="margin:0">Subtotal: ${money(total)}</h3></div>`:"<p>Your cart is empty.</p>";
+  const saved=JSON.parse(localStorage.getItem("vk_customer")||"{}");["name","phone","address","orderType"].forEach(k=>{const el=document.getElementById("customer"+k.charAt(0).toUpperCase()+k.slice(1));if(el&&saved[k])el.value=saved[k]});document.getElementById("orderType").value=saved.orderType||"delivery";
 }
-
-function closeCart(){document.getElementById("cartPanel").style.display="none"}
-
-function openAdmin(){
-  const password = prompt("🔐 Admin Password:");
-  if(password !== "VK1234"){
-    if(password !== null) alert("❌ Wrong password!");
-    return;
-  }
-  const panel = document.getElementById("adminPanel");
-  if(panel){ panel.style.display="block"; document.body.style.overflow="hidden"; }
-  manage();
-}
-
-function closeAdmin(){
-  const panel = document.getElementById("adminPanel");
-  if(panel) panel.style.display = "none";
-  document.body.style.overflow = "";
-}
-
+function closeCart(){document.getElementById("cartPanel").style.display="none";}
+function openAdmin(){const pw=prompt("🔐 Admin Password:");if(pw!=="VK1234"){if(pw!==null)alert("❌ Wrong password!");return}document.getElementById("adminPanel").style.display="block";document.body.style.overflow="hidden";manage();loadAdminOrders();}
+function closeAdmin(){document.getElementById("adminPanel").style.display="none";document.body.style.overflow="";}
+function readImg(file){return new Promise((resolve,reject)=>{if(!file)return resolve("");const r=new FileReader();r.onload=()=>{const img=new Image();img.onload=()=>{const max=800;let w=img.width,h=img.height;if(w>max||h>max){if(w>=h){h=Math.round(h*max/w);w=max}else{w=Math.round(w*max/h);h=max}}const c=document.createElement("canvas");c.width=w;c.height=h;c.getContext("2d").drawImage(img,0,0,w,h);resolve(c.toDataURL("image/jpeg",.72))};img.onerror=reject;img.src=r.result};r.onerror=reject;r.readAsDataURL(file)});}
 async function addProduct(){
   try{
-    const name=document.getElementById("pname").value.trim(), price=Number(document.getElementById("pprice").value), category=document.getElementById("pcat").value.trim(), emoji=document.getElementById("pemoji").value.trim()||"🔧";
-    const f1=document.getElementById("productPhoto1")?.files?.[0], f2=document.getElementById("productPhoto2")?.files?.[0];
-    if(!name || !Number.isFinite(price) || price<0 || !category){alert("Please enter Product Name, valid Price and Category.");return;}
-    const readImg=f=>new Promise((res,rej)=>{if(!f)return res("");const r=new FileReader();r.onload=()=>{const im=new Image();im.onload=()=>{let w=im.width,h=im.height,max=700;if(w>max||h>max){if(w>=h){h=Math.round(h*max/w);w=max}else{w=Math.round(w*max/h);h=max}}const c=document.createElement("canvas");c.width=w;c.height=h;c.getContext("2d").drawImage(im,0,0,w,h);res(c.toDataURL("image/jpeg",.72))};im.onerror=()=>rej(new Error("Could not process photo"));im.src=r.result};r.onerror=()=>rej(new Error("Could not read photo"));r.readAsDataURL(f)});
-    const [photo,photo2]=await Promise.all([readImg(f1),readImg(f2)]);
-    await addDoc(productsRef,{name,price,category,emoji,photo,photo2});
-    document.getElementById("pname").value="";document.getElementById("pprice").value="";document.getElementById("pcat").value="";document.getElementById("pemoji").value="🔧";if(document.getElementById("productPhoto1"))document.getElementById("productPhoto1").value="";if(document.getElementById("productPhoto2"))document.getElementById("productPhoto2").value="";await loadProducts();alert("✅ Product added successfully!");
-  }catch(error){console.error(error);alert("❌ Firebase error: "+error.message)}
+    const name=document.getElementById("pname").value.trim(),price=Number(document.getElementById("pprice").value),category=document.getElementById("pcat").value.trim(),emoji=document.getElementById("pemoji").value.trim()||"🔧";
+    if(!name||!Number.isFinite(price)||price<0||!category){alert("Enter Product Name, valid Price and Category.");return}
+    if(blockedWords.some(w=>(name+" "+category).toLowerCase().includes(w))){alert("This store is for hardware, plumbing, sanitary, construction material and tools — electric products are not added.");return}
+    const [photo,photo2]=await Promise.all([readImg(document.getElementById("productPhoto").files[0]),readImg(document.getElementById("productPhoto2").files[0])]);
+    await productsRef.add({name,price,category,emoji,photo,photo2,featured:document.getElementById("pfeatured").checked,popular:document.getElementById("ppopular").checked,stock:document.getElementById("pstock").checked,discount:Number(document.getElementById("pdiscount").value||0)});
+    ["pname","pprice","pcat","pdiscount"].forEach(id=>document.getElementById(id).value="");document.getElementById("pemoji").value="🔧";document.getElementById("pfeatured").checked=false;document.getElementById("ppopular").checked=false;document.getElementById("pstock").checked=true;document.getElementById("productPhoto").value="";document.getElementById("productPhoto2").value="";
+    await loadProducts();alert("✅ Product added successfully!");
+  }catch(e){console.error(e);alert("Firebase error: "+e.message)}
 }
-
 function manage(){
-  document.getElementById("manage").innerHTML="<h3>Products: "+products.length+" (Firebase)</h3>"+
-  products.map((p,i)=>`<div>${escapeHtml(p.emoji)} ${escapeHtml(p.name)} — ₹${escapeHtml(p.price)}
-    <button onclick="editProduct(${i})">✏️ Edit</button>
-    <button onclick="del(${i})">Delete</button>
-  </div>`).join("");
+  const q=(document.getElementById("adminSearch")?.value||"").toLowerCase().trim(), list=products.filter(p=>(p.name+" "+p.category).toLowerCase().includes(q));
+  document.getElementById("manage").innerHTML=`<h3>Products: ${products.length}</h3>`+list.map(p=>`<div class="admin-product-row"><div class="admin-product-info"><b>${escapeHtml(p.emoji)} ${escapeHtml(p.name)}</b><small>${escapeHtml(p.category)} • ${money(p.price)} • ${p.stock?"In Stock":"Out of Stock"}${p.discount?` • ${p.discount}% OFF`:""}${p.featured?" • ⭐ Featured":""}${p.popular?" • 🔥 Popular":""}</small></div><div class="admin-product-actions"><button class="edit-btn" onclick="editProduct('${p.id}')">✏️ Edit</button><button class="danger-btn" onclick="deleteProduct('${p.id}')">Delete</button></div></div>`).join("");
 }
-
-function removeFromCart(index){
-  if(cart[index]){
-    delete cart[index];
-    saveCart();
-    render();
-    openCart();
-  }
+function editProduct(id){
+  const p=products.find(x=>x.id===id);if(!p)return;editingId=id;
+  document.getElementById("editName").value=p.name;document.getElementById("editPrice").value=p.price;document.getElementById("editCat").value=p.category;document.getElementById("editEmoji").value=p.emoji;document.getElementById("editFeatured").checked=p.featured;document.getElementById("editPopular").checked=p.popular;document.getElementById("editStock").checked=p.stock;document.getElementById("editDiscount").value=p.discount||0;document.getElementById("editPhoto1").value="";document.getElementById("editPhoto2").value="";
+  document.getElementById("editPhotoPreview1").innerHTML=p.photo?`<div class="edit-photo-box"><img src="${p.photo}"><button class="danger-btn" onclick="removeExistingPhoto(1)">🗑️ Remove</button></div>`:"No photo";
+  document.getElementById("editPhotoPreview2").innerHTML=p.photo2?`<div class="edit-photo-box"><img src="${p.photo2}"><button class="danger-btn" onclick="removeExistingPhoto(2)">🗑️ Remove</button></div>`:"No photo";
+  document.getElementById("editPanel").style.display="block";
 }
-
-
-function compressImageFile(file){
-  return new Promise((resolve,reject)=>{
-    if(!file){resolve(null);return;}
-    const reader=new FileReader();
-    reader.onload=function(){
-      const img=new Image();
-      img.onload=function(){
-        const max=700;
-        let w=img.width,h=img.height;
-        if(w>max||h>max){
-          if(w>=h){h=Math.round(h*max/w);w=max;}
-          else{w=Math.round(w*max/h);h=max;}
-        }
-        const canvas=document.createElement("canvas");
-        canvas.width=w; canvas.height=h;
-        const ctx=canvas.getContext("2d");
-        ctx.drawImage(img,0,0,w,h);
-        resolve(canvas.toDataURL("image/jpeg",0.72));
-      };
-      img.onerror=()=>reject(new Error("Could not process image."));
-      img.src=reader.result;
-    };
-    reader.onerror=()=>reject(new Error("Could not read image."));
-    reader.readAsDataURL(file);
-  });
-}
-
-function editProduct(i){
-  const p=products[i];
-  if(!p)return;
-  document.getElementById("editProductId").value=i;
-  document.getElementById("editPname").value=p.name;
-  document.getElementById("editPprice").value=p.price;
-  document.getElementById("editPcat").value=p.category;
-  document.getElementById("editPemoji").value=p.emoji||"🔧";
-  document.getElementById("editProductPhoto1").value="";
-  document.getElementById("editProductPhoto2").value="";
-  document.getElementById("editPhotoPreview1").innerHTML=p.photo
-    ? `<div class="edit-photo-box"><img src="${p.photo}" alt="Photo 1"><button type="button" onclick="removeEditPhoto(1)">🗑️ Remove Photo 1</button></div>`
-    : "<span>No Photo 1</span>";
-  document.getElementById("editPhotoPreview2").innerHTML=p.photo2
-    ? `<div class="edit-photo-box"><img src="${p.photo2}" alt="Photo 2"><button type="button" onclick="removeEditPhoto(2)">🗑️ Remove Photo 2</button></div>`
-    : "<span>No Photo 2</span>";
-  document.getElementById("editProductPanel").style.display="block";
-  document.body.style.overflow="hidden";
-}
-
-function removeEditPhoto(which){
-  const i=Number(document.getElementById("editProductId").value);
-  const p=products[i];
-  if(!p)return;
-  if(which===1)p._removePhoto1=true;
-  if(which===2)p._removePhoto2=true;
-  const target=which===1?"editPhotoPreview1":"editPhotoPreview2";
-  document.getElementById(target).innerHTML="<span>Photo will be removed when you save.</span>";
-}
-
-async function saveProductEdit(){
+let removePhoto1=false,removePhoto2=false;
+function removeExistingPhoto(n){if(n===1){removePhoto1=true;document.getElementById("editPhotoPreview1").innerHTML="Photo 1 will be removed."}else{removePhoto2=true;document.getElementById("editPhotoPreview2").innerHTML="Photo 2 will be removed."}}
+async function saveEdit(){
+  if(!editingId)return;const name=document.getElementById("editName").value.trim(),price=Number(document.getElementById("editPrice").value),category=document.getElementById("editCat").value.trim();
+  if(!name||!Number.isFinite(price)||price<0||!category){alert("Please enter valid name, price and category.");return}
+  if(blockedWords.some(w=>(name+" "+category).toLowerCase().includes(w))){alert("Electric products are not allowed in this store catalog.");return}
   try{
-    const i=Number(document.getElementById("editProductId").value);
-    const p=products[i];
-    if(!p)return;
+    const data={name,price,category,emoji:document.getElementById("editEmoji").value.trim()||"🔧",featured:document.getElementById("editFeatured").checked,popular:document.getElementById("editPopular").checked,stock:document.getElementById("editStock").checked,discount:Math.min(90,Math.max(0,Number(document.getElementById("editDiscount").value||0)))};
+    if(removePhoto1)data.photo=""; else if(document.getElementById("editPhoto1").files[0])data.photo=await readImg(document.getElementById("editPhoto1").files[0]);
+    if(removePhoto2)data.photo2=""; else if(document.getElementById("editPhoto2").files[0])data.photo2=await readImg(document.getElementById("editPhoto2").files[0]);
+    await db.collection("products").doc(editingId).update(data);removePhoto1=false;removePhoto2=false;editingId=null;closeEdit();await loadProducts();alert("✅ Product updated!");
+  }catch(e){alert("Could not update: "+e.message)}
+}
+function closeEdit(){document.getElementById("editPanel").style.display="none";}
+async function deleteProduct(id){const p=products.find(x=>x.id===id);if(!p||!confirm(`Delete "${p.name}"?`))return;try{await db.collection("products").doc(id).delete();delete cart[id];wishlist=wishlist.filter(x=>x!==id);saveCart();saveWishlist();await loadProducts();}catch(e){alert("Could not delete product: "+e.message)}}
+function toggleWishlist(id){wishlist.includes(id)?wishlist=wishlist.filter(x=>x!==id):wishlist.push(id);saveWishlist();updateWishCount();render();renderHighlights();}
+function updateWishCount(){document.getElementById("wishCount").textContent=wishlist.filter(id=>products.some(p=>p.id===id)).length;}
+function openWishlist(){document.getElementById("wishlistPanel").style.display="block";const items=wishlist.map(id=>products.find(p=>p.id===id)).filter(Boolean);document.getElementById("wishlist").innerHTML=items.length?`<div class="wish-grid">${items.map(p=>`<div class="wish-item"><div><b>${escapeHtml(p.name)}</b><br><small>${money(finalPrice(p))}</small></div><button onclick="addById('${p.id}')">Add</button></div>`).join("")}</div>`:"<p>Your wishlist is empty.</p>";}
+function closeWishlist(){document.getElementById("wishlistPanel").style.display="none";}
+function openRequest(){document.getElementById("requestPanel").style.display="block";}
+function closeRequest(){document.getElementById("requestPanel").style.display="none";}
+function sendProductRequest(){const n=document.getElementById("requestProduct").value.trim(),q=document.getElementById("requestQty").value.trim(),note=document.getElementById("requestNote").value.trim();if(!n){alert("Enter the product name.");return}const msg=`*V K Traders & Hardware – Product Request*%0AProduct: ${encodeURIComponent(n)}%0AQuantity: ${encodeURIComponent(q||"Not specified")}%0ADetails: ${encodeURIComponent(note||"None")}`;window.location.href="https://wa.me/919623009626?text="+msg;}
+function openImageGalleryById(id){const p=products.find(x=>x.id===id);if(!p)return;galleryImages=[p.photo,p.photo2].filter(Boolean);if(!galleryImages.length)return;galleryIndex=0;document.getElementById("galleryModal").style.display="flex";updateGallery();}
+function updateGallery(){document.getElementById("galleryImg").src=galleryImages[galleryIndex];document.getElementById("galleryCounter").textContent=`Photo ${galleryIndex+1} of ${galleryImages.length}`;}
+function nextGallery(){if(!galleryImages.length)return;galleryIndex=(galleryIndex+1)%galleryImages.length;updateGallery();}
+function prevGallery(){if(!galleryImages.length)return;galleryIndex=(galleryIndex-1+galleryImages.length)%galleryImages.length;updateGallery();}
+function closeGallery(){document.getElementById("galleryModal").style.display="none";}
 
-    const name=document.getElementById("editPname").value.trim();
-    const price=Number(document.getElementById("editPprice").value);
-    const category=document.getElementById("editPcat").value.trim();
-    const emoji=document.getElementById("editPemoji").value.trim()||"🔧";
-    if(!name || !Number.isFinite(price) || price<0 || !category){
-      alert("Please enter Product Name, valid Price and Category.");
-      return;
-    }
 
-    const f1=document.getElementById("editProductPhoto1").files[0];
-    const f2=document.getElementById("editProductPhoto2").files[0];
-    const newPhoto1=await compressImageFile(f1);
-    const newPhoto2=await compressImageFile(f2);
+let adminOrdersCache=[];
 
-    const updateData={name,price,category,emoji};
-    if(p._removePhoto1) updateData.photo="";
-    else if(newPhoto1) updateData.photo=newPhoto1;
+function adminStatusOptions(current){
+  const statuses=["Pending","Confirmed","Ready","Delivered","Cancelled"];
+  return statuses.map(s=>`<option value="${s}" ${String(current||"Pending")===s?"selected":""}>${s}</option>`).join("");
+}
 
-    if(p._removePhoto2) updateData.photo2="";
-    else if(newPhoto2) updateData.photo2=newPhoto2;
+async function loadAdminOrders(){
+  const box=document.getElementById("adminOrders");
+  if(!box)return;
+  box.innerHTML='<div class="notice">⏳ Loading customer orders...</div>';
+  try{
+    const snap=await ordersRef.get();
+    adminOrdersCache=snap.docs.map(d=>({id:d.id,...d.data()}))
+      .sort((a,b)=>String(b.createdAt||"").localeCompare(String(a.createdAt||"")));
+    renderAdminOrders();
+  }catch(e){
+    console.error(e);
+    box.innerHTML='<div class="notice">❌ Could not load orders. Check Firestore Rules.</div>';
+  }
+}
 
-    await import("https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js").then(async m=>{
-      await m.updateDoc(m.doc(db,"products",p.id),updateData);
+function renderAdminOrders(){
+  const box=document.getElementById("adminOrders");
+  if(!box)return;
+  if(!adminOrdersCache.length){
+    box.innerHTML='<div class="notice">No customer orders yet.</div>';
+    return;
+  }
+  box.innerHTML=adminOrdersCache.map(o=>{
+    const items=(o.items||[]).map(it=>`${escapeHtml(it.name)} × ${Number(it.qty||0)}`).join(" • ");
+    return `<div class="admin-order-card">
+      <div class="admin-order-top">
+        <div>
+          <div class="admin-order-name">${escapeHtml(o.invoiceNo||"Order")}</div>
+          <div class="admin-order-meta">${escapeHtml(o.customer?.name||"Customer")} • ${escapeHtml(o.customer?.phone||"")} • ${formatOrderDate(o.createdAt)}</div>
+        </div>
+        <b>${money(o.total||0)}</b>
+      </div>
+      <div class="admin-order-items">${items||"No items"}<br><small>${o.customer?.orderType==="delivery"?"🏠 Home Delivery":"🏪 Self Pickup"}</small></div>
+      <div class="admin-order-status">
+        <select id="status-${o.id}">${adminStatusOptions(o.status)}</select>
+        <button onclick="updateOrderStatus('${o.id}')">💾 Update</button>
+      </div>
+    </div>`;
+  }).join("");
+}
+
+async function updateOrderStatus(id){
+  const select=document.getElementById("status-"+id);
+  if(!select)return;
+  try{
+    await db.collection("orders").doc(id).update({
+      status:select.value,
+      updatedAt:new Date().toISOString()
     });
-
-    delete p._removePhoto1;
-    delete p._removePhoto2;
-    closeEditProduct();
-    await loadProducts();
-    alert("✅ Product updated successfully!");
-  }catch(error){
-    console.error(error);
-    alert("❌ Could not update product: "+error.message);
+    const order=adminOrdersCache.find(x=>x.id===id);
+    if(order)order.status=select.value;
+    alert("✅ Order status updated to "+select.value);
+    renderAdminOrders();
+  }catch(e){
+    console.error(e);
+    alert("❌ Could not update order: "+e.message);
   }
 }
 
-function closeEditProduct(){
-  const panel=document.getElementById("editProductPanel");
-  if(panel)panel.style.display="none";
-  document.body.style.overflow="";
-}
-
-async function del(i){
-  if(!products[i]) return;
-  if(confirm("Delete this product from Firebase?")){
-    try{
-      await deleteDoc(doc(db,"products",products[i].id));
-      delete cart[i];
-      saveCart();
-      await loadProducts();
-    }catch(error){
-      alert("❌ Could not delete product: " + error.message);
-    }
+async function saveOrderToFirebase(data){
+  try{
+    const orderDoc={
+      invoiceNo:data.invoiceNo,
+      customer:{
+        name:data.customer.name,
+        phone:data.customer.phone,
+        address:data.customer.address || "",
+        orderType:data.customer.orderType
+      },
+      items:data.items.map(x=>({
+        productId:x.id,
+        name:x.p.name,
+        qty:x.qty,
+        price:Number(finalPrice(x.p)),
+        amount:Number(finalPrice(x.p)*x.qty)
+      })),
+      subtotal:Number(data.subtotal),
+      total:Number(data.subtotal),
+      status:"Pending",
+      createdAt:new Date().toISOString()
+    };
+    await ordersRef.add(orderDoc);
+    return true;
+  }catch(e){
+    console.error("Order save error:",e);
+    return false;
   }
 }
 
-function saveCustomer(details){
-  localStorage.setItem("vk_customer",JSON.stringify(details));
-}
-
-function buildInvoiceData(){
-  const items=getCartItems();
-  if(!items.length){alert("Cart is empty.");return null;}
-  const customer=getCustomerDetails();
-  if(!customer)return null;
-  saveCustomer(customer);
-  const subtotal=items.reduce((t,x)=>t+x.lineTotal,0);
-  const invoiceNo=makeInvoiceNumber();
-  return {items,customer,subtotal,invoiceNo,date:new Date()};
-}
-
-function generateBill(){
-  const data=buildInvoiceData();
-  if(!data)return;
-
-  const grandTotal=data.subtotal;
-  const type=data.customer.orderType==="delivery"?"Home Delivery":"Self Pickup";
-  const date=data.date.toLocaleDateString("en-IN");
-  const time=data.date.toLocaleTimeString("en-IN",{hour:"2-digit",minute:"2-digit"});
-
-  const rows=data.items.map((x,i)=>`
-    <tr>
-      <td>${i+1}</td>
-      <td><b>${escapeHtml(x.product.name)}</b></td>
-      <td>${x.qty} nos</td>
-      <td>₹${x.product.price.toFixed(2)}</td>
-      <td>nos</td>
-      <td>₹${x.lineTotal.toFixed(2)}</td>
-    </tr>`).join("");
-
-  document.getElementById("billPreview").innerHTML=`
-    <div class="bill-head">
-      <h1>V K Traders &amp; Hardware</h1>
-      <p>Good Quality Material • Hardware &amp; Plumbing Store</p>
-      <p>A/P Retre Karkhana, Shivnagar, Maharashtra</p>
-      <p>Phone: 9623009626</p>
-    </div>
-
-    <div class="bill-meta">
-      <div>
-        <b>Invoice No:</b> ${escapeHtml(data.invoiceNo)}<br>
-        <b>Date:</b> ${date} &nbsp; <b>Time:</b> ${time}
-      </div>
-      <div>
-        <b>Customer:</b> ${escapeHtml(data.customer.name)}<br>
-        <b>Mobile:</b> ${escapeHtml(data.customer.phone)}<br>
-        <b>Order:</b> ${type}
-      </div>
-    </div>
-
-    ${data.customer.address ? `<p style="margin:10px 0 0"><b>Delivery Address:</b> ${escapeHtml(data.customer.address)}</p>` : ""}
-
-    <table class="bill-table">
-      <thead>
-        <tr>
-          <th>Sl No.</th>
-          <th>Description of Goods</th>
-          <th>Quantity</th>
-          <th>Rate</th>
-          <th>Per</th>
-          <th>Amount</th>
-        </tr>
-      </thead>
-      <tbody>${rows}</tbody>
-    </table>
-
-    <div class="bill-totals">
-      <div><span>Subtotal</span><span>₹${data.subtotal.toFixed(2)}</span></div>
-      <div class="grand"><span>Grand Total</span><span>₹${grandTotal.toFixed(2)}</span></div>
-    </div>
-
-    <div class="bill-footer">
-      <p><b>${type}</b> • ${type==="Self Pickup" ? "Pickup is free" : "Delivery charges may apply"}</p>
-      <p>Thank you for shopping with V K Traders &amp; Hardware!</p>
-    </div>
-  `;
-
-  document.getElementById("billPanel").style.display="block";
+function openOrders(){
+  document.getElementById("ordersPanel").style.display="block";
+  const saved=JSON.parse(localStorage.getItem("vk_customer")||"{}");
+  if(saved.phone) document.getElementById("historyPhone").value=saved.phone;
   document.body.style.overflow="hidden";
+  if(saved.phone) loadOrderHistory();
 }
-
-function printBill(){
-  window.print();
-}
-
-function closeBill(){
-  document.getElementById("billPanel").style.display="none";
+function closeOrders(){
+  document.getElementById("ordersPanel").style.display="none";
   document.body.style.overflow="";
 }
+function orderStatusClass(status){
+  const s=String(status||"Pending").toLowerCase();
+  if(s==="delivered") return "delivered";
+  if(s==="cancelled") return "cancelled";
+  return "";
+}
+function formatOrderDate(value){
+  const d=value?.toDate ? value.toDate() : new Date(value);
+  return isNaN(d.getTime()) ? "" : d.toLocaleString("en-IN",{dateStyle:"medium",timeStyle:"short"});
+}
+function renderOrderHistory(orders){
+  const box=document.getElementById("orderHistory");
+  if(!orders.length){
+    box.innerHTML='<div class="notice">No orders found for this mobile number.</div>';
+    return;
+  }
+  box.innerHTML=orders.map(o=>{
+    const items=(o.items||[]).map(it=>`<div class="order-item-line"><span>${escapeHtml(it.name)} × ${Number(it.qty||0)}</span><b>${money(Number(it.amount||0))}</b></div>`).join("");
+    const status=escapeHtml(o.status||"Pending");
+    return `<div class="order-card">
+      <div class="order-card-head">
+        <div><div class="order-no">${escapeHtml(o.invoiceNo||"Order")}</div><div class="order-date">${formatOrderDate(o.createdAt)}</div></div>
+        <span class="order-status ${orderStatusClass(o.status)}">${status}</span>
+      </div>
+      <div class="status-line">🟡 Pending → 🔵 Confirmed → 🚚 Ready → 🟢 Delivered</div>
+      <div class="order-items">${items||"<div>No item details</div>"}</div>
+      <div class="order-total"><span>Total</span><span>${money(Number(o.total||0))}</span></div>
+      <div class="order-actions"><button onclick="reorderFromHistory('${o.id}')">🔄 Reorder</button><button class="secondary-btn" onclick="showOrderDetails('${o.id}')">👁️ Details</button></div>
+    </div>`;
+  }).join("");
+}
+let cachedOrders=[];
+async function loadOrderHistory(){
+  const phone=document.getElementById("historyPhone").value.trim().replace(/\D/g,"");
+  if(!/^\d{10}$/.test(phone)){alert("Please enter the same 10-digit mobile number used for the order.");return;}
+  const box=document.getElementById("orderHistory");
+  box.innerHTML='<div class="notice">⏳ Loading your orders...</div>';
+  try{
+    const snap=await ordersRef.where("customer.phone","==",phone).get();
+    cachedOrders=snap.docs.map(d=>({id:d.id,...d.data()})).sort((a,b)=>String(b.createdAt||"").localeCompare(String(a.createdAt||"")));
+    renderOrderHistory(cachedOrders);
+  }catch(e){
+    console.error(e);
+    box.innerHTML='<div class="notice">❌ Could not load order history. Please check your internet connection or Firebase Firestore Rules.</div>';
+  }
+}
+function reorderFromHistory(id){
+  const o=cachedOrders.find(x=>x.id===id); if(!o)return;
+  const next={...cart};
+  (o.items||[]).forEach(it=>{if(it.productId){next[it.productId]=(next[it.productId]||0)+Number(it.qty||0);}});
+  cart=next;saveCart();closeOrders();render();openCart();
+}
+function showOrderDetails(id){
+  const o=cachedOrders.find(x=>x.id===id);if(!o)return;
+  const lines=(o.items||[]).map(it=>`${it.name} × ${it.qty} = ${money(it.amount)}`).join("\n");
+  alert(`${o.invoiceNo||"Order"}\n\nCustomer: ${o.customer?.name||""}\nMobile: ${o.customer?.phone||""}\nOrder: ${o.customer?.orderType==="delivery"?"Home Delivery":"Self Pickup"}\nStatus: ${o.status||"Pending"}\n\n${lines}\n\nTotal: ${money(o.total||0)}`);
+}
 
-function orderWhatsApp(){
-  const data=buildInvoiceData();
-  if(!data)return;
-
+function buildInvoiceData(){const items=getCartItems();if(!items.length){alert("Cart is empty.");return null}const customer=getCustomerDetails();if(!customer)return null;const subtotal=items.reduce((t,x)=>t+finalPrice(x.p)*x.qty,0);return{items,customer,subtotal,invoiceNo:makeInvoiceNumber(),date:new Date()};}
+function generateBill(){
+  const data=buildInvoiceData();if(!data)return;const type=data.customer.orderType==="delivery"?"Home Delivery":"Self Pickup",date=data.date.toLocaleDateString("en-IN"),time=data.date.toLocaleTimeString("en-IN",{hour:"2-digit",minute:"2-digit"});
+  const rows=data.items.map((x,i)=>`<tr><td>${i+1}</td><td><b>${escapeHtml(x.p.name)}</b></td><td>${x.qty} nos</td><td>${money(finalPrice(x.p))}</td><td>nos</td><td>${money(finalPrice(x.p)*x.qty)}</td></tr>`).join("");
+  document.getElementById("billPreview").innerHTML=`<div class="bill-head"><h1>V K Traders &amp; Hardware</h1><p>Good Quality Material • Hardware &amp; Plumbing Store</p><p>A/P Retre Karkhana, Shivnagar, Maharashtra</p><p>Phone: 9623009626</p></div><div class="bill-meta"><div><b>Invoice No:</b> ${data.invoiceNo}<br><b>Date:</b> ${date} &nbsp; <b>Time:</b> ${time}</div><div><b>Customer:</b> ${escapeHtml(data.customer.name)}<br><b>Mobile:</b> ${escapeHtml(data.customer.phone)}<br><b>Order:</b> ${type}</div></div>${data.customer.address?`<p><b>Delivery Address:</b> ${escapeHtml(data.customer.address)}</p>`:""}<table class="bill-table"><thead><tr><th>Sl No.</th><th>Description of Goods</th><th>Quantity</th><th>Rate</th><th>Per</th><th>Amount</th></tr></thead><tbody>${rows}</tbody></table><div class="bill-totals"><div><span>Subtotal</span><span>${money(data.subtotal)}</span></div><div class="grand"><span>Grand Total</span><span>${money(data.subtotal)}</span></div></div><div class="bill-footer"><p><b>${type}</b> • ${type==="Self Pickup"?"Pickup is free":"Delivery charges may apply"}</p><p>Thank you for shopping with V K Traders &amp; Hardware!</p></div>`;
+  document.getElementById("billPanel").style.display="block";document.body.style.overflow="hidden";
+}
+function printBill(){window.print();}
+function closeBill(){document.getElementById("billPanel").style.display="none";document.body.style.overflow="";}
+async function orderWhatsApp(){
+  const data=buildInvoiceData();if(!data)return;
   const type=data.customer.orderType==="delivery"?"Home Delivery":"Self Pickup";
-  const grandTotal=data.subtotal;
-  const lines=data.items.map(x=>`${x.product.name} x ${x.qty} = ₹${x.lineTotal.toFixed(2)}`);
+  const lines=data.items.map(x=>`${x.p.name} x ${x.qty} = ${money(finalPrice(x.p)*x.qty)}`);
+  const message=["*V K Traders and Hardware*",`Invoice: ${data.invoiceNo}`,"","*Customer Details*",`Name: ${data.customer.name}`,`Mobile: ${data.customer.phone}`,`Order Type: ${type}`,data.customer.address?`Address: ${data.customer.address}`:"","", "*Order Items*",...lines,"",`Grand Total: ${money(data.subtotal)}`,type==="Home Delivery"?"Delivery charges: Additional charges apply":"Pickup: Free","","Please confirm my order."].filter(Boolean).join("\n");
 
-  const message=[
-    "*V K Traders and Hardware*",
-    `Invoice: ${data.invoiceNo}`,
-    "",
-    "*Customer Details*",
-    `Name: ${data.customer.name}`,
-    `Mobile: ${data.customer.phone}`,
-    `Order Type: ${type}`,
-    data.customer.address?`Address: ${data.customer.address}`:"",
-    "",
-    "*Order Items*",
-    ...lines,
-    "",
-    `Subtotal: ₹${data.subtotal.toFixed(2)}`,
-    `*Grand Total: ₹${grandTotal.toFixed(2)}*`,
-    type==="Home Delivery"?"Delivery charges: Additional charges apply":"Pickup: Free",
-    "",
-    "Please confirm my order."
-  ].filter(Boolean).join("\n");
-
-  // Order has been sent to WhatsApp: clear the cart so the same items
-  // are not left in the cart for the next order.
-  cart={};
-  saveCart();
-  render();
-  closeBill();
-  closeCart();
-
+  const saved=await saveOrderToFirebase(data);
+  if(!saved){
+    const ok=confirm("Order history could not be saved to Firebase. Send the WhatsApp order anyway?");
+    if(!ok)return;
+  }
+  cart={};saveCart();render();closeBill();closeCart();
+  alert("✅ Order saved! Opening WhatsApp...");
   window.location.href="https://wa.me/919623009626?text="+encodeURIComponent(message);
 }
 
-let galleryImages=[],galleryIndex=0;
-function openImageGallery(i){const p=products[i];if(!p)return;galleryImages=[p.photo,p.photo2].filter(Boolean);if(!galleryImages.length)return;galleryIndex=0;document.getElementById("galleryImg").src=galleryImages[0];document.getElementById("galleryModal").style.display="flex";updateGallery();}
-function updateGallery(){document.getElementById("galleryImg").src=galleryImages[galleryIndex];document.getElementById("galleryCount").textContent=(galleryIndex+1)+" / "+galleryImages.length;document.getElementById("galleryPrev").style.display=galleryImages.length>1?"block":"none";document.getElementById("galleryNext").style.display=galleryImages.length>1?"block":"none";}
-function galleryPrev(){if(galleryImages.length>1){galleryIndex=(galleryIndex-1+galleryImages.length)%galleryImages.length;updateGallery()}}
-function galleryNext(){if(galleryImages.length>1){galleryIndex=(galleryIndex+1)%galleryImages.length;updateGallery()}}
-function closeGallery(){document.getElementById("galleryModal").style.display="none"}
-function escapeHtml(value){
-  return String(value).replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#039;"}[m]));
-}
+window.openCart=openCart;window.closeCart=closeCart;window.openOrders=openOrders;window.closeOrders=closeOrders;window.loadOrderHistory=loadOrderHistory;window.reorderFromHistory=reorderFromHistory;window.showOrderDetails=showOrderDetails;window.openAdmin=openAdmin;window.openGallery=openGallery;window.closeGallery=closeGallery;window.updateOrderStatus=updateOrderStatus;window.closeAdmin=closeAdmin;window.addProduct=addProduct;window.manage=manage;window.editProduct=editProduct;window.saveEdit=saveEdit;window.closeEdit=closeEdit;window.deleteProduct=deleteProduct;window.addById=addById;window.removeFromCart=removeFromCart;window.changeQty=changeQty;window.loadMore=loadMore;window.generateBill=generateBill;window.printBill=printBill;window.closeBill=closeBill;window.orderWhatsApp=orderWhatsApp;window.toggleWishlist=toggleWishlist;window.openWishlist=openWishlist;window.closeWishlist=closeWishlist;window.openRequest=openRequest;window.closeRequest=closeRequest;window.sendProductRequest=sendProductRequest;window.openImageGalleryById=openImageGalleryById;window.nextGallery=nextGallery;window.prevGallery=prevGallery;window.closeGallery=closeGallery;window.removeExistingPhoto=removeExistingPhoto;
 
-let adminTapCount=0,adminTapTimer=null;
-function secretAdminAccess(){
-  adminTapCount++;
-  clearTimeout(adminTapTimer);
-  adminTapTimer=setTimeout(()=>{adminTapCount=0},2500);
-  if(adminTapCount>=5){
-    adminTapCount=0;
-    openAdmin();
-  }
-}
-window.secretAdminAccess=secretAdminAccess;
-
-window.openCart=openCart;
-window.closeCart=closeCart;
-window.openAdmin=openAdmin;
-window.closeAdmin=closeAdmin;
-window.addProduct=addProduct;
-window.del=del;
-window.editProduct=editProduct;
-window.removeEditPhoto=removeEditPhoto;
-window.saveProductEdit=saveProductEdit;
-window.closeEditProduct=closeEditProduct;
-window.removeFromCart=removeFromCart;
-window.add=add;
-window.loadMore=loadMore;
-window.orderWhatsApp=orderWhatsApp;
-window.generateBill=generateBill;
-window.printBill=printBill;
-window.closeBill=closeBill;window.openImageGallery=openImageGallery;window.galleryPrev=galleryPrev;window.galleryNext=galleryNext;window.closeGallery=closeGallery;
-
-const storeTitle=document.getElementById("storeTitle");
-if(storeTitle){
-  storeTitle.addEventListener("click",secretAdminAccess);
-  storeTitle.addEventListener("touchend",function(e){e.preventDefault();secretAdminAccess();},{passive:false});
-}
-
-window.addEventListener("DOMContentLoaded", async ()=>{
-  document.getElementById("search").addEventListener("input",()=>{visibleCount=24;render();});
-  document.getElementById("cat").addEventListener("change",()=>{visibleCount=24;render();});
-  document.getElementById("products").innerHTML='<div class="notice" style="grid-column:1/-1;text-align:center">⏳ Loading products from Firebase...</div>';
-  try{ await loadProducts(); }
-  catch(error){
-    console.error(error);
-    document.getElementById("products").innerHTML='<div class="notice" style="grid-column:1/-1;text-align:center">❌ Products could not be loaded.<br><small>Check Firebase/Internet and try again.</small><br><button type="button" onclick="retryProducts()" style="margin-top:10px;background:#0d47a1;color:#fff;border:0;border-radius:8px;padding:10px 16px;font-weight:bold">🔄 Retry</button></div>';document.getElementById("loadBtn").style.display="none";
-  }
+window.addEventListener("DOMContentLoaded",async()=>{
+  try{await loadProducts()}catch(e){console.error(e);document.getElementById("productsGrid").innerHTML=`<div class="notice" style="grid-column:1/-1">❌ Could not load products from Firebase.<br><button onclick="location.reload()">Retry</button></div>`}
 });
+document.addEventListener("click",e=>{
+  if(e.target?.id==="adminPanel")closeAdmin();if(e.target?.id==="cartPanel")closeCart();if(e.target?.id==="ordersPanel")closeOrders();if(e.target?.id==="editPanel")closeEdit();if(e.target?.id==="wishlistPanel")closeWishlist();if(e.target?.id==="requestPanel")closeRequest();if(e.target?.id==="billPanel")closeBill();if(e.target?.id==="galleryModal")closeGallery();
+});
+
 </script>
 
 <script>
-document.addEventListener("click", function(e){
-  if(e.target && e.target.id === "adminPanel") closeAdmin();
-  if(e.target && e.target.id === "editProductPanel") closeEditProduct();
-  if(e.target && e.target.id === "cartPanel") closeCart();
-  if(e.target && e.target.id === "billPanel") closeBill();
-});
+(function(){
+  let taps=0, timer=null, lastTap=0;
+  function reset(){
+    taps=0;
+    clearTimeout(timer);
+    timer=null;
+  }
+  function handleTap(e){
+    if(e.cancelable) e.preventDefault();
+    e.stopPropagation();
+
+    const now=Date.now();
+    if(now-lastTap>1800) taps=0;
+    lastTap=now;
+    taps++;
+
+    clearTimeout(timer);
+    timer=setTimeout(reset,1800);
+
+    if(taps>=5){
+      reset();
+      if(typeof openAdmin==="function") openAdmin();
+    }
+  }
+  function setupSecretAdmin(){
+    const logo=document.getElementById("secretAdminLogo");
+    if(!logo) return;
+    logo.addEventListener("touchend", handleTap, {passive:false});
+    logo.addEventListener("click", handleTap);
+    logo.addEventListener("contextmenu", function(e){ e.preventDefault(); });
+  }
+  if(document.readyState==="loading"){
+    document.addEventListener("DOMContentLoaded", setupSecretAdmin);
+  }else{
+    setupSecretAdmin();
+  }
+})();
 </script>
 
-<div id="galleryModal" style="display:none;position:fixed;inset:0;background:#000e;z-index:300;align-items:center;justify-content:center;padding:15px" onclick="if(event.target===this)closeGallery()"><button onclick="closeGallery()" style="position:absolute;right:15px;top:15px;background:#fff;border:0;border-radius:50%;width:42px;height:42px;font-size:25px">×</button><button id="galleryPrev" onclick="galleryPrev()" style="position:absolute;left:15px;background:#fff;border:0;border-radius:50%;width:45px;height:45px;font-size:30px">‹</button><img id="galleryImg" style="max-width:90vw;max-height:82vh;object-fit:contain;border-radius:10px"><button id="galleryNext" onclick="galleryNext()" style="position:absolute;right:15px;background:#fff;border:0;border-radius:50%;width:45px;height:45px;font-size:30px">›</button><div id="galleryCount" style="position:absolute;bottom:20px;background:#000b;color:#fff;padding:6px 12px;border-radius:20px"></div></div></body>
+</body>
 </html>
