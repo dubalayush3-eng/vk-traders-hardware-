@@ -8,6 +8,9 @@
 <meta name="robots" content="index, follow, max-image-preview:large">
 <meta name="author" content="V K Traders & Hardware">
 <meta name="theme-color" content="#0d47a1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 <link rel="canonical" href="https://vk-traders-hardware.web.app/">
 <meta property="og:type" content="website">
 <meta property="og:title" content="V K Traders & Hardware | Hardware & Plumbing Store">
@@ -157,6 +160,40 @@ header{box-shadow:0 4px 18px #071a3318;backdrop-filter:blur(10px)}
 .totals-row{display:flex;justify-content:space-between;padding:3px 0;font-size:14px}
 .coupon-discount-row{color:#087f3f;font-weight:700}
 
+/* ===== V7 POLISH PASS ===== */
+body{font-family:'Poppins',Arial,sans-serif}
+h1,h2,h3,.section-head h2,.hero h2,.card h3,.featured-card h3{font-family:'Poppins',Arial,sans-serif;letter-spacing:-.2px}
+button{transition:transform .12s ease,box-shadow .12s ease,filter .12s ease}
+button:active{transform:scale(.96)}
+.card button,.admin button,.box button{background:linear-gradient(135deg,var(--blue),var(--blue2));box-shadow:0 4px 14px #0d47a12e}
+.card button:hover{filter:brightness(1.08)}
+.out-btn{background:#8b95a7!important}
+.heart-btn:active{transform:scale(.9)}
+.whatsapp-order-btn{background:linear-gradient(135deg,#12a84f,#0d8f42)!important}
+.bill-btn{background:linear-gradient(135deg,#1459a5,#0d47a1)!important}
+.cart{box-shadow:0 3px 12px #0004}
+.orders-top-btn{box-shadow:0 3px 10px #0002}
+@keyframes fadeInUp{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+.card{animation:fadeInUp .35s ease both}
+.badge{box-shadow:0 3px 8px #0003;letter-spacing:.2px}
+.price{letter-spacing:-.2px}
+.bottom-actions a{box-shadow:0 6px 18px #0005}
+.bottom-actions a:active{transform:scale(.97)}
+.hero-btn{transition:filter .12s ease,transform .12s ease}
+.hero-btn:active{transform:scale(.97)}
+.featured-card{transition:transform .18s ease,box-shadow .18s ease}
+.featured-card:hover{transform:translateY(-2px);box-shadow:0 8px 22px #071a3318}
+::selection{background:#0d47a133}
+
+.offer-banner{position:sticky;top:0;z-index:99;display:flex;align-items:center;gap:0;background:linear-gradient(90deg,#f7931e,#e64a19);color:#fff;padding:11px 0;box-shadow:0 3px 12px #0004;animation:offerSlideDown .4s ease;overflow:hidden}
+.offer-banner-icon{flex-shrink:0;margin-left:16px;font-size:16px}
+.offer-banner-marquee{flex:1;overflow:hidden;white-space:nowrap;margin-left:8px}
+.offer-banner-track{display:inline-block;padding-left:100%;font-weight:800;font-size:14px;animation:offerMarquee 16s linear infinite}
+.offer-banner-close{background:#ffffff2e!important;border:0;color:#fff;width:26px;height:26px;border-radius:50%;flex-shrink:0;font-size:13px;padding:0;line-height:1;margin:0 12px 0 10px}
+@keyframes offerSlideDown{from{transform:translateY(-100%);opacity:0}to{transform:translateY(0);opacity:1}}
+@keyframes offerMarquee{0%{transform:translateX(0)}100%{transform:translateX(-100%)}}
+@media(max-width:600px){.offer-banner{padding:9px 0}.offer-banner-track{font-size:12px}}
+
 </style>
 
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"HardwareStore","name":"V K Traders & Hardware","description":"Hardware, plumbing, sanitary products and tools. Good quality material and home delivery available.","telephone":"+91-9623009626","address":{"@type":"PostalAddress","streetAddress":"A/P Retre Karkhana, Shivnagar","addressRegion":"Maharashtra","addressCountry":"IN"},"openingHours":"Mo-Fr 09:00-20:30, Su 09:00-20:30","url":"https://vk-traders-hardware.web.app/","hasMap":"https://maps.app.goo.gl/cnreYKyo2iWvuaAa8"}</script>
@@ -173,6 +210,12 @@ header{box-shadow:0 4px 18px #071a3318;backdrop-filter:blur(10px)}
     <button class="cart" onclick="openCart()">🛒 Cart (<span id="count">0</span>)</button>
   </div>
 </header>
+
+<div id="offerBanner" class="offer-banner" style="display:none">
+  <span class="offer-banner-icon">📢</span>
+  <div class="offer-banner-marquee"><span id="offerBannerMsg" class="offer-banner-track"></span></div>
+  <button class="offer-banner-close" onclick="closeOfferBanner()" aria-label="Close">✕</button>
+</div>
 
 <section class="hero" id="home">
   <div class="hero-inner">
@@ -294,8 +337,15 @@ header{box-shadow:0 4px 18px #071a3318;backdrop-filter:blur(10px)}
     <button onclick="addCoupon()">➕ Add Coupon</button>
     <div id="adminCoupons"></div>
     <hr>
+    <h3>📢 Offer Banner</h3>
+    <div class="notice">This scrolling message shows at the top of the site for every visitor.</div>
+    <input id="bannerText" placeholder="e.g. Diwali Sale! Flat 10% off on all items this week">
+    <div class="check-row"><label><input type="checkbox" id="bannerActive"> ✅ Show Banner</label></div>
+    <button onclick="saveOfferBanner()">💾 Save Banner</button>
+    <hr>
     <h3>📦 Customer Orders</h3>
     <div class="notice">Update an order status here. The customer will see the latest status in <b>My Orders</b>.</div>
+    <input id="adminOrderSearch" placeholder="🔍 Search by invoice no, name or mobile number" oninput="renderAdminOrders()">
     <div id="adminOrders"><div class="notice">Loading orders...</div></div>
   </div>
 </div>
@@ -365,6 +415,8 @@ header{box-shadow:0 4px 18px #071a3318;backdrop-filter:blur(10px)}
 
 <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore-compat.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 <script>
 
 const firebaseConfig = {
@@ -376,12 +428,13 @@ const firebaseConfig = {
   appId:"1:598417742404:web:3e4fc94c246022fb167a11",
   measurementId:"G-08X6GP7N26"
 };
-const app=firebase.initializeApp(firebaseConfig), db=firebase.firestore(), productsRef=db.collection("products"), ordersRef=db.collection("orders"), couponsRef=db.collection("coupons");
+const app=firebase.initializeApp(firebaseConfig), db=firebase.firestore(), productsRef=db.collection("products"), ordersRef=db.collection("orders"), couponsRef=db.collection("coupons"), settingsRef=db.collection("settings");
 
 let products=[], visibleCount=24, editingId=null, galleryImages=[], galleryIndex=0;
 let cart=JSON.parse(localStorage.getItem("vk_cart")||"{}");
 let wishlist=JSON.parse(localStorage.getItem("vk_wishlist")||"[]");
 let coupons=[], appliedCoupon=null;
+let offerBannerSettings={text:"",active:false};
 
 const blockedWords=["electric","electrical","wire","wiring","switchboard","mcb","fan","bulb","led","socket electrical"];
 const isAllowed=p=>!blockedWords.some(w=>String(p.name+" "+p.category).toLowerCase().includes(w));
@@ -402,6 +455,40 @@ async function loadCoupons(){
     const snap=await couponsRef.get();
     coupons=snap.docs.map(d=>({id:d.id,...d.data(),code:String(d.data().code||"").toUpperCase(),type:d.data().type==="flat"?"flat":"percent",value:Number(d.data().value||0),minOrder:Number(d.data().minOrder||500),active:d.data().active!==false}));
   }catch(e){console.error("Could not load coupons:",e);coupons=[]}
+}
+async function loadOfferBannerSettings(){
+  try{
+    const doc=await settingsRef.doc("offerBanner").get();
+    offerBannerSettings=doc.exists?{text:doc.data().text||"",active:!!doc.data().active}:{text:"",active:false};
+  }catch(e){console.error("Could not load banner settings:",e);offerBannerSettings={text:"",active:false}}
+  const textEl=document.getElementById("bannerText"), activeEl=document.getElementById("bannerActive");
+  if(textEl)textEl.value=offerBannerSettings.text;
+  if(activeEl)activeEl.checked=offerBannerSettings.active;
+  showOfferBanner();
+}
+function showOfferBanner(){
+  const banner=document.getElementById("offerBanner");
+  if(!banner)return;
+  if(sessionStorage.getItem("vk_offer_dismissed")){banner.style.display="none";return}
+  if(!offerBannerSettings.active||!offerBannerSettings.text){banner.style.display="none";return}
+  document.getElementById("offerBannerMsg").textContent=offerBannerSettings.text;
+  banner.style.display="flex";
+}
+function closeOfferBanner(){
+  document.getElementById("offerBanner").style.display="none";
+  sessionStorage.setItem("vk_offer_dismissed","1");
+}
+async function saveOfferBanner(){
+  try{
+    const text=(document.getElementById("bannerText").value||"").trim();
+    const active=document.getElementById("bannerActive").checked;
+    if(active&&!text){alert("Please enter banner text before enabling it.");return}
+    await settingsRef.doc("offerBanner").set({text,active,updatedAt:new Date().toISOString()});
+    offerBannerSettings={text,active};
+    sessionStorage.removeItem("vk_offer_dismissed");
+    showOfferBanner();
+    alert("✅ Banner updated!");
+  }catch(e){alert("Could not save banner: "+e.message)}
 }
 function migrateOldCart(){
   const keys=Object.keys(cart); if(!keys.length)return;
@@ -482,7 +569,7 @@ function renderHighlights(){
   document.getElementById("popular").innerHTML=pop.length?pop.map(p=>cardHtml(p,true)).join(""):'<div class="notice" style="grid-column:1/-1">Admin can mark products as Popular.</div>';
 }
 function loadMore(){visibleCount+=24;render();}
-function addById(id){const p=products.find(x=>x.id===id);if(!p||!p.stock)return;cart[id]=(cart[id]||0)+1;saveCart();render();}
+function addById(id){const p=products.find(x=>x.id===id);if(!p||!p.stock)return;cart[id]=(cart[id]||0)+1;saveCart();render();if(navigator.vibrate)navigator.vibrate(50);}
 function removeFromCart(id){delete cart[id];saveCart();openCart();}
 function changeQty(id,delta){const n=Number(cart[id]||0)+delta;if(n<=0)delete cart[id];else cart[id]=n;saveCart();openCart();render();}
 function getCartItems(){return Object.keys(cart).map(id=>({id,p:products.find(x=>x.id===id),qty:Number(cart[id])})).filter(x=>x.p&&x.qty>0);}
@@ -530,7 +617,7 @@ function openCart(){
   const saved=JSON.parse(localStorage.getItem("vk_customer")||"{}");["name","phone","address","orderType"].forEach(k=>{const el=document.getElementById("customer"+k.charAt(0).toUpperCase()+k.slice(1));if(el&&saved[k])el.value=saved[k]});document.getElementById("orderType").value=saved.orderType||"delivery";
 }
 function closeCart(){document.getElementById("cartPanel").style.display="none";}
-function openAdmin(){const pw=prompt("🔐 Admin Password:");if(pw!=="VK1234"){if(pw!==null)alert("❌ Wrong password!");return}document.getElementById("adminPanel").style.display="block";document.body.style.overflow="hidden";manage();renderAdminCoupons();loadAdminOrders();}
+function openAdmin(){const pw=prompt("🔐 Admin Password:");if(pw!=="VK1234"){if(pw!==null)alert("❌ Wrong password!");return}document.getElementById("adminPanel").style.display="block";document.body.style.overflow="hidden";manage();renderAdminCoupons();loadAdminOrders();const textEl=document.getElementById("bannerText"),activeEl=document.getElementById("bannerActive");if(textEl)textEl.value=offerBannerSettings.text;if(activeEl)activeEl.checked=offerBannerSettings.active;}
 async function addCoupon(){
   try{
     const code=(document.getElementById("couponAdminCode").value||"").trim().toUpperCase();
@@ -639,11 +726,17 @@ async function loadAdminOrders(){
 function renderAdminOrders(){
   const box=document.getElementById("adminOrders");
   if(!box)return;
-  if(!adminOrdersCache.length){
-    box.innerHTML='<div class="notice">No customer orders yet.</div>';
+  const q=(document.getElementById("adminOrderSearch")?.value||"").trim().toLowerCase();
+  const list=q?adminOrdersCache.filter(o=>{
+    return String(o.invoiceNo||"").toLowerCase().includes(q)
+      ||String(o.customer?.name||"").toLowerCase().includes(q)
+      ||String(o.customer?.phone||"").toLowerCase().includes(q);
+  }):adminOrdersCache;
+  if(!list.length){
+    box.innerHTML=`<div class="notice">${q?"No orders match your search.":"No customer orders yet."}</div>`;
     return;
   }
-  box.innerHTML=adminOrdersCache.map(o=>{
+  box.innerHTML=list.map(o=>{
     const items=(o.items||[]).map(it=>`${escapeHtml(it.name)} × ${Number(it.qty||0)}`).join(" • ");
     return `<div class="admin-order-card">
       <div class="admin-order-top">
@@ -657,9 +750,19 @@ function renderAdminOrders(){
       <div class="admin-order-status">
         <select id="status-${o.id}">${adminStatusOptions(o.status)}</select>
         <button onclick="updateOrderStatus('${o.id}')">💾 Update</button>
+        <button class="danger-btn" onclick="deleteOrder('${o.id}')">🗑️</button>
       </div>
     </div>`;
   }).join("");
+}
+async function deleteOrder(id){
+  const o=adminOrdersCache.find(x=>x.id===id);if(!o)return;
+  if(!confirm(`Delete order ${o.invoiceNo||""}? This cannot be undone.`))return;
+  try{
+    await ordersRef.doc(id).delete();
+    adminOrdersCache=adminOrdersCache.filter(x=>x.id!==id);
+    renderAdminOrders();
+  }catch(e){alert("Could not delete order: "+e.message)}
 }
 
 async function updateOrderStatus(id){
@@ -782,11 +885,32 @@ function showOrderDetails(id){
 }
 
 function buildInvoiceData(){const{items,subtotal,discount,total}=calcCartTotals();if(!items.length){alert("Cart is empty.");return null}const customer=getCustomerDetails();if(!customer)return null;return{items,customer,subtotal,discount,total,couponCode:discount>0&&appliedCoupon?appliedCoupon.code:"",invoiceNo:makeInvoiceNumber(),date:new Date()};}
-function generateBill(){
-  const data=buildInvoiceData();if(!data)return;const type=data.customer.orderType==="delivery"?"Home Delivery":"Self Pickup",date=data.date.toLocaleDateString("en-IN"),time=data.date.toLocaleTimeString("en-IN",{hour:"2-digit",minute:"2-digit"});
+function buildBillHTML(data){
+  const type=data.customer.orderType==="delivery"?"Home Delivery":"Self Pickup",date=data.date.toLocaleDateString("en-IN"),time=data.date.toLocaleTimeString("en-IN",{hour:"2-digit",minute:"2-digit"});
   const rows=data.items.map((x,i)=>`<tr><td>${i+1}</td><td><b>${escapeHtml(x.p.name)}</b></td><td>${x.qty} nos</td><td>${money(finalPrice(x.p))}</td><td>nos</td><td>${money(finalPrice(x.p)*x.qty)}</td></tr>`).join("");
-  document.getElementById("billPreview").innerHTML=`<div class="bill-head"><h1>V K Traders &amp; Hardware</h1><p>Good Quality Material • Hardware &amp; Plumbing Store</p><p>A/P Retre Karkhana, Shivnagar, Maharashtra</p><p>Phone: 9623009626</p></div><div class="bill-meta"><div><b>Invoice No:</b> ${data.invoiceNo}<br><b>Date:</b> ${date} &nbsp; <b>Time:</b> ${time}</div><div><b>Customer:</b> ${escapeHtml(data.customer.name)}<br><b>Mobile:</b> ${escapeHtml(data.customer.phone)}<br><b>Order:</b> ${type}</div></div>${data.customer.address?`<p><b>Delivery Address:</b> ${escapeHtml(data.customer.address)}</p>`:""}<table class="bill-table"><thead><tr><th>Sl No.</th><th>Description of Goods</th><th>Quantity</th><th>Rate</th><th>Per</th><th>Amount</th></tr></thead><tbody>${rows}</tbody></table><div class="bill-totals"><div><span>Subtotal</span><span>${money(data.subtotal)}</span></div>${data.discount>0?`<div><span>Coupon (${escapeHtml(data.couponCode)})</span><span>-${money(data.discount)}</span></div>`:""}<div class="grand"><span>Grand Total</span><span>${money(data.total)}</span></div></div><div class="bill-footer"><p><b>${type}</b> • ${type==="Self Pickup"?"Pickup is free":"Delivery charges may apply"}</p><p>Thank you for shopping with V K Traders &amp; Hardware!</p></div>`;
+  return `<div class="bill-head"><h1>V K Traders &amp; Hardware</h1><p>Good Quality Material • Hardware &amp; Plumbing Store</p><p>A/P Retre Karkhana, Shivnagar, Maharashtra</p><p>Phone: 9623009626</p></div><div class="bill-meta"><div><b>Invoice No:</b> ${data.invoiceNo}<br><b>Date:</b> ${date} &nbsp; <b>Time:</b> ${time}</div><div><b>Customer:</b> ${escapeHtml(data.customer.name)}<br><b>Mobile:</b> ${escapeHtml(data.customer.phone)}<br><b>Order:</b> ${type}</div></div>${data.customer.address?`<p><b>Delivery Address:</b> ${escapeHtml(data.customer.address)}</p>`:""}<table class="bill-table"><thead><tr><th>Sl No.</th><th>Description of Goods</th><th>Quantity</th><th>Rate</th><th>Per</th><th>Amount</th></tr></thead><tbody>${rows}</tbody></table><div class="bill-totals"><div><span>Subtotal</span><span>${money(data.subtotal)}</span></div>${data.discount>0?`<div><span>Coupon (${escapeHtml(data.couponCode)})</span><span>-${money(data.discount)}</span></div>`:""}<div class="grand"><span>Grand Total</span><span>${money(data.total)}</span></div></div><div class="bill-footer"><p><b>${type}</b> • ${type==="Self Pickup"?"Pickup is free":"Delivery charges may apply"}</p><p>Thank you for shopping with V K Traders &amp; Hardware!</p></div>`;
+}
+function generateBill(){
+  const data=buildInvoiceData();if(!data)return;
+  document.getElementById("billPreview").innerHTML=buildBillHTML(data);
   document.getElementById("billPanel").style.display="block";document.body.style.overflow="hidden";
+}
+async function buildBillPDFFile(data){
+  const wrap=document.createElement("div");
+  wrap.style.cssText="position:fixed;left:-9999px;top:0;width:780px;background:#fff;padding:24px;font-family:Poppins,Arial,sans-serif;color:#111;";
+  wrap.innerHTML=`<div class="bill-wrap">${buildBillHTML(data)}</div>`;
+  document.body.appendChild(wrap);
+  try{
+    const canvas=await html2canvas(wrap,{scale:2,backgroundColor:"#ffffff"});
+    const imgData=canvas.toDataURL("image/jpeg",0.92);
+    const {jsPDF}=window.jspdf;
+    const pdf=new jsPDF({unit:"px",format:[canvas.width,canvas.height]});
+    pdf.addImage(imgData,"JPEG",0,0,canvas.width,canvas.height);
+    const blob=pdf.output("blob");
+    return new File([blob],`Invoice-${data.invoiceNo}.pdf`,{type:"application/pdf"});
+  }finally{
+    wrap.remove();
+  }
 }
 function printBill(){window.print();}
 function closeBill(){document.getElementById("billPanel").style.display="none";document.body.style.overflow="";}
@@ -801,16 +925,36 @@ async function orderWhatsApp(){
     const ok=confirm("Order history could not be saved to Firebase. Send the WhatsApp order anyway?");
     if(!ok)return;
   }
+  if(data.discount>0&&appliedCoupon&&appliedCoupon.id){
+    try{await couponsRef.doc(appliedCoupon.id).delete();await loadCoupons();}catch(e){console.error("Could not delete used coupon:",e)}
+  }
+
+  let sharedPDF=false;
+  try{
+    if(window.html2canvas&&window.jspdf&&navigator.canShare){
+      const file=await buildBillPDFFile(data);
+      if(navigator.canShare({files:[file]})){
+        await navigator.share({files:[file],title:"VK Traders Order",text:message});
+        sharedPDF=true;
+      }
+    }
+  }catch(e){console.error("PDF share failed, falling back to text order:",e)}
+
   cart={};appliedCoupon=null;saveCart();render();closeBill();closeCart();
-  alert("✅ Order saved! Opening WhatsApp...");
-  window.location.href="https://wa.me/919623009626?text="+encodeURIComponent(message);
+  if(sharedPDF){
+    alert("✅ Order saved! Bill PDF sent.");
+  }else{
+    alert("✅ Order saved! Opening WhatsApp...");
+    window.location.href="https://wa.me/919623009626?text="+encodeURIComponent(message);
+  }
 }
 
-window.openCart=openCart;window.closeCart=closeCart;window.openOrders=openOrders;window.closeOrders=closeOrders;window.loadOrderHistory=loadOrderHistory;window.reorderFromHistory=reorderFromHistory;window.showOrderDetails=showOrderDetails;window.openAdmin=openAdmin;window.openGallery=openGallery;window.closeGallery=closeGallery;window.updateOrderStatus=updateOrderStatus;window.closeAdmin=closeAdmin;window.addProduct=addProduct;window.manage=manage;window.editProduct=editProduct;window.saveEdit=saveEdit;window.closeEdit=closeEdit;window.deleteProduct=deleteProduct;window.addById=addById;window.removeFromCart=removeFromCart;window.changeQty=changeQty;window.loadMore=loadMore;window.generateBill=generateBill;window.printBill=printBill;window.closeBill=closeBill;window.orderWhatsApp=orderWhatsApp;window.toggleWishlist=toggleWishlist;window.openWishlist=openWishlist;window.closeWishlist=closeWishlist;window.openRequest=openRequest;window.closeRequest=closeRequest;window.sendProductRequest=sendProductRequest;window.openImageGalleryById=openImageGalleryById;window.nextGallery=nextGallery;window.prevGallery=prevGallery;window.closeGallery=closeGallery;window.removeExistingPhoto=removeExistingPhoto;window.applyCoupon=applyCoupon;window.removeCoupon=removeCoupon;window.addCoupon=addCoupon;window.toggleCouponActive=toggleCouponActive;window.deleteCoupon=deleteCoupon;
+window.openCart=openCart;window.closeCart=closeCart;window.openOrders=openOrders;window.closeOrders=closeOrders;window.loadOrderHistory=loadOrderHistory;window.reorderFromHistory=reorderFromHistory;window.showOrderDetails=showOrderDetails;window.openAdmin=openAdmin;window.openGallery=openGallery;window.closeGallery=closeGallery;window.updateOrderStatus=updateOrderStatus;window.closeAdmin=closeAdmin;window.addProduct=addProduct;window.manage=manage;window.editProduct=editProduct;window.saveEdit=saveEdit;window.closeEdit=closeEdit;window.deleteProduct=deleteProduct;window.addById=addById;window.removeFromCart=removeFromCart;window.changeQty=changeQty;window.loadMore=loadMore;window.generateBill=generateBill;window.printBill=printBill;window.closeBill=closeBill;window.orderWhatsApp=orderWhatsApp;window.toggleWishlist=toggleWishlist;window.openWishlist=openWishlist;window.closeWishlist=closeWishlist;window.openRequest=openRequest;window.closeRequest=closeRequest;window.sendProductRequest=sendProductRequest;window.openImageGalleryById=openImageGalleryById;window.nextGallery=nextGallery;window.prevGallery=prevGallery;window.closeGallery=closeGallery;window.removeExistingPhoto=removeExistingPhoto;window.applyCoupon=applyCoupon;window.removeCoupon=removeCoupon;window.addCoupon=addCoupon;window.toggleCouponActive=toggleCouponActive;window.deleteCoupon=deleteCoupon;window.closeOfferBanner=closeOfferBanner;window.saveOfferBanner=saveOfferBanner;window.deleteOrder=deleteOrder;
 
 window.addEventListener("DOMContentLoaded",async()=>{
   try{await loadProducts()}catch(e){console.error(e);document.getElementById("productsGrid").innerHTML=`<div class="notice" style="grid-column:1/-1">❌ Could not load products from Firebase.<br><button onclick="location.reload()">Retry</button></div>`}
   try{await loadCoupons()}catch(e){console.error(e)}
+  try{await loadOfferBannerSettings()}catch(e){console.error(e)}
 });
 document.addEventListener("click",e=>{
   if(e.target?.id==="adminPanel")closeAdmin();if(e.target?.id==="cartPanel")closeCart();if(e.target?.id==="ordersPanel")closeOrders();if(e.target?.id==="editPanel")closeEdit();if(e.target?.id==="wishlistPanel")closeWishlist();if(e.target?.id==="requestPanel")closeRequest();if(e.target?.id==="billPanel")closeBill();if(e.target?.id==="galleryModal")closeGallery();
