@@ -1,511 +1,1210 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>V K Traders & Hardware - Shivnagar</title>
-  
-  <!-- Tailwind CSS & FontAwesome -->
-  <script src="https://cdn.tailwindcss.com"></script>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
-  
-  <!-- jsPDF & html2canvas -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>V K Traders & Hardware | Hardware, Plumbing & Sanitary Store</title>
+<meta name="description" content="V K Traders & Hardware in Retre Karkhana, Shivnagar, Maharashtra. Shop hardware, plumbing, sanitary and tools. Good quality material, home delivery available. Call 9623009626.">
+<meta name="robots" content="index, follow, max-image-preview:large">
+<meta name="author" content="V K Traders & Hardware">
+<meta name="theme-color" content="#0d47a1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="canonical" href="https://vk-traders-hardware.web.app/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="V K Traders & Hardware | Hardware & Plumbing Store">
+<meta property="og:description" content="Good quality hardware, plumbing, sanitary and tools. Home delivery available in Maharashtra.">
+<meta property="og:url" content="https://vk-traders-hardware.web.app/">
+<meta property="og:site_name" content="V K Traders & Hardware">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="V K Traders & Hardware">
+<meta name="twitter:description" content="Hardware, plumbing, sanitary and tools in Maharashtra. Home delivery available.">
 
-  <!-- Firebase SDKs (Compat Build) -->
-  <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-auth-compat.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore-compat.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-storage-compat.js"></script>
+<style>
+:root{--blue:#0d47a1;--blue2:#1565c0;--green:#12a84f;--orange:#f7931e;--red:#d32f2f;--ink:#172033;--muted:#667085;--bg:#f5f7fb;--card:#fff;--line:#e3e8f0}
+*{box-sizing:border-box}html{scroll-behavior:smooth}
+body{margin:0;font-family:Arial,sans-serif;background:var(--bg);color:var(--ink)}
+button,input,select,textarea{font:inherit}button{cursor:pointer}
+header{background:linear-gradient(135deg,#0d47a1,#1565c0);color:#fff;padding:13px 5%;display:flex;justify-content:space-between;align-items:center;gap:12px;position:sticky;top:0;z-index:100;box-shadow:0 3px 14px #0002}
+h1{font-size:22px;margin:0}#secretAdminLogo{cursor:pointer;user-select:none;-webkit-user-select:none;-webkit-touch-callout:none;touch-action:manipulation}.brand-sub{opacity:.9;font-size:13px;margin-top:4px}
+.cart{background:#fff;color:var(--blue);border:0;border-radius:25px;padding:11px 17px;font-weight:800;white-space:nowrap}.header-actions{display:flex;align-items:center;gap:8px}
+.orders-top-btn{background:#eaf2ff;color:#0d47a1;border:0;border-radius:25px;padding:11px 14px;font-weight:800;white-space:nowrap}
+.orders-subtitle{color:var(--muted);margin-top:-6px}
+.orders-search{display:flex;gap:8px;margin:14px 0}.orders-search input{flex:1!important;margin:0!important}.orders-search button{white-space:nowrap}
+.order-card{border:1px solid #e3e8f0;border-radius:14px;padding:14px;margin:12px 0;background:#fff;box-shadow:0 3px 12px #0000000d}
+.order-card-head{display:flex;justify-content:space-between;gap:10px;align-items:flex-start}
+.order-no{font-weight:900;color:var(--blue);font-size:16px}.order-date{color:var(--muted);font-size:12px;margin-top:3px}
+.order-status{padding:6px 9px;border-radius:999px;background:#eef5ff;color:var(--blue);font-size:12px;font-weight:800;white-space:nowrap}
+.order-status.delivered{background:#e9f9ef;color:#087f3f}.order-status.cancelled{background:#fff0f0;color:#c62828}
+.order-items{margin:10px 0;padding:10px;background:#f7f9fc;border-radius:10px}
+.order-item-line{display:flex;justify-content:space-between;gap:10px;padding:5px 0;font-size:14px}
+.order-total{display:flex;justify-content:space-between;border-top:1px solid #e3e8f0;padding-top:10px;font-size:17px;font-weight:900}
+.order-actions{display:flex;gap:8px;margin-top:12px}.order-actions button{flex:1}
+.admin-order-card{border:1px solid #e2e7ef;border-radius:14px;padding:13px;margin:10px 0;background:#fff}
+.admin-order-top{display:flex;justify-content:space-between;gap:10px;align-items:flex-start}
+.admin-order-name{font-weight:900}.admin-order-meta{font-size:12px;color:var(--muted);margin-top:3px}
+.admin-order-items{background:#f7f9fc;border-radius:9px;padding:8px;margin:9px 0;font-size:13px}
+.admin-order-total{font-weight:900;margin:7px 0}
+.admin-order-status{display:flex;gap:7px;align-items:center}
+.admin-order-status select{padding:9px;border:1px solid #ccd3df;border-radius:8px;font:inherit;flex:1}
+.admin-order-status button{padding:9px 12px}
 
-  <style>
-    .no-scrollbar::-webkit-scrollbar { display: none; }
-    .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
-  </style>
+.status-line{font-size:12px;color:var(--muted);margin-top:8px}
+
+.hero{padding:34px 5%;background:linear-gradient(180deg,#fff,#f8fbff)}
+.hero-inner{max-width:1180px;margin:auto;display:grid;grid-template-columns:1.5fr .8fr;gap:28px;align-items:center}
+.hero h2{margin:0 0 10px;font-size:34px;line-height:1.12}.hero p{margin:0;color:var(--muted);font-size:18px;line-height:1.55}
+.hero-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}.hero-btn{display:inline-block;text-decoration:none;border-radius:12px;padding:12px 16px;font-weight:800}.hero-primary{background:var(--blue);color:#fff}.hero-secondary{background:#eaf2ff;color:var(--blue)}
+.hero-box{background:#fff;border:1px solid var(--line);border-radius:20px;padding:22px;box-shadow:0 8px 30px #0d47a112}.hero-box strong{font-size:29px;color:var(--blue)}.hero-box p{font-size:14px;margin-top:4px}
+.store-chips{display:flex;gap:8px;flex-wrap:wrap;margin-top:18px}.store-chip{background:#eef5ff;color:var(--blue);padding:8px 11px;border-radius:999px;font-size:13px;font-weight:700}
+.section{max-width:1180px;margin:0 auto;padding:28px 5%}.section-head{display:flex;justify-content:space-between;align-items:end;gap:12px;margin-bottom:15px}.section-head h2{margin:0;font-size:26px}.section-head p{margin:5px 0 0;color:var(--muted)}
+.mini-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:13px}
+.controls{padding:16px 5%;display:flex;gap:10px;align-items:center;flex-wrap:wrap;background:#f5f7fb;border-top:1px solid #eef1f5;border-bottom:1px solid #eef1f5}
+.controls input,.controls select{padding:13px;border:1px solid #ccd3df;border-radius:12px;min-width:0;font-size:16px;background:#fff}.controls input{flex:2}.controls select{flex:1}
+.search-wrap{position:relative;flex:2}.search-wrap input{width:100%;padding-left:42px}.search-icon{position:absolute;left:14px;top:12px;font-size:20px}
+.grid{padding:10px 5% 30px;max-width:1180px;margin:auto;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;align-items:start}
+.card{background:var(--card);border-radius:17px;padding:12px;box-shadow:0 3px 15px #00000010;width:100%;min-width:0;border:1px solid #edf0f5;position:relative;transition:.18s transform,.18s box-shadow}
+.card:hover{transform:translateY(-2px);box-shadow:0 8px 24px #0002}.photo{height:155px;background:#eef3f9;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:58px;margin-bottom:10px;overflow:hidden;position:relative}
+.photo img{width:100%;height:100%;object-fit:contain}.photo .photo-count{position:absolute;right:7px;bottom:7px;background:#000b;color:#fff;border-radius:999px;padding:4px 7px;font-size:11px}
+.badges{position:absolute;left:16px;top:16px;display:flex;gap:5px;flex-wrap:wrap;z-index:2}.badge{padding:5px 7px;border-radius:999px;color:#fff;font-size:10px;font-weight:800}.badge-featured{background:var(--orange)}.badge-popular{background:#7b1fa2}.badge-offer{background:var(--red)}.badge-stock{background:#555}
+.card h3{font-size:16px;margin:7px 0 4px;line-height:1.3}.card .category{color:var(--muted);font-size:12px}
+.price{color:var(--blue);font-size:18px;font-weight:800;margin:6px 0}.old-price{text-decoration:line-through;color:#8b95a7;font-size:13px;margin-left:5px;font-weight:400}.card-actions{display:flex;gap:7px}.card-actions button{flex:1}
+.card button,.admin button,.box button{background:var(--blue);color:#fff;border:0;border-radius:9px;padding:9px 11px;font-weight:800}.heart-btn{flex:0 0 42px!important;background:#f0f4fa!important;color:#d32f2f!important;font-size:18px}
+.out-btn{background:#8b95a7!important;cursor:not-allowed!important}.stock-off{opacity:.72}
+.load{text-align:center;padding:15px 0 55px}.load button{background:var(--blue);color:#fff;border:0;border-radius:10px;padding:12px 20px;font-weight:800}
+.panel{display:none;position:fixed;inset:0;background:#0009;z-index:200;overflow:auto;padding:25px 12px}.box{background:#fff;max-width:760px;margin:20px auto;padding:20px;border-radius:16px;box-shadow:0 15px 60px #0004}.close{float:right;background:#555!important}.box input,.box select,.box textarea{display:block;width:100%;padding:12px;margin:8px 0;border:1px solid #ccd3df;border-radius:9px}.box textarea{min-height:80px;resize:vertical}
+.notice{background:#fff7d6;padding:12px;border-radius:10px;margin:12px 0}.success{background:#e9f9ef;padding:12px;border-radius:10px;margin:12px 0}
+.admin{position:fixed;right:12px;bottom:86px;z-index:160}.admin button{box-shadow:0 5px 18px #0003}
+.admin-product-row{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:11px 0;border-bottom:1px solid #eee}.admin-product-info{min-width:0;overflow-wrap:anywhere}.admin-product-info small{display:block;color:var(--muted);margin-top:3px}.admin-product-actions{display:flex;gap:7px;flex-wrap:wrap;justify-content:flex-end}.edit-btn{background:var(--blue)!important}.danger-btn{background:var(--red)!important}.secondary-btn{background:#667085!important}
+.edit-photo-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}.edit-photo-box{border:1px solid var(--line);border-radius:10px;padding:8px}.edit-photo-box img{width:100%;height:130px;object-fit:contain;background:#f4f6f8;border-radius:8px}
+.check-row{display:flex;gap:15px;flex-wrap:wrap;margin:10px 0}.check-row label{display:flex;align-items:center;gap:6px;font-weight:700}.check-row input{width:auto;margin:0}
+.cart-item-row{display:flex;align-items:center;gap:10px;padding:12px 0;border-bottom:1px solid #e8ecf2}.cart-item-info{display:flex;flex-direction:column;gap:4px;min-width:0;flex:1}.cart-item-info b{overflow-wrap:anywhere}.cart-item-info span{color:var(--muted)}.qty{display:flex;align-items:center;gap:7px}.qty button{width:30px;height:30px;padding:0;border-radius:8px}.cart-remove-btn{background:var(--red)!important;white-space:nowrap;padding:8px 10px!important}.invoice-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}.invoice-actions button{flex:1;min-width:180px}.whatsapp-order-btn{background:var(--green)!important}.bill-btn{background:#1459a5!important}
+.customer-form{background:#f5f7fb;border-radius:12px;padding:12px;margin:14px 0}.customer-form label{display:block;font-weight:bold;margin-top:9px}.customer-form input,.customer-form textarea,.customer-form select{display:block;width:100%;padding:11px;margin-top:5px;border:1px solid #ccd3df;border-radius:8px;font:inherit}.customer-form textarea{min-height:75px;resize:vertical}
+.invoice-summary{background:#fff;border:1px solid #e3e7ef;border-radius:10px;padding:12px;margin-top:12px}
+.wish-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.wish-item{border:1px solid var(--line);border-radius:10px;padding:10px;display:flex;justify-content:space-between;gap:8px}
+.gallery{display:none;position:fixed;inset:0;background:#000e;z-index:400;align-items:center;justify-content:center;padding:18px}.gallery-inner{max-width:900px;width:100%;text-align:center;position:relative}.gallery img{max-width:100%;max-height:75vh;object-fit:contain;border-radius:12px}.gallery-close{position:absolute;right:0;top:-42px;background:#fff;color:#111;border:0;border-radius:50%;width:36px;height:36px;font-size:20px}.gallery-nav{display:flex;justify-content:center;gap:10px;margin-top:12px}.gallery-nav button{background:#fff;color:#111;border:0;border-radius:9px;padding:10px 15px;font-weight:800}
+.contact-section{padding:35px 5% 0;background:#fff}.contact-card{max-width:1180px;margin:auto;background:linear-gradient(135deg,#f7931e,#ef6c00);border-radius:22px;padding:28px 7%;min-height:180px}.contact-card h2{color:#fff;font-size:28px;font-weight:600;margin:0 0 20px}.contact-whatsapp{display:inline-block;background:#fff;color:var(--ink);text-decoration:none;font-weight:bold;font-size:18px;padding:15px 25px;border-radius:14px}
+.site-footer{background:#06162b;color:#d9e1ee;margin-top:55px;padding:60px 5% 105px}.footer-inner{max-width:1180px;margin:auto;display:grid;grid-template-columns:1.4fr 1fr 1.4fr;gap:45px}.site-footer h2{color:#fff;font-size:27px;margin:0 0 18px}.site-footer h3{color:#fff;font-size:20px;margin:0 0 18px}.site-footer p{font-size:16px;line-height:1.65;margin:0}.footer-links a,.footer-contact a{display:block;color:#d9e1ee;text-decoration:none;font-size:16px;margin:0 0 11px}.copyright{grid-column:1/-1;border-top:1px solid #ffffff18;padding-top:25px;text-align:center;font-size:14px}
+.bottom-actions{position:fixed;left:20px;right:20px;bottom:14px;display:flex;gap:14px;z-index:150}.bottom-actions a{flex:1;text-align:center;text-decoration:none;color:#fff;font-weight:bold;font-size:18px;padding:16px 10px;border-radius:40px;box-shadow:0 4px 14px #0004}.call-btn{background:#1459a5}.whatsapp-btn{background:#12a84f}
+.bill-panel{display:none;position:fixed;inset:0;background:#0009;z-index:350;overflow:auto;padding:18px 10px}.bill-wrap{background:#fff;max-width:900px;margin:10px auto;padding:22px;color:#111;border-radius:8px}.bill-head{text-align:center;border-bottom:2px solid #222;padding-bottom:12px;margin-bottom:12px}.bill-head h1{font-size:26px;color:#111;margin:0 0 4px}.bill-head p{margin:3px 0;font-size:14px}.bill-meta{display:flex;justify-content:space-between;gap:18px;border-bottom:1px solid #999;padding:10px 0;font-size:14px}.bill-table{width:100%;border-collapse:collapse;margin-top:16px;font-size:13px}.bill-table th,.bill-table td{border:1px solid #777;padding:8px 7px}.bill-table th{font-weight:700;text-align:center;background:#f3f3f3}.bill-table td:nth-child(1),.bill-table td:nth-child(3),.bill-table td:nth-child(5){text-align:center}.bill-table td:nth-child(4),.bill-table td:nth-child(6){text-align:right}.bill-totals{margin-left:auto;width:320px;margin-top:10px;font-size:14px}.bill-totals div{display:flex;justify-content:space-between;padding:5px 0}.bill-totals .grand{border-top:2px solid #222;font-size:18px;font-weight:700;padding-top:8px}.bill-footer{margin-top:30px;text-align:center;font-size:13px}.bill-buttons{display:flex;gap:10px;justify-content:center;margin-top:18px}.bill-buttons button{padding:11px 18px;border:0;border-radius:8px;color:#fff;font-weight:700}.bill-print{background:#087f3f}.bill-close{background:#555}
+@media(max-width:900px){.grid{grid-template-columns:repeat(3,minmax(0,1fr))}.mini-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.hero-inner{grid-template-columns:1fr}}
+@media(max-width:600px){
+.header-actions{gap:5px}.orders-top-btn{padding:9px 10px;font-size:11px}.cart{padding:9px 11px;font-size:12px}
+.orders-search{flex-direction:column}.orders-search button{width:100%}
+.order-card-head{flex-direction:column}.order-status{align-self:flex-start}.order-actions{flex-direction:column}
+
+header{padding:12px 4%}h1{font-size:18px}.brand-sub{font-size:11px}.hero{padding:24px 5%}.hero h2{font-size:25px}.hero p{font-size:16px}.hero-box{display:none}
+.section{padding:22px 4%}.section-head h2{font-size:22px}.mini-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}
+.controls{padding:12px 4%;flex-direction:row}.controls input,.controls select{width:100%;flex:1 1 100%}.grid{grid-template-columns:repeat(2,minmax(0,1fr));padding:8px 12px 35px;gap:10px}.card{padding:9px}.photo{height:110px;font-size:45px}.card h3{font-size:14px}.price{font-size:16px}.card button{padding:8px;font-size:12px}.badges{left:12px;top:12px}
+.contact-section{padding:25px 0 0}.contact-card{border-radius:0;padding:28px 9%;min-height:200px}.contact-card h2{font-size:24px}.site-footer{margin-top:45px;padding:60px 7% 105px}.footer-inner{display:block}.footer-about,.footer-links,.footer-contact{margin-bottom:42px}
+.bottom-actions{left:20px;right:20px;bottom:14px}.bottom-actions a{font-size:17px;padding:16px 8px}.admin{bottom:82px;right:10px}.admin button{font-size:11px;padding:8px 9px}
+.edit-photo-grid{grid-template-columns:1fr}.wish-grid{grid-template-columns:1fr}.cart-item-row{align-items:flex-start;flex-wrap:wrap}.qty{order:3;width:100%}
+.bill-wrap{padding:12px}.bill-head h1{font-size:21px}.bill-meta{font-size:12px}.bill-table{font-size:11px}.bill-table th,.bill-table td{padding:6px 4px}.bill-totals{width:100%}
+}
+@media print{body *{visibility:hidden!important}#billPanel,#billPanel *{visibility:visible!important}#billPanel{display:block!important;position:absolute!important;inset:0!important;background:#fff!important;padding:0!important;overflow:visible!important}.bill-wrap{max-width:none!important;margin:0!important;border-radius:0!important;padding:10mm!important}.bill-buttons{display:none!important}@page{size:A4;margin:8mm}}
+
+/* ===== V6 PREMIUM LOOK ===== */
+:root{--premium-blue:#0d47a1;--premium-dark:#071a33;--premium-soft:#f5f8fc;--premium-gold:#f4a62a}
+body{
+  background-color:#eef2f9;
+  background-image:
+    radial-gradient(circle at 12% 8%, #dce8fb 0%, transparent 42%),
+    radial-gradient(circle at 92% 4%, #e3edfb 0%, transparent 38%),
+    radial-gradient(circle at 100% 60%, #f4e9d8 0%, transparent 40%),
+    linear-gradient(180deg,#f8faff 0%,#eef3fa 45%,#e9eff8 100%);
+  background-attachment:fixed;
+  position:relative;
+}
+body:before{
+  content:"";
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+  z-index:0;
+  opacity:.5;
+  background-image:radial-gradient(#0d47a11a 1px, transparent 1px);
+  background-size:26px 26px;
+  -webkit-mask-image:linear-gradient(180deg,#000 0%,#000 55%,transparent 100%);
+  mask-image:linear-gradient(180deg,#000 0%,#000 55%,transparent 100%);
+}
+header,.hero,.section,.controls,.grid,.contact-section,.site-footer,.bottom-actions{position:relative;z-index:1}
+header{z-index:100}
+header{box-shadow:0 4px 18px #071a3318;backdrop-filter:blur(10px)}
+.hero{position:relative;overflow:hidden;background:linear-gradient(135deg,#071a33 0%,#0d47a1 58%,#1768c4 100%);color:#fff;border-radius:0 0 28px 28px;padding:30px 5% 34px;box-shadow:0 8px 28px #071a3320}
+.hero:after{content:"";position:absolute;width:190px;height:190px;border-radius:50%;right:-55px;top:-70px;background:#ffffff12}
+.hero h2{position:relative;z-index:1;font-size:clamp(25px,4vw,38px);line-height:1.12;max-width:700px}
+.hero p{position:relative;z-index:1;color:#e8f0ff;max-width:680px;line-height:1.55}
+.map-link{position:relative;z-index:1;color:#fff;text-decoration:none;margin-top:12px;display:inline-flex;padding:10px 14px;border:1px solid #ffffff40;border-radius:12px;background:#ffffff12}
+.premium-strip{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px;position:relative;z-index:1}
+.premium-pill{background:#ffffff16;border:1px solid #ffffff2b;color:#fff;border-radius:999px;padding:8px 12px;font-size:13px;font-weight:700}
+.controls{background:transparent;padding-top:20px}
+.controls input,.controls select{background:#fff;box-shadow:0 3px 14px #071a3310;border-color:#dce3ed}
+.grid{gap:16px}
+.card{position:relative;border:1px solid #e5eaf1;background:#fffffff2;backdrop-filter:blur(6px);box-shadow:0 5px 20px #071a3310;transition:transform .18s ease,box-shadow .18s ease;border-radius:17px}
+.card:hover{transform:translateY(-3px);box-shadow:0 10px 28px #071a3320}
+.photo{background:linear-gradient(135deg,#f7f9fc,#eaf0f7);position:relative}
+.photo img{cursor:zoom-in;transition:transform .3s ease}
+.card:hover .photo img{transform:scale(1.06)}
+.product-badge{position:absolute;left:9px;top:9px;background:#fff;color:#0d47a1;padding:5px 8px;border-radius:999px;font-size:10px;font-weight:900;box-shadow:0 3px 10px #0002;z-index:2}
+.featured-section{padding:28px 5% 4px}
+.section-head{display:flex;justify-content:space-between;align-items:end;gap:10px;margin-bottom:12px}
+.section-head h2{margin:0;font-size:24px;color:#071a33}
+.section-head p{margin:3px 0 0;color:#687589;font-size:13px}
+.featured-row{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+.featured-card{background:#fff;border:1px solid #e6ebf2;border-radius:16px;padding:10px;box-shadow:0 4px 16px #071a330d}
+.featured-card .mini-photo{height:105px;border-radius:11px;background:#eef3f9;overflow:hidden;display:flex;align-items:center;justify-content:center;font-size:42px}
+.featured-card .mini-photo img{width:100%;height:100%;object-fit:contain}
+.featured-card h3{font-size:14px;margin:8px 0 3px}
+.featured-card .mini-price{font-weight:900;color:#0d47a1}
+.gallery-panel{display:none;position:fixed;inset:0;background:#000d;z-index:300;align-items:center;justify-content:center;padding:18px}
+.gallery-box{width:min(900px,100%);background:#fff;border-radius:18px;padding:12px;position:relative}
+.gallery-main{height:min(68vh,560px);display:flex;align-items:center;justify-content:center;background:#f2f5f9;border-radius:12px;overflow:hidden}
+.gallery-main img{max-width:100%;max-height:100%;object-fit:contain}
+.gallery-close{position:absolute;right:10px;top:10px;border:0;background:#071a33;color:#fff;border-radius:50%;width:38px;height:38px;font-size:20px}
+.gallery-thumbs{display:flex;gap:8px;margin-top:10px;overflow:auto}
+.gallery-thumbs img{width:72px;height:58px;object-fit:cover;border-radius:8px;border:2px solid transparent;cursor:pointer;background:#eef3f9}
+.gallery-thumbs img.active{border-color:#0d47a1}
+@media(max-width:800px){.featured-row{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:600px){
+  .hero{padding:24px 5% 28px;border-radius:0 0 22px 22px}
+  .featured-section{padding:22px 12px 4px}
+  .featured-row{gap:9px}
+  .featured-card{padding:8px}
+  .featured-card .mini-photo{height:92px}
+}
+
+.coupon-box{background:#fff7e6;border:1px solid #f4d9a0;border-radius:12px;padding:12px;margin:14px 0}
+.coupon-row{display:flex;gap:8px;margin-top:6px;flex-wrap:wrap}
+.coupon-row input{flex:1;min-width:140px;padding:11px;margin:0;border:1px solid #ccd3df;border-radius:8px}
+.coupon-row button{padding:10px 14px}
+.coupon-msg{margin-top:8px;font-size:13px;font-weight:700;min-height:16px}
+.coupon-msg.coupon-success{color:#087f3f}
+.coupon-msg.coupon-error{color:#c62828}
+.totals-row{display:flex;justify-content:space-between;padding:3px 0;font-size:14px}
+.coupon-discount-row{color:#087f3f;font-weight:700}
+
+/* ===== V7 POLISH PASS ===== */
+body{font-family:'Poppins',Arial,sans-serif}
+h1,h2,h3,.section-head h2,.hero h2,.card h3,.featured-card h3{font-family:'Poppins',Arial,sans-serif;letter-spacing:-.2px}
+button{transition:transform .12s ease,box-shadow .12s ease,filter .12s ease}
+button:active{transform:scale(.96)}
+.card button,.admin button,.box button{background:linear-gradient(135deg,var(--blue),var(--blue2));box-shadow:0 4px 14px #0d47a12e}
+.card button:hover{filter:brightness(1.08)}
+.out-btn{background:#8b95a7!important}
+.heart-btn:active{transform:scale(.9)}
+.whatsapp-order-btn{background:linear-gradient(135deg,#12a84f,#0d8f42)!important}
+.bill-btn{background:linear-gradient(135deg,#1459a5,#0d47a1)!important}
+.cart{box-shadow:0 3px 12px #0004}
+.orders-top-btn{box-shadow:0 3px 10px #0002}
+@keyframes fadeInUp{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+.card{animation:fadeInUp .35s ease both}
+.badge{box-shadow:0 3px 8px #0003;letter-spacing:.2px}
+.price{letter-spacing:-.2px}
+.bottom-actions a{box-shadow:0 6px 18px #0005}
+.bottom-actions a:active{transform:scale(.97)}
+.hero-btn{transition:filter .12s ease,transform .12s ease}
+.hero-btn:active{transform:scale(.97)}
+.featured-card{transition:transform .18s ease,box-shadow .18s ease}
+.featured-card:hover{transform:translateY(-2px);box-shadow:0 8px 22px #071a3318}
+::selection{background:#0d47a133}
+
+.offer-banner{position:sticky;top:0;z-index:99;display:flex;align-items:center;gap:0;background:linear-gradient(90deg,#f7931e,#e64a19);color:#fff;padding:11px 0;box-shadow:0 3px 12px #0004;animation:offerSlideDown .4s ease;overflow:hidden}
+.offer-banner-icon{flex-shrink:0;margin-left:16px;font-size:16px}
+.offer-banner-marquee{flex:1;overflow:hidden;white-space:nowrap;margin-left:8px}
+.offer-banner-track{display:inline-block;padding-left:100%;font-weight:800;font-size:14px;animation:offerMarquee 16s linear infinite}
+.offer-banner-close{background:#ffffff2e!important;border:0;color:#fff;width:26px;height:26px;border-radius:50%;flex-shrink:0;font-size:13px;padding:0;line-height:1;margin:0 12px 0 10px}
+@keyframes offerSlideDown{from{transform:translateY(-100%);opacity:0}to{transform:translateY(0);opacity:1}}
+@keyframes offerMarquee{0%{transform:translateX(0)}100%{transform:translateX(-100%)}}
+@media(max-width:600px){.offer-banner{padding:9px 0}.offer-banner-track{font-size:12px}}
+
+/* ===== V8 PREMIUM ALL-AROUND PASS ===== */
+::-webkit-scrollbar{width:10px;height:10px}
+::-webkit-scrollbar-track{background:#eef2f9}
+::-webkit-scrollbar-thumb{background:linear-gradient(180deg,#1565c0,#0d47a1);border-radius:10px}
+
+header{background:linear-gradient(120deg,#071a33 0%,#0d47a1 55%,#1768c4 100%);position:sticky;border-bottom:1px solid #f4a62a55}
+header:after{content:"";position:absolute;left:0;right:0;bottom:0;height:2px;background:linear-gradient(90deg,transparent,#f4a62a,transparent)}
+h1#secretAdminLogo{background:linear-gradient(90deg,#fff,#dfe9fb);-webkit-background-clip:text;background-clip:text;color:transparent;font-weight:800}
+.brand-sub{letter-spacing:.3px}
+.cart{background:linear-gradient(135deg,#fff,#f3f7ff);box-shadow:0 4px 14px #0005,inset 0 0 0 1px #ffffffaa}
+.orders-top-btn{background:linear-gradient(135deg,#eaf2ff,#dceaff)}
+
+.section-head h2{position:relative;padding-bottom:8px}
+.section-head h2:after{content:"";position:absolute;left:0;bottom:0;width:46px;height:3px;border-radius:3px;background:linear-gradient(90deg,#f4a62a,#f7931e)}
+
+.card{border:1px solid #e5eaf1}
+.card:hover{border-color:#f4a62a70;box-shadow:0 14px 32px #071a3324,0 0 0 1px #f4a62a30}
+.card h3{color:#071a33}
+.price{background:linear-gradient(90deg,#0d47a1,#1565c0);-webkit-background-clip:text;background-clip:text;color:transparent;font-weight:900}
+.badge-featured{background:linear-gradient(135deg,#f7931e,#e6790e)}
+.badge-popular{background:linear-gradient(135deg,#8e24aa,#6a1b9a)}
+.badge-offer{background:linear-gradient(135deg,#e53935,#c62828)}
+.product-badge{border:1px solid #eef1f6}
+
+.hero-box{background:linear-gradient(180deg,#fff,#f8fbff);border:1px solid #e5eaf1;box-shadow:0 10px 34px #071a3316}
+.hero-box strong{background:linear-gradient(90deg,#0d47a1,#1768c4);-webkit-background-clip:text;background-clip:text;color:transparent}
+.store-chip{background:#ffffff16;border:1px solid #ffffff2b;color:#fff}
+
+.contact-card{background:linear-gradient(135deg,#f7931e 0%,#ef6c00 55%,#d35400 100%);box-shadow:0 14px 34px #ef6c0033}
+.contact-whatsapp{box-shadow:0 6px 16px #0002}
+.contact-whatsapp:hover{filter:brightness(1.03)}
+
+.site-footer{background:linear-gradient(180deg,#06162b 0%,#04101f 100%)}
+.site-footer h2,.site-footer h3{position:relative}
+.footer-links a,.footer-contact a{transition:.15s color,.15s transform;display:inline-block}
+.footer-links a:hover,.footer-contact a:hover{color:#f4a62a;transform:translateX(3px)}
+
+.call-btn{background:linear-gradient(135deg,#1768c4,#0d47a1)}
+.whatsapp-btn{background:linear-gradient(135deg,#16c15c,#0d8f42)}
+.bottom-actions a{box-shadow:0 8px 22px #0006,inset 0 0 0 1px #ffffff22}
+
+.featured-card{border:1px solid #e6ebf2}
+.featured-card:hover{border-color:#f4a62a60}
+.featured-card .mini-price{background:linear-gradient(90deg,#0d47a1,#1565c0);-webkit-background-clip:text;background-clip:text;color:transparent}
+
+/* ===== V9 PANELS & MODALS PREMIUM PASS ===== */
+.panel,.bill-panel,.gallery-panel,.gallery{backdrop-filter:blur(3px)}
+.box{background:linear-gradient(180deg,#fff,#fbfcff);border:1px solid #e9edf4;box-shadow:0 20px 60px #071a3330,0 0 0 1px #ffffff}
+.box h2,.box h3{color:#071a33}
+.close,.gallery-close{background:linear-gradient(135deg,#3d4a5f,#222c3b)!important}
+.box input:focus,.box select:focus,.box textarea:focus,.customer-form input:focus,.customer-form select:focus,.customer-form textarea:focus,.controls input:focus,.controls select:focus,.coupon-row input:focus{outline:none;border-color:#1565c0;box-shadow:0 0 0 3px #0d47a11f}
+
+.cart-item-row{border-bottom:1px solid #eef1f6}
+.qty button{background:linear-gradient(135deg,var(--blue),var(--blue2));color:#fff;border:0}
+.cart-remove-btn{background:linear-gradient(135deg,#e53935,#c62828)!important}
+.whatsapp-order-btn{box-shadow:0 4px 14px #12a84f33}
+.bill-btn{box-shadow:0 4px 14px #1459a533}
+
+.customer-form,.admin-order-items,.order-items,.admin-product-row,.invoice-summary{background:#f7f9fd;border:1px solid #eef1f6}
+.invoice-summary,.order-card,.admin-order-card{box-shadow:0 4px 16px #071a330a}
+
+.coupon-box{background:linear-gradient(135deg,#fff9ec,#fff2d6);border:1px solid #f0d9a3;box-shadow:0 4px 14px #f4a62a1f}
+.coupon-row button{background:linear-gradient(135deg,var(--blue),var(--blue2));color:#fff;border:0;border-radius:8px;font-weight:800}
+.coupon-discount-row{font-weight:800}
+
+.order-status{background:linear-gradient(135deg,#eaf2ff,#dceaff)}
+.order-status.delivered{background:linear-gradient(135deg,#e9f9ef,#d7f4e2)}
+.order-status.cancelled{background:linear-gradient(135deg,#fff0f0,#ffe3e3)}
+.order-no{background:linear-gradient(90deg,#0d47a1,#1565c0);-webkit-background-clip:text;background-clip:text;color:transparent}
+
+.admin{filter:drop-shadow(0 6px 14px #0d47a133)}
+.admin button{background:linear-gradient(135deg,var(--blue),var(--blue2))}
+
+.bill-wrap{box-shadow:0 20px 60px #0006}
+.bill-head{border-bottom:2px solid #0d47a1}
+.bill-head h1{background:linear-gradient(90deg,#0d47a1,#1565c0);-webkit-background-clip:text;background-clip:text;color:transparent}
+.bill-table th{background:linear-gradient(180deg,#f7f9fd,#eef2f8)}
+.bill-totals .grand{border-top:2px solid #0d47a1;color:#0d47a1}
+.bill-print{background:linear-gradient(135deg,#12a84f,#087f3f)}
+.bill-close{background:linear-gradient(135deg,#6b7686,#454f5e)}
+
+.heart-btn{transition:.15s transform,.15s background}
+.wish-item{background:#fff;box-shadow:0 3px 12px #071a330a;transition:.15s transform,.15s box-shadow}
+.wish-item:hover{transform:translateY(-2px);box-shadow:0 8px 20px #071a3318}
+
+.gallery-main,.gallery img{box-shadow:0 10px 30px #0004}
+
+#toastContainer{position:fixed;left:50%;bottom:96px;transform:translateX(-50%);z-index:999;display:flex;flex-direction:column;gap:9px;align-items:center;width:min(92%,420px);pointer-events:none}
+.toast{background:linear-gradient(135deg,#1a2333,#101724);color:#fff;padding:13px 20px;border-radius:12px;font-size:14px;font-weight:700;box-shadow:0 10px 28px #0006,inset 0 0 0 1px #ffffff14;opacity:0;transform:translateY(14px) scale(.97);transition:.28s opacity ease,.28s transform ease;max-width:100%;text-align:center;letter-spacing:.1px}
+.toast.show{opacity:1;transform:translateY(0) scale(1)}
+.toast-success{background:linear-gradient(135deg,#12a84f,#0d8f42)}
+.toast-error{background:linear-gradient(135deg,#e53935,#c62828)}
+.toast-info{background:linear-gradient(135deg,#0d47a1,#1565c0)}
+@media(max-width:600px){#toastContainer{bottom:84px;width:94%}.toast{font-size:13px;padding:12px 16px}}
+
+.empty-state{text-align:center;padding:46px 20px;color:#687589}
+.empty-state .empty-icon{font-size:44px;margin-bottom:10px;filter:grayscale(.15);opacity:.85}
+.empty-state h3{margin:0 0 6px;color:#071a33;font-size:18px}
+.empty-state p{margin:0;font-size:14px;color:#8b95a7}
+
+#backToTop{position:fixed;right:16px;bottom:150px;z-index:140;width:46px;height:46px;border-radius:50%;background:linear-gradient(135deg,var(--blue),var(--blue2));color:#fff;border:0;font-size:20px;font-weight:800;box-shadow:0 8px 22px #0d47a144;opacity:0;pointer-events:none;transform:translateY(10px);transition:.25s opacity ease,.25s transform ease}
+#backToTop.show{opacity:1;pointer-events:auto;transform:translateY(0)}
+#backToTop:active{transform:scale(.92)}
+@media(max-width:600px){#backToTop{right:14px;bottom:148px;width:42px;height:42px;font-size:18px}}
+
+</style>
+
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"HardwareStore","name":"V K Traders & Hardware","description":"Hardware, plumbing, sanitary products and tools. Good quality material and home delivery available.","telephone":"+91-9623009626","address":{"@type":"PostalAddress","streetAddress":"A/P Retre Karkhana, Shivnagar","addressRegion":"Maharashtra","addressCountry":"IN"},"openingHours":"Mo-Fr 09:00-20:30, Su 09:00-20:30","url":"https://vk-traders-hardware.web.app/","hasMap":"https://maps.app.goo.gl/cnreYKyo2iWvuaAa8"}</script>
 </head>
-<body class="bg-gray-50 text-gray-800 flex flex-col min-h-screen">
 
-  <!-- TOP ANNOUNCEMENT BANNER -->
-  <div id="bannerAlert" class="bg-amber-600 text-white text-xs font-semibold py-1.5 px-4 text-center hidden">
-    <span id="bannerText">Special Discount on Hardware & Plumbing Items!</span>
+<body>
+<header>
+  <div>
+    <h1 id="secretAdminLogo" aria-label="V K Traders and Hardware">V K Traders &amp; Hardware</h1>
+    <div class="brand-sub">Quality Hardware • Plumbing • Sanitary • Tools</div>
   </div>
+  <div class="header-actions">
+    <button class="orders-top-btn" onclick="openOrders()">📦 My Orders</button>
+    <button class="cart" onclick="openCart()">🛒 Cart (<span id="count">0</span>)</button>
+  </div>
+</header>
 
-  <!-- HEADER -->
-  <header class="sticky top-0 z-40 bg-slate-900 text-white shadow-md">
-    <div class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
-      
-      <!-- Logo with 5-Tap Gesture Trigger -->
-      <div id="logoTrigger" class="flex items-center space-x-2 cursor-pointer select-none">
-        <div class="bg-amber-500 text-slate-900 p-2 rounded-lg font-black text-xl">VK</div>
+<div id="offerBanner" class="offer-banner" style="display:none">
+  <span class="offer-banner-icon">📢</span>
+  <div class="offer-banner-marquee"><span id="offerBannerMsg" class="offer-banner-track"></span></div>
+  <button class="offer-banner-close" onclick="closeOfferBanner()" aria-label="Close">✕</button>
+</div>
+
+<section class="hero" id="home">
+  <div class="hero-inner">
+    <div>
+      <div class="store-chips">
+        <span class="store-chip">🚚 Home Delivery</span><span class="store-chip">🏪 Self Pickup</span><span class="store-chip">⭐ Good Quality Material</span>
+      </div>
+      <h2>Hardware &amp; Plumbing Products You Can Trust</h2>
+      <p>Shop hardware, plumbing, sanitary products, construction material and tools from V K Traders &amp; Hardware.</p>
+      <div class="hero-actions">
+        <a class="hero-btn hero-primary" href="#products">🛍️ Browse Products</a>
+        <a class="hero-btn hero-secondary" href="https://maps.app.goo.gl/cnreYKyo2iWvuaAa8" target="_blank" rel="noopener">📍 Get Directions</a>
+      </div>
+    </div>
+    <div class="hero-box">
+      <strong>9:00 AM – 8:30 PM</strong>
+      <p>Open Monday–Friday &amp; Sunday<br><b>Saturday: Closed</b></p>
+      <hr>
+      <p><b>📞 9623009626</b><br>A/P Retre Karkhana, Shivnagar, Maharashtra</p>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="featuredSection">
+  <div class="section-head"><div><h2>⭐ Featured Products</h2><p>Our highlighted products</p></div></div>
+  <div id="featured" class="mini-grid"></div>
+</section>
+
+<section class="section" id="popularSection">
+  <div class="section-head"><div><h2>🔥 Popular Products</h2><p>Popular choices from our store</p></div></div>
+  <div id="popular" class="mini-grid"></div>
+</section>
+
+<div class="controls" id="products">
+  <div class="search-wrap"><span class="search-icon">🔍</span><input id="search" placeholder="Search products, plumbing, tools..." oninput="render()"></div>
+  <select id="cat" onchange="render()"><option value="">All Categories</option></select>
+  <button class="hero-btn hero-secondary" type="button" onclick="openWishlist()">❤️ Wishlist (<span id="wishCount">0</span>)</button>
+  <button class="hero-btn hero-secondary" type="button" onclick="openRequest()">📦 Request Product</button>
+</div>
+
+<div id="productsGrid" class="grid"></div>
+<div class="load"><button id="loadBtn" onclick="loadMore()">Show More Products</button></div>
+
+<section id="business-info" style="padding:35px 5%;background:#fff">
+  <div style="max-width:1180px;margin:auto">
+    <h2>V K Traders &amp; Hardware</h2>
+    <p><strong>Hardware and plumbing store in Retre Karkhana, Shivnagar, Maharashtra.</strong></p>
+    <p>Hardware, plumbing, sanitary products, construction material and tools with good quality material and home delivery availability.</p>
+    <p><strong>Phone:</strong> <a href="tel:9623009626">9623009626</a></p>
+    <p><strong>Address:</strong> A/P Retre Karkhana, Shivnagar, Maharashtra</p>
+    <p><strong>Hours:</strong> 9:00 AM–8:30 PM • Saturday Closed • Sunday Open</p>
+  </div>
+</section>
+
+<div class="contact-section" id="contact">
+  <div class="contact-card">
+    <h2>Need a product that you don't see here?</h2>
+    <a class="contact-whatsapp" href="https://wa.me/919623009626" target="_blank" rel="noopener">💬 Ask us on WhatsApp</a>
+  </div>
+</div>
+
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-about"><h2>V K Traders &amp; Hardware</h2><p>Quality hardware and construction materials for your needs.</p></div>
+    <div class="footer-links"><h3>Quick Links</h3><a href="#home">Home</a><a href="#products">Products</a><a href="#business-info">About</a><a href="#contact">Contact</a></div>
+    <div class="footer-contact"><h3>Contact</h3><a href="tel:9623009626">9623009626</a><a href="mailto:dhairyashilduba9626@gmaip.com">dhairyashilduba9626@gmaip.com</a><p>A/P Retre Karkhana, Shivnagar, Maharashtra</p></div>
+    <div class="copyright">© 2026 V K Traders &amp; Hardware. All rights reserved.</div>
+  </div>
+</footer>
+
+<button id="backToTop" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="Back to top">↑</button>
+<div class="bottom-actions"><a class="call-btn" href="tel:9623009626">📞 Call</a><a class="whatsapp-btn" href="https://wa.me/919623009626" target="_blank" rel="noopener">💬 WhatsApp</a></div>
+
+<div id="galleryPanel" class="gallery-panel" onclick="closeGallery(event)">
+  <div class="gallery-box" onclick="event.stopPropagation()">
+    <button class="gallery-close" onclick="closeGallery()">×</button>
+    <div class="gallery-main"><img id="galleryMain" src="" alt="Product image"></div>
+    <div id="galleryThumbs" class="gallery-thumbs"></div>
+  </div>
+</div>
+
+<div id="billPanel" class="bill-panel"><div class="bill-wrap"><div id="billPreview"></div><div class="bill-buttons"><button class="bill-print" onclick="printBill()">🖨️ Print / Save PDF</button><button class="whatsapp-btn" onclick="reviewOrder()">💬 Order on WhatsApp</button><button class="bill-close" onclick="closeBill()">Close</button></div></div></div>
+
+<div id="orderReviewPanel" class="panel">
+  <div class="box" style="max-width:420px">
+    <button class="close" onclick="closeOrderReview()">Close</button>
+    <h2 style="margin-top:0">📋 Confirm Your Order</h2>
+    <p style="color:var(--muted);margin-top:-6px">Please check your details carefully before sending — especially your mobile number.</p>
+    <div id="orderReviewBody" class="invoice-summary"></div>
+    <div class="invoice-actions" style="margin-top:16px">
+      <button class="secondary-btn" onclick="closeOrderReview()">✏️ Edit Details</button>
+      <button class="whatsapp-order-btn" onclick="confirmSendOrder()">✅ Confirm &amp; Send</button>
+    </div>
+  </div>
+</div>
+
+<div id="galleryModal" class="gallery">
+  <div class="gallery-inner">
+    <button class="gallery-close" onclick="closeGallery()">×</button>
+    <img id="galleryImg" alt="Product photo">
+    <div id="galleryCounter" style="color:#fff;margin-top:8px"></div>
+    <div class="gallery-nav"><button onclick="prevGallery()">← Previous</button><button onclick="nextGallery()">Next →</button></div>
+  </div>
+</div>
+
+<div id="adminPanel" class="panel">
+  <div class="box">
+    <button class="close" onclick="closeAdmin()">Close</button>
+    <h2>⚙️ Admin — Manage Products</h2>
+    <div class="notice">Changes are saved to Firebase and will appear on other mobiles too.</div>
+    <h3>Add Product</h3>
+    <input id="pname" placeholder="Product name">
+    <input id="pprice" type="number" min="0" placeholder="Price ₹">
+    <input id="pcat" placeholder="Category (Hardware / Plumbing / Sanitary / Tools)">
+    <input id="pemoji" placeholder="Emoji" value="🔧">
+    <label><b>Product Photo 1</b></label><input type="file" id="productPhoto" accept="image/*">
+    <label><b>Product Photo 2 (optional)</b></label><input type="file" id="productPhoto2" accept="image/*">
+    <div class="check-row"><label><input type="checkbox" id="pfeatured"> ⭐ Featured</label><label><input type="checkbox" id="ppopular"> 🔥 Popular</label><label><input type="checkbox" id="pstock" checked> ✅ In Stock</label></div>
+    <input id="pdiscount" type="number" min="0" max="90" placeholder="Discount % (optional)">
+    <button onclick="addProduct()">➕ Add Product</button>
+    <hr>
+    <h3>Product Management</h3>
+    <input id="adminSearch" placeholder="Search products in admin..." oninput="manage()">
+    <div id="manage"></div>
+    <hr>
+    <h3>🎟️ Coupons</h3>
+    <div class="notice">Coupon control is admin-only. Customers can only enter a code at checkout — they can't create or edit coupons.</div>
+    <input id="couponAdminCode" placeholder="Coupon Code (e.g. SAVE10)" style="text-transform:uppercase">
+    <select id="couponAdminType"><option value="percent">Percentage Discount (%)</option><option value="flat">Flat Discount (₹)</option></select>
+    <input id="couponAdminValue" type="number" min="0" placeholder="Discount value">
+    <input id="couponAdminMin" type="number" min="0" value="500" placeholder="Minimum shopping amount (₹)">
+    <div class="check-row"><label><input type="checkbox" id="couponAdminActive" checked> ✅ Active</label></div>
+    <button onclick="addCoupon()">➕ Add Coupon</button>
+    <div id="adminCoupons"></div>
+    <hr>
+    <h3>📢 Offer Banner</h3>
+    <div class="notice">This scrolling message shows at the top of the site for every visitor.</div>
+    <input id="bannerText" placeholder="e.g. Diwali Sale! Flat 10% off on all items this week">
+    <div class="check-row"><label><input type="checkbox" id="bannerActive"> ✅ Show Banner</label></div>
+    <button onclick="saveOfferBanner()">💾 Save Banner</button>
+    <hr>
+    <h3>📦 Customer Orders</h3>
+    <div class="notice">Update an order status here. The customer will see the latest status in <b>My Orders</b>.</div>
+    <input id="adminOrderSearch" placeholder="🔍 Search by invoice no, name or mobile number" oninput="renderAdminOrders()">
+    <div id="adminOrders"><div class="notice">Loading orders...</div></div>
+  </div>
+</div>
+
+<div id="editPanel" class="panel">
+  <div class="box">
+    <button class="close" onclick="closeEdit()">Close</button>
+    <h2>✏️ Edit Product</h2>
+    <input id="editName" placeholder="Product name">
+    <input id="editPrice" type="number" min="0" placeholder="Price ₹">
+    <input id="editCat" placeholder="Category">
+    <input id="editEmoji" placeholder="Emoji">
+    <div class="check-row"><label><input type="checkbox" id="editFeatured"> ⭐ Featured</label><label><input type="checkbox" id="editPopular"> 🔥 Popular</label><label><input type="checkbox" id="editStock"> ✅ In Stock</label></div>
+    <input id="editDiscount" type="number" min="0" max="90" placeholder="Discount %">
+    <div class="edit-photo-grid">
+      <div><b>Photo 1</b><div id="editPhotoPreview1"></div><input type="file" id="editPhoto1" accept="image/*"></div>
+      <div><b>Photo 2</b><div id="editPhotoPreview2"></div><input type="file" id="editPhoto2" accept="image/*"></div>
+    </div>
+    <div class="invoice-actions"><button onclick="saveEdit()">💾 Save Changes</button><button class="secondary-btn" onclick="closeEdit()">Cancel</button></div>
+  </div>
+</div>
+
+<div id="cartPanel" class="panel">
+  <div class="box">
+    <button class="close" onclick="closeCart()">Close</button><h2>🛒 Your Cart</h2><div id="cart"></div>
+    <div class="coupon-box">
+      <label><b>🎟️ Have a Coupon Code?</b></label>
+      <div class="coupon-row">
+        <input id="couponCode" placeholder="Enter coupon code" style="text-transform:uppercase">
+        <button type="button" onclick="applyCoupon()">Apply</button>
+        <button type="button" class="secondary-btn" onclick="removeCoupon()">Remove</button>
+      </div>
+      <div id="couponMsg" class="coupon-msg"></div>
+    </div>
+    <div class="customer-form">
+      <h3 style="margin-top:0">Customer Details</h3>
+      <label>Name *</label><input id="customerName" placeholder="Your name">
+      <label>Mobile Number *</label><input id="customerPhone" type="tel" inputmode="numeric" placeholder="10-digit mobile number">
+      <label>Confirm Mobile Number *</label><input id="customerPhoneConfirm" type="tel" inputmode="numeric" placeholder="Re-enter mobile number">
+      <label>Delivery Address</label><textarea id="customerAddress" placeholder="Address (required for home delivery)"></textarea>
+      <label>Order Type</label><select id="orderType"><option value="delivery">🏠 Home Delivery</option><option value="pickup">🏪 Self Pickup (Free)</option></select>
+    </div>
+    <div class="notice">🏠 Home Delivery: Additional Charges Apply<br>🏪 Self Pickup: Free</div>
+    <div class="invoice-actions"><button class="bill-btn" onclick="generateBill()">🧾 Generate Bill</button><button class="whatsapp-order-btn" onclick="reviewOrder()">💬 Order on WhatsApp</button></div>
+  </div>
+</div>
+
+<div id="ordersPanel" class="panel">
+  <div class="box orders-box">
+    <button class="close" onclick="closeOrders()">Close</button>
+    <h2>📦 My Orders</h2>
+    <p class="orders-subtitle">Enter the mobile number used for your order to see your order history.</p>
+    <div class="orders-search">
+      <input id="historyPhone" type="tel" inputmode="numeric" maxlength="10" placeholder="10-digit mobile number">
+      <button onclick="loadOrderHistory()">🔍 View Orders</button>
+    </div>
+    <div id="orderHistory">
+      <div class="notice">Your previous WhatsApp orders will appear here after they are saved.</div>
+    </div>
+  </div>
+</div>
+
+<div id="wishlistPanel" class="panel"><div class="box"><button class="close" onclick="closeWishlist()">Close</button><h2>❤️ Wishlist</h2><div id="wishlist"></div></div></div>
+
+<div id="requestPanel" class="panel"><div class="box"><button class="close" onclick="closeRequest()">Close</button><h2>📦 Request a Product</h2><p>Can't find something? Tell us what you need and we'll check availability.</p><input id="requestProduct" placeholder="Product name"><input id="requestQty" placeholder="Quantity (optional)"><textarea id="requestNote" placeholder="Brand / size / extra details"></textarea><button onclick="sendProductRequest()">💬 Send Request on WhatsApp</button></div></div>
+
+<div class="admin" id="adminButton" style="display:none"></div>
+
+<script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore-compat.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script>
+
+const firebaseConfig = {
+  apiKey:"AIzaSyDjxyqqRQ_tA5Cr73Dac6s7j32UT9M6QpA",
+  authDomain:"vk-traders-hardware.firebaseapp.com",
+  projectId:"vk-traders-hardware",
+  storageBucket:"vk-traders-hardware.firebasestorage.app",
+  messagingSenderId:"598417742404",
+  appId:"1:598417742404:web:3e4fc94c246022fb167a11",
+  measurementId:"G-08X6GP7N26"
+};
+const app=firebase.initializeApp(firebaseConfig), db=firebase.firestore(), productsRef=db.collection("products"), ordersRef=db.collection("orders"), couponsRef=db.collection("coupons"), settingsRef=db.collection("settings");
+
+function toast(msg,type){
+  type=type||"info";
+  let c=document.getElementById("toastContainer");
+  if(!c){c=document.createElement("div");c.id="toastContainer";document.body.appendChild(c)}
+  const el=document.createElement("div");
+  el.className="toast toast-"+type;
+  el.textContent=msg;
+  c.appendChild(el);
+  requestAnimationFrame(()=>el.classList.add("show"));
+  setTimeout(()=>{el.classList.remove("show");setTimeout(()=>el.remove(),300)},3200);
+}
+window.toast=toast;
+
+let products=[], visibleCount=24, editingId=null, galleryImages=[], galleryIndex=0;
+let cart=JSON.parse(localStorage.getItem("vk_cart")||"{}");
+let wishlist=JSON.parse(localStorage.getItem("vk_wishlist")||"[]");
+let coupons=[], appliedCoupon=null;
+let offerBannerSettings={text:"",active:false};
+
+const blockedWords=["electric","electrical","wire","wiring","switchboard","mcb","fan","bulb","led","socket electrical"];
+const isAllowed=p=>!blockedWords.some(w=>String(p.name+" "+p.category).toLowerCase().includes(w));
+
+function saveCart(){localStorage.setItem("vk_cart",JSON.stringify(cart));}
+function saveWishlist(){localStorage.setItem("vk_wishlist",JSON.stringify(wishlist));}
+function money(n){return "₹"+Number(n||0).toFixed(0);}
+function finalPrice(p){const d=Number(p.discount||0);return Math.max(0,Number(p.price||0)*(1-d/100));}
+function escapeHtml(v){return String(v??"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#039;"}[m]));}
+
+async function loadProducts(){
+  const snap=await productsRef.orderBy("name").get();
+  products=snap.docs.map(d=>({id:d.id,...d.data(),name:String(d.data().name||""),price:Number(d.data().price||0),category:String(d.data().category||""),emoji:String(d.data().emoji||"🔧"),photo:String(d.data().photo||""),photo2:String(d.data().photo2||""),featured:!!d.data().featured,popular:!!d.data().popular,stock:d.data().stock!==false,discount:Number(d.data().discount||0)})).filter(isAllowed);
+  migrateOldCart(); render(); renderHighlights(); manage(); updateWishCount();
+}
+async function loadCoupons(){
+  try{
+    const snap=await couponsRef.get();
+    coupons=snap.docs.map(d=>({id:d.id,...d.data(),code:String(d.data().code||"").toUpperCase(),type:d.data().type==="flat"?"flat":"percent",value:Number(d.data().value||0),minOrder:Number(d.data().minOrder||500),active:d.data().active!==false}));
+  }catch(e){console.error("Could not load coupons:",e);coupons=[]}
+}
+async function loadOfferBannerSettings(){
+  try{
+    const doc=await settingsRef.doc("offerBanner").get();
+    offerBannerSettings=doc.exists?{text:doc.data().text||"",active:!!doc.data().active}:{text:"",active:false};
+  }catch(e){console.error("Could not load banner settings:",e);offerBannerSettings={text:"",active:false}}
+  const textEl=document.getElementById("bannerText"), activeEl=document.getElementById("bannerActive");
+  if(textEl)textEl.value=offerBannerSettings.text;
+  if(activeEl)activeEl.checked=offerBannerSettings.active;
+  showOfferBanner();
+}
+function showOfferBanner(){
+  const banner=document.getElementById("offerBanner");
+  if(!banner)return;
+  if(sessionStorage.getItem("vk_offer_dismissed")){banner.style.display="none";return}
+  if(!offerBannerSettings.active||!offerBannerSettings.text){banner.style.display="none";return}
+  document.getElementById("offerBannerMsg").textContent=offerBannerSettings.text;
+  banner.style.display="flex";
+}
+function closeOfferBanner(){
+  document.getElementById("offerBanner").style.display="none";
+  sessionStorage.setItem("vk_offer_dismissed","1");
+}
+async function saveOfferBanner(){
+  try{
+    const text=(document.getElementById("bannerText").value||"").trim();
+    const active=document.getElementById("bannerActive").checked;
+    if(active&&!text){toast("Please enter banner text before enabling it.","error");return}
+    await settingsRef.doc("offerBanner").set({text,active,updatedAt:new Date().toISOString()});
+    offerBannerSettings={text,active};
+    sessionStorage.removeItem("vk_offer_dismissed");
+    showOfferBanner();
+    toast("✅ Banner updated!","success");
+  }catch(e){toast("Could not save banner: "+e.message,"error")}
+}
+function migrateOldCart(){
+  const keys=Object.keys(cart); if(!keys.length)return;
+  const looksOld=keys.some(k=>/^\d+$/.test(k));
+  if(!looksOld)return;
+  const next={}; keys.forEach(k=>{const p=products[Number(k)];if(p&&cart[k])next[p.id]=Number(cart[k]);}); cart=next; saveCart();
+}
+function cardHtml(p,compact=false){
+  const i=products.findIndex(x=>x.id===p.id), wished=wishlist.includes(p.id), pics=[p.photo,p.photo2].filter(Boolean);
+  const badge=(p.featured?'<span class="badge badge-featured">⭐ Featured</span>':'')+(p.popular?'<span class="badge badge-popular">🔥 Popular</span>':'')+(p.discount>0?`<span class="badge badge-offer">${p.discount}% OFF</span>`:'')+(!p.stock?'<span class="badge badge-stock">Out of Stock</span>':'');
+  const photo=pics.length?`<img src="${p.photo}" alt="${escapeHtml(p.name)}" onclick="openImageGalleryById('${p.id}')" loading="lazy">`:`<span>${escapeHtml(p.emoji)}</span>`;
+  const count=pics.length>1?`<span class="photo-count">📷 ${pics.length}</span>`:"";
+  const old=p.discount>0?`<span class="old-price">${money(p.price)}</span>`:"";
+  return `<div class="card ${!p.stock?'stock-off':''}">
+    <div class="badges">${badge}</div>
+    <div class="photo">${photo}${count}</div>
+    <h3>${escapeHtml(p.name)}</h3><div class="category">${escapeHtml(p.category)}</div>
+    <div class="price">${money(finalPrice(p))}${old}</div>
+    <div class="card-actions">
+      <button class="heart-btn" onclick="toggleWishlist('${p.id}')">${wished?'♥':'♡'}</button>
+      <button ${!p.stock?'disabled class="out-btn"':''} onclick="addById('${p.id}')">${p.stock?'🛒 Add to Cart':'Out of Stock'}</button>
+    </div>
+  </div>`;
+}
+
+function renderFeaturedProducts(){
+  const row=document.getElementById("featuredRow");
+  if(!row)return;
+  const list=products.filter(p=>p.photo).slice(0,4);
+  const fallback=products.slice(0,4);
+  const items=list.length?list:fallback;
+  row.innerHTML=items.map(p=>{
+    const idx=products.indexOf(p);
+    return `<div class="featured-card" onclick="add(${idx})">
+      <div class="mini-photo">${p.photo?`<img src="${p.photo}" alt="${escapeHtml(p.name)}">`:escapeHtml(p.emoji)}</div>
+      <h3>${escapeHtml(p.name)}</h3>
+      <div class="mini-price">₹${Number(p.price).toFixed(2)}</div>
+    </div>`;
+  }).join("");
+}
+
+function openGallery(index){
+  const p=products[index];
+  if(!p)return;
+  const imgs=[];
+  if(p.photo)imgs.push(p.photo);
+  if(p.photo2)imgs.push(p.photo2);
+  if(!imgs.length)return;
+  const panel=document.getElementById("galleryPanel");
+  const main=document.getElementById("galleryMain");
+  const thumbs=document.getElementById("galleryThumbs");
+  main.src=imgs[0];
+  thumbs.innerHTML=imgs.map((src,i)=>`<img class="${i===0?"active":""}" src="${src}" onclick="showGalleryImage('${src.replace(/'/g,"&#039;")}',this)">`).join("");
+  panel.style.display="flex";
+}
+function showGalleryImage(src,el){
+  document.getElementById("galleryMain").src=src;
+  document.querySelectorAll("#galleryThumbs img").forEach(x=>x.classList.remove("active"));
+  if(el)el.classList.add("active");
+}
+function closeGallery(e){
+  if(e && e.target && e.target.id!=="galleryPanel")return;
+  document.getElementById("galleryPanel").style.display="none";
+}
+
+function render(){
+  const s=document.getElementById("search").value.toLowerCase().trim(), selected=document.getElementById("cat").value;
+  const cats=[...new Set(products.map(p=>p.category).filter(Boolean))].sort(), sel=document.getElementById("cat");
+  sel.innerHTML='<option value="">All Categories</option>'+cats.map(x=>`<option value="${escapeHtml(x)}">${escapeHtml(x)}</option>`).join(""); sel.value=selected;
+  const filtered=products.filter(p=>(!s||(p.name+" "+p.category).toLowerCase().includes(s))&&(!sel.value||p.category===sel.value));
+  document.getElementById("productsGrid").innerHTML=filtered.slice(0,visibleCount).map(p=>cardHtml(p)).join("")||'<div class="empty-state" style="grid-column:1/-1"><div class="empty-icon">🔍</div><h3>No products found</h3><p>Try a different search term or category.</p></div>';
+  document.getElementById("count").textContent=Object.values(cart).reduce((a,b)=>a+Number(b),0);
+  document.getElementById("loadBtn").style.display=filtered.length>visibleCount?"inline-block":"none";
+}
+function renderHighlights(){
+  const f=products.filter(p=>p.featured&&p.stock).slice(0,4), pop=products.filter(p=>p.popular&&p.stock).slice(0,4);
+  document.getElementById("featured").innerHTML=f.length?f.map(p=>cardHtml(p,true)).join(""):'<div class="notice" style="grid-column:1/-1">Admin can mark products as Featured.</div>';
+  document.getElementById("popular").innerHTML=pop.length?pop.map(p=>cardHtml(p,true)).join(""):'<div class="notice" style="grid-column:1/-1">Admin can mark products as Popular.</div>';
+}
+function loadMore(){visibleCount+=24;render();}
+function addById(id){const p=products.find(x=>x.id===id);if(!p||!p.stock)return;cart[id]=(cart[id]||0)+1;saveCart();render();if(navigator.vibrate)navigator.vibrate(50);toast("🛒 Added: "+p.name,"success");}
+function removeFromCart(id){delete cart[id];saveCart();openCart();}
+function changeQty(id,delta){const n=Number(cart[id]||0)+delta;if(n<=0)delete cart[id];else cart[id]=n;saveCart();openCart();render();}
+function getCartItems(){return Object.keys(cart).map(id=>({id,p:products.find(x=>x.id===id),qty:Number(cart[id])})).filter(x=>x.p&&x.qty>0);}
+function getCustomerDetails(){
+  const name=document.getElementById("customerName").value.trim(),phone=document.getElementById("customerPhone").value.replace(/\D/g,""),phoneConfirm=document.getElementById("customerPhoneConfirm").value.replace(/\D/g,""),address=document.getElementById("customerAddress").value.trim(),orderType=document.getElementById("orderType").value;
+  if(!name){toast("Please enter customer name.","error");return null}
+  if(!/^\d{10}$/.test(phone)){toast("Please enter a valid 10-digit mobile number.","error");return null}
+  if(!phoneConfirm){toast("Please re-enter your mobile number to confirm.","error");return null}
+  if(phone!==phoneConfirm){toast("❌ Mobile numbers don't match. Please check and re-enter.","error");return null}
+  if(orderType==="delivery"&&!address){toast("Please enter delivery address.","error");return null}
+  const d={name,phone,address,orderType};localStorage.setItem("vk_customer",JSON.stringify(d));return d;
+}
+function makeInvoiceNumber(){const d=new Date();return "VK-"+String(d.getFullYear()).slice(-2)+String(d.getMonth()+1).padStart(2,"0")+String(d.getDate()).padStart(2,"0")+"-"+String(Date.now()).slice(-5);}
+function calcCartTotals(){
+  const items=getCartItems();
+  const subtotal=items.reduce((t,x)=>t+finalPrice(x.p)*x.qty,0);
+  let discount=0;
+  if(appliedCoupon){
+    if(appliedCoupon.active && subtotal>=Number(appliedCoupon.minOrder||0)){
+      discount=appliedCoupon.type==="flat"?Number(appliedCoupon.value||0):subtotal*Number(appliedCoupon.value||0)/100;
+      discount=Math.max(0,Math.min(discount,subtotal));
+    }
+  }
+  const total=Math.max(0,subtotal-discount);
+  return {items,subtotal,discount,total};
+}
+function applyCoupon(){
+  const codeInput=document.getElementById("couponCode"), msg=document.getElementById("couponMsg");
+  const code=(codeInput.value||"").trim().toUpperCase();
+  if(!code){msg.textContent="Please enter a coupon code.";msg.className="coupon-msg coupon-error";return}
+  const {subtotal}=calcCartTotals();
+  const match=coupons.find(c=>c.code===code);
+  if(!match||!match.active){msg.textContent="❌ Invalid or inactive coupon code.";msg.className="coupon-msg coupon-error";appliedCoupon=null;openCart();return}
+  if(subtotal<Number(match.minOrder||0)){msg.textContent=`❌ Minimum shopping of ${money(match.minOrder)} required for this coupon.`;msg.className="coupon-msg coupon-error";appliedCoupon=null;openCart();return}
+  appliedCoupon=match;
+  msg.textContent=`✅ Coupon "${match.code}" applied!`;msg.className="coupon-msg coupon-success";
+  openCart();
+}
+function removeCoupon(){appliedCoupon=null;const msg=document.getElementById("couponMsg");if(msg){msg.textContent="";msg.className="coupon-msg"}openCart();}
+function openCart(){
+  document.getElementById("cartPanel").style.display="block";
+  const {items,subtotal,discount,total}=calcCartTotals();
+  const summary=items.length?`<div class="invoice-summary">
+      <div class="totals-row"><span>Subtotal</span><span>${money(subtotal)}</span></div>
+      ${discount>0?`<div class="totals-row coupon-discount-row"><span>Coupon (${escapeHtml(appliedCoupon.code)})</span><span>-${money(discount)}</span></div>`:""}
+      <h3 style="margin:8px 0 0">Total: ${money(total)}</h3>
+    </div>`:"";
+  document.getElementById("cart").innerHTML=items.length?items.map(x=>`<div class="cart-item-row"><div class="cart-item-info"><b>${escapeHtml(x.p.name)}</b><span>${money(finalPrice(x.p))} each</span></div><div class="qty"><button onclick="changeQty('${x.id}',-1)">−</button><b>${x.qty}</b><button onclick="changeQty('${x.id}',1)">+</button></div><button class="cart-remove-btn" onclick="removeFromCart('${x.id}')">🗑️ Remove</button></div>`).join("")+summary:'<div class="empty-state"><div class="empty-icon">🛒</div><h3>Your cart is empty</h3><p>Add some products to get started.</p></div>';
+  const saved=JSON.parse(localStorage.getItem("vk_customer")||"{}");["name","phone","address","orderType"].forEach(k=>{const el=document.getElementById("customer"+k.charAt(0).toUpperCase()+k.slice(1));if(el&&saved[k])el.value=saved[k]});document.getElementById("orderType").value=saved.orderType||"delivery";
+}
+function closeCart(){document.getElementById("cartPanel").style.display="none";}
+const ADMIN_PW_HASH="a1b56852c7916d2c96615f5572691c0607ee91401726e6738ef77646ab2427ca";
+async function sha256Hex(str){
+  const buf=await crypto.subtle.digest("SHA-256",new TextEncoder().encode(str));
+  return Array.from(new Uint8Array(buf)).map(b=>b.toString(16).padStart(2,"0")).join("");
+}
+async function openAdmin(){
+  const lockUntil=Number(localStorage.getItem("vk_admin_lock")||0);
+  if(Date.now()<lockUntil){
+    toast(`🔒 Too many wrong attempts. Try again in ${Math.ceil((lockUntil-Date.now())/1000)}s.`,"error");
+    return;
+  }
+  const pw=prompt("🔐 Admin Password:");
+  if(pw===null)return;
+  const hash=await sha256Hex(pw);
+  if(hash!==ADMIN_PW_HASH){
+    const fails=Number(localStorage.getItem("vk_admin_fails")||0)+1;
+    if(fails>=5){
+      localStorage.setItem("vk_admin_lock",Date.now()+60000);
+      localStorage.setItem("vk_admin_fails","0");
+      toast("🔒 Too many wrong attempts. Locked for 60s.","error");
+    }else{
+      localStorage.setItem("vk_admin_fails",String(fails));
+      toast("❌ Wrong password!","error");
+    }
+    return;
+  }
+  localStorage.setItem("vk_admin_fails","0");
+  localStorage.removeItem("vk_admin_lock");
+  document.getElementById("adminPanel").style.display="block";document.body.style.overflow="hidden";manage();renderAdminCoupons();loadAdminOrders();const textEl=document.getElementById("bannerText"),activeEl=document.getElementById("bannerActive");if(textEl)textEl.value=offerBannerSettings.text;if(activeEl)activeEl.checked=offerBannerSettings.active;
+}
+async function addCoupon(){
+  try{
+    const code=(document.getElementById("couponAdminCode").value||"").trim().toUpperCase();
+    const type=document.getElementById("couponAdminType").value==="flat"?"flat":"percent";
+    const value=Number(document.getElementById("couponAdminValue").value);
+    const minOrder=Number(document.getElementById("couponAdminMin").value||500);
+    const active=document.getElementById("couponAdminActive").checked;
+    if(!code||!Number.isFinite(value)||value<=0){toast("Enter a valid coupon code and discount value.","error");return}
+    if(type==="percent"&&value>90){toast("Percentage discount cannot exceed 90%.","error");return}
+    if(coupons.some(c=>c.code===code)){toast("A coupon with this code already exists.","error");return}
+    await couponsRef.add({code,type,value,minOrder,active,createdAt:new Date().toISOString()});
+    document.getElementById("couponAdminCode").value="";document.getElementById("couponAdminValue").value="";document.getElementById("couponAdminMin").value="500";document.getElementById("couponAdminActive").checked=true;
+    await loadCoupons();renderAdminCoupons();
+    toast("✅ Coupon added!","success");
+  }catch(e){console.error(e);toast("Firebase error: "+e.message,"error")}
+}
+function renderAdminCoupons(){
+  const box=document.getElementById("adminCoupons");
+  if(!box)return;
+  if(!coupons.length){box.innerHTML='<div class="notice">No coupons yet.</div>';return}
+  box.innerHTML=coupons.map(c=>`<div class="admin-product-row"><div class="admin-product-info"><b>🎟️ ${escapeHtml(c.code)}</b><small>${c.type==="flat"?money(c.value)+" off":c.value+"% off"} • Min shopping ${money(c.minOrder)} • ${c.active?"✅ Active":"⛔ Inactive"}</small></div><div class="admin-product-actions"><button class="edit-btn" onclick="toggleCouponActive('${c.id}')">${c.active?"Deactivate":"Activate"}</button><button class="danger-btn" onclick="deleteCoupon('${c.id}')">Delete</button></div></div>`).join("");
+}
+async function toggleCouponActive(id){
+  const c=coupons.find(x=>x.id===id);if(!c)return;
+  try{await couponsRef.doc(id).update({active:!c.active});await loadCoupons();renderAdminCoupons();}catch(e){toast("Could not update coupon: "+e.message,"error")}
+}
+async function deleteCoupon(id){
+  const c=coupons.find(x=>x.id===id);if(!c||!confirm(`Delete coupon "${c.code}"?`))return;
+  try{await couponsRef.doc(id).delete();if(appliedCoupon&&appliedCoupon.id===id)appliedCoupon=null;await loadCoupons();renderAdminCoupons();}catch(e){toast("Could not delete coupon: "+e.message,"error")}
+}
+function closeAdmin(){document.getElementById("adminPanel").style.display="none";document.body.style.overflow="";}
+function readImg(file){return new Promise((resolve,reject)=>{if(!file)return resolve("");const r=new FileReader();r.onload=()=>{const img=new Image();img.onload=()=>{const max=800;let w=img.width,h=img.height;if(w>max||h>max){if(w>=h){h=Math.round(h*max/w);w=max}else{w=Math.round(w*max/h);h=max}}const c=document.createElement("canvas");c.width=w;c.height=h;c.getContext("2d").drawImage(img,0,0,w,h);resolve(c.toDataURL("image/jpeg",.72))};img.onerror=reject;img.src=r.result};r.onerror=reject;r.readAsDataURL(file)});}
+async function addProduct(){
+  try{
+    const name=document.getElementById("pname").value.trim(),price=Number(document.getElementById("pprice").value),category=document.getElementById("pcat").value.trim(),emoji=document.getElementById("pemoji").value.trim()||"🔧";
+    if(!name||!Number.isFinite(price)||price<0||!category){toast("Enter Product Name, valid Price and Category.","error");return}
+    if(blockedWords.some(w=>(name+" "+category).toLowerCase().includes(w))){toast("This store is for hardware, plumbing, sanitary, construction material and tools — electric products are not added.","error");return}
+    const [photo,photo2]=await Promise.all([readImg(document.getElementById("productPhoto").files[0]),readImg(document.getElementById("productPhoto2").files[0])]);
+    await productsRef.add({name,price,category,emoji,photo,photo2,featured:document.getElementById("pfeatured").checked,popular:document.getElementById("ppopular").checked,stock:document.getElementById("pstock").checked,discount:Number(document.getElementById("pdiscount").value||0)});
+    ["pname","pprice","pcat","pdiscount"].forEach(id=>document.getElementById(id).value="");document.getElementById("pemoji").value="🔧";document.getElementById("pfeatured").checked=false;document.getElementById("ppopular").checked=false;document.getElementById("pstock").checked=true;document.getElementById("productPhoto").value="";document.getElementById("productPhoto2").value="";
+    await loadProducts();toast("✅ Product added successfully!","success");
+  }catch(e){console.error(e);toast("Firebase error: "+e.message,"error")}
+}
+function manage(){
+  const q=(document.getElementById("adminSearch")?.value||"").toLowerCase().trim(), list=products.filter(p=>(p.name+" "+p.category).toLowerCase().includes(q));
+  document.getElementById("manage").innerHTML=`<h3>Products: ${products.length}</h3>`+list.map(p=>`<div class="admin-product-row"><div class="admin-product-info"><b>${escapeHtml(p.emoji)} ${escapeHtml(p.name)}</b><small>${escapeHtml(p.category)} • ${money(p.price)} • ${p.stock?"In Stock":"Out of Stock"}${p.discount?` • ${p.discount}% OFF`:""}${p.featured?" • ⭐ Featured":""}${p.popular?" • 🔥 Popular":""}</small></div><div class="admin-product-actions"><button class="edit-btn" onclick="editProduct('${p.id}')">✏️ Edit</button><button class="danger-btn" onclick="deleteProduct('${p.id}')">Delete</button></div></div>`).join("");
+}
+function editProduct(id){
+  const p=products.find(x=>x.id===id);if(!p)return;editingId=id;
+  document.getElementById("editName").value=p.name;document.getElementById("editPrice").value=p.price;document.getElementById("editCat").value=p.category;document.getElementById("editEmoji").value=p.emoji;document.getElementById("editFeatured").checked=p.featured;document.getElementById("editPopular").checked=p.popular;document.getElementById("editStock").checked=p.stock;document.getElementById("editDiscount").value=p.discount||0;document.getElementById("editPhoto1").value="";document.getElementById("editPhoto2").value="";
+  document.getElementById("editPhotoPreview1").innerHTML=p.photo?`<div class="edit-photo-box"><img src="${p.photo}"><button class="danger-btn" onclick="removeExistingPhoto(1)">🗑️ Remove</button></div>`:"No photo";
+  document.getElementById("editPhotoPreview2").innerHTML=p.photo2?`<div class="edit-photo-box"><img src="${p.photo2}"><button class="danger-btn" onclick="removeExistingPhoto(2)">🗑️ Remove</button></div>`:"No photo";
+  document.getElementById("editPanel").style.display="block";
+}
+let removePhoto1=false,removePhoto2=false;
+function removeExistingPhoto(n){if(n===1){removePhoto1=true;document.getElementById("editPhotoPreview1").innerHTML="Photo 1 will be removed."}else{removePhoto2=true;document.getElementById("editPhotoPreview2").innerHTML="Photo 2 will be removed."}}
+async function saveEdit(){
+  if(!editingId)return;const name=document.getElementById("editName").value.trim(),price=Number(document.getElementById("editPrice").value),category=document.getElementById("editCat").value.trim();
+  if(!name||!Number.isFinite(price)||price<0||!category){toast("Please enter valid name, price and category.","error");return}
+  if(blockedWords.some(w=>(name+" "+category).toLowerCase().includes(w))){toast("Electric products are not allowed in this store catalog.","error");return}
+  try{
+    const data={name,price,category,emoji:document.getElementById("editEmoji").value.trim()||"🔧",featured:document.getElementById("editFeatured").checked,popular:document.getElementById("editPopular").checked,stock:document.getElementById("editStock").checked,discount:Math.min(90,Math.max(0,Number(document.getElementById("editDiscount").value||0)))};
+    if(removePhoto1)data.photo=""; else if(document.getElementById("editPhoto1").files[0])data.photo=await readImg(document.getElementById("editPhoto1").files[0]);
+    if(removePhoto2)data.photo2=""; else if(document.getElementById("editPhoto2").files[0])data.photo2=await readImg(document.getElementById("editPhoto2").files[0]);
+    await db.collection("products").doc(editingId).update(data);removePhoto1=false;removePhoto2=false;editingId=null;closeEdit();await loadProducts();toast("✅ Product updated!","success");
+  }catch(e){toast("Could not update: "+e.message,"error")}
+}
+function closeEdit(){document.getElementById("editPanel").style.display="none";}
+async function deleteProduct(id){const p=products.find(x=>x.id===id);if(!p||!confirm(`Delete "${p.name}"?`))return;try{await db.collection("products").doc(id).delete();delete cart[id];wishlist=wishlist.filter(x=>x!==id);saveCart();saveWishlist();await loadProducts();}catch(e){toast("Could not delete product: "+e.message,"error")}}
+function toggleWishlist(id){wishlist.includes(id)?wishlist=wishlist.filter(x=>x!==id):wishlist.push(id);saveWishlist();updateWishCount();render();renderHighlights();}
+function updateWishCount(){document.getElementById("wishCount").textContent=wishlist.filter(id=>products.some(p=>p.id===id)).length;}
+function openWishlist(){document.getElementById("wishlistPanel").style.display="block";const items=wishlist.map(id=>products.find(p=>p.id===id)).filter(Boolean);document.getElementById("wishlist").innerHTML=items.length?`<div class="wish-grid">${items.map(p=>`<div class="wish-item"><div><b>${escapeHtml(p.name)}</b><br><small>${money(finalPrice(p))}</small></div><button onclick="addById('${p.id}')">Add</button></div>`).join("")}</div>`:'<div class="empty-state"><div class="empty-icon">❤️</div><h3>Your wishlist is empty</h3><p>Tap the heart on any product to save it here.</p></div>';}
+function closeWishlist(){document.getElementById("wishlistPanel").style.display="none";}
+function openRequest(){document.getElementById("requestPanel").style.display="block";}
+function closeRequest(){document.getElementById("requestPanel").style.display="none";}
+function sendProductRequest(){const n=document.getElementById("requestProduct").value.trim(),q=document.getElementById("requestQty").value.trim(),note=document.getElementById("requestNote").value.trim();if(!n){toast("Enter the product name.","error");return}const msg=`*V K Traders & Hardware – Product Request*%0AProduct: ${encodeURIComponent(n)}%0AQuantity: ${encodeURIComponent(q||"Not specified")}%0ADetails: ${encodeURIComponent(note||"None")}`;window.location.href="https://wa.me/919623009626?text="+msg;}
+function openImageGalleryById(id){const p=products.find(x=>x.id===id);if(!p)return;galleryImages=[p.photo,p.photo2].filter(Boolean);if(!galleryImages.length)return;galleryIndex=0;document.getElementById("galleryModal").style.display="flex";updateGallery();}
+function updateGallery(){document.getElementById("galleryImg").src=galleryImages[galleryIndex];document.getElementById("galleryCounter").textContent=`Photo ${galleryIndex+1} of ${galleryImages.length}`;}
+function nextGallery(){if(!galleryImages.length)return;galleryIndex=(galleryIndex+1)%galleryImages.length;updateGallery();}
+function prevGallery(){if(!galleryImages.length)return;galleryIndex=(galleryIndex-1+galleryImages.length)%galleryImages.length;updateGallery();}
+function closeGallery(){document.getElementById("galleryModal").style.display="none";}
+
+
+let adminOrdersCache=[];
+
+function adminStatusOptions(current){
+  const statuses=["Pending","Confirmed","Ready","Delivered","Cancelled"];
+  return statuses.map(s=>`<option value="${s}" ${String(current||"Pending")===s?"selected":""}>${s}</option>`).join("");
+}
+
+async function loadAdminOrders(){
+  const box=document.getElementById("adminOrders");
+  if(!box)return;
+  box.innerHTML='<div class="notice">⏳ Loading customer orders...</div>';
+  try{
+    const snap=await ordersRef.get();
+    adminOrdersCache=snap.docs.map(d=>({id:d.id,...d.data()}))
+      .sort((a,b)=>String(b.createdAt||"").localeCompare(String(a.createdAt||"")));
+    renderAdminOrders();
+  }catch(e){
+    console.error(e);
+    box.innerHTML='<div class="notice">❌ Could not load orders. Check Firestore Rules.</div>';
+  }
+}
+
+function renderAdminOrders(){
+  const box=document.getElementById("adminOrders");
+  if(!box)return;
+  const q=(document.getElementById("adminOrderSearch")?.value||"").trim().toLowerCase();
+  const list=q?adminOrdersCache.filter(o=>{
+    return String(o.invoiceNo||"").toLowerCase().includes(q)
+      ||String(o.customer?.name||"").toLowerCase().includes(q)
+      ||String(o.customer?.phone||"").toLowerCase().includes(q);
+  }):adminOrdersCache;
+  if(!list.length){
+    box.innerHTML=`<div class="notice">${q?"No orders match your search.":"No customer orders yet."}</div>`;
+    return;
+  }
+  box.innerHTML=list.map(o=>{
+    const items=(o.items||[]).map(it=>`${escapeHtml(it.name)} × ${Number(it.qty||0)}`).join(" • ");
+    return `<div class="admin-order-card">
+      <div class="admin-order-top">
         <div>
-          <h1 class="font-bold text-lg leading-tight">V K Traders</h1>
-          <p class="text-xs text-amber-400 font-medium">& Hardware • Shivnagar</p>
+          <div class="admin-order-name">${escapeHtml(o.invoiceNo||"Order")}</div>
+          <div class="admin-order-meta">${escapeHtml(o.customer?.name||"Customer")} • ${escapeHtml(o.customer?.phone||"")} • ${formatOrderDate(o.createdAt)}</div>
         </div>
+        <b>${money(o.total||0)}</b>
       </div>
-
-      <!-- Action Buttons -->
-      <div class="flex items-center space-x-4">
-        <button onclick="toggleWishlist()" class="relative text-gray-300 hover:text-white">
-          <i class="fa-solid fa-heart text-xl"></i>
-          <span id="wishlistBadge" class="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full w-4 h-4 flex items-center justify-center font-bold text-[10px] hidden">0</span>
-        </button>
-
-        <button onclick="toggleCart()" class="relative text-gray-300 hover:text-white">
-          <i class="fa-solid fa-cart-shopping text-xl"></i>
-          <span id="cartBadge" class="absolute -top-2 -right-2 bg-amber-500 text-slate-900 text-xs rounded-full w-4 h-4 flex items-center justify-center font-bold text-[10px] hidden">0</span>
-        </button>
-
-        <button id="adminPortalBtn" onclick="openAdminAuth()" class="text-xs bg-slate-800 hover:bg-slate-700 text-amber-400 px-2.5 py-1.5 rounded border border-slate-700">
-          Admin
-        </button>
+      <div class="admin-order-items">${items||"No items"}<br><small>${o.customer?.orderType==="delivery"?"🏠 Home Delivery":"🏪 Self Pickup"}${o.couponCode?` • 🎟️ Coupon: ${escapeHtml(o.couponCode)} (-${money(o.discount||0)})`:""}</small></div>
+      <div class="admin-order-status">
+        <select id="status-${o.id}">${adminStatusOptions(o.status)}</select>
+        <button onclick="updateOrderStatus('${o.id}')">💾 Update</button>
+        <button class="danger-btn" onclick="deleteOrder('${o.id}')">🗑️</button>
       </div>
-    </div>
-  </header>
+    </div>`;
+  }).join("");
+}
+async function deleteOrder(id){
+  const o=adminOrdersCache.find(x=>x.id===id);if(!o)return;
+  if(!confirm(`Delete order ${o.invoiceNo||""}? This cannot be undone.`))return;
+  try{
+    await ordersRef.doc(id).delete();
+    adminOrdersCache=adminOrdersCache.filter(x=>x.id!==id);
+    renderAdminOrders();
+  }catch(e){toast("Could not delete order: "+e.message,"error")}
+}
 
-  <!-- MAIN CATALOG & STORE -->
-  <main class="flex-grow max-w-6xl w-full mx-auto p-4">
-    
-    <!-- Search and Filter -->
-    <div class="mb-6 flex flex-col md:flex-row gap-3">
-      <div class="relative flex-grow">
-        <i class="fa-solid fa-magnifying-glass absolute left-3 top-3.5 text-gray-400"></i>
-        <input type="text" id="searchInput" oninput="renderProducts()" placeholder="Search plumbing, tools, construction items..." 
-          class="w-full pl-10 pr-4 py-2.5 border rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-500 bg-white shadow-sm" />
-      </div>
-      <select id="categoryFilter" onchange="renderProducts()" class="py-2.5 px-4 border rounded-lg bg-white shadow-sm focus:ring-2 focus:ring-amber-500">
-        <option value="All">All Categories</option>
-        <option value="Plumbing">Plumbing & Pipes</option>
-        <option value="Hardware">Hardware & Fasteners</option>
-        <option value="Sanitary">Sanitaryware</option>
-        <option value="Tools">Hand & Power Tools</option>
-        <option value="Construction">Construction Materials</option>
-      </select>
-    </div>
-
-    <!-- Dynamic Products Grid -->
-    <div id="productGrid" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
-      <div class="col-span-full text-center py-12 text-gray-500">Loading catalog items...</div>
-    </div>
-  </main>
-
-  <!-- CART SIDE PANEL -->
-  <div id="cartModal" class="fixed inset-0 bg-black/50 z-50 hidden justify-end">
-    <div class="bg-white w-full max-w-md h-full flex flex-col shadow-2xl">
-      <div class="p-4 bg-slate-900 text-white flex justify-between items-center">
-        <h3 class="font-bold text-lg"><i class="fa-solid fa-cart-shopping mr-2 text-amber-400"></i>Shopping Cart</h3>
-        <button onclick="toggleCart()" class="text-gray-400 hover:text-white"><i class="fa-solid fa-xmark text-xl"></i></button>
-      </div>
-      
-      <div id="cartItemsList" class="flex-grow overflow-y-auto p-4 space-y-3 divide-y">
-        <!-- Cart Items Injection -->
-      </div>
-
-      <!-- Coupon & Summary -->
-      <div class="p-4 border-t bg-gray-50 space-y-3">
-        <div class="flex gap-2">
-          <input type="text" id="couponInput" placeholder="Coupon Code" class="uppercase border px-3 py-1.5 text-sm rounded flex-grow">
-          <button onclick="applyCoupon()" class="bg-slate-800 text-white text-xs px-3 py-1.5 rounded font-semibold">Apply</button>
-        </div>
-        
-        <div id="couponMessage" class="text-xs"></div>
-
-        <div class="space-y-1 text-sm border-t pt-2">
-          <div class="flex justify-between text-gray-600"><span>Subtotal:</span><span id="cartSubtotal">₹0</span></div>
-          <div class="flex justify-between text-green-600"><span>Discount:</span><span id="cartDiscount">-₹0</span></div>
-          <div class="flex justify-between font-bold text-lg text-slate-900"><span>Total:</span><span id="cartTotal">₹0</span></div>
-        </div>
-
-        <button onclick="checkoutWhatsApp()" class="w-full bg-green-600 hover:bg-green-700 text-white font-bold py-2.5 rounded-lg flex items-center justify-center gap-2">
-          <i class="fa-brands fa-whatsapp text-lg"></i> Order via WhatsApp
-        </button>
-      </div>
-    </div>
-  </div>
-
-  <!-- ADMIN AUTH MODAL -->
-  <div id="authModal" class="fixed inset-0 bg-black/60 z-50 hidden items-center justify-center p-4">
-    <div class="bg-white rounded-xl shadow-2xl max-w-sm w-full p-6 relative">
-      <button onclick="closeAuthModal()" class="absolute top-3 right-3 text-gray-400 hover:text-gray-600"><i class="fa-solid fa-xmark text-lg"></i></button>
-      <h3 class="text-xl font-bold text-slate-900 mb-4">Admin Authentication</h3>
-      <form onsubmit="handleAdminLogin(event)" class="space-y-4">
-        <div>
-          <label class="text-xs font-semibold text-gray-600">Admin Email</label>
-          <input type="email" id="adminEmail" required class="w-full border rounded p-2 text-sm focus:ring-2 focus:ring-amber-500">
-        </div>
-        <div>
-          <label class="text-xs font-semibold text-gray-600">Password</label>
-          <input type="password" id="adminPassword" required class="w-full border rounded p-2 text-sm focus:ring-2 focus:ring-amber-500">
-        </div>
-        <div id="authError" class="text-xs text-red-600 hidden"></div>
-        <button type="submit" class="w-full bg-amber-500 hover:bg-amber-600 text-slate-900 font-bold py-2 rounded">Sign In</button>
-      </form>
-    </div>
-  </div>
-
-  <!-- ADMIN DASHBOARD MODAL -->
-  <div id="adminPanelModal" class="fixed inset-0 bg-black/70 z-50 hidden overflow-y-auto p-4">
-    <div class="bg-white max-w-4xl mx-auto rounded-xl shadow-2xl overflow-hidden my-8">
-      <div class="bg-slate-900 text-white px-6 py-4 flex justify-between items-center">
-        <h2 class="text-xl font-bold text-amber-400">Store Management Console</h2>
-        <div class="flex items-center space-x-3">
-          <button onclick="handleAdminLogout()" class="text-xs bg-red-600 text-white px-2.5 py-1 rounded">Logout</button>
-          <button onclick="closeAdminPanel()" class="text-gray-400 hover:text-white"><i class="fa-solid fa-xmark text-xl"></i></button>
-        </div>
-      </div>
-
-      <div class="p-6 space-y-8">
-        
-        <!-- Add Product Form -->
-        <div class="bg-gray-50 p-4 rounded-lg border">
-          <h3 class="font-bold text-slate-800 mb-3">Add / Update Product</h3>
-          <form onsubmit="saveProduct(event)" class="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <input type="text" id="pName" placeholder="Product Name" required class="border p-2 rounded text-sm">
-            <select id="pCategory" required class="border p-2 rounded text-sm">
-              <option value="Plumbing">Plumbing & Pipes</option>
-              <option value="Hardware">Hardware & Fasteners</option>
-              <option value="Sanitary">Sanitaryware</option>
-              <option value="Tools">Hand & Power Tools</option>
-              <option value="Construction">Construction Materials</option>
-            </select>
-            <input type="number" id="pPrice" placeholder="Price (₹)" required class="border p-2 rounded text-sm">
-            <input type="file" id="pImageFile" accept="image/*" class="border p-1.5 rounded text-sm bg-white">
-            <textarea id="pDesc" placeholder="Product Description" class="border p-2 rounded text-sm md:col-span-2"></textarea>
-            <button type="submit" id="saveProdBtn" class="bg-slate-900 text-white font-bold py-2 rounded md:col-span-2">Upload to Store</button>
-          </form>
-        </div>
-
-        <!-- Banner Announcement Control -->
-        <div class="bg-gray-50 p-4 rounded-lg border">
-          <h3 class="font-bold text-slate-800 mb-2">Announcement Banner</h3>
-          <div class="flex gap-2">
-            <input type="text" id="bannerInput" placeholder="Special announcement message..." class="border p-2 rounded text-sm flex-grow">
-            <button onclick="saveBanner()" class="bg-amber-500 font-bold px-4 rounded text-sm">Save</button>
-          </div>
-        </div>
-
-      </div>
-    </div>
-  </div>
-
-  <script>
-    // --- 1. FIREBASE INITIALIZATION ---
-    const firebaseConfig = {
-      apiKey: "YOUR_FIREBASE_API_KEY",
-      authDomain: "YOUR_PROJECT_ID.firebaseapp.com",
-      projectId: "YOUR_PROJECT_ID",
-      storageBucket: "YOUR_PROJECT_ID.appspot.com",
-      messagingSenderId: "YOUR_SENDER_ID",
-      appId: "YOUR_APP_ID"
-    };
-
-    firebase.initializeApp(firebaseConfig);
-    const auth = firebase.auth();
-    const db = firebase.firestore();
-    const storage = firebase.storage();
-
-    // --- 2. GLOBAL STATE ---
-    let products = [];
-    let cart = JSON.parse(localStorage.getItem('vk_cart')) || [];
-    let wishlist = JSON.parse(localStorage.getItem('vk_wishlist')) || [];
-    let activeCoupon = null;
-
-    // Electrical guardrail filter
-    const blockedWords = ['bulb', 'wire', 'mcb', 'wiring', 'switch', 'cable', 'led', 'fan', 'tube', 'electric'];
-
-    // --- 3. GESTURE & AUTH HANDLERS ---
-    let tapCount = 0;
-    let tapTimer = null;
-    
-    document.getElementById('logoTrigger').addEventListener('click', () => {
-      tapCount++;
-      clearTimeout(tapTimer);
-      if (tapCount === 5) {
-        tapCount = 0;
-        openAdminAuth();
-      } else {
-        tapTimer = setTimeout(() => { tapCount = 0; }, 1500);
-      }
+async function updateOrderStatus(id){
+  const select=document.getElementById("status-"+id);
+  if(!select)return;
+  try{
+    await db.collection("orders").doc(id).update({
+      status:select.value,
+      updatedAt:new Date().toISOString()
     });
+    const order=adminOrdersCache.find(x=>x.id===id);
+    if(order)order.status=select.value;
+    toast("✅ Order status updated to "+select.value,"success");
+    renderAdminOrders();
+  }catch(e){
+    console.error(e);
+    toast("❌ Could not update order: "+e.message,"error");
+  }
+}
 
-    function openAdminAuth() {
-      if (auth.currentUser) {
-        openAdminPanel();
-      } else {
-        document.getElementById('authModal').classList.remove('hidden');
-        document.getElementById('authModal').classList.add('flex');
-      }
+async function saveOrderToFirebase(data){
+  try{
+    const orderDoc={
+      invoiceNo:data.invoiceNo,
+      customer:{
+        name:data.customer.name,
+        phone:data.customer.phone,
+        address:data.customer.address || "",
+        orderType:data.customer.orderType
+      },
+      items:data.items.map(x=>({
+        productId:x.id,
+        name:x.p.name,
+        qty:x.qty,
+        price:Number(finalPrice(x.p)),
+        amount:Number(finalPrice(x.p)*x.qty)
+      })),
+      subtotal:Number(data.subtotal),
+      discount:Number(data.discount||0),
+      couponCode:data.couponCode||"",
+      total:Number(data.total),
+      status:"Pending",
+      createdAt:new Date().toISOString()
+    };
+    await ordersRef.add(orderDoc);
+    return true;
+  }catch(e){
+    console.error("Order save error:",e);
+    return false;
+  }
+}
+
+function openOrders(){
+  document.getElementById("ordersPanel").style.display="block";
+  const saved=JSON.parse(localStorage.getItem("vk_customer")||"{}");
+  if(saved.phone) document.getElementById("historyPhone").value=saved.phone;
+  document.body.style.overflow="hidden";
+  if(saved.phone) loadOrderHistory();
+}
+function closeOrders(){
+  document.getElementById("ordersPanel").style.display="none";
+  document.body.style.overflow="";
+}
+function orderStatusClass(status){
+  const s=String(status||"Pending").toLowerCase();
+  if(s==="delivered") return "delivered";
+  if(s==="cancelled") return "cancelled";
+  return "";
+}
+function formatOrderDate(value){
+  const d=value?.toDate ? value.toDate() : new Date(value);
+  return isNaN(d.getTime()) ? "" : d.toLocaleString("en-IN",{dateStyle:"medium",timeStyle:"short"});
+}
+function renderOrderHistory(orders){
+  const box=document.getElementById("orderHistory");
+  if(!orders.length){
+    box.innerHTML='<div class="notice">No orders found for this mobile number.</div>';
+    return;
+  }
+  box.innerHTML=orders.map(o=>{
+    const items=(o.items||[]).map(it=>`<div class="order-item-line"><span>${escapeHtml(it.name)} × ${Number(it.qty||0)}</span><b>${money(Number(it.amount||0))}</b></div>`).join("");
+    const status=escapeHtml(o.status||"Pending");
+    return `<div class="order-card">
+      <div class="order-card-head">
+        <div><div class="order-no">${escapeHtml(o.invoiceNo||"Order")}</div><div class="order-date">${formatOrderDate(o.createdAt)}</div></div>
+        <span class="order-status ${orderStatusClass(o.status)}">${status}</span>
+      </div>
+      <div class="status-line">🟡 Pending → 🔵 Confirmed → 🚚 Ready → 🟢 Delivered</div>
+      <div class="order-items">${items||"<div>No item details</div>"}</div>
+      <div class="order-total"><span>Total</span><span>${money(Number(o.total||0))}</span></div>
+      <div class="order-actions"><button onclick="reorderFromHistory('${o.id}')">🔄 Reorder</button><button class="secondary-btn" onclick="showOrderDetails('${o.id}')">👁️ Details</button></div>
+    </div>`;
+  }).join("");
+}
+let cachedOrders=[];
+async function loadOrderHistory(){
+  const phone=document.getElementById("historyPhone").value.trim().replace(/\D/g,"");
+  if(!/^\d{10}$/.test(phone)){toast("Please enter the same 10-digit mobile number used for the order.","error");return;}
+  const box=document.getElementById("orderHistory");
+  box.innerHTML='<div class="notice">⏳ Loading your orders...</div>';
+  try{
+    const snap=await ordersRef.where("customer.phone","==",phone).get();
+    cachedOrders=snap.docs.map(d=>({id:d.id,...d.data()})).sort((a,b)=>String(b.createdAt||"").localeCompare(String(a.createdAt||"")));
+    renderOrderHistory(cachedOrders);
+  }catch(e){
+    console.error(e);
+    box.innerHTML='<div class="notice">❌ Could not load order history. Please check your internet connection or Firebase Firestore Rules.</div>';
+  }
+}
+function reorderFromHistory(id){
+  const o=cachedOrders.find(x=>x.id===id); if(!o)return;
+  const next={...cart};
+  (o.items||[]).forEach(it=>{if(it.productId){next[it.productId]=(next[it.productId]||0)+Number(it.qty||0);}});
+  cart=next;saveCart();closeOrders();render();openCart();
+}
+function showOrderDetails(id){
+  const o=cachedOrders.find(x=>x.id===id);if(!o)return;
+  const lines=(o.items||[]).map(it=>`${it.name} × ${it.qty} = ${money(it.amount)}`).join("\n");
+  alert(`${o.invoiceNo||"Order"}\n\nCustomer: ${o.customer?.name||""}\nMobile: ${o.customer?.phone||""}\nOrder: ${o.customer?.orderType==="delivery"?"Home Delivery":"Self Pickup"}\nStatus: ${o.status||"Pending"}\n\n${lines}\n\nTotal: ${money(o.total||0)}`);
+}
+
+function buildInvoiceData(){const{items,subtotal,discount,total}=calcCartTotals();if(!items.length){toast("Cart is empty.","error");return null}const customer=getCustomerDetails();if(!customer)return null;return{items,customer,subtotal,discount,total,couponCode:discount>0&&appliedCoupon?appliedCoupon.code:"",invoiceNo:makeInvoiceNumber(),date:new Date()};}
+function buildBillHTML(data){
+  const type=data.customer.orderType==="delivery"?"Home Delivery":"Self Pickup",date=data.date.toLocaleDateString("en-IN"),time=data.date.toLocaleTimeString("en-IN",{hour:"2-digit",minute:"2-digit"});
+  const rows=data.items.map((x,i)=>`<tr><td>${i+1}</td><td><b>${escapeHtml(x.p.name)}</b></td><td>${x.qty} nos</td><td>${money(finalPrice(x.p))}</td><td>nos</td><td>${money(finalPrice(x.p)*x.qty)}</td></tr>`).join("");
+  return `<div class="bill-head"><h1>V K Traders &amp; Hardware</h1><p>Good Quality Material • Hardware &amp; Plumbing Store</p><p>A/P Retre Karkhana, Shivnagar, Maharashtra</p><p>Phone: 9623009626</p></div><div class="bill-meta"><div><b>Invoice No:</b> ${data.invoiceNo}<br><b>Date:</b> ${date} &nbsp; <b>Time:</b> ${time}</div><div><b>Customer:</b> ${escapeHtml(data.customer.name)}<br><b>Mobile:</b> ${escapeHtml(data.customer.phone)}<br><b>Order:</b> ${type}</div></div>${data.customer.address?`<p><b>Delivery Address:</b> ${escapeHtml(data.customer.address)}</p>`:""}<table class="bill-table"><thead><tr><th>Sl No.</th><th>Description of Goods</th><th>Quantity</th><th>Rate</th><th>Per</th><th>Amount</th></tr></thead><tbody>${rows}</tbody></table><div class="bill-totals"><div><span>Subtotal</span><span>${money(data.subtotal)}</span></div>${data.discount>0?`<div><span>Coupon (${escapeHtml(data.couponCode)})</span><span>-${money(data.discount)}</span></div>`:""}<div class="grand"><span>Grand Total</span><span>${money(data.total)}</span></div></div><div class="bill-footer"><p><b>${type}</b> • ${type==="Self Pickup"?"Pickup is free":"Delivery charges may apply"}</p><p>Thank you for shopping with V K Traders &amp; Hardware!</p></div>`;
+}
+function generateBill(){
+  const data=buildInvoiceData();if(!data)return;
+  document.getElementById("billPreview").innerHTML=buildBillHTML(data);
+  document.getElementById("billPanel").style.display="block";document.body.style.overflow="hidden";
+}
+async function buildBillPDFFile(data){
+  const wrap=document.createElement("div");
+  wrap.style.cssText="position:fixed;left:-9999px;top:0;width:780px;background:#fff;padding:24px;font-family:Poppins,Arial,sans-serif;color:#111;";
+  wrap.innerHTML=`<div class="bill-wrap">${buildBillHTML(data)}</div>`;
+  document.body.appendChild(wrap);
+  try{
+    const canvas=await html2canvas(wrap,{scale:2,backgroundColor:"#ffffff"});
+    const imgData=canvas.toDataURL("image/jpeg",0.92);
+    const {jsPDF}=window.jspdf;
+    const pdf=new jsPDF({unit:"px",format:[canvas.width,canvas.height]});
+    pdf.addImage(imgData,"JPEG",0,0,canvas.width,canvas.height);
+    const blob=pdf.output("blob");
+    return new File([blob],`Invoice-${data.invoiceNo}.pdf`,{type:"application/pdf"});
+  }finally{
+    wrap.remove();
+  }
+}
+function printBill(){window.print();}
+function closeBill(){document.getElementById("billPanel").style.display="none";document.body.style.overflow="";}
+let pendingOrderData=null;
+function reviewOrder(){
+  const data=buildInvoiceData();if(!data)return;
+  pendingOrderData=data;
+  const type=data.customer.orderType==="delivery"?"Home Delivery":"Self Pickup";
+  document.getElementById("orderReviewBody").innerHTML=`
+    <div class="totals-row"><span>Name</span><span><b>${escapeHtml(data.customer.name)}</b></span></div>
+    <div class="totals-row"><span>Mobile</span><span><b>${escapeHtml(data.customer.phone)}</b></span></div>
+    ${data.customer.address?`<div class="totals-row"><span>Address</span><span style="text-align:right">${escapeHtml(data.customer.address)}</span></div>`:""}
+    <div class="totals-row"><span>Order Type</span><span><b>${type}</b></span></div>
+    <div class="totals-row"><span>Items</span><span>${data.items.reduce((a,x)=>a+x.qty,0)}</span></div>
+    <div class="totals-row" style="border-top:1px solid #e3e8f0;padding-top:8px;margin-top:4px"><span>Grand Total</span><span><b>${money(data.total)}</b></span></div>
+  `;
+  document.getElementById("orderReviewPanel").style.display="block";
+  document.body.style.overflow="hidden";
+}
+function closeOrderReview(){document.getElementById("orderReviewPanel").style.display="none";document.body.style.overflow="";}
+async function confirmSendOrder(){
+  if(!pendingOrderData)return;
+  const data=pendingOrderData;
+  pendingOrderData=null;
+  closeOrderReview();
+  const type=data.customer.orderType==="delivery"?"Home Delivery":"Self Pickup";
+  const lines=data.items.map(x=>`${x.p.name} x ${x.qty} = ${money(finalPrice(x.p)*x.qty)}`);
+  const message=["*V K Traders and Hardware*",`Invoice: ${data.invoiceNo}`,"","*Customer Details*",`Name: ${data.customer.name}`,`Mobile: ${data.customer.phone}`,`Order Type: ${type}`,data.customer.address?`Address: ${data.customer.address}`:"","", "*Order Items*",...lines,"",`Subtotal: ${money(data.subtotal)}`,data.discount>0?`Coupon (${data.couponCode}): -${money(data.discount)}`:"",`Grand Total: ${money(data.total)}`,type==="Home Delivery"?"Delivery charges: Additional charges apply":"Pickup: Free","","Please confirm my order."].filter(Boolean).join("\n");
+
+  const saved=await saveOrderToFirebase(data);
+  if(!saved){
+    const ok=confirm("Order history could not be saved to Firebase. Send the WhatsApp order anyway?");
+    if(!ok)return;
+  }
+  if(data.discount>0&&appliedCoupon&&appliedCoupon.id){
+    try{await couponsRef.doc(appliedCoupon.id).delete();await loadCoupons();}catch(e){console.error("Could not delete used coupon:",e)}
+  }
+
+  cart={};appliedCoupon=null;saveCart();render();closeBill();closeCart();
+  window.location.href="https://wa.me/919623009626?text="+encodeURIComponent(message);
+}
+
+window.openCart=openCart;window.closeCart=closeCart;window.openOrders=openOrders;window.closeOrders=closeOrders;window.loadOrderHistory=loadOrderHistory;window.reorderFromHistory=reorderFromHistory;window.showOrderDetails=showOrderDetails;window.openAdmin=openAdmin;window.openGallery=openGallery;window.closeGallery=closeGallery;window.updateOrderStatus=updateOrderStatus;window.closeAdmin=closeAdmin;window.addProduct=addProduct;window.manage=manage;window.editProduct=editProduct;window.saveEdit=saveEdit;window.closeEdit=closeEdit;window.deleteProduct=deleteProduct;window.addById=addById;window.removeFromCart=removeFromCart;window.changeQty=changeQty;window.loadMore=loadMore;window.generateBill=generateBill;window.printBill=printBill;window.closeBill=closeBill;window.orderWhatsApp=confirmSendOrder;window.reviewOrder=reviewOrder;window.closeOrderReview=closeOrderReview;window.confirmSendOrder=confirmSendOrder;window.toggleWishlist=toggleWishlist;window.openWishlist=openWishlist;window.closeWishlist=closeWishlist;window.openRequest=openRequest;window.closeRequest=closeRequest;window.sendProductRequest=sendProductRequest;window.openImageGalleryById=openImageGalleryById;window.nextGallery=nextGallery;window.prevGallery=prevGallery;window.closeGallery=closeGallery;window.removeExistingPhoto=removeExistingPhoto;window.applyCoupon=applyCoupon;window.removeCoupon=removeCoupon;window.addCoupon=addCoupon;window.toggleCouponActive=toggleCouponActive;window.deleteCoupon=deleteCoupon;window.closeOfferBanner=closeOfferBanner;window.saveOfferBanner=saveOfferBanner;window.deleteOrder=deleteOrder;
+
+window.addEventListener("DOMContentLoaded",async()=>{
+  try{await loadProducts()}catch(e){console.error(e);document.getElementById("productsGrid").innerHTML=`<div class="notice" style="grid-column:1/-1">❌ Could not load products from Firebase.<br><button onclick="location.reload()">Retry</button></div>`}
+  try{await loadCoupons()}catch(e){console.error(e)}
+  try{await loadOfferBannerSettings()}catch(e){console.error(e)}
+});
+let backToTopTicking=false;
+window.addEventListener("scroll",()=>{
+  if(backToTopTicking)return;
+  backToTopTicking=true;
+  requestAnimationFrame(()=>{
+    const btn=document.getElementById("backToTop");
+    if(btn)btn.classList.toggle("show",window.scrollY>500);
+    backToTopTicking=false;
+  });
+},{passive:true});
+document.addEventListener("click",e=>{
+  if(e.target?.id==="adminPanel")closeAdmin();if(e.target?.id==="cartPanel")closeCart();if(e.target?.id==="ordersPanel")closeOrders();if(e.target?.id==="editPanel")closeEdit();if(e.target?.id==="wishlistPanel")closeWishlist();if(e.target?.id==="requestPanel")closeRequest();if(e.target?.id==="billPanel")closeBill();if(e.target?.id==="galleryModal")closeGallery();if(e.target?.id==="orderReviewPanel")closeOrderReview();
+});
+
+</script>
+
+<script>
+(function(){
+  let taps=0, timer=null, lastTap=0;
+  function reset(){
+    taps=0;
+    clearTimeout(timer);
+    timer=null;
+  }
+  function handleTap(e){
+    if(e.cancelable) e.preventDefault();
+    e.stopPropagation();
+
+    const now=Date.now();
+    if(now-lastTap>1800) taps=0;
+    lastTap=now;
+    taps++;
+
+    clearTimeout(timer);
+    timer=setTimeout(reset,1800);
+
+    if(taps>=5){
+      reset();
+      if(typeof openAdmin==="function") openAdmin();
     }
+  }
+  function setupSecretAdmin(){
+    const logo=document.getElementById("secretAdminLogo");
+    if(!logo) return;
+    logo.addEventListener("touchend", handleTap, {passive:false});
+    logo.addEventListener("click", handleTap);
+    logo.addEventListener("contextmenu", function(e){ e.preventDefault(); });
+  }
+  if(document.readyState==="loading"){
+    document.addEventListener("DOMContentLoaded", setupSecretAdmin);
+  }else{
+    setupSecretAdmin();
+  }
+})();
+</script>
 
-    function closeAuthModal() {
-      document.getElementById('authModal').classList.add('hidden');
-      document.getElementById('authModal').classList.remove('flex');
-    }
-
-    async function handleAdminLogin(e) {
-      e.preventDefault();
-      const email = document.getElementById('adminEmail').value;
-      const pass = document.getElementById('adminPassword').value;
-      const errDiv = document.getElementById('authError');
-      
-      try {
-        await auth.signInWithEmailAndPassword(email, pass);
-        errDiv.classList.add('hidden');
-        closeAuthModal();
-        openAdminPanel();
-      } catch (err) {
-        errDiv.innerText = err.message;
-        errDiv.classList.remove('hidden');
-      }
-    }
-
-    function handleAdminLogout() {
-      auth.signOut();
-      closeAdminPanel();
-    }
-
-    function openAdminPanel() {
-      document.getElementById('adminPanelModal').classList.remove('hidden');
-    }
-
-    function closeAdminPanel() {
-      document.getElementById('adminPanelModal').classList.add('hidden');
-    }
-
-    // --- 4. PRODUCT DATA & STORAGE ---
-    function listenToData() {
-      // Stream Products
-      db.collection('products').onSnapshot(snapshot => {
-        products = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
-        renderProducts();
-      });
-
-      // Stream Announcement Banner
-      db.collection('settings').doc('banner').onSnapshot(doc => {
-        if (doc.exists && doc.data().text) {
-          document.getElementById('bannerText').innerText = doc.data().text;
-          document.getElementById('bannerAlert').classList.remove('hidden');
-        } else {
-          document.getElementById('bannerAlert').classList.add('hidden');
-        }
-      });
-    }
-
-    async function saveProduct(e) {
-      e.preventDefault();
-      const btn = document.getElementById('saveProdBtn');
-      btn.innerText = "Processing...";
-      btn.disabled = true;
-
-      const title = document.getElementById('pName').value;
-      const category = document.getElementById('pCategory').value;
-      const price = parseFloat(document.getElementById('pPrice').value);
-      const desc = document.getElementById('pDesc').value;
-      const imageFile = document.getElementById('pImageFile').files[0];
-
-      // Blocked words validation
-      const fullText = (title + ' ' + desc).toLowerCase();
-      if (blockedWords.some(word => fullText.includes(word))) {
-        alert("Blocked Item: Electrical items are restricted. Please add hardware or plumbing items only.");
-        btn.innerText = "Upload to Store";
-        btn.disabled = false;
-        return;
-      }
-
-      try {
-        let imageUrl = '';
-        
-        // Upload image to Firebase Storage
-        if (imageFile) {
-          const storageRef = storage.ref(`products/${Date.now()}_${imageFile.name}`);
-          await storageRef.put(imageFile);
-          imageUrl = await storageRef.getDownloadURL();
-        }
-
-        await db.collection('products').add({
-          name: title,
-          category: category,
-          price: price,
-          description: desc,
-          imageUrl: imageUrl,
-          createdAt: firebase.firestore.FieldValue.serverTimestamp()
-        });
-
-        alert('Product added successfully!');
-        e.target.reset();
-      } catch (err) {
-        alert("Upload Error: " + err.message);
-      } finally {
-        btn.innerText = "Upload to Store";
-        btn.disabled = false;
-      }
-    }
-
-    async function saveBanner() {
-      const text = document.getElementById('bannerInput').value;
-      await db.collection('settings').doc('banner').set({ text: text });
-      alert('Banner announcement updated!');
-    }
-
-    // --- 5. RENDER UI ---
-    function renderProducts() {
-      const grid = document.getElementById('productGrid');
-      const search = document.getElementById('searchInput').value.toLowerCase();
-      const category = document.getElementById('categoryFilter').value;
-
-      const filtered = products.filter(p => {
-        const matchesSearch = p.name.toLowerCase().includes(search) || p.description?.toLowerCase().includes(search);
-        const matchesCat = category === 'All' || p.category === category;
-        return matchesSearch && matchesCat;
-      });
-
-      if (filtered.length === 0) {
-        grid.innerHTML = `<div class="col-span-full text-center py-12 text-gray-400">No items found matching criteria.</div>`;
-        return;
-      }
-
-      grid.innerHTML = filtered.map(p => `
-        <div class="bg-white rounded-lg border border-gray-200 overflow-hidden shadow-sm flex flex-col justify-between">
-          <div class="relative bg-gray-100 h-36 flex items-center justify-center overflow-hidden">
-            ${p.imageUrl ? `<img src="${p.imageUrl}" class="object-cover w-full h-full" />` : `<i class="fa-solid fa-wrench text-3xl text-gray-300"></i>`}
-            <button onclick="toggleWishlist('${p.id}')" class="absolute top-2 right-2 p-1.5 rounded-full bg-white/80 text-gray-600 hover:text-red-500">
-              <i class="${wishlist.includes(p.id) ? 'fa-solid fa-heart text-red-500' : 'fa-regular fa-heart'}"></i>
-            </button>
-          </div>
-          <div class="p-3 flex-grow flex flex-col justify-between">
-            <div>
-              <span class="text-[10px] font-bold uppercase text-amber-600 bg-amber-50 px-1.5 py-0.5 rounded">${p.category}</span>
-              <h4 class="font-semibold text-sm text-gray-800 line-clamp-1 mt-1">${p.name}</h4>
-              <p class="text-xs text-gray-500 line-clamp-2 mt-0.5">${p.description || ''}</p>
-            </div>
-            <div class="mt-3 flex items-center justify-between">
-              <span class="font-black text-slate-900 text-base">₹${p.price}</span>
-              <button onclick="addToCart('${p.id}')" class="bg-slate-900 hover:bg-slate-800 text-amber-400 p-2 rounded-lg text-xs">
-                <i class="fa-solid fa-plus"></i>
-              </button>
-            </div>
-          </div>
-        </div>
-      `).join('');
-      
-      updateBadges();
-    }
-
-    // --- 6. CART & WISHLIST LOGIC ---
-    function addToCart(id) {
-      const existing = cart.find(item => item.id === id);
-      if (existing) {
-        existing.qty += 1;
-      } else {
-        cart.push({ id, qty: 1 });
-      }
-      saveCart();
-    }
-
-    function saveCart() {
-      localStorage.setItem('vk_cart', JSON.stringify(cart));
-      updateBadges();
-      renderCartItems();
-    }
-
-    function toggleCart() {
-      const modal = document.getElementById('cartModal');
-      modal.classList.toggle('hidden');
-      modal.classList.toggle('flex');
-      renderCartItems();
-    }
-
-    function renderCartItems() {
-      const container = document.getElementById('cartItemsList');
-      if (cart.length === 0) {
-        container.innerHTML = `<div class="text-center py-8 text-gray-400">Your shopping cart is empty.</div>`;
-        updateCartTotals(0);
-        return;
-      }
-
-      let subtotal = 0;
-      container.innerHTML = cart.map(item => {
-        const prod = products.find(p => p.id === item.id);
-        if (!prod) return '';
-        const lineTotal = prod.price * item.qty;
-        subtotal += lineTotal;
-        return `
-          <div class="flex items-center justify-between py-2">
-            <div>
-              <h5 class="font-bold text-sm">${prod.name}</h5>
-              <div class="text-xs text-gray-500">₹${prod.price} × ${item.qty}</div>
-            </div>
-            <div class="flex items-center space-x-2">
-              <span class="font-semibold text-sm">₹${lineTotal}</span>
-              <button onclick="removeFromCart('${item.id}')" class="text-red-500 text-xs px-1"><i class="fa-solid fa-trash"></i></button>
-            </div>
-          </div>
-        `;
-      }).join('');
-
-      updateCartTotals(subtotal);
-    }
-
-    function removeFromCart(id) {
-      cart = cart.filter(i => i.id !== id);
-      saveCart();
-    }
-
-    function updateCartTotals(subtotal) {
-      let discount = activeCoupon ? (subtotal * activeCoupon.percent) / 100 : 0;
-      let total = Math.max(0, subtotal - discount);
-
-      document.getElementById('cartSubtotal').innerText = `₹${subtotal.toFixed(2)}`;
-      document.getElementById('cartDiscount').innerText = `-₹${discount.toFixed(2)}`;
-      document.getElementById('cartTotal').innerText = `₹${total.toFixed(2)}`;
-    }
-
-    function updateBadges() {
-      const cBadge = document.getElementById('cartBadge');
-      const totalCartQty = cart.reduce((acc, i) => acc + i.qty, 0);
-      cBadge.innerText = totalCartQty;
-      cBadge.classList.toggle('hidden', totalCartQty === 0);
-
-      const wBadge = document.getElementById('wishlistBadge');
-      wBadge.innerText = wishlist.length;
-      wBadge.classList.toggle('hidden', wishlist.length === 0);
-    }
-
-    function toggleWishlist(id) {
-      if (!id) return;
-      if (wishlist.includes(id)) {
-        wishlist = wishlist.filter(i => i !== id);
-      } else {
-        wishlist.push(id);
-      }
-      localStorage.setItem('vk_wishlist', JSON.stringify(wishlist));
-      renderProducts();
-    }
-
-    // --- 7. CHECKOUT & WHATSAPP ---
-    function checkoutWhatsApp() {
-      if (cart.length === 0) return alert('Cart is empty!');
-
-      let msg = `*New Order - V K Traders & Hardware*\n------------------------------------\n`;
-      let total = 0;
-
-      cart.forEach(item => {
-        const prod = products.find(p => p.id === item.id);
-        if (prod) {
-          const line = prod.price * item.qty;
-          total += line;
-          msg += `• ${prod.name} (x${item.qty}) - ₹${line}\n`;
-        }
-      });
-
-      msg += `------------------------------------\n*Total Amount: ₹${total.toFixed(2)}*\nLocation: Shivnagar, Maharashtra`;
-      
-      const whatsappUrl = `https://wa.me/?text=${encodeURIComponent(msg)}`;
-      window.open(whatsappUrl, '_blank');
-    }
-
-    // Boot App
-    window.addEventListener('DOMContentLoaded', listenToData);
-  </script>
 </body>
 </html>
