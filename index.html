@@ -1,195 +1,111 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>V K Traders & Hardware</title>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
-    <style>
-        :root {
-            --primary-blue: #2563eb;
-            --dark-navy: #1b2537;
-            --light-bg: #f3f4f6;
-            --card-bg: #ffffff;
-            --text-dark: #111827;
-            --text-muted: #6b7280;
-            --radius-lg: 20px;
-            --shadow-soft: 0 4px 15px rgba(0, 0, 0, 0.05);
-        }
-
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
-        body { background-color: var(--light-bg); color: var(--text-dark); padding-bottom: 90px; }
-
-        /* Header */
-        header {
-            background: #1b2537;
-            color: white; 
-            padding: 24px 20px 20px 20px;
-            border-bottom-left-radius: 28px; 
-            border-bottom-right-radius: 28px;
-            box-shadow: 0 6px 20px rgba(0,0,0,0.15);
-        }
-        .header-top { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 12px; }
-        .brand-title { font-size: 1.6rem; font-weight: 800; line-height: 1.15; letter-spacing: -0.5px; }
-        .header-actions { display: flex; gap: 8px; }
-        .btn-header {
-            background: rgba(255, 255, 255, 0.12); 
-            border: 1px solid rgba(255, 255, 255, 0.15);
-            color: white; padding: 10px 16px; border-radius: 22px; font-size: 0.85rem; font-weight: 600;
-            display: flex; align-items: center; gap: 6px; text-decoration: none;
-        }
-        .btn-header-primary { background: #2563eb; border: none; }
-        .sub-categories { font-size: 0.8rem; color: #9ca3af; }
-
-        /* Container & Grid Layout */
-        .container { padding: 16px; max-width: 600px; margin: 0 auto; }
-        .products-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
-
-        /* Product Card */
-        .product-card {
-            background: var(--card-bg); border-radius: var(--radius-lg); padding: 14px;
-            box-shadow: var(--shadow-soft); display: flex; flex-direction: column;
-            justify-content: space-between; border: 1px solid rgba(229, 231, 235, 0.8);
-        }
-
-        .image-container {
-            width: 100%; height: 150px; border-radius: 14px; overflow: hidden;
-            background: #f8fafc;
-            display: flex; align-items: center; justify-content: center; margin-bottom: 12px;
-        }
-        .image-container img { width: 100%; height: 100%; object-fit: cover; }
-
-        .category-tag { font-size: 0.68rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase; margin-bottom: 4px; letter-spacing: 0.3px; }
-        .product-name { font-size: 0.95rem; font-weight: 700; color: var(--text-dark); margin-bottom: 8px; line-height: 1.35; height: 2.7em; overflow: hidden; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; }
-        .price { font-size: 1.15rem; font-weight: 800; color: var(--primary-blue); margin-bottom: 12px; }
-        
-        .card-actions { display: flex; gap: 8px; }
-        .btn-fav { width: 38px; height: 38px; border-radius: 12px; background: #f3f4f6; border: none; color: #ef4444; display: flex; align-items: center; justify-content: center; cursor: pointer; font-size: 0.95rem; }
-        .btn-add { flex: 1; background: #0f172a; color: white; border: none; border-radius: 12px; font-size: 0.78rem; font-weight: 700; display: flex; align-items: center; justify-content: center; gap: 5px; cursor: pointer; }
-        
-        .status-msg { text-align: center; grid-column: span 2; font-weight: 600; color: var(--text-muted); padding: 30px 0; }
-
-        /* Bottom Floating Bar */
-        .bottom-nav { position: fixed; bottom: 0; left: 0; right: 0; background: white; padding: 12px 16px; box-shadow: 0 -4px 25px rgba(0,0,0,0.1); display: flex; gap: 12px; max-width: 600px; margin: 0 auto; border-top-left-radius: 20px; border-top-right-radius: 20px; z-index: 1000; }
-        .action-btn { flex: 1; padding: 14px; border-radius: 25px; font-weight: 700; font-size: 1rem; display: flex; align-items: center; justify-content: center; gap: 8px; text-decoration: none; color: white; }
-        .btn-call { background: linear-gradient(135deg, #2563eb, #1d4ed8); }
-        .btn-whatsapp { background: linear-gradient(135deg, #10b981, #059669); }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Panel & App</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 20px; text-align: center; }
+    .card { border: 1px solid #ccc; padding: 20px; border-radius: 8px; max-width: 400px; margin: 0 auto; }
+    button { padding: 10px 15px; background: #007bff; color: white; border: none; border-radius: 4px; cursor: pointer; margin-top: 10px; }
+    button:hover { background: #0056b3; }
+    .hidden { display: none; }
+    .error { color: red; margin-top: 10px; }
+  </style>
 </head>
 <body>
 
-    <header>
-        <div class="header-top">
-            <div class="brand-title">V K<br>Traders &<br>Hardware</div>
-            <div class="header-actions">
-                <a href="#" class="btn-header"><i class="fa-solid fa-box-archive"></i> Orders</a>
-                <a href="#" class="btn-header btn-header-primary"><i class="fa-solid fa-cart-shopping"></i> Cart (0)</a>
-            </div>
-        </div>
-        <div class="sub-categories">Premium Hardware • Plumbing • Sanitary • Tools</div>
-    </header>
+  <!-- Main View / Login Form -->
+  <div id="login-section" class="card">
+    <h2>Login / Admin Access</h2>
+    <input type="email" id="email" placeholder="Email" style="width: 90%; padding: 8px; margin-bottom: 8px;"><br>
+    <input type="password" id="password" placeholder="Password" style="width: 90%; padding: 8px; margin-bottom: 8px;"><br>
+    <button id="btn-login">Login</button>
+    <div id="login-error" class="error"></div>
+  </div>
 
-    <div class="container">
-        <div class="products-grid" id="productsGrid">
-            <div class="status-msg"><i class="fa-solid fa-circle-notch fa-spin"></i> Loading Products...</div>
-        </div>
-    </div>
+  <!-- Admin Panel View -->
+  <div id="admin-panel" class="card hidden">
+    <h2>Admin Dashboard</h2>
+    <p>Welcome, Admin!</p>
+    <button id="btn-action">Perform Admin Action</button><br>
+    <button id="btn-logout" style="background: #dc3545;">Logout</button>
+    <div id="status-msg"></div>
+  </div>
 
-    <div class="bottom-nav">
-        <a href="tel:+919876543210" class="action-btn btn-call"><i class="fa-solid fa-phone"></i> Call Now</a>
-        <a href="https://wa.me/919876543210" class="action-btn btn-whatsapp"><i class="fa-brands fa-whatsapp"></i> WhatsApp</a>
-    </div>
+  <!-- Firebase Scripts (v10 Modular) -->
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-app.js";
+    import { getAuth, signInWithEmailAndPassword, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-auth.js";
+    import { getFirestore, doc, setDoc } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-firestore.js";
 
-    <!-- Firebase Script -->
-    <script type="module">
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
-        import { getFirestore, collection, onSnapshot } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+    // 1. Apni Firebase Config yahan Replace karein
+    const firebaseConfig = {
+      apiKey: "YOUR_API_KEY",
+      authDomain: "YOUR_PROJECT_ID.firebaseapp.com",
+      projectId: "YOUR_PROJECT_ID",
+      storageBucket: "YOUR_PROJECT_ID.appspot.com",
+      messagingSenderId: "YOUR_SENDER_ID",
+      appId: "YOUR_APP_ID"
+    };
 
-        // Apna Firebase Project Configuration yahan replace karein
-        const firebaseConfig = {
-            apiKey: "YOUR_API_KEY",
-            authDomain: "YOUR_PROJECT_ID.firebaseapp.com",
-            projectId: "YOUR_PROJECT_ID",
-            storageBucket: "YOUR_PROJECT_ID.appspot.com",
-            messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
-            appId: "YOUR_APP_ID"
-        };
+    // 2. Firebase Initialize
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+    const db = getFirestore(app);
 
-        const app = initializeApp(firebaseConfig);
-        const db = getFirestore(app);
-        const grid = document.getElementById('productsGrid');
+    // DOM Elements
+    const loginSection = document.getElementById("login-section");
+    const adminPanel = document.getElementById("admin-panel");
+    const btnLogin = document.getElementById("btn-login");
+    const btnLogout = document.getElementById("btn-logout");
+    const btnAction = document.getElementById("btn-action");
+    const loginError = document.getElementById("login-error");
+    const statusMsg = document.getElementById("status-msg");
 
-        // High-Quality Default Product Images
-        const defaultProducts = [
-            { 
-                id: 1, 
-                name: "32 Ghungar Chal जोड़ी", 
-                category: "CATTLE ACCESSORIES", 
-                price: 400, 
-                image: "https://m.media-amazon.com/images/I/71R2oWjX-AL._SL1500_.jpg" 
-            },
-            { 
-                id: 2, 
-                name: "Bakri patti Ghungru mal", 
-                category: "CATTLE ACCESSORIES", 
-                price: 40, 
-                image: "https://m.media-amazon.com/images/I/61y4M8h0uPL._SL1200_.jpg" 
-            },
-            { 
-                id: 3, 
-                name: "Brass Cattle Bell Heavy", 
-                category: "HARDWARE", 
-                price: 180, 
-                image: "https://m.media-amazon.com/images/I/61N+E2qJ7SL._SL1000_.jpg" 
-            },
-            { 
-                id: 4, 
-                name: "Designer Nylon Belt Pair", 
-                category: "CATTLE ACCESSORIES", 
-                price: 120, 
-                image: "https://m.media-amazon.com/images/I/71wZc+6L7GL._SL1500_.jpg" 
-            }
-        ];
+    // 3. Auth State Observer (Button & Admin Panel Toggle Fix)
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        // User logged in -> Admin panel dikhao
+        loginSection.classList.add("hidden");
+        adminPanel.classList.remove("hidden");
+      } else {
+        // User logged out -> Login form dikhao
+        loginSection.classList.remove("hidden");
+        adminPanel.classList.add("hidden");
+      }
+    });
 
-        function renderProducts(items) {
-            grid.innerHTML = "";
-            items.forEach(p => {
-                grid.innerHTML += `
-                    <div class="product-card">
-                        <div class="image-container">
-                            <img src="${p.image}" alt="${p.name}" onerror="this.src='https://dummyimage.com/400x400/e2e8f0/1e293b.png&text=${encodeURIComponent(p.name)}'">
-                        </div>
-                        <div>
-                            <div class="category-tag">${p.category || 'General'}</div>
-                            <div class="product-name">${p.name}</div>
-                            <div class="price">₹${p.price}</div>
-                        </div>
-                        <div class="card-actions">
-                            <button class="btn-fav"><i class="fa-regular fa-heart"></i></button>
-                            <button class="btn-add"><i class="fa-solid fa-cart-plus"></i> Add to Cart</button>
-                        </div>
-                    </div>
-                `;
-            });
-        }
+    // 4. Login Button Click Listener
+    btnLogin.addEventListener("click", async () => {
+      loginError.innerText = "";
+      const email = document.getElementById("email").value;
+      const password = document.getElementById("password").value;
 
-        // Firebase Check Logic
-        if(firebaseConfig.apiKey === "YOUR_API_KEY") {
-            renderProducts(defaultProducts);
-        } else {
-            onSnapshot(collection(db, "products"), (snapshot) => {
-                if (snapshot.empty) {
-                    grid.innerHTML = `<div class="status-msg">No products found in database.</div>`;
-                    return;
-                }
-                const items = [];
-                snapshot.forEach(doc => items.push({ id: doc.id, ...doc.data() }));
-                renderProducts(items);
-            }, (error) => {
-                console.error(error);
-                renderProducts(defaultProducts);
-            });
-        }
-    </script>
+      try {
+        await signInWithEmailAndPassword(auth, email, password);
+      } catch (err) {
+        loginError.innerText = "Login failed: " + err.message;
+      }
+    });
+
+    // 5. Logout Button Listener
+    btnLogout.addEventListener("click", async () => {
+      await signOut(auth);
+    });
+
+    // 6. Action Button (Database Test)
+    btnAction.addEventListener("click", async () => {
+      try {
+        statusMsg.innerText = "Processing...";
+        await setDoc(doc(db, "testCollection", "testDoc"), {
+          lastUpdated: new Date().toISOString()
+        });
+        statusMsg.innerText = "Data saved successfully!";
+      } catch (err) {
+        statusMsg.innerText = "Error: " + err.message;
+      }
+    });
+  </script>
 </body>
 </html>
