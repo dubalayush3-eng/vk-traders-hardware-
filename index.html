@@ -8,35 +8,38 @@
     <style>
         :root {
             --primary-blue: #2563eb;
-            --dark-navy: #0f172a;
-            --light-bg: #f8fafc;
+            --dark-navy: #1b2537;
+            --light-bg: #f3f4f6;
             --card-bg: #ffffff;
-            --text-dark: #0f172a;
-            --text-muted: #64748b;
-            --radius-lg: 18px;
-            --shadow-soft: 0 10px 25px -5px rgba(0, 0, 0, 0.05);
+            --text-dark: #111827;
+            --text-muted: #6b7280;
+            --radius-lg: 20px;
+            --shadow-soft: 0 4px 15px rgba(0, 0, 0, 0.05);
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
         body { background-color: var(--light-bg); color: var(--text-dark); padding-bottom: 90px; }
 
-        /* Premium Header */
+        /* Header */
         header {
-            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
-            color: white; padding: 20px 16px;
-            border-bottom-left-radius: 24px; border-bottom-right-radius: 24px;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+            background: #1b2537;
+            color: white; 
+            padding: 24px 20px 20px 20px;
+            border-bottom-left-radius: 28px; 
+            border-bottom-right-radius: 28px;
+            box-shadow: 0 6px 20px rgba(0,0,0,0.15);
         }
         .header-top { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 12px; }
-        .brand-title { font-size: 1.4rem; font-weight: 800; line-height: 1.2; letter-spacing: -0.5px; }
+        .brand-title { font-size: 1.6rem; font-weight: 800; line-height: 1.15; letter-spacing: -0.5px; }
         .header-actions { display: flex; gap: 8px; }
         .btn-header {
-            background: rgba(255, 255, 255, 0.1); border: 1px solid rgba(255, 255, 255, 0.2);
-            color: white; padding: 8px 14px; border-radius: 20px; font-size: 0.85rem; font-weight: 600;
+            background: rgba(255, 255, 255, 0.12); 
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            color: white; padding: 10px 16px; border-radius: 22px; font-size: 0.85rem; font-weight: 600;
             display: flex; align-items: center; gap: 6px; text-decoration: none;
         }
-        .btn-header-primary { background: var(--primary-blue); border: none; }
-        .sub-categories { font-size: 0.78rem; color: #94a3b8; }
+        .btn-header-primary { background: #2563eb; border: none; }
+        .sub-categories { font-size: 0.8rem; color: #9ca3af; }
 
         /* Container & Grid Layout */
         .container { padding: 16px; max-width: 600px; margin: 0 auto; }
@@ -44,37 +47,31 @@
 
         /* Product Card */
         .product-card {
-            background: var(--card-bg); border-radius: var(--radius-lg); padding: 12px;
+            background: var(--card-bg); border-radius: var(--radius-lg); padding: 14px;
             box-shadow: var(--shadow-soft); display: flex; flex-direction: column;
-            justify-content: space-between; border: 1px solid rgba(226, 232, 240, 0.8);
+            justify-content: space-between; border: 1px solid rgba(229, 231, 235, 0.8);
         }
 
-        /* SVG Vector Image Container - Guarantees 100% Loading */
         .image-container {
-            width: 100%; height: 140px; border-radius: 12px; overflow: hidden;
-            background: linear-gradient(135deg, #e2e8f0 0%, #cbd5e1 100%);
-            display: flex; align-items: center; justify-content: center; margin-bottom: 10px;
-            position: relative;
+            width: 100%; height: 150px; border-radius: 14px; overflow: hidden;
+            background: #f8fafc;
+            display: flex; align-items: center; justify-content: center; margin-bottom: 12px;
         }
         .image-container img { width: 100%; height: 100%; object-fit: cover; }
-        .image-placeholder {
-            font-size: 2.5rem; color: #64748b; opacity: 0.6;
-            display: flex; align-items: center; justify-content: center;
-        }
 
-        .category-tag { font-size: 0.65rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase; margin-bottom: 4px; }
-        .product-name { font-size: 0.95rem; font-weight: 700; color: var(--text-dark); margin-bottom: 8px; height: 2.6em; overflow: hidden; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; }
-        .price { font-size: 1.1rem; font-weight: 800; color: var(--primary-blue); margin-bottom: 10px; }
+        .category-tag { font-size: 0.68rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase; margin-bottom: 4px; letter-spacing: 0.3px; }
+        .product-name { font-size: 0.95rem; font-weight: 700; color: var(--text-dark); margin-bottom: 8px; line-height: 1.35; height: 2.7em; overflow: hidden; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; }
+        .price { font-size: 1.15rem; font-weight: 800; color: var(--primary-blue); margin-bottom: 12px; }
         
         .card-actions { display: flex; gap: 8px; }
-        .btn-fav { width: 36px; height: 36px; border-radius: 10px; background: #f1f5f9; border: none; color: #ef4444; display: flex; align-items: center; justify-content: center; cursor: pointer; }
-        .btn-add { flex: 1; background: var(--dark-navy); color: white; border: none; border-radius: 10px; font-size: 0.75rem; font-weight: 600; display: flex; align-items: center; justify-content: center; gap: 4px; cursor: pointer; }
+        .btn-fav { width: 38px; height: 38px; border-radius: 12px; background: #f3f4f6; border: none; color: #ef4444; display: flex; align-items: center; justify-content: center; cursor: pointer; font-size: 0.95rem; }
+        .btn-add { flex: 1; background: #0f172a; color: white; border: none; border-radius: 12px; font-size: 0.78rem; font-weight: 700; display: flex; align-items: center; justify-content: center; gap: 5px; cursor: pointer; }
         
         .status-msg { text-align: center; grid-column: span 2; font-weight: 600; color: var(--text-muted); padding: 30px 0; }
 
         /* Bottom Floating Bar */
-        .bottom-nav { position: fixed; bottom: 0; left: 0; right: 0; background: white; padding: 12px 16px; box-shadow: 0 -4px 25px rgba(0,0,0,0.1); display: flex; gap: 12px; max-width: 600px; margin: 0 auto; border-top-left-radius: 16px; border-top-right-radius: 16px; }
-        .action-btn { flex: 1; padding: 14px; border-radius: 25px; font-weight: 700; font-size: 0.95rem; display: flex; align-items: center; justify-content: center; gap: 8px; text-decoration: none; color: white; }
+        .bottom-nav { position: fixed; bottom: 0; left: 0; right: 0; background: white; padding: 12px 16px; box-shadow: 0 -4px 25px rgba(0,0,0,0.1); display: flex; gap: 12px; max-width: 600px; margin: 0 auto; border-top-left-radius: 20px; border-top-right-radius: 20px; z-index: 1000; }
+        .action-btn { flex: 1; padding: 14px; border-radius: 25px; font-weight: 700; font-size: 1rem; display: flex; align-items: center; justify-content: center; gap: 8px; text-decoration: none; color: white; }
         .btn-call { background: linear-gradient(135deg, #2563eb, #1d4ed8); }
         .btn-whatsapp { background: linear-gradient(135deg, #10b981, #059669); }
     </style>
@@ -108,7 +105,7 @@
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
         import { getFirestore, collection, onSnapshot } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
 
-        // Replace with your Firebase Project Configuration
+        // Apna Firebase Project Configuration yahan replace karein
         const firebaseConfig = {
             apiKey: "YOUR_API_KEY",
             authDomain: "YOUR_PROJECT_ID.firebaseapp.com",
@@ -122,26 +119,45 @@
         const db = getFirestore(app);
         const grid = document.getElementById('productsGrid');
 
-        // Fallback sample data in case Firebase is not configured yet
+        // High-Quality Default Product Images
         const defaultProducts = [
-            { id: 1, name: "32 Ghungar Chal जोड़ी", category: "CATTLE ACCESSORIES", price: 400, icon: "fa-ring" },
-            { id: 2, name: "Bakri patti Ghungru mal", category: "CATTLE ACCESSORIES", price: 40, icon: "fa-gem" },
-            { id: 3, name: "Brass Cattle Bell Heavy", category: "HARDWARE", price: 180, icon: "fa-bell" },
-            { id: 4, name: "Designer Nylon Belt Pair", category: "CATTLE ACCESSORIES", price: 120, icon: "fa-ribbon" }
+            { 
+                id: 1, 
+                name: "32 Ghungar Chal जोड़ी", 
+                category: "CATTLE ACCESSORIES", 
+                price: 400, 
+                image: "https://m.media-amazon.com/images/I/71R2oWjX-AL._SL1500_.jpg" 
+            },
+            { 
+                id: 2, 
+                name: "Bakri patti Ghungru mal", 
+                category: "CATTLE ACCESSORIES", 
+                price: 40, 
+                image: "https://m.media-amazon.com/images/I/61y4M8h0uPL._SL1200_.jpg" 
+            },
+            { 
+                id: 3, 
+                name: "Brass Cattle Bell Heavy", 
+                category: "HARDWARE", 
+                price: 180, 
+                image: "https://m.media-amazon.com/images/I/61N+E2qJ7SL._SL1000_.jpg" 
+            },
+            { 
+                id: 4, 
+                name: "Designer Nylon Belt Pair", 
+                category: "CATTLE ACCESSORIES", 
+                price: 120, 
+                image: "https://m.media-amazon.com/images/I/71wZc+6L7GL._SL1500_.jpg" 
+            }
         ];
 
         function renderProducts(items) {
             grid.innerHTML = "";
             items.forEach(p => {
-                const imgHTML = p.image 
-                    ? `<img src="${p.image}" alt="${p.name}" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-                       <div class="image-placeholder" style="display:none;"><i class="fa-solid ${p.icon || 'fa-box-open'}"></i></div>`
-                    : `<div class="image-placeholder"><i class="fa-solid ${p.icon || 'fa-box-open'}"></i></div>`;
-
                 grid.innerHTML += `
                     <div class="product-card">
                         <div class="image-container">
-                            ${imgHTML}
+                            <img src="${p.image}" alt="${p.name}" onerror="this.src='https://dummyimage.com/400x400/e2e8f0/1e293b.png&text=${encodeURIComponent(p.name)}'">
                         </div>
                         <div>
                             <div class="category-tag">${p.category || 'General'}</div>
@@ -157,7 +173,7 @@
             });
         }
 
-        // Try Loading from Firebase; fallback to defaults if keys are placeholder
+        // Firebase Check Logic
         if(firebaseConfig.apiKey === "YOUR_API_KEY") {
             renderProducts(defaultProducts);
         } else {
