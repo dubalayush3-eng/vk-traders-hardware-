@@ -8,6 +8,9 @@
 <meta name="robots" content="index, follow, max-image-preview:large">
 <meta name="author" content="V K Traders & Hardware">
 <meta name="theme-color" content="#0d47a1">
+<link rel="manifest" href="manifest.json">
+<link rel="icon" href="icon-192.png">
+<link rel="apple-touch-icon" href="icon-192.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
@@ -52,8 +55,14 @@ h1{font-size:22px;margin:0}#secretAdminLogo{cursor:pointer;user-select:none;-web
 
 .status-line{font-size:12px;color:var(--muted);margin-top:8px}
 
-.hero{padding:34px 5%;background:linear-gradient(180deg,#fff,#f8fbff)}
-.hero-inner{max-width:1180px;margin:auto;display:grid;grid-template-columns:1.5fr .8fr;gap:28px;align-items:center}
+.hero{padding:34px 5%;background:linear-gradient(180deg,#fff,#f8fbff);position:relative;overflow:hidden}
+.hero::before,.hero::after{content:"";position:absolute;border-radius:50%;filter:blur(55px);z-index:0;pointer-events:none}
+.hero::before{width:280px;height:280px;background:radial-gradient(circle,#0d47a133,transparent 70%);top:-90px;right:-60px;animation:heroFloat1 10s ease-in-out infinite}
+.hero::after{width:220px;height:220px;background:radial-gradient(circle,#f7931e2e,transparent 70%);bottom:-80px;left:-50px;animation:heroFloat2 12s ease-in-out infinite}
+@keyframes heroFloat1{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(-18px,22px) scale(1.08)}}
+@keyframes heroFloat2{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(16px,-16px) scale(1.05)}}
+@media(prefers-reduced-motion:reduce){header,.hero::before,.hero::after{animation:none!important}}
+.hero-inner{max-width:1180px;margin:auto;display:grid;grid-template-columns:1.5fr .8fr;gap:28px;align-items:center;position:relative;z-index:1}
 .hero h2{margin:0 0 10px;font-size:34px;line-height:1.12}.hero p{margin:0;color:var(--muted);font-size:18px;line-height:1.55}
 .hero-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}.hero-btn{display:inline-block;text-decoration:none;border-radius:12px;padding:12px 16px;font-weight:800}.hero-primary{background:var(--blue);color:#fff}.hero-secondary{background:#eaf2ff;color:var(--blue)}
 .hero-box{background:#fff;border:1px solid var(--line);border-radius:20px;padding:22px;box-shadow:0 8px 30px #0d47a112}.hero-box strong{font-size:29px;color:var(--blue)}.hero-box p{font-size:14px;margin-top:4px}
@@ -69,25 +78,32 @@ h1{font-size:22px;margin:0}#secretAdminLogo{cursor:pointer;user-select:none;-web
 .photo img{width:100%;height:100%;object-fit:contain}.photo .photo-count{position:absolute;right:7px;bottom:7px;background:#000b;color:#fff;border-radius:999px;padding:4px 7px;font-size:11px}
 .badges{position:absolute;left:16px;top:16px;display:flex;gap:5px;flex-wrap:wrap;z-index:2}.badge{padding:5px 7px;border-radius:999px;color:#fff;font-size:10px;font-weight:800}.badge-featured{background:var(--orange)}.badge-popular{background:#7b1fa2}.badge-offer{background:var(--red)}.badge-stock{background:#555}
 .card h3{font-size:16px;margin:7px 0 4px;line-height:1.3}.card .category{color:var(--muted);font-size:12px}
-.price{color:var(--blue);font-size:18px;font-weight:800;margin:6px 0}.old-price{text-decoration:line-through;color:#8b95a7;font-size:13px;margin-left:5px;font-weight:400}.card-actions{display:flex;gap:7px}.card-actions button{flex:1}
+.price{color:var(--blue);font-size:18px;font-weight:800;margin:6px 0}.unit-tag{font-size:11px;font-weight:600;color:var(--muted)}.old-price{text-decoration:line-through;color:#8b95a7;font-size:13px;margin-left:5px;font-weight:400}.card-actions{display:flex;gap:7px}.card-actions button{flex:1}
 .card button,.admin button,.box button{background:var(--blue);color:#fff;border:0;border-radius:9px;padding:9px 11px;font-weight:800}.heart-btn{flex:0 0 42px!important;background:#f0f4fa!important;color:#d32f2f!important;font-size:18px}
 .out-btn{background:#8b95a7!important;cursor:not-allowed!important}.stock-off{opacity:.72}
 .load{text-align:center;padding:15px 0 55px}.load button{background:var(--blue);color:#fff;border:0;border-radius:10px;padding:12px 20px;font-weight:800}
-.panel{display:none;position:fixed;inset:0;background:#0009;z-index:200;overflow:auto;padding:25px 12px}.box{background:#fff;max-width:760px;margin:20px auto;padding:20px;border-radius:16px;box-shadow:0 15px 60px #0004}.close{float:right;background:#555!important}.box input,.box select,.box textarea{display:block;width:100%;padding:12px;margin:8px 0;border:1px solid #ccd3df;border-radius:9px}.box textarea{min-height:80px;resize:vertical}
+.panel{display:none;position:fixed;inset:0;background:#0009;z-index:200;overflow:auto;padding:25px 12px}.box{background:#fff;max-width:760px;margin:auto;padding:20px;border-radius:16px;box-shadow:0 15px 60px #0004}.close{float:right;background:#555!important}.box input,.box select,.box textarea{display:block;width:100%;padding:12px;margin:8px 0;border:1px solid #ccd3df;border-radius:9px}.box textarea{min-height:80px;resize:vertical}
 .notice{background:#fff7d6;padding:12px;border-radius:10px;margin:12px 0}.success{background:#e9f9ef;padding:12px;border-radius:10px;margin:12px 0}
 .admin{position:fixed;right:12px;bottom:86px;z-index:160}.admin button{box-shadow:0 5px 18px #0003}
 .admin-product-row{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:11px 0;border-bottom:1px solid #eee}.admin-product-info{min-width:0;overflow-wrap:anywhere}.admin-product-info small{display:block;color:var(--muted);margin-top:3px}.admin-product-actions{display:flex;gap:7px;flex-wrap:wrap;justify-content:flex-end}.edit-btn{background:var(--blue)!important}.danger-btn{background:var(--red)!important}.secondary-btn{background:#667085!important}
 .edit-photo-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}.edit-photo-box{border:1px solid var(--line);border-radius:10px;padding:8px}.edit-photo-box img{width:100%;height:130px;object-fit:contain;background:#f4f6f8;border-radius:8px}
 .check-row{display:flex;gap:15px;flex-wrap:wrap;margin:10px 0}.check-row label{display:flex;align-items:center;gap:6px;font-weight:700}.check-row input{width:auto;margin:0}
-.cart-item-row{display:flex;align-items:center;gap:10px;padding:12px 0;border-bottom:1px solid #e8ecf2}.cart-item-info{display:flex;flex-direction:column;gap:4px;min-width:0;flex:1}.cart-item-info b{overflow-wrap:anywhere}.cart-item-info span{color:var(--muted)}.qty{display:flex;align-items:center;gap:7px}.qty button{width:30px;height:30px;padding:0;border-radius:8px}.cart-remove-btn{background:var(--red)!important;white-space:nowrap;padding:8px 10px!important}.invoice-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}.invoice-actions button{flex:1;min-width:180px}.whatsapp-order-btn{background:var(--green)!important}.bill-btn{background:#1459a5!important}
+.cart-item-row{display:flex;align-items:center;gap:10px;padding:12px 0;border-bottom:1px solid #e8ecf2}.cart-item-info{display:flex;flex-direction:column;gap:4px;min-width:0;flex:1}.cart-item-info b{overflow-wrap:anywhere}.cart-item-info span{color:var(--muted)}.qty{display:flex;align-items:center;gap:7px}.qty button{width:30px;height:30px;padding:0;border-radius:8px;flex:0 0 30px}
+.qty-input{width:58px;text-align:center;border:1px solid #ccd3df;border-radius:8px;padding:6px 2px;font-weight:900;font-size:15px;color:var(--ink);-moz-appearance:textfield}
+.qty-input::-webkit-outer-spin-button,.qty-input::-webkit-inner-spin-button{-webkit-appearance:none;margin:0}.cart-remove-btn{background:var(--red)!important;white-space:nowrap;padding:8px 10px!important}.invoice-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}.invoice-actions button{flex:1;min-width:180px}.whatsapp-order-btn{background:var(--green)!important}.bill-btn{background:#1459a5!important}
 .customer-form{background:#f5f7fb;border-radius:12px;padding:12px;margin:14px 0}.customer-form label{display:block;font-weight:bold;margin-top:9px}.customer-form input,.customer-form textarea,.customer-form select{display:block;width:100%;padding:11px;margin-top:5px;border:1px solid #ccd3df;border-radius:8px;font:inherit}.customer-form textarea{min-height:75px;resize:vertical}
 .invoice-summary{background:#fff;border:1px solid #e3e7ef;border-radius:10px;padding:12px;margin-top:12px}
 .wish-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.wish-item{border:1px solid var(--line);border-radius:10px;padding:10px;display:flex;justify-content:space-between;gap:8px}
-.gallery{display:none;position:fixed;inset:0;background:#000e;z-index:400;align-items:center;justify-content:center;padding:18px}.gallery-inner{max-width:900px;width:100%;text-align:center;position:relative}.gallery img{max-width:100%;max-height:75vh;object-fit:contain;border-radius:12px}.gallery-close{position:absolute;right:0;top:-42px;background:#fff;color:#111;border:0;border-radius:50%;width:36px;height:36px;font-size:20px}.gallery-nav{display:flex;justify-content:center;gap:10px;margin-top:12px}.gallery-nav button{background:#fff;color:#111;border:0;border-radius:9px;padding:10px 15px;font-weight:800}
+.gallery{display:none;position:fixed;inset:0;background:#000e;z-index:400;align-items:flex-start;justify-content:center;padding:18px;overflow-y:auto}.gallery-inner{max-width:900px;width:100%;text-align:center;position:relative}.gallery img{max-width:100%;max-height:75vh;object-fit:contain;border-radius:12px}.gallery-close{position:absolute;right:0;top:-42px;background:#fff;color:#111;border:0;border-radius:50%;width:36px;height:36px;font-size:20px}.gallery-nav{display:flex;justify-content:center;gap:10px;margin-top:12px}.gallery-nav button{background:#fff;color:#111;border:0;border-radius:9px;padding:10px 15px;font-weight:800}
 .contact-section{padding:35px 5% 0;background:#fff}.contact-card{max-width:1180px;margin:auto;background:linear-gradient(135deg,#f7931e,#ef6c00);border-radius:22px;padding:28px 7%;min-height:180px}.contact-card h2{color:#fff;font-size:28px;font-weight:600;margin:0 0 20px}.contact-whatsapp{display:inline-block;background:#fff;color:var(--ink);text-decoration:none;font-weight:bold;font-size:18px;padding:15px 25px;border-radius:14px}
 .site-footer{background:#06162b;color:#d9e1ee;margin-top:55px;padding:60px 5% 105px}.footer-inner{max-width:1180px;margin:auto;display:grid;grid-template-columns:1.4fr 1fr 1.4fr;gap:45px}.site-footer h2{color:#fff;font-size:27px;margin:0 0 18px}.site-footer h3{color:#fff;font-size:20px;margin:0 0 18px}.site-footer p{font-size:16px;line-height:1.65;margin:0}.footer-links a,.footer-contact a{display:block;color:#d9e1ee;text-decoration:none;font-size:16px;margin:0 0 11px}.copyright{grid-column:1/-1;border-top:1px solid #ffffff18;padding-top:25px;text-align:center;font-size:14px}
 .bottom-actions{position:fixed;left:20px;right:20px;bottom:14px;display:flex;gap:14px;z-index:150}.bottom-actions a{flex:1;text-align:center;text-decoration:none;color:#fff;font-weight:bold;font-size:18px;padding:16px 10px;border-radius:40px;box-shadow:0 4px 14px #0004}.call-btn{background:#1459a5}.whatsapp-btn{background:#12a84f}
-.bill-panel{display:none;position:fixed;inset:0;background:#0009;z-index:350;overflow:auto;padding:18px 10px}.bill-wrap{background:#fff;max-width:900px;margin:10px auto;padding:22px;color:#111;border-radius:8px}.bill-head{text-align:center;border-bottom:2px solid #222;padding-bottom:12px;margin-bottom:12px}.bill-head h1{font-size:26px;color:#111;margin:0 0 4px}.bill-head p{margin:3px 0;font-size:14px}.bill-meta{display:flex;justify-content:space-between;gap:18px;border-bottom:1px solid #999;padding:10px 0;font-size:14px}.bill-table{width:100%;border-collapse:collapse;margin-top:16px;font-size:13px}.bill-table th,.bill-table td{border:1px solid #777;padding:8px 7px}.bill-table th{font-weight:700;text-align:center;background:#f3f3f3}.bill-table td:nth-child(1),.bill-table td:nth-child(3),.bill-table td:nth-child(5){text-align:center}.bill-table td:nth-child(4),.bill-table td:nth-child(6){text-align:right}.bill-totals{margin-left:auto;width:320px;margin-top:10px;font-size:14px}.bill-totals div{display:flex;justify-content:space-between;padding:5px 0}.bill-totals .grand{border-top:2px solid #222;font-size:18px;font-weight:700;padding-top:8px}.bill-footer{margin-top:30px;text-align:center;font-size:13px}.bill-buttons{display:flex;gap:10px;justify-content:center;margin-top:18px}.bill-buttons button{padding:11px 18px;border:0;border-radius:8px;color:#fff;font-weight:700}.bill-print{background:#087f3f}.bill-close{background:#555}
+.bill-panel{display:none;position:fixed;inset:0;background:#0009;z-index:350;overflow:auto;padding:18px 10px}.bill-wrap{background:#fff;max-width:900px;margin:auto;padding:22px;color:#111;border-radius:8px}.bill-head{text-align:center;border-bottom:2px solid #222;padding-bottom:12px;margin-bottom:12px}.bill-head h1{font-size:26px;color:#111;margin:0 0 4px}.bill-head p{margin:3px 0;font-size:14px}.bill-meta{display:flex;justify-content:space-between;gap:18px;border-bottom:1px solid #999;padding:10px 0;font-size:14px}.bill-table{width:100%;border-collapse:collapse;margin-top:16px;font-size:13px}.bill-table th,.bill-table td{border:1px solid #777;padding:8px 7px}.bill-table th{font-weight:700;text-align:center;background:#f3f3f3}.bill-table td:nth-child(1),.bill-table td:nth-child(3),.bill-table td:nth-child(5){text-align:center}.bill-table td:nth-child(4),.bill-table td:nth-child(6){text-align:right}.bill-totals{margin-left:auto;width:320px;margin-top:10px;font-size:14px}.bill-totals div{display:flex;justify-content:space-between;padding:5px 0}.bill-totals .grand{border-top:2px solid #222;font-size:18px;font-weight:700;padding-top:8px}.bill-footer{margin-top:30px;text-align:center;font-size:13px}.bill-buttons{display:flex;gap:10px;justify-content:center;margin-top:18px;flex-wrap:wrap}.bill-buttons button{padding:11px 18px;border:0;border-radius:8px;color:#fff;font-weight:700}.bill-print{background:#087f3f}.bill-close{background:#555}.bill-pay{background:#7b1fa2}
+.payment-screenshot-box{border:1px dashed #ccd3df;border-radius:10px;padding:14px;margin-top:16px;text-align:center}
+.payment-screenshot-box label{display:block;margin-bottom:8px}
+.payment-screenshot-box input[type=file]{margin:0 auto;display:block}
+.payment-screenshot-box img{max-width:160px;border-radius:8px;margin-top:10px}
+.ss-send-btn{margin-top:10px;border:0;border-radius:8px;padding:10px 16px;background:var(--green);color:#fff;font-weight:800}
 @media(max-width:900px){.grid{grid-template-columns:repeat(3,minmax(0,1fr))}.mini-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.hero-inner{grid-template-columns:1fr}}
 @media(max-width:600px){
 .header-actions{gap:5px}.orders-top-btn{padding:9px 10px;font-size:11px}.cart{padding:9px 11px;font-size:12px}
@@ -102,7 +118,7 @@ header{padding:12px 4%}h1{font-size:18px}.brand-sub{font-size:11px}.hero{padding
 .edit-photo-grid{grid-template-columns:1fr}.wish-grid{grid-template-columns:1fr}.cart-item-row{align-items:flex-start;flex-wrap:wrap}.qty{order:3;width:100%}
 .bill-wrap{padding:12px}.bill-head h1{font-size:21px}.bill-meta{font-size:12px}.bill-table{font-size:11px}.bill-table th,.bill-table td{padding:6px 4px}.bill-totals{width:100%}
 }
-@media print{body *{visibility:hidden!important}#billPanel,#billPanel *{visibility:visible!important}#billPanel{display:block!important;position:absolute!important;inset:0!important;background:#fff!important;padding:0!important;overflow:visible!important}.bill-wrap{max-width:none!important;margin:0!important;border-radius:0!important;padding:10mm!important}.bill-buttons{display:none!important}@page{size:A4;margin:8mm}}
+@media print{body *{visibility:hidden!important}#billPanel,#billPanel *{visibility:visible!important}#billPanel{display:block!important;position:absolute!important;inset:0!important;background:#fff!important;padding:0!important;overflow:visible!important}.bill-wrap{max-width:none!important;margin:0!important;border-radius:0!important;padding:10mm!important}.bill-buttons{display:none!important}#paymentScreenshotBox{display:none!important}@page{size:A4;margin:8mm}}
 
 /* ===== V6 PREMIUM LOOK ===== */
 :root{--premium-blue:#0d47a1;--premium-dark:#071a33;--premium-soft:#f5f8fc;--premium-gold:#f4a62a}
@@ -223,7 +239,8 @@ button:active{transform:scale(.96)}
 ::-webkit-scrollbar-track{background:#eef2f9}
 ::-webkit-scrollbar-thumb{background:linear-gradient(180deg,#1565c0,#0d47a1);border-radius:10px}
 
-header{background:linear-gradient(120deg,#071a33 0%,#0d47a1 55%,#1768c4 100%);position:sticky;border-bottom:1px solid #f4a62a55}
+header{background:linear-gradient(120deg,#071a33 0%,#0d47a1 45%,#1768c4 75%,#0d47a1 100%);background-size:250% 250%;animation:headerGradientFlow 10s ease infinite;position:sticky;border-bottom:1px solid #f4a62a55}
+@keyframes headerGradientFlow{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
 header:after{content:"";position:absolute;left:0;right:0;bottom:0;height:2px;background:linear-gradient(90deg,transparent,#f4a62a,transparent)}
 h1#secretAdminLogo{background:linear-gradient(90deg,#fff,#dfe9fb);-webkit-background-clip:text;background-clip:text;color:transparent;font-weight:800}
 .brand-sub{letter-spacing:.3px}
@@ -323,20 +340,97 @@ h1#secretAdminLogo{background:linear-gradient(90deg,#fff,#dfe9fb);-webkit-backgr
 #backToTop:active{transform:scale(.92)}
 @media(max-width:600px){#backToTop{right:14px;bottom:148px;width:42px;height:42px;font-size:18px}}
 
+/* ===== V10 HIDE-PRODUCT + ADMIN REFINEMENT PASS ===== */
+.admin-product-row{transition:.18s opacity ease,.18s background ease;border-radius:12px;padding:12px 6px}
+.admin-product-row:hover{background:#f7f9fd}
+.admin-product-row.is-hidden-product{opacity:.62;background:#faf7f2}
+.admin-product-info b{display:inline-flex;align-items:center;gap:7px;flex-wrap:wrap}
+.hidden-tag{background:linear-gradient(135deg,#6b7686,#454f5e);color:#fff;font-size:10px;font-weight:800;padding:3px 8px;border-radius:999px;letter-spacing:.2px}
+.hidden-count-pill{display:inline-block;background:linear-gradient(135deg,#f4a62a,#e6790e);color:#fff;font-size:11px;font-weight:800;padding:4px 10px;border-radius:999px;vertical-align:middle;margin-left:6px}
+.hide-btn{background:linear-gradient(135deg,#6b7686,#454f5e)!important}
+.show-btn{background:linear-gradient(135deg,#12a84f,#0d8f42)!important}
+.admin-product-actions button{white-space:nowrap}
+#manage h3{display:flex;align-items:center;flex-wrap:wrap;gap:4px;color:#071a33;font-size:16px}
+
+/* Sharper professional edges: admin panel + inputs */
+.box{position:relative}
+.close{position:absolute!important;top:18px;right:18px;float:none;margin:0;z-index:5;border-radius:9px!important;font-weight:700;padding:9px 15px;box-shadow:0 4px 12px #0003}
+.box h2{font-weight:800;border-bottom:1px solid #eef1f6;padding:0 96px 14px 0;margin:0 0 16px}
+.box h3{font-weight:800;font-size:16px;margin-top:22px;position:relative;padding-left:12px}
+.box h3:before{content:"";position:absolute;left:0;top:2px;bottom:2px;width:4px;border-radius:3px;background:linear-gradient(180deg,var(--blue),#f4a62a)}
+.box input,.box select,.box textarea{transition:.15s border-color ease,.15s box-shadow ease;border:1px solid #d8dfeb}
+.notice{border-left:4px solid #f4a62a;background:linear-gradient(135deg,#fffaf0,#fff7d6)}
+.success{border-left:4px solid #12a84f}
+@media(max-width:600px){.box h2{padding-right:78px;font-size:19px}.close{top:14px;right:14px;padding:8px 12px;font-size:13px}}
+
+/* Product card: extra premium finish */
+.card{border-radius:18px}
+.card h3{font-weight:700}
+.category{text-transform:uppercase;letter-spacing:.4px;font-size:10.5px;font-weight:700;color:#9aa4b6}
+.card-actions button:not(.heart-btn){letter-spacing:.15px}
+.card-actions button:not(.heart-btn):not(.out-btn):hover{filter:brightness(1.1);box-shadow:0 6px 18px #0d47a13a}
+
+/* Section headers: consistent premium rhythm */
+.section-head h2{display:flex;align-items:center;gap:8px}
+
+/* ===== V11 MODAL / OVERLAY PREMIUM PASS ===== */
+@keyframes overlayFadeIn{from{opacity:0}to{opacity:1}}
+@keyframes boxPopIn{from{opacity:0;transform:translateY(18px) scale(.96)}to{opacity:1;transform:translateY(0) scale(1)}}
+.panel,.bill-panel{background:linear-gradient(160deg,#050b16e3,#0d2038e3);backdrop-filter:blur(7px);-webkit-backdrop-filter:blur(7px);animation:overlayFadeIn .22s ease both}
+.gallery-panel,.gallery{background:linear-gradient(160deg,#03060cec,#0a1526ec);backdrop-filter:blur(9px);-webkit-backdrop-filter:blur(9px);animation:overlayFadeIn .22s ease both}
+.box,.bill-wrap,.gallery-box,.gallery-inner{animation:boxPopIn .28s cubic-bezier(.2,.8,.3,1) both}
+.box{box-shadow:0 24px 70px #020814a3,0 0 0 1px #ffffff;border:1px solid #e6eaf2}
+#orderReviewPanel{z-index:400}
+
+/* ===== V12 ENGAGEMENT PASS: language, share, festival, delivery-check ===== */
+.lang-select{background:#ffffff22;color:#fff;border:1px solid #ffffff40;border-radius:10px;padding:9px 8px;font-weight:700;font-size:13px}
+.lang-select option{color:#111}
+.share-btn{flex:0 0 42px!important;background:#eaf2ff!important;color:var(--blue)!important;font-size:16px}
+.delivery-check{margin-top:14px;padding-top:12px;border-top:1px solid #e3e8f0}
+.delivery-check label{display:block;font-weight:800;font-size:13px;margin-bottom:6px}
+.delivery-check-row{display:flex;gap:7px}
+.delivery-check-row input{flex:1;padding:10px;border-radius:9px;border:1px solid #ccd3df;font:inherit}
+.delivery-check-row button{border:0;border-radius:9px;padding:10px 12px;background:var(--blue);color:#fff;font-weight:800;white-space:nowrap}
+.delivery-result{margin-top:8px;font-size:13px;font-weight:700;padding:8px 10px;border-radius:8px}
+.delivery-result.ok{background:#e9f9ef;color:#087f3f}
+.delivery-result.no{background:#fff0f0;color:#c62828}
+
+/* Festival themes — applied as a class on <body> */
+body.festival-diwali .hero{background:linear-gradient(135deg,#4a1a03 0%,#a6470d 55%,#f4a62a 100%)!important}
+body.festival-diwali header{background:linear-gradient(135deg,#7a2e02,#c65a06)!important}
+body.festival-diwali:before{content:"";position:fixed;inset:0;pointer-events:none;z-index:0;font-size:22px;opacity:.5;background-image:none}
+.festival-banner{display:none;text-align:center;padding:9px 12px;font-weight:800;font-size:13px;color:#fff}
+body.festival-diwali .festival-banner{display:block;background:linear-gradient(135deg,#a6470d,#f4a62a)}
+body.festival-holi .hero{background:linear-gradient(135deg,#6a1b9a 0%,#d81b60 45%,#f7931e 100%)!important}
+body.festival-holi header{background:linear-gradient(135deg,#6a1b9a,#d81b60)!important}
+body.festival-holi .festival-banner{display:block;background:linear-gradient(135deg,#6a1b9a,#f7931e)}
+body.festival-independence .hero{background:linear-gradient(135deg,#e07b00 0%,#ffffff 50%,#0b6e2c 100%)!important;color:#111!important}
+body.festival-independence .hero h2,body.festival-independence .hero p{color:#111!important}
+body.festival-independence .festival-banner{display:block;background:linear-gradient(90deg,#ff9933,#ffffff,#128807);color:#111}
+body.festival-newyear .hero{background:linear-gradient(135deg,#071a33 0%,#4a148c 55%,#0d47a1 100%)!important}
+body.festival-newyear .festival-banner{display:block;background:linear-gradient(135deg,#4a148c,#0d47a1)}
+@media(max-width:600px){.lang-select{padding:8px 6px;font-size:11px}.delivery-check-row{flex-direction:column}.delivery-check-row button{width:100%}}
 </style>
 
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"HardwareStore","name":"V K Traders & Hardware","description":"Hardware, plumbing, sanitary products and tools. Good quality material and home delivery available.","telephone":"+91-9623009626","address":{"@type":"PostalAddress","streetAddress":"A/P Retre Karkhana, Shivnagar","addressRegion":"Maharashtra","addressCountry":"IN"},"openingHours":"Mo-Fr 09:00-20:30, Su 09:00-20:30","url":"https://vk-traders-hardware.web.app/","hasMap":"https://maps.app.goo.gl/cnreYKyo2iWvuaAa8"}</script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-08X6GP7N26"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date());gtag("config","G-08X6GP7N26");</script>
 </head>
 
 <body>
 <header>
   <div>
     <h1 id="secretAdminLogo" aria-label="V K Traders and Hardware">V K Traders &amp; Hardware</h1>
-    <div class="brand-sub">Quality Hardware • Plumbing • Sanitary • Tools</div>
+    <div class="brand-sub" data-i18n="brandSub">Quality Hardware • Plumbing • Sanitary • Tools</div>
   </div>
   <div class="header-actions">
-    <button class="orders-top-btn" onclick="openOrders()">📦 My Orders</button>
-    <button class="cart" onclick="openCart()">🛒 Cart (<span id="count">0</span>)</button>
+    <select id="langSelect" class="lang-select" onchange="setLanguage(this.value)" aria-label="Language">
+      <option value="en">EN</option>
+      <option value="hi">हिंदी</option>
+      <option value="mr">मराठी</option>
+    </select>
+    <button class="orders-top-btn" onclick="openOrders()">📦 <span data-i18n="myOrders">My Orders</span></button>
+    <button class="cart" onclick="openCart()">🛒 <span data-i18n="cart">Cart</span> (<span id="count">0</span>)</button>
   </div>
 </header>
 
@@ -345,78 +439,87 @@ h1#secretAdminLogo{background:linear-gradient(90deg,#fff,#dfe9fb);-webkit-backgr
   <div class="offer-banner-marquee"><span id="offerBannerMsg" class="offer-banner-track"></span></div>
   <button class="offer-banner-close" onclick="closeOfferBanner()" aria-label="Close">✕</button>
 </div>
+<div id="festivalBanner" class="festival-banner"></div>
 
 <section class="hero" id="home">
   <div class="hero-inner">
     <div>
       <div class="store-chips">
-        <span class="store-chip">🚚 Home Delivery</span><span class="store-chip">🏪 Self Pickup</span><span class="store-chip">⭐ Good Quality Material</span>
+        <span class="store-chip">🚚 <span data-i18n="chipDelivery">Home Delivery</span></span><span class="store-chip">🏪 <span data-i18n="chipPickup">Self Pickup</span></span><span class="store-chip">⭐ <span data-i18n="chipQuality">Good Quality Material</span></span>
       </div>
-      <h2>Hardware &amp; Plumbing Products You Can Trust</h2>
-      <p>Shop hardware, plumbing, sanitary products, construction material and tools from V K Traders &amp; Hardware.</p>
+      <h2 data-i18n="heroHeading">Hardware &amp; Plumbing Products You Can Trust</h2>
+      <p data-i18n="heroPara">Shop hardware, plumbing, sanitary products, construction material and tools from V K Traders &amp; Hardware.</p>
       <div class="hero-actions">
-        <a class="hero-btn hero-primary" href="#products">🛍️ Browse Products</a>
-        <a class="hero-btn hero-secondary" href="https://maps.app.goo.gl/cnreYKyo2iWvuaAa8" target="_blank" rel="noopener">📍 Get Directions</a>
+        <a class="hero-btn hero-primary" href="#products">🛍️ <span data-i18n="browseProducts">Browse Products</span></a>
+        <a class="hero-btn hero-secondary" href="https://maps.app.goo.gl/cnreYKyo2iWvuaAa8" target="_blank" rel="noopener">📍 <span data-i18n="getDirections">Get Directions</span></a>
       </div>
     </div>
     <div class="hero-box">
       <strong>9:00 AM – 8:30 PM</strong>
-      <p>Open Monday–Friday &amp; Sunday<br><b>Saturday: Closed</b></p>
+      <p><span data-i18n="heroBoxDays">Open Monday–Friday &amp; Sunday</span><br><b data-i18n="heroBoxSat">Saturday: Closed</b></p>
       <hr>
-      <p><b>📞 9623009626</b><br>A/P Retre Karkhana, Shivnagar, Maharashtra</p>
+      <p><b>📞 9623009626</b><br><span data-i18n="heroBoxAddr">A/P Retre Karkhana, Shivnagar, Maharashtra</span></p>
+      <div class="delivery-check">
+        <label data-i18n="deliveryCheckLabel">📍 Check delivery at your pincode</label>
+        <div class="delivery-check-row">
+          <input id="pincodeInput" inputmode="numeric" maxlength="6" placeholder="e.g. 415109" data-i18n-ph="pincodePlaceholder">
+          <button type="button" onclick="checkDeliveryPincode()" data-i18n="checkBtn">Check</button>
+        </div>
+        <div id="deliveryResult"></div>
+      </div>
     </div>
   </div>
 </section>
 
 <section class="section" id="featuredSection">
-  <div class="section-head"><div><h2>⭐ Featured Products</h2><p>Our highlighted products</p></div></div>
+  <div class="section-head"><div><h2>⭐ <span data-i18n="featuredTitle">Featured Products</span></h2><p data-i18n="featuredSub">Our highlighted products</p></div></div>
   <div id="featured" class="mini-grid"></div>
 </section>
 
 <section class="section" id="popularSection">
-  <div class="section-head"><div><h2>🔥 Popular Products</h2><p>Popular choices from our store</p></div></div>
+  <div class="section-head"><div><h2>🔥 <span data-i18n="popularTitle">Popular Products</span></h2><p data-i18n="popularSub">Popular choices from our store</p></div></div>
   <div id="popular" class="mini-grid"></div>
 </section>
 
 <div class="controls" id="products">
-  <div class="search-wrap"><span class="search-icon">🔍</span><input id="search" placeholder="Search products, plumbing, tools..." oninput="render()"></div>
-  <select id="cat" onchange="render()"><option value="">All Categories</option></select>
-  <button class="hero-btn hero-secondary" type="button" onclick="openWishlist()">❤️ Wishlist (<span id="wishCount">0</span>)</button>
-  <button class="hero-btn hero-secondary" type="button" onclick="openRequest()">📦 Request Product</button>
+  <div class="search-wrap"><span class="search-icon">🔍</span><input id="search" placeholder="Search products, plumbing, tools..." oninput="render()" data-i18n-ph="searchPlaceholder"></div>
+  <select id="cat" onchange="render()"><option value="" data-i18n="allCategories">All Categories</option></select>
+  <button class="hero-btn hero-secondary" type="button" onclick="openWishlist()">❤️ <span data-i18n="wishlistBtn">Wishlist</span> (<span id="wishCount">0</span>)</button>
+  <button class="hero-btn hero-secondary" type="button" onclick="openRequest()">📦 <span data-i18n="requestBtn">Request Product</span></button>
 </div>
 
 <div id="productsGrid" class="grid"></div>
-<div class="load"><button id="loadBtn" onclick="loadMore()">Show More Products</button></div>
+<div class="load"><button id="loadBtn" onclick="loadMore()" data-i18n="loadMoreBtn">Show More Products</button></div>
 
 <section id="business-info" style="padding:35px 5%;background:#fff">
   <div style="max-width:1180px;margin:auto">
     <h2>V K Traders &amp; Hardware</h2>
-    <p><strong>Hardware and plumbing store in Retre Karkhana, Shivnagar, Maharashtra.</strong></p>
-    <p>Hardware, plumbing, sanitary products, construction material and tools with good quality material and home delivery availability.</p>
-    <p><strong>Phone:</strong> <a href="tel:9623009626">9623009626</a></p>
-    <p><strong>Address:</strong> A/P Retre Karkhana, Shivnagar, Maharashtra</p>
-    <p><strong>Hours:</strong> 9:00 AM–8:30 PM • Saturday Closed • Sunday Open</p>
+    <p><strong data-i18n="businessInfoTag">Hardware and plumbing store in Retre Karkhana, Shivnagar, Maharashtra.</strong></p>
+    <p data-i18n="businessInfoDesc">Hardware, plumbing, sanitary products, construction material and tools with good quality material and home delivery availability.</p>
+    <p><strong data-i18n="phoneLabel">Phone:</strong> <a href="tel:9623009626">9623009626</a></p>
+    <p><strong data-i18n="addressLabel2">Address:</strong> A/P Retre Karkhana, Shivnagar, Maharashtra</p>
+    <p><strong data-i18n="hoursLabel">Hours:</strong> 9:00 AM–8:30 PM • <span data-i18n="satClosed">Saturday Closed</span> • <span data-i18n="sunOpen">Sunday Open</span></p>
   </div>
 </section>
 
 <div class="contact-section" id="contact">
   <div class="contact-card">
-    <h2>Need a product that you don't see here?</h2>
-    <a class="contact-whatsapp" href="https://wa.me/919623009626" target="_blank" rel="noopener">💬 Ask us on WhatsApp</a>
+    <h2 data-i18n="contactHeading">Need a product that you don't see here?</h2>
+    <a class="contact-whatsapp" href="https://wa.me/919623009626" target="_blank" rel="noopener">💬 <span data-i18n="contactWhatsapp">Ask us on WhatsApp</span></a>
   </div>
 </div>
 
 <footer class="site-footer">
   <div class="footer-inner">
-    <div class="footer-about"><h2>V K Traders &amp; Hardware</h2><p>Quality hardware and construction materials for your needs.</p></div>
-    <div class="footer-links"><h3>Quick Links</h3><a href="#home">Home</a><a href="#products">Products</a><a href="#business-info">About</a><a href="#contact">Contact</a></div>
-    <div class="footer-contact"><h3>Contact</h3><a href="tel:9623009626">9623009626</a><a href="mailto:dhairyashilduba9626@gmaip.com">dhairyashilduba9626@gmaip.com</a><p>A/P Retre Karkhana, Shivnagar, Maharashtra</p></div>
+    <div class="footer-about"><h2>V K Traders &amp; Hardware</h2><p data-i18n="footerAbout">Quality hardware and construction materials for your needs.</p></div>
+    <div class="footer-links"><h3 data-i18n="footerQuickLinks">Quick Links</h3><a href="#home" data-i18n="footerHome">Home</a><a href="#products" data-i18n="footerProducts">Products</a><a href="#business-info" data-i18n="footerAboutLink">About</a><a href="#contact" data-i18n="footerContact">Contact</a></div>
+    <div class="footer-contact"><h3 data-i18n="footerContactHeading">Contact</h3><a href="tel:9623009626">9623009626</a><a href="mailto:dhairyashilduba9626@gmaip.com">dhairyashilduba9626@gmaip.com</a><p>A/P Retre Karkhana, Shivnagar, Maharashtra</p></div>
     <div class="copyright">© 2026 V K Traders &amp; Hardware. All rights reserved.</div>
   </div>
 </footer>
 
 <button id="backToTop" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="Back to top">↑</button>
-<div class="bottom-actions"><a class="call-btn" href="tel:9623009626">📞 Call</a><a class="whatsapp-btn" href="https://wa.me/919623009626" target="_blank" rel="noopener">💬 WhatsApp</a></div>
+<div class="bottom-actions"><a class="call-btn" href="tel:9623009626">📞 <span data-i18n="callBtn">Call</span></a><a class="whatsapp-btn" href="https://wa.me/919623009626" target="_blank" rel="noopener">💬 WhatsApp</a></div>
 
 <div id="galleryPanel" class="gallery-panel" onclick="closeGallery(event)">
   <div class="gallery-box" onclick="event.stopPropagation()">
@@ -426,7 +529,15 @@ h1#secretAdminLogo{background:linear-gradient(90deg,#fff,#dfe9fb);-webkit-backgr
   </div>
 </div>
 
-<div id="billPanel" class="bill-panel"><div class="bill-wrap"><div id="billPreview"></div><div class="bill-buttons"><button class="bill-print" onclick="printBill()">🖨️ Print / Save PDF</button><button class="whatsapp-btn" onclick="reviewOrder()">💬 Order on WhatsApp</button><button class="bill-close" onclick="closeBill()">Close</button></div></div></div>
+<div id="billPanel" class="bill-panel"><div class="bill-wrap"><div id="billPreview"></div>
+  <div id="paymentScreenshotBox" class="payment-screenshot-box" style="display:none">
+    <label><b>📸 Upload Payment Screenshot</b></label>
+    <input type="file" id="paymentScreenshotFile" accept="image/*" onchange="handlePaymentScreenshotChange(this)">
+    <div id="paymentScreenshotPreview"></div>
+    <button type="button" class="ss-send-btn" onclick="sendPaymentScreenshot()">📤 Send Screenshot on WhatsApp</button>
+  </div>
+  <div class="bill-buttons"><button class="bill-print" onclick="printBill()">🖨️ Print / Save PDF</button><button class="bill-pay" id="billPayNowBtn" onclick="payNowFromBill()" style="display:none">💳 Proceed to Pay</button><button class="whatsapp-btn" onclick="reviewOrder()">💬 Order on WhatsApp</button><button class="bill-close" onclick="closeBill()">Close</button></div>
+</div></div>
 
 <div id="orderReviewPanel" class="panel">
   <div class="box" style="max-width:420px">
@@ -434,6 +545,7 @@ h1#secretAdminLogo{background:linear-gradient(90deg,#fff,#dfe9fb);-webkit-backgr
     <h2 style="margin-top:0">📋 Confirm Your Order</h2>
     <p style="color:var(--muted);margin-top:-6px">Please check your details carefully before sending — especially your mobile number.</p>
     <div id="orderReviewBody" class="invoice-summary"></div>
+    <div id="orderReviewQr" style="text-align:center;margin-top:10px"></div>
     <div class="invoice-actions" style="margin-top:16px">
       <button class="secondary-btn" onclick="closeOrderReview()">✏️ Edit Details</button>
       <button class="whatsapp-order-btn" onclick="confirmSendOrder()">✅ Confirm &amp; Send</button>
@@ -447,6 +559,23 @@ h1#secretAdminLogo{background:linear-gradient(90deg,#fff,#dfe9fb);-webkit-backgr
     <img id="galleryImg" alt="Product photo">
     <div id="galleryCounter" style="color:#fff;margin-top:8px"></div>
     <div class="gallery-nav"><button onclick="prevGallery()">← Previous</button><button onclick="nextGallery()">Next →</button></div>
+    <div id="galleryProductPanel" style="background:#fff;border-radius:14px;padding:16px;margin-top:14px;text-align:left;max-width:520px;margin-left:auto;margin-right:auto">
+      <div id="galleryProductInfo"></div>
+      <hr>
+      <h3 style="margin:8px 0">⭐ Reviews</h3>
+      <div id="galleryReviewSummary"></div>
+      <div id="galleryReviewList" style="max-height:180px;overflow:auto;margin:8px 0"></div>
+      <div class="customer-form" style="margin-top:8px">
+        <label>Your Name</label><input id="reviewName" placeholder="Your name">
+        <label>Rating</label>
+        <select id="reviewRating"><option value="5">★★★★★ (5)</option><option value="4">★★★★☆ (4)</option><option value="3">★★★☆☆ (3)</option><option value="2">★★☆☆☆ (2)</option><option value="1">★☆☆☆☆ (1)</option></select>
+        <label>Comment (optional)</label><textarea id="reviewComment" placeholder="How was the product?"></textarea>
+        <button onclick="submitReview()">✅ Submit Review</button>
+      </div>
+      <hr>
+      <h3 style="margin:8px 0">🧰 You may also like</h3>
+      <div id="galleryRelated" class="mini-grid"></div>
+    </div>
   </div>
 </div>
 
@@ -455,20 +584,32 @@ h1#secretAdminLogo{background:linear-gradient(90deg,#fff,#dfe9fb);-webkit-backgr
     <button class="close" onclick="closeAdmin()">Close</button>
     <h2>⚙️ Admin — Manage Products</h2>
     <div class="notice">Changes are saved to Firebase and will appear on other mobiles too.</div>
+    <h3>📊 Sales Report</h3>
+    <div id="salesReport" class="notice">⏳ Loading sales report...</div>
+    <hr>
     <h3>Add Product</h3>
     <input id="pname" placeholder="Product name">
     <input id="pprice" type="number" min="0" placeholder="Price ₹">
     <input id="pcat" placeholder="Category (Hardware / Plumbing / Sanitary / Tools)">
     <input id="pemoji" placeholder="Emoji" value="🔧">
+    <label><b>Unit</b></label>
+    <select id="punit"><option value="Nos">Nos</option><option value="KG">KG</option><option value="Gram">Gram</option><option value="Litre">Litre</option><option value="ML">ML</option><option value="Meter">Meter</option><option value="Feet">Feet</option><option value="Box">Box</option><option value="Packet">Packet</option><option value="Bag">Bag</option></select>
     <label><b>Product Photo 1</b></label><input type="file" id="productPhoto" accept="image/*">
     <label><b>Product Photo 2 (optional)</b></label><input type="file" id="productPhoto2" accept="image/*">
     <div class="check-row"><label><input type="checkbox" id="pfeatured"> ⭐ Featured</label><label><input type="checkbox" id="ppopular"> 🔥 Popular</label><label><input type="checkbox" id="pstock" checked> ✅ In Stock</label></div>
     <input id="pdiscount" type="number" min="0" max="90" placeholder="Discount % (optional)">
+    <input id="pstockqty" type="number" min="0" placeholder="Stock Quantity (optional — leave blank if unlimited)">
     <button onclick="addProduct()">➕ Add Product</button>
     <hr>
     <h3>Product Management</h3>
     <input id="adminSearch" placeholder="Search products in admin..." oninput="manage()">
     <div id="manage"></div>
+    <hr>
+    <h3>💰 Bulk Price Update</h3>
+    <div class="notice">Change price for all products in a category by a percentage. Use negative % to reduce, positive to increase. This cannot be undone automatically.</div>
+    <select id="bulkCategory"><option value="">All Categories</option></select>
+    <input id="bulkPercent" type="number" step="0.1" placeholder="e.g. 5 for +5%, -10 for -10%">
+    <button onclick="bulkUpdatePrices()">💾 Apply Bulk Price Update</button>
     <hr>
     <h3>🎟️ Coupons</h3>
     <div class="notice">Coupon control is admin-only. Customers can only enter a code at checkout — they can't create or edit coupons.</div>
@@ -486,6 +627,25 @@ h1#secretAdminLogo{background:linear-gradient(90deg,#fff,#dfe9fb);-webkit-backgr
     <div class="check-row"><label><input type="checkbox" id="bannerActive"> ✅ Show Banner</label></div>
     <button onclick="saveOfferBanner()">💾 Save Banner</button>
     <hr>
+    <h3>🎊 Festival Theme</h3>
+    <div class="notice">Changes the site colours and shows a festival banner for every visitor. Select "None" to return to normal.</div>
+    <select id="festivalSelect">
+      <option value="none">None (Normal)</option>
+      <option value="diwali">🪔 Diwali</option>
+      <option value="holi">🎨 Holi</option>
+      <option value="independence">🇮🇳 Independence / Republic Day</option>
+      <option value="newyear">🎉 New Year</option>
+    </select>
+    <button onclick="saveFestivalTheme()">💾 Save Festival Theme</button>
+    <hr>
+    <h3>💳 UPI Payment</h3>
+    <div class="notice">Add your UPI ID to show a Scan &amp; Pay QR code to customers when they review their order.</div>
+    <input id="upiId" placeholder="e.g. vktraders@okicici">
+    <button onclick="saveUpiSettings()">💾 Save UPI ID</button>
+    <hr>
+    <h3>⚠️ Low Stock Products</h3>
+    <div id="lowStockList" class="notice">No low-stock alerts.</div>
+    <hr>
     <h3>📦 Customer Orders</h3>
     <div class="notice">Update an order status here. The customer will see the latest status in <b>My Orders</b>.</div>
     <input id="adminOrderSearch" placeholder="🔍 Search by invoice no, name or mobile number" oninput="renderAdminOrders()">
@@ -501,8 +661,11 @@ h1#secretAdminLogo{background:linear-gradient(90deg,#fff,#dfe9fb);-webkit-backgr
     <input id="editPrice" type="number" min="0" placeholder="Price ₹">
     <input id="editCat" placeholder="Category">
     <input id="editEmoji" placeholder="Emoji">
+    <label><b>Unit</b></label>
+    <select id="editUnit"><option value="Nos">Nos</option><option value="KG">KG</option><option value="Gram">Gram</option><option value="Litre">Litre</option><option value="ML">ML</option><option value="Meter">Meter</option><option value="Feet">Feet</option><option value="Box">Box</option><option value="Packet">Packet</option><option value="Bag">Bag</option></select>
     <div class="check-row"><label><input type="checkbox" id="editFeatured"> ⭐ Featured</label><label><input type="checkbox" id="editPopular"> 🔥 Popular</label><label><input type="checkbox" id="editStock"> ✅ In Stock</label></div>
     <input id="editDiscount" type="number" min="0" max="90" placeholder="Discount %">
+    <input id="editStockQty" type="number" min="0" placeholder="Stock Quantity (optional — leave blank if unlimited)">
     <div class="edit-photo-grid">
       <div><b>Photo 1</b><div id="editPhotoPreview1"></div><input type="file" id="editPhoto1" accept="image/*"></div>
       <div><b>Photo 2</b><div id="editPhotoPreview2"></div><input type="file" id="editPhoto2" accept="image/*"></div>
@@ -513,40 +676,40 @@ h1#secretAdminLogo{background:linear-gradient(90deg,#fff,#dfe9fb);-webkit-backgr
 
 <div id="cartPanel" class="panel">
   <div class="box">
-    <button class="close" onclick="closeCart()">Close</button><h2>🛒 Your Cart</h2><div id="cart"></div>
+    <button class="close" onclick="closeCart()">Close</button><h2>🛒 <span data-i18n="cartTitle">Your Cart</span></h2><div id="cart"></div>
     <div class="coupon-box">
-      <label><b>🎟️ Have a Coupon Code?</b></label>
+      <label><b data-i18n="couponLabel">🎟️ Have a Coupon Code?</b></label>
       <div class="coupon-row">
-        <input id="couponCode" placeholder="Enter coupon code" style="text-transform:uppercase">
-        <button type="button" onclick="applyCoupon()">Apply</button>
-        <button type="button" class="secondary-btn" onclick="removeCoupon()">Remove</button>
+        <input id="couponCode" placeholder="Enter coupon code" style="text-transform:uppercase" data-i18n-ph="couponPlaceholder">
+        <button type="button" onclick="applyCoupon()" data-i18n="applyBtn">Apply</button>
+        <button type="button" class="secondary-btn" onclick="removeCoupon()" data-i18n="removeBtn">Remove</button>
       </div>
       <div id="couponMsg" class="coupon-msg"></div>
     </div>
     <div class="customer-form">
-      <h3 style="margin-top:0">Customer Details</h3>
-      <label>Name *</label><input id="customerName" placeholder="Your name">
-      <label>Mobile Number *</label><input id="customerPhone" type="tel" inputmode="numeric" placeholder="10-digit mobile number">
-      <label>Confirm Mobile Number *</label><input id="customerPhoneConfirm" type="tel" inputmode="numeric" placeholder="Re-enter mobile number">
-      <label>Delivery Address</label><textarea id="customerAddress" placeholder="Address (required for home delivery)"></textarea>
-      <label>Order Type</label><select id="orderType"><option value="delivery">🏠 Home Delivery</option><option value="pickup">🏪 Self Pickup (Free)</option></select>
+      <h3 style="margin-top:0" data-i18n="customerDetails">Customer Details</h3>
+      <label data-i18n="nameLabel">Name *</label><input id="customerName" placeholder="Your name" data-i18n-ph="namePlaceholder">
+      <label data-i18n="mobileLabel">Mobile Number *</label><input id="customerPhone" type="tel" inputmode="numeric" placeholder="10-digit mobile number" data-i18n-ph="mobilePlaceholder" onblur="checkLoyalCustomer()">
+      <label data-i18n="confirmMobileLabel">Confirm Mobile Number *</label><input id="customerPhoneConfirm" type="tel" inputmode="numeric" placeholder="Re-enter mobile number" data-i18n-ph="confirmMobilePlaceholder">
+      <label data-i18n="deliveryAddressLabel">Delivery Address</label><textarea id="customerAddress" placeholder="Address (required for home delivery)" data-i18n-ph="addressPlaceholder"></textarea>
+      <label data-i18n="orderTypeLabel">Order Type</label><select id="orderType"><option value="delivery" data-i18n="deliveryOpt">🏠 Home Delivery</option><option value="pickup" data-i18n="pickupOpt">🏪 Self Pickup (Free)</option></select>
     </div>
-    <div class="notice">🏠 Home Delivery: Additional Charges Apply<br>🏪 Self Pickup: Free</div>
-    <div class="invoice-actions"><button class="bill-btn" onclick="generateBill()">🧾 Generate Bill</button><button class="whatsapp-order-btn" onclick="reviewOrder()">💬 Order on WhatsApp</button></div>
+    <div class="notice" data-i18n="deliveryNotice">🏠 Home Delivery: Additional Charges Apply<br>🏪 Self Pickup: Free</div>
+    <div class="invoice-actions"><button class="bill-btn" onclick="generateBill()">🧾 <span data-i18n="generateBillBtn">Generate Bill</span></button><button class="whatsapp-order-btn" onclick="reviewOrder()">💬 <span data-i18n="orderWhatsappBtn">Order on WhatsApp</span></button></div>
   </div>
 </div>
 
 <div id="ordersPanel" class="panel">
   <div class="box orders-box">
     <button class="close" onclick="closeOrders()">Close</button>
-    <h2>📦 My Orders</h2>
-    <p class="orders-subtitle">Enter the mobile number used for your order to see your order history.</p>
+    <h2>📦 <span data-i18n="myOrdersTitle">My Orders</span></h2>
+    <p class="orders-subtitle" data-i18n="myOrdersSub">Enter the mobile number used for your order to see your order history.</p>
     <div class="orders-search">
-      <input id="historyPhone" type="tel" inputmode="numeric" maxlength="10" placeholder="10-digit mobile number">
-      <button onclick="loadOrderHistory()">🔍 View Orders</button>
+      <input id="historyPhone" type="tel" inputmode="numeric" maxlength="10" placeholder="10-digit mobile number" data-i18n-ph="mobilePlaceholder">
+      <button onclick="loadOrderHistory()">🔍 <span data-i18n="viewOrdersBtn">View Orders</span></button>
     </div>
     <div id="orderHistory">
-      <div class="notice">Your previous WhatsApp orders will appear here after they are saved.</div>
+      <div class="notice" data-i18n="orderHistoryEmpty">Your previous WhatsApp orders will appear here after they are saved.</div>
     </div>
   </div>
 </div>
@@ -561,6 +724,7 @@ h1#secretAdminLogo{background:linear-gradient(90deg,#fff,#dfe9fb);-webkit-backgr
 <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore-compat.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 <script>
 
 const firebaseConfig = {
@@ -572,7 +736,9 @@ const firebaseConfig = {
   appId:"1:598417742404:web:3e4fc94c246022fb167a11",
   measurementId:"G-08X6GP7N26"
 };
-const app=firebase.initializeApp(firebaseConfig), db=firebase.firestore(), productsRef=db.collection("products"), ordersRef=db.collection("orders"), couponsRef=db.collection("coupons"), settingsRef=db.collection("settings");
+const app=firebase.initializeApp(firebaseConfig), db=firebase.firestore(), productsRef=db.collection("products"), ordersRef=db.collection("orders"), couponsRef=db.collection("coupons"), settingsRef=db.collection("settings"), reviewsRef=db.collection("reviews");
+try{db.enablePersistence({synchronizeTabs:true})}catch(e){}
+if("serviceWorker" in navigator){window.addEventListener("load",()=>{navigator.serviceWorker.register("sw.js").catch(()=>{})})}
 
 function toast(msg,type){
   type=type||"info";
@@ -589,6 +755,7 @@ window.toast=toast;
 
 let products=[], visibleCount=24, editingId=null, galleryImages=[], galleryIndex=0;
 let cart=JSON.parse(localStorage.getItem("vk_cart")||"{}");
+let loyaltyDiscountPct=0, loyaltyOrderCount=0;
 let wishlist=JSON.parse(localStorage.getItem("vk_wishlist")||"[]");
 let coupons=[], appliedCoupon=null;
 let offerBannerSettings={text:"",active:false};
@@ -600,11 +767,20 @@ function saveCart(){localStorage.setItem("vk_cart",JSON.stringify(cart));}
 function saveWishlist(){localStorage.setItem("vk_wishlist",JSON.stringify(wishlist));}
 function money(n){return "₹"+Number(n||0).toFixed(0);}
 function finalPrice(p){const d=Number(p.discount||0);return Math.max(0,Number(p.price||0)*(1-d/100));}
+function qtyStep(unit){return (unit==="KG"||unit==="Litre")?0.5:1;}
+function fmtQty(n){n=Number(n||0);return (Math.round(n*1000)/1000).toString();}
+function setQty(id,val){
+  const p=products.find(x=>x.id===id);if(!p)return;
+  let n=parseFloat(val);
+  if(isNaN(n)||n<=0){delete cart[id];}
+  else{n=Math.round(n*1000)/1000;cart[id]=n;}
+  saveCart();openCart();render();
+}
 function escapeHtml(v){return String(v??"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#039;"}[m]));}
 
 async function loadProducts(){
   const snap=await productsRef.orderBy("name").get();
-  products=snap.docs.map(d=>({id:d.id,...d.data(),name:String(d.data().name||""),price:Number(d.data().price||0),category:String(d.data().category||""),emoji:String(d.data().emoji||"🔧"),photo:String(d.data().photo||""),photo2:String(d.data().photo2||""),featured:!!d.data().featured,popular:!!d.data().popular,stock:d.data().stock!==false,discount:Number(d.data().discount||0)})).filter(isAllowed);
+  products=snap.docs.map(d=>({id:d.id,...d.data(),name:String(d.data().name||""),price:Number(d.data().price||0),category:String(d.data().category||""),emoji:String(d.data().emoji||"🔧"),unit:String(d.data().unit||"Nos"),photo:String(d.data().photo||""),photo2:String(d.data().photo2||""),featured:!!d.data().featured,popular:!!d.data().popular,stock:d.data().stock!==false,discount:Number(d.data().discount||0),hidden:!!d.data().hidden,stockQty:d.data().stockQty===undefined||d.data().stockQty===null||d.data().stockQty===""?null:Number(d.data().stockQty),ratingAvg:Number(d.data().ratingAvg||0),ratingCount:Number(d.data().ratingCount||0)})).filter(isAllowed);
   migrateOldCart(); render(); renderHighlights(); manage(); updateWishCount();
 }
 async function loadCoupons(){
@@ -653,20 +829,31 @@ function migrateOldCart(){
   if(!looksOld)return;
   const next={}; keys.forEach(k=>{const p=products[Number(k)];if(p&&cart[k])next[p.id]=Number(cart[k]);}); cart=next; saveCart();
 }
+function starsHtml(avg){
+  const full=Math.round(avg);
+  return [1,2,3,4,5].map(n=>n<=full?"★":"☆").join("");
+}
 function cardHtml(p,compact=false){
   const i=products.findIndex(x=>x.id===p.id), wished=wishlist.includes(p.id), pics=[p.photo,p.photo2].filter(Boolean);
-  const badge=(p.featured?'<span class="badge badge-featured">⭐ Featured</span>':'')+(p.popular?'<span class="badge badge-popular">🔥 Popular</span>':'')+(p.discount>0?`<span class="badge badge-offer">${p.discount}% OFF</span>`:'')+(!p.stock?'<span class="badge badge-stock">Out of Stock</span>':'');
+  const lowStock=p.stock&&p.stockQty!==null&&p.stockQty>0&&p.stockQty<=5;
+  const outByQty=p.stockQty!==null&&p.stockQty<=0;
+  const inStock=p.stock&&!outByQty;
+  const badge=(p.featured?'<span class="badge badge-featured">⭐ Featured</span>':'')+(p.popular?'<span class="badge badge-popular">🔥 Popular</span>':'')+(p.discount>0?`<span class="badge badge-offer">${p.discount}% OFF</span>`:'')+(!inStock?'<span class="badge badge-stock">Out of Stock</span>':lowStock?`<span class="badge badge-offer">Only ${p.stockQty} left!</span>`:'');
   const photo=pics.length?`<img src="${p.photo}" alt="${escapeHtml(p.name)}" onclick="openImageGalleryById('${p.id}')" loading="lazy">`:`<span>${escapeHtml(p.emoji)}</span>`;
   const count=pics.length>1?`<span class="photo-count">📷 ${pics.length}</span>`:"";
   const old=p.discount>0?`<span class="old-price">${money(p.price)}</span>`:"";
-  return `<div class="card ${!p.stock?'stock-off':''}">
+  const unitTag=`<span class="unit-tag"> / ${escapeHtml(p.unit||"Nos")}</span>`;
+  const rating=p.ratingCount>0?`<div class="rating-line" onclick="openImageGalleryById('${p.id}')" style="cursor:pointer;color:#f7931e;font-size:13px;margin:2px 0">${starsHtml(p.ratingAvg)} <span style="color:var(--muted)">${p.ratingAvg.toFixed(1)} (${p.ratingCount})</span></div>`:`<div class="rating-line" onclick="openImageGalleryById('${p.id}')" style="cursor:pointer;color:var(--muted);font-size:12px;margin:2px 0">No reviews yet</div>`;
+  return `<div class="card ${!inStock?'stock-off':''}">
     <div class="badges">${badge}</div>
     <div class="photo">${photo}${count}</div>
     <h3>${escapeHtml(p.name)}</h3><div class="category">${escapeHtml(p.category)}</div>
-    <div class="price">${money(finalPrice(p))}${old}</div>
+    ${rating}
+    <div class="price">${money(finalPrice(p))}${unitTag}${old}</div>
     <div class="card-actions">
       <button class="heart-btn" onclick="toggleWishlist('${p.id}')">${wished?'♥':'♡'}</button>
-      <button ${!p.stock?'disabled class="out-btn"':''} onclick="addById('${p.id}')">${p.stock?'🛒 Add to Cart':'Out of Stock'}</button>
+      <button class="share-btn" onclick="shareProduct('${p.id}')" aria-label="Share">📤</button>
+      <button ${!inStock?'disabled class="out-btn"':''} onclick="addById('${p.id}')">${inStock?'🛒 Add to Cart':'Out of Stock'}</button>
     </div>
   </div>`;
 }
@@ -674,8 +861,8 @@ function cardHtml(p,compact=false){
 function renderFeaturedProducts(){
   const row=document.getElementById("featuredRow");
   if(!row)return;
-  const list=products.filter(p=>p.photo).slice(0,4);
-  const fallback=products.slice(0,4);
+  const list=products.filter(p=>p.photo&&!p.hidden).slice(0,4);
+  const fallback=products.filter(p=>!p.hidden).slice(0,4);
   const items=list.length?list:fallback;
   row.innerHTML=items.map(p=>{
     const idx=products.indexOf(p);
@@ -713,22 +900,22 @@ function closeGallery(e){
 
 function render(){
   const s=document.getElementById("search").value.toLowerCase().trim(), selected=document.getElementById("cat").value;
-  const cats=[...new Set(products.map(p=>p.category).filter(Boolean))].sort(), sel=document.getElementById("cat");
+  const cats=[...new Set(products.filter(p=>!p.hidden).map(p=>p.category).filter(Boolean))].sort(), sel=document.getElementById("cat");
   sel.innerHTML='<option value="">All Categories</option>'+cats.map(x=>`<option value="${escapeHtml(x)}">${escapeHtml(x)}</option>`).join(""); sel.value=selected;
-  const filtered=products.filter(p=>(!s||(p.name+" "+p.category).toLowerCase().includes(s))&&(!sel.value||p.category===sel.value));
+  const filtered=products.filter(p=>!p.hidden&&(!s||(p.name+" "+p.category).toLowerCase().includes(s))&&(!sel.value||p.category===sel.value));
   document.getElementById("productsGrid").innerHTML=filtered.slice(0,visibleCount).map(p=>cardHtml(p)).join("")||'<div class="empty-state" style="grid-column:1/-1"><div class="empty-icon">🔍</div><h3>No products found</h3><p>Try a different search term or category.</p></div>';
   document.getElementById("count").textContent=Object.values(cart).reduce((a,b)=>a+Number(b),0);
   document.getElementById("loadBtn").style.display=filtered.length>visibleCount?"inline-block":"none";
 }
 function renderHighlights(){
-  const f=products.filter(p=>p.featured&&p.stock).slice(0,4), pop=products.filter(p=>p.popular&&p.stock).slice(0,4);
+  const f=products.filter(p=>p.featured&&p.stock&&!p.hidden).slice(0,4), pop=products.filter(p=>p.popular&&p.stock&&!p.hidden).slice(0,4);
   document.getElementById("featured").innerHTML=f.length?f.map(p=>cardHtml(p,true)).join(""):'<div class="notice" style="grid-column:1/-1">Admin can mark products as Featured.</div>';
   document.getElementById("popular").innerHTML=pop.length?pop.map(p=>cardHtml(p,true)).join(""):'<div class="notice" style="grid-column:1/-1">Admin can mark products as Popular.</div>';
 }
 function loadMore(){visibleCount+=24;render();}
-function addById(id){const p=products.find(x=>x.id===id);if(!p||!p.stock)return;cart[id]=(cart[id]||0)+1;saveCart();render();if(navigator.vibrate)navigator.vibrate(50);toast("🛒 Added: "+p.name,"success");}
+function addById(id){const p=products.find(x=>x.id===id);if(!p||!p.stock||p.hidden)return;const step=qtyStep(p.unit);cart[id]=Number((Number(cart[id]||0)+step).toFixed(2));saveCart();render();if(navigator.vibrate)navigator.vibrate(50);toast("🛒 Added: "+p.name,"success");}
 function removeFromCart(id){delete cart[id];saveCart();openCart();}
-function changeQty(id,delta){const n=Number(cart[id]||0)+delta;if(n<=0)delete cart[id];else cart[id]=n;saveCart();openCart();render();}
+function changeQty(id,delta){const p=products.find(x=>x.id===id);const step=qtyStep(p&&p.unit);const dir=delta<0?-1:1;const n=Number((Number(cart[id]||0)+dir*step).toFixed(2));if(n<=0)delete cart[id];else cart[id]=n;saveCart();openCart();render();}
 function getCartItems(){return Object.keys(cart).map(id=>({id,p:products.find(x=>x.id===id),qty:Number(cart[id])})).filter(x=>x.p&&x.qty>0);}
 function getCustomerDetails(){
   const name=document.getElementById("customerName").value.trim(),phone=document.getElementById("customerPhone").value.replace(/\D/g,""),phoneConfirm=document.getElementById("customerPhoneConfirm").value.replace(/\D/g,""),address=document.getElementById("customerAddress").value.trim(),orderType=document.getElementById("orderType").value;
@@ -750,8 +937,9 @@ function calcCartTotals(){
       discount=Math.max(0,Math.min(discount,subtotal));
     }
   }
-  const total=Math.max(0,subtotal-discount);
-  return {items,subtotal,discount,total};
+  const loyaltyDiscount=loyaltyDiscountPct>0?Math.max(0,(subtotal-discount)*loyaltyDiscountPct/100):0;
+  const total=Math.max(0,subtotal-discount-loyaltyDiscount);
+  return {items,subtotal,discount,loyaltyDiscount,total};
 }
 function applyCoupon(){
   const codeInput=document.getElementById("couponCode"), msg=document.getElementById("couponMsg");
@@ -766,15 +954,27 @@ function applyCoupon(){
   openCart();
 }
 function removeCoupon(){appliedCoupon=null;const msg=document.getElementById("couponMsg");if(msg){msg.textContent="";msg.className="coupon-msg"}openCart();}
+async function checkLoyalCustomer(){
+  const phone=document.getElementById("customerPhone").value.replace(/\D/g,"");
+  if(!/^\d{10}$/.test(phone)){loyaltyDiscountPct=0;return;}
+  try{
+    const snap=await ordersRef.where("customer.phone","==",phone).get();
+    loyaltyOrderCount=snap.docs.filter(d=>String(d.data().status||"")==="Delivered").length;
+    loyaltyDiscountPct=loyaltyOrderCount>=5?3:0;
+    if(loyaltyDiscountPct>0)toast(`🎉 Loyal customer! ${loyaltyDiscountPct}% extra discount applied.`,"success");
+  }catch(e){console.error(e);loyaltyDiscountPct=0;}
+  openCart();
+}
 function openCart(){
-  document.getElementById("cartPanel").style.display="block";
-  const {items,subtotal,discount,total}=calcCartTotals();
+  document.getElementById("cartPanel").style.display="flex";
+  const {items,subtotal,discount,loyaltyDiscount,total}=calcCartTotals();
   const summary=items.length?`<div class="invoice-summary">
       <div class="totals-row"><span>Subtotal</span><span>${money(subtotal)}</span></div>
       ${discount>0?`<div class="totals-row coupon-discount-row"><span>Coupon (${escapeHtml(appliedCoupon.code)})</span><span>-${money(discount)}</span></div>`:""}
+      ${loyaltyDiscount>0?`<div class="totals-row coupon-discount-row"><span>🎉 Loyal Customer (${loyaltyDiscountPct}%)</span><span>-${money(loyaltyDiscount)}</span></div>`:""}
       <h3 style="margin:8px 0 0">Total: ${money(total)}</h3>
     </div>`:"";
-  document.getElementById("cart").innerHTML=items.length?items.map(x=>`<div class="cart-item-row"><div class="cart-item-info"><b>${escapeHtml(x.p.name)}</b><span>${money(finalPrice(x.p))} each</span></div><div class="qty"><button onclick="changeQty('${x.id}',-1)">−</button><b>${x.qty}</b><button onclick="changeQty('${x.id}',1)">+</button></div><button class="cart-remove-btn" onclick="removeFromCart('${x.id}')">🗑️ Remove</button></div>`).join("")+summary:'<div class="empty-state"><div class="empty-icon">🛒</div><h3>Your cart is empty</h3><p>Add some products to get started.</p></div>';
+  document.getElementById("cart").innerHTML=items.length?items.map(x=>`<div class="cart-item-row"><div class="cart-item-info"><b>${escapeHtml(x.p.name)}</b><span>${money(finalPrice(x.p))} / ${escapeHtml(x.p.unit||"Nos")}</span></div><div class="qty"><button onclick="changeQty('${x.id}',-1)">−</button><input class="qty-input" type="number" inputmode="decimal" step="any" min="0" value="${fmtQty(x.qty)}" onclick="this.select()" onkeydown="if(event.key==='Enter')this.blur()" onchange="setQty('${x.id}',this.value)"><span class="unit-tag">${escapeHtml(x.p.unit||"Nos")}</span><button onclick="changeQty('${x.id}',1)">+</button></div><button class="cart-remove-btn" onclick="removeFromCart('${x.id}')">🗑️ Remove</button></div>`).join("")+summary:'<div class="empty-state"><div class="empty-icon">🛒</div><h3>Your cart is empty</h3><p>Add some products to get started.</p></div>';
   const saved=JSON.parse(localStorage.getItem("vk_customer")||"{}");["name","phone","address","orderType"].forEach(k=>{const el=document.getElementById("customer"+k.charAt(0).toUpperCase()+k.slice(1));if(el&&saved[k])el.value=saved[k]});document.getElementById("orderType").value=saved.orderType||"delivery";
 }
 function closeCart(){document.getElementById("cartPanel").style.display="none";}
@@ -806,7 +1006,7 @@ async function openAdmin(){
   }
   localStorage.setItem("vk_admin_fails","0");
   localStorage.removeItem("vk_admin_lock");
-  document.getElementById("adminPanel").style.display="block";document.body.style.overflow="hidden";manage();renderAdminCoupons();loadAdminOrders();const textEl=document.getElementById("bannerText"),activeEl=document.getElementById("bannerActive");if(textEl)textEl.value=offerBannerSettings.text;if(activeEl)activeEl.checked=offerBannerSettings.active;
+  document.getElementById("adminPanel").style.display="flex";document.body.style.overflow="hidden";manage();renderAdminCoupons();loadAdminOrders();loadSalesReport();populateBulkCategory();const textEl=document.getElementById("bannerText"),activeEl=document.getElementById("bannerActive");if(textEl)textEl.value=offerBannerSettings.text;if(activeEl)activeEl.checked=offerBannerSettings.active;
 }
 async function addCoupon(){
   try{
@@ -842,25 +1042,117 @@ function closeAdmin(){document.getElementById("adminPanel").style.display="none"
 function readImg(file){return new Promise((resolve,reject)=>{if(!file)return resolve("");const r=new FileReader();r.onload=()=>{const img=new Image();img.onload=()=>{const max=800;let w=img.width,h=img.height;if(w>max||h>max){if(w>=h){h=Math.round(h*max/w);w=max}else{w=Math.round(w*max/h);h=max}}const c=document.createElement("canvas");c.width=w;c.height=h;c.getContext("2d").drawImage(img,0,0,w,h);resolve(c.toDataURL("image/jpeg",.72))};img.onerror=reject;img.src=r.result};r.onerror=reject;r.readAsDataURL(file)});}
 async function addProduct(){
   try{
-    const name=document.getElementById("pname").value.trim(),price=Number(document.getElementById("pprice").value),category=document.getElementById("pcat").value.trim(),emoji=document.getElementById("pemoji").value.trim()||"🔧";
+    const name=document.getElementById("pname").value.trim(),price=Number(document.getElementById("pprice").value),category=document.getElementById("pcat").value.trim(),emoji=document.getElementById("pemoji").value.trim()||"🔧",unit=document.getElementById("punit").value||"Nos";
     if(!name||!Number.isFinite(price)||price<0||!category){toast("Enter Product Name, valid Price and Category.","error");return}
     if(blockedWords.some(w=>(name+" "+category).toLowerCase().includes(w))){toast("This store is for hardware, plumbing, sanitary, construction material and tools — electric products are not added.","error");return}
     const [photo,photo2]=await Promise.all([readImg(document.getElementById("productPhoto").files[0]),readImg(document.getElementById("productPhoto2").files[0])]);
-    await productsRef.add({name,price,category,emoji,photo,photo2,featured:document.getElementById("pfeatured").checked,popular:document.getElementById("ppopular").checked,stock:document.getElementById("pstock").checked,discount:Number(document.getElementById("pdiscount").value||0)});
-    ["pname","pprice","pcat","pdiscount"].forEach(id=>document.getElementById(id).value="");document.getElementById("pemoji").value="🔧";document.getElementById("pfeatured").checked=false;document.getElementById("ppopular").checked=false;document.getElementById("pstock").checked=true;document.getElementById("productPhoto").value="";document.getElementById("productPhoto2").value="";
+    const qtyRaw=document.getElementById("pstockqty").value.trim();
+    await productsRef.add({name,price,category,emoji,unit,photo,photo2,featured:document.getElementById("pfeatured").checked,popular:document.getElementById("ppopular").checked,stock:document.getElementById("pstock").checked,discount:Number(document.getElementById("pdiscount").value||0),hidden:false,stockQty:qtyRaw===""?null:Number(qtyRaw),ratingAvg:0,ratingCount:0});
+    ["pname","pprice","pcat","pdiscount","pstockqty"].forEach(id=>document.getElementById(id).value="");document.getElementById("pemoji").value="🔧";document.getElementById("punit").value="Nos";document.getElementById("pfeatured").checked=false;document.getElementById("ppopular").checked=false;document.getElementById("pstock").checked=true;document.getElementById("productPhoto").value="";document.getElementById("productPhoto2").value="";
     await loadProducts();toast("✅ Product added successfully!","success");
   }catch(e){console.error(e);toast("Firebase error: "+e.message,"error")}
 }
 function manage(){
   const q=(document.getElementById("adminSearch")?.value||"").toLowerCase().trim(), list=products.filter(p=>(p.name+" "+p.category).toLowerCase().includes(q));
-  document.getElementById("manage").innerHTML=`<h3>Products: ${products.length}</h3>`+list.map(p=>`<div class="admin-product-row"><div class="admin-product-info"><b>${escapeHtml(p.emoji)} ${escapeHtml(p.name)}</b><small>${escapeHtml(p.category)} • ${money(p.price)} • ${p.stock?"In Stock":"Out of Stock"}${p.discount?` • ${p.discount}% OFF`:""}${p.featured?" • ⭐ Featured":""}${p.popular?" • 🔥 Popular":""}</small></div><div class="admin-product-actions"><button class="edit-btn" onclick="editProduct('${p.id}')">✏️ Edit</button><button class="danger-btn" onclick="deleteProduct('${p.id}')">Delete</button></div></div>`).join("");
+  const hiddenCount=products.filter(p=>p.hidden).length;
+  document.getElementById("manage").innerHTML=`<h3>Products: ${products.length}${hiddenCount?` <span class="hidden-count-pill">🙈 ${hiddenCount} hidden</span>`:""}</h3>`+list.map(p=>`<div class="admin-product-row${p.hidden?" is-hidden-product":""}"><div class="admin-product-info"><b>${escapeHtml(p.emoji)} ${escapeHtml(p.name)}</b>${p.hidden?'<span class="hidden-tag">🙈 Hidden</span>':''}<small>${escapeHtml(p.category)} • ${money(p.price)} / ${escapeHtml(p.unit||"Nos")} • ${p.stock?"In Stock":"Out of Stock"}${p.stockQty!==null?` • Qty: ${p.stockQty}`:""}${p.discount?` • ${p.discount}% OFF`:""}${p.featured?" • ⭐ Featured":""}${p.popular?" • 🔥 Popular":""}</small></div><div class="admin-product-actions"><button class="${p.hidden?"show-btn":"hide-btn"}" onclick="toggleProductHidden('${p.id}')">${p.hidden?"👁️ Unhide":"🙈 Hide"}</button><button class="edit-btn" onclick="editProduct('${p.id}')">✏️ Edit</button><button class="danger-btn" onclick="deleteProduct('${p.id}')">Delete</button></div></div>`).join("");
+  renderLowStock();
+}
+function renderLowStock(){
+  const box=document.getElementById("lowStockList");
+  if(!box)return;
+  const low=products.filter(p=>!p.hidden&&p.stock&&p.stockQty!==null&&p.stockQty<=5);
+  if(!low.length){box.innerHTML="No low-stock alerts.";return}
+  box.innerHTML=low.map(p=>`⚠️ <b>${escapeHtml(p.name)}</b> — only ${p.stockQty} left`).join("<br>");
+}
+function populateBulkCategory(){
+  const sel=document.getElementById("bulkCategory");
+  if(!sel)return;
+  const cats=[...new Set(products.map(p=>p.category).filter(Boolean))].sort();
+  sel.innerHTML='<option value="">All Categories</option>'+cats.map(c=>`<option value="${escapeHtml(c)}">${escapeHtml(c)}</option>`).join("");
+}
+async function bulkUpdatePrices(){
+  const cat=document.getElementById("bulkCategory").value;
+  const pct=Number(document.getElementById("bulkPercent").value);
+  if(!Number.isFinite(pct)||pct===0){toast("Enter a valid percentage (positive or negative).","error");return}
+  const targets=products.filter(p=>!cat||p.category===cat);
+  if(!targets.length){toast("No products found for this category.","error");return}
+  if(!confirm(`Update price by ${pct}% for ${targets.length} product(s)${cat?` in "${cat}"`:""}?`))return;
+  try{
+    const batch=db.batch();
+    targets.forEach(p=>{
+      const newPrice=Math.max(0,Math.round(Number(p.price||0)*(1+pct/100)*100)/100);
+      batch.update(productsRef.doc(p.id),{price:newPrice});
+    });
+    await batch.commit();
+    document.getElementById("bulkPercent").value="";
+    await loadProducts();
+    toast(`✅ Updated price for ${targets.length} product(s)!`,"success");
+  }catch(e){toast("Could not update prices: "+e.message,"error");}
+}
+async function loadSalesReport(){
+  const box=document.getElementById("salesReport");
+  if(!box)return;
+  box.innerHTML='<div class="notice">⏳ Loading sales report...</div>';
+  try{
+    const snap=await ordersRef.get();
+    const all=snap.docs.map(d=>d.data()).filter(o=>String(o.status||"")!=="Cancelled");
+    const now=new Date();
+    const startOfToday=new Date(now.getFullYear(),now.getMonth(),now.getDate()).getTime();
+    const startOfWeek=startOfToday-6*86400000;
+    let todayCount=0,todayRevenue=0,weekCount=0,weekRevenue=0;
+    const productSales={};
+    all.forEach(o=>{
+      const t=new Date(o.createdAt||0).getTime();
+      const total=Number(o.total||0);
+      if(t>=startOfToday){todayCount++;todayRevenue+=total;}
+      if(t>=startOfWeek){weekCount++;weekRevenue+=total;}
+      (o.items||[]).forEach(it=>{
+        const key=it.name||"Unknown";
+        productSales[key]=(productSales[key]||0)+Number(it.qty||0);
+      });
+    });
+    const top=Object.entries(productSales).sort((a,b)=>b[1]-a[1]).slice(0,5);
+    box.innerHTML=`
+      <div class="totals-row"><span>📅 Today's Orders</span><span><b>${todayCount}</b></span></div>
+      <div class="totals-row"><span>💰 Today's Revenue</span><span><b>${money(todayRevenue)}</b></span></div>
+      <div class="totals-row"><span>📅 Last 7 Days Orders</span><span><b>${weekCount}</b></span></div>
+      <div class="totals-row"><span>💰 Last 7 Days Revenue</span><span><b>${money(weekRevenue)}</b></span></div>
+      ${top.length?`<div style="margin-top:8px"><b>🔥 Top Selling Products (all time)</b><br>${top.map(([n,q],i)=>`${i+1}. ${escapeHtml(n)} — ${fmtQty(q)} sold`).join("<br>")}</div>`:""}
+    `;
+  }catch(e){console.error(e);box.innerHTML='<div class="notice">❌ Could not load sales report.</div>';}
+}
+async function saveUpiSettings(){
+  const upiId=document.getElementById("upiId").value.trim();
+  try{
+    await settingsRef.doc("payment").set({upiId});
+    paymentSettings.upiId=upiId;
+    toast("✅ UPI ID saved!","success");
+  }catch(e){toast("Could not save UPI ID: "+e.message,"error")}
+}
+let paymentSettings={upiId:""};
+async function loadPaymentSettings(){
+  try{
+    const doc=await settingsRef.doc("payment").get();
+    paymentSettings={upiId:doc.exists?(doc.data().upiId||""):""};
+  }catch(e){console.error("Could not load payment settings:",e)}
+  const el=document.getElementById("upiId");
+  if(el)el.value=paymentSettings.upiId;
+}
+async function toggleProductHidden(id){
+  const p=products.find(x=>x.id===id);if(!p)return;
+  try{
+    await db.collection("products").doc(id).update({hidden:!p.hidden});
+    await loadProducts();
+    toast(p.hidden?`👁️ "${p.name}" is visible to customers again`:`🙈 "${p.name}" is now hidden from customers`,"success");
+  }catch(e){toast("Could not update product visibility: "+e.message,"error")}
 }
 function editProduct(id){
   const p=products.find(x=>x.id===id);if(!p)return;editingId=id;
-  document.getElementById("editName").value=p.name;document.getElementById("editPrice").value=p.price;document.getElementById("editCat").value=p.category;document.getElementById("editEmoji").value=p.emoji;document.getElementById("editFeatured").checked=p.featured;document.getElementById("editPopular").checked=p.popular;document.getElementById("editStock").checked=p.stock;document.getElementById("editDiscount").value=p.discount||0;document.getElementById("editPhoto1").value="";document.getElementById("editPhoto2").value="";
+  document.getElementById("editName").value=p.name;document.getElementById("editPrice").value=p.price;document.getElementById("editCat").value=p.category;document.getElementById("editEmoji").value=p.emoji;document.getElementById("editUnit").value=p.unit||"Nos";document.getElementById("editFeatured").checked=p.featured;document.getElementById("editPopular").checked=p.popular;document.getElementById("editStock").checked=p.stock;document.getElementById("editDiscount").value=p.discount||0;document.getElementById("editStockQty").value=p.stockQty===null||p.stockQty===undefined?"":p.stockQty;document.getElementById("editPhoto1").value="";document.getElementById("editPhoto2").value="";
   document.getElementById("editPhotoPreview1").innerHTML=p.photo?`<div class="edit-photo-box"><img src="${p.photo}"><button class="danger-btn" onclick="removeExistingPhoto(1)">🗑️ Remove</button></div>`:"No photo";
   document.getElementById("editPhotoPreview2").innerHTML=p.photo2?`<div class="edit-photo-box"><img src="${p.photo2}"><button class="danger-btn" onclick="removeExistingPhoto(2)">🗑️ Remove</button></div>`:"No photo";
-  document.getElementById("editPanel").style.display="block";
+  document.getElementById("editPanel").style.display="flex";
 }
 let removePhoto1=false,removePhoto2=false;
 function removeExistingPhoto(n){if(n===1){removePhoto1=true;document.getElementById("editPhotoPreview1").innerHTML="Photo 1 will be removed."}else{removePhoto2=true;document.getElementById("editPhotoPreview2").innerHTML="Photo 2 will be removed."}}
@@ -869,7 +1161,8 @@ async function saveEdit(){
   if(!name||!Number.isFinite(price)||price<0||!category){toast("Please enter valid name, price and category.","error");return}
   if(blockedWords.some(w=>(name+" "+category).toLowerCase().includes(w))){toast("Electric products are not allowed in this store catalog.","error");return}
   try{
-    const data={name,price,category,emoji:document.getElementById("editEmoji").value.trim()||"🔧",featured:document.getElementById("editFeatured").checked,popular:document.getElementById("editPopular").checked,stock:document.getElementById("editStock").checked,discount:Math.min(90,Math.max(0,Number(document.getElementById("editDiscount").value||0)))};
+    const qtyRaw=document.getElementById("editStockQty").value.trim();
+    const data={name,price,category,emoji:document.getElementById("editEmoji").value.trim()||"🔧",unit:document.getElementById("editUnit").value||"Nos",featured:document.getElementById("editFeatured").checked,popular:document.getElementById("editPopular").checked,stock:document.getElementById("editStock").checked,discount:Math.min(90,Math.max(0,Number(document.getElementById("editDiscount").value||0))),stockQty:qtyRaw===""?null:Number(qtyRaw)};
     if(removePhoto1)data.photo=""; else if(document.getElementById("editPhoto1").files[0])data.photo=await readImg(document.getElementById("editPhoto1").files[0]);
     if(removePhoto2)data.photo2=""; else if(document.getElementById("editPhoto2").files[0])data.photo2=await readImg(document.getElementById("editPhoto2").files[0]);
     await db.collection("products").doc(editingId).update(data);removePhoto1=false;removePhoto2=false;editingId=null;closeEdit();await loadProducts();toast("✅ Product updated!","success");
@@ -879,16 +1172,87 @@ function closeEdit(){document.getElementById("editPanel").style.display="none";}
 async function deleteProduct(id){const p=products.find(x=>x.id===id);if(!p||!confirm(`Delete "${p.name}"?`))return;try{await db.collection("products").doc(id).delete();delete cart[id];wishlist=wishlist.filter(x=>x!==id);saveCart();saveWishlist();await loadProducts();}catch(e){toast("Could not delete product: "+e.message,"error")}}
 function toggleWishlist(id){wishlist.includes(id)?wishlist=wishlist.filter(x=>x!==id):wishlist.push(id);saveWishlist();updateWishCount();render();renderHighlights();}
 function updateWishCount(){document.getElementById("wishCount").textContent=wishlist.filter(id=>products.some(p=>p.id===id)).length;}
-function openWishlist(){document.getElementById("wishlistPanel").style.display="block";const items=wishlist.map(id=>products.find(p=>p.id===id)).filter(Boolean);document.getElementById("wishlist").innerHTML=items.length?`<div class="wish-grid">${items.map(p=>`<div class="wish-item"><div><b>${escapeHtml(p.name)}</b><br><small>${money(finalPrice(p))}</small></div><button onclick="addById('${p.id}')">Add</button></div>`).join("")}</div>`:'<div class="empty-state"><div class="empty-icon">❤️</div><h3>Your wishlist is empty</h3><p>Tap the heart on any product to save it here.</p></div>';}
+function openWishlist(){document.getElementById("wishlistPanel").style.display="flex";const items=wishlist.map(id=>products.find(p=>p.id===id)).filter(Boolean);document.getElementById("wishlist").innerHTML=items.length?`<div class="wish-grid">${items.map(p=>`<div class="wish-item"><div><b>${escapeHtml(p.name)}</b><br><small>${money(finalPrice(p))}</small></div><button onclick="addById('${p.id}')">Add</button></div>`).join("")}</div>`:'<div class="empty-state"><div class="empty-icon">❤️</div><h3>Your wishlist is empty</h3><p>Tap the heart on any product to save it here.</p></div>';}
 function closeWishlist(){document.getElementById("wishlistPanel").style.display="none";}
-function openRequest(){document.getElementById("requestPanel").style.display="block";}
+function openRequest(){document.getElementById("requestPanel").style.display="flex";}
 function closeRequest(){document.getElementById("requestPanel").style.display="none";}
 function sendProductRequest(){const n=document.getElementById("requestProduct").value.trim(),q=document.getElementById("requestQty").value.trim(),note=document.getElementById("requestNote").value.trim();if(!n){toast("Enter the product name.","error");return}const msg=`*V K Traders & Hardware – Product Request*%0AProduct: ${encodeURIComponent(n)}%0AQuantity: ${encodeURIComponent(q||"Not specified")}%0ADetails: ${encodeURIComponent(note||"None")}`;window.location.href="https://wa.me/919623009626?text="+msg;}
-function openImageGalleryById(id){const p=products.find(x=>x.id===id);if(!p)return;galleryImages=[p.photo,p.photo2].filter(Boolean);if(!galleryImages.length)return;galleryIndex=0;document.getElementById("galleryModal").style.display="flex";updateGallery();}
+let currentGalleryProductId=null;
+function openImageGalleryById(id){
+  const p=products.find(x=>x.id===id);if(!p)return;
+  currentGalleryProductId=id;
+  galleryImages=[p.photo,p.photo2].filter(Boolean);
+  galleryIndex=0;
+  document.getElementById("galleryModal").style.display="flex";
+  if(galleryImages.length)updateGallery();
+  else{document.getElementById("galleryImg").src="";document.getElementById("galleryCounter").textContent="";}
+  document.getElementById("galleryProductInfo").innerHTML=`<h2 style="margin:0 0 4px">${escapeHtml(p.emoji)} ${escapeHtml(p.name)}</h2><div class="category">${escapeHtml(p.category)}</div><div class="price" style="margin-top:6px">${money(finalPrice(p))}${p.discount>0?`<span class="old-price">${money(p.price)}</span>`:""}</div><button style="margin-top:8px" ${!p.stock?'disabled class="out-btn"':''} onclick="addById('${p.id}')">${p.stock?'🛒 Add to Cart':'Out of Stock'}</button>`;
+  document.getElementById("reviewName").value="";document.getElementById("reviewComment").value="";document.getElementById("reviewRating").value="5";
+  loadProductReviews(id);
+  renderRelatedProducts(p);
+}
 function updateGallery(){document.getElementById("galleryImg").src=galleryImages[galleryIndex];document.getElementById("galleryCounter").textContent=`Photo ${galleryIndex+1} of ${galleryImages.length}`;}
 function nextGallery(){if(!galleryImages.length)return;galleryIndex=(galleryIndex+1)%galleryImages.length;updateGallery();}
 function prevGallery(){if(!galleryImages.length)return;galleryIndex=(galleryIndex-1+galleryImages.length)%galleryImages.length;updateGallery();}
-function closeGallery(){document.getElementById("galleryModal").style.display="none";}
+function closeGallery(){document.getElementById("galleryModal").style.display="none";currentGalleryProductId=null;}
+function renderRelatedProducts(p){
+  const box=document.getElementById("galleryRelated");
+  if(!box)return;
+  const related=products.filter(x=>!x.hidden&&x.id!==p.id&&x.category===p.category).slice(0,4);
+  box.innerHTML=related.length?related.map(x=>{
+    const idx=products.indexOf(x);
+    return `<div class="featured-card" onclick="openImageGalleryById('${x.id}')">
+      <div class="mini-photo">${x.photo?`<img src="${x.photo}" alt="${escapeHtml(x.name)}">`:escapeHtml(x.emoji)}</div>
+      <h3>${escapeHtml(x.name)}</h3>
+      <div class="mini-price">${money(finalPrice(x))}</div>
+    </div>`;
+  }).join(""):'<div class="notice">No related products found.</div>';
+}
+async function loadProductReviews(productId){
+  const summaryEl=document.getElementById("galleryReviewSummary"), listEl=document.getElementByID("galleryReviewSummary"), listEl=document.getElementById("galleryReviewList");
+  listEl.innerHTML='<div class="notice">⏳ Loading reviews...</div>';
+  try{
+    const snap=await reviewsRef.where("productId","==",productId).get();
+    const reviews=snap.docs.map(d=>({id:d.id,...d.data()})).sort((a,b)=>String(b.createdAt||"").localeCompare(String(a.createdAt||"")));
+    if(!reviews.length){
+      summaryEl.innerHTML='<div class="notice">No reviews yet — be the first to review!</div>';
+      listEl.innerHTML="";
+      return;
+    }
+    const avg=reviews.reduce((a,r)=>a+Number(r.rating||0),0)/reviews.length;
+    summaryEl.innerHTML=`<div style="color:#f7931e;font-size:18px">${starsHtml(avg)} <span style="color:var(--muted);font-size:14px">${avg.toFixed(1)} out of 5 (${reviews.length} review${reviews.length>1?"s":""})</span></div>`;
+    listEl.innerHTML=reviews.map(r=>`<div style="border-bottom:1px solid var(--line);padding:8px 0"><b>${escapeHtml(r.name||"Customer")}</b> <span style="color:#f7931e">${starsHtml(r.rating)}</span>${r.comment?`<div style="color:var(--muted);font-size:13px">${escapeHtml(r.comment)}</div>`:""}</div>`).join("");
+  }catch(e){
+    console.error(e);
+    summaryEl.innerHTML='<div class="notice">❌ Could not load reviews.</div>';
+    listEl.innerHTML="";
+  }
+}
+async function submitReview(){
+  const productId=currentGalleryProductId;
+  if(!productId)return;
+  const name=document.getElementById("reviewName").value.trim();
+  const rating=Number(document.getElementById("reviewRating").value);
+  const comment=document.getElementById("reviewComment").value.trim();
+  if(!name){toast("Please enter your name.","error");return}
+  try{
+    await reviewsRef.add({productId,name,rating,comment,createdAt:new Date().toISOString()});
+    const productDocRef=db.collection("products").doc(productId);
+    await db.runTransaction(async(tx)=>{
+      const doc=await tx.get(productDocRef);
+      if(!doc.exists)return;
+      const data=doc.data();
+      const oldCount=Number(data.ratingCount||0), oldAvg=Number(data.ratingAvg||0);
+      const newCount=oldCount+1;
+      const newAvg=((oldAvg*oldCount)+rating)/newCount;
+      tx.update(productDocRef,{ratingCount:newCount,ratingAvg:newAvg});
+    });
+    document.getElementById("reviewName").value="";document.getElementById("reviewComment").value="";document.getElementById("reviewRating").value="5";
+    toast("✅ Thanks for your review!","success");
+    await loadProducts();
+    loadProductReviews(productId);
+  }catch(e){console.error(e);toast("Could not submit review: "+e.message,"error")}
+}
 
 
 let adminOrdersCache=[];
@@ -927,7 +1291,7 @@ function renderAdminOrders(){
     return;
   }
   box.innerHTML=list.map(o=>{
-    const items=(o.items||[]).map(it=>`${escapeHtml(it.name)} × ${Number(it.qty||0)}`).join(" • ");
+    const items=(o.items||[]).map(it=>`${escapeHtml(it.name)} × ${fmtQty(it.qty)} ${escapeHtml(it.unit||"Nos")}`).join(" • ");
     return `<div class="admin-order-card">
       <div class="admin-order-top">
         <div>
@@ -987,11 +1351,13 @@ async function saveOrderToFirebase(data){
         productId:x.id,
         name:x.p.name,
         qty:x.qty,
+        unit:x.p.unit||"Nos",
         price:Number(finalPrice(x.p)),
         amount:Number(finalPrice(x.p)*x.qty)
       })),
       subtotal:Number(data.subtotal),
       discount:Number(data.discount||0),
+      loyaltyDiscount:Number(data.loyaltyDiscount||0),
       couponCode:data.couponCode||"",
       total:Number(data.total),
       status:"Pending",
@@ -1006,7 +1372,7 @@ async function saveOrderToFirebase(data){
 }
 
 function openOrders(){
-  document.getElementById("ordersPanel").style.display="block";
+  document.getElementById("ordersPanel").style.display="flex";
   const saved=JSON.parse(localStorage.getItem("vk_customer")||"{}");
   if(saved.phone) document.getElementById("historyPhone").value=saved.phone;
   document.body.style.overflow="hidden";
@@ -1022,6 +1388,13 @@ function orderStatusClass(status){
   if(s==="cancelled") return "cancelled";
   return "";
 }
+function orderTrackingStepper(status){
+  const steps=[["Pending","🟡"],["Confirmed","🔵"],["Ready","🚚"],["Delivered","🟢"]];
+  const s=String(status||"Pending");
+  if(s==="Cancelled")return '<div class="status-line" style="color:var(--red)">❌ Order Cancelled</div>';
+  const idx=Math.max(0,steps.findIndex(x=>x[0]===s));
+  return '<div class="status-line">'+steps.map((x,i)=>`<span style="opacity:${i<=idx?1:.4};font-weight:${i===idx?"800":"400"}">${x[1]} ${x[0]}</span>`).join(' <span style="opacity:.4">→</span> ')+'</div>';
+}
 function formatOrderDate(value){
   const d=value?.toDate ? value.toDate() : new Date(value);
   return isNaN(d.getTime()) ? "" : d.toLocaleString("en-IN",{dateStyle:"medium",timeStyle:"short"});
@@ -1033,17 +1406,17 @@ function renderOrderHistory(orders){
     return;
   }
   box.innerHTML=orders.map(o=>{
-    const items=(o.items||[]).map(it=>`<div class="order-item-line"><span>${escapeHtml(it.name)} × ${Number(it.qty||0)}</span><b>${money(Number(it.amount||0))}</b></div>`).join("");
+    const items=(o.items||[]).map(it=>`<div class="order-item-line"><span>${escapeHtml(it.name)} × ${fmtQty(it.qty)} ${escapeHtml(it.unit||"Nos")}</span><b>${money(Number(it.amount||0))}</b></div>`).join("");
     const status=escapeHtml(o.status||"Pending");
     return `<div class="order-card">
       <div class="order-card-head">
         <div><div class="order-no">${escapeHtml(o.invoiceNo||"Order")}</div><div class="order-date">${formatOrderDate(o.createdAt)}</div></div>
         <span class="order-status ${orderStatusClass(o.status)}">${status}</span>
       </div>
-      <div class="status-line">🟡 Pending → 🔵 Confirmed → 🚚 Ready → 🟢 Delivered</div>
+      ${orderTrackingStepper(o.status)}
       <div class="order-items">${items||"<div>No item details</div>"}</div>
       <div class="order-total"><span>Total</span><span>${money(Number(o.total||0))}</span></div>
-      <div class="order-actions"><button onclick="reorderFromHistory('${o.id}')">🔄 Reorder</button><button class="secondary-btn" onclick="showOrderDetails('${o.id}')">👁️ Details</button></div>
+      <div class="order-actions"><button onclick="reorderFromHistory('${o.id}')">🔄 Reorder</button><button class="secondary-btn" onclick="showOrderDetails('${o.id}')">👁️ Details</button>${String(o.status||"Pending")==="Pending"?`<button class="cart-remove-btn" onclick="cancelMyOrder('${o.id}')">❌ Cancel</button>`:""}</div>
     </div>`;
   }).join("");
 }
@@ -1068,22 +1441,80 @@ function reorderFromHistory(id){
   (o.items||[]).forEach(it=>{if(it.productId){next[it.productId]=(next[it.productId]||0)+Number(it.qty||0);}});
   cart=next;saveCart();closeOrders();render();openCart();
 }
+async function cancelMyOrder(id){
+  const o=cachedOrders.find(x=>x.id===id);if(!o)return;
+  if(String(o.status||"Pending")!=="Pending"){toast("This order can no longer be cancelled.","error");return;}
+  if(!confirm(`Cancel order ${o.invoiceNo||""}? This cannot be undone.`))return;
+  try{
+    await ordersRef.doc(id).update({status:"Cancelled",updatedAt:new Date().toISOString()});
+    o.status="Cancelled";
+    renderOrderHistory(cachedOrders);
+    toast("✅ Order cancelled.","success");
+  }catch(e){toast("Could not cancel order: "+e.message,"error");}
+}
 function showOrderDetails(id){
   const o=cachedOrders.find(x=>x.id===id);if(!o)return;
-  const lines=(o.items||[]).map(it=>`${it.name} × ${it.qty} = ${money(it.amount)}`).join("\n");
+  const lines=(o.items||[]).map(it=>`${it.name} × ${fmtQty(it.qty)} ${it.unit||"Nos"} = ${money(it.amount)}`).join("\n");
   alert(`${o.invoiceNo||"Order"}\n\nCustomer: ${o.customer?.name||""}\nMobile: ${o.customer?.phone||""}\nOrder: ${o.customer?.orderType==="delivery"?"Home Delivery":"Self Pickup"}\nStatus: ${o.status||"Pending"}\n\n${lines}\n\nTotal: ${money(o.total||0)}`);
 }
 
-function buildInvoiceData(){const{items,subtotal,discount,total}=calcCartTotals();if(!items.length){toast("Cart is empty.","error");return null}const customer=getCustomerDetails();if(!customer)return null;return{items,customer,subtotal,discount,total,couponCode:discount>0&&appliedCoupon?appliedCoupon.code:"",invoiceNo:makeInvoiceNumber(),date:new Date()};}
+function buildInvoiceData(){const{items,subtotal,discount,loyaltyDiscount,total}=calcCartTotals();if(!items.length){toast("Cart is empty.","error");return null}const customer=getCustomerDetails();if(!customer)return null;return{items,customer,subtotal,discount,loyaltyDiscount,total,couponCode:discount>0&&appliedCoupon?appliedCoupon.code:"",invoiceNo:makeInvoiceNumber(),date:new Date()};}
 function buildBillHTML(data){
   const type=data.customer.orderType==="delivery"?"Home Delivery":"Self Pickup",date=data.date.toLocaleDateString("en-IN"),time=data.date.toLocaleTimeString("en-IN",{hour:"2-digit",minute:"2-digit"});
-  const rows=data.items.map((x,i)=>`<tr><td>${i+1}</td><td><b>${escapeHtml(x.p.name)}</b></td><td>${x.qty} nos</td><td>${money(finalPrice(x.p))}</td><td>nos</td><td>${money(finalPrice(x.p)*x.qty)}</td></tr>`).join("");
-  return `<div class="bill-head"><h1>V K Traders &amp; Hardware</h1><p>Good Quality Material • Hardware &amp; Plumbing Store</p><p>A/P Retre Karkhana, Shivnagar, Maharashtra</p><p>Phone: 9623009626</p></div><div class="bill-meta"><div><b>Invoice No:</b> ${data.invoiceNo}<br><b>Date:</b> ${date} &nbsp; <b>Time:</b> ${time}</div><div><b>Customer:</b> ${escapeHtml(data.customer.name)}<br><b>Mobile:</b> ${escapeHtml(data.customer.phone)}<br><b>Order:</b> ${type}</div></div>${data.customer.address?`<p><b>Delivery Address:</b> ${escapeHtml(data.customer.address)}</p>`:""}<table class="bill-table"><thead><tr><th>Sl No.</th><th>Description of Goods</th><th>Quantity</th><th>Rate</th><th>Per</th><th>Amount</th></tr></thead><tbody>${rows}</tbody></table><div class="bill-totals"><div><span>Subtotal</span><span>${money(data.subtotal)}</span></div>${data.discount>0?`<div><span>Coupon (${escapeHtml(data.couponCode)})</span><span>-${money(data.discount)}</span></div>`:""}<div class="grand"><span>Grand Total</span><span>${money(data.total)}</span></div></div><div class="bill-footer"><p><b>${type}</b> • ${type==="Self Pickup"?"Pickup is free":"Delivery charges may apply"}</p><p>Thank you for shopping with V K Traders &amp; Hardware!</p></div>`;
+  const rows=data.items.map((x,i)=>`<tr><td>${i+1}</td><td><b>${escapeHtml(x.p.name)}</b></td><td>${fmtQty(x.qty)} ${escapeHtml(x.p.unit||"Nos")}</td><td>${money(finalPrice(x.p))}</td><td>${escapeHtml(x.p.unit||"Nos")}</td><td>${money(finalPrice(x.p)*x.qty)}</td></tr>`).join("");
+  const qrBlock=paymentSettings.upiId?`<div class="bill-qr" style="text-align:center;margin-top:16px;padding-top:14px;border-top:1px dashed #999"><p style="font-weight:700;margin:0 0 8px">📲 Scan &amp; Pay via UPI</p><div id="billQrCode" style="display:inline-block;padding:8px;background:#fff;border:1px solid #ccc;border-radius:8px"></div><p style="font-size:12px;color:#667085;margin-top:8px">✅ After payment, please send a screenshot of the payment on WhatsApp for confirmation.</p></div>`:"";
+  return `<div class="bill-head"><h1>V K Traders &amp; Hardware</h1><p>Good Quality Material • Hardware &amp; Plumbing Store</p><p>A/P Retre Karkhana, Shivnagar, Maharashtra</p><p>Phone: 9623009626</p></div><div class="bill-meta"><div><b>Invoice No:</b> ${data.invoiceNo}<br><b>Date:</b> ${date} &nbsp; <b>Time:</b> ${time}</div><div><b>Customer:</b> ${escapeHtml(data.customer.name)}<br><b>Mobile:</b> ${escapeHtml(data.customer.phone)}<br><b>Order:</b> ${type}</div></div>${data.customer.address?`<p><b>Delivery Address:</b> ${escapeHtml(data.customer.address)}</p>`:""}<table class="bill-table"><thead><tr><th>Sl No.</th><th>Description of Goods</th><th>Quantity</th><th>Rate</th><th>Per</th><th>Amount</th></tr></thead><tbody>${rows}</tbody></table><div class="bill-totals"><div><span>Subtotal</span><span>${money(data.subtotal)}</span></div>${data.discount>0?`<div><span>Coupon (${escapeHtml(data.couponCode)})</span><span>-${money(data.discount)}</span></div>`:""}${data.loyaltyDiscount>0?`<div><span>🎉 Loyal Customer Discount</span><span>-${money(data.loyaltyDiscount)}</span></div>`:""}<div class="grand"><span>Grand Total</span><span>${money(data.total)}</span></div></div>${qrBlock}<div class="bill-footer"><p><b>${type}</b> • ${type==="Self Pickup"?"Pickup is free":"Delivery charges may apply"}</p><p>Thank you for shopping with V K Traders &amp; Hardware!</p></div>`;
+}
+function renderBillQr(data,containerId){
+  const el=document.getElementById(containerId||"billQrCode");
+  if(!el||!paymentSettings.upiId)return;
+  el.innerHTML="";
+  try{
+    const upiUrl=`upi://pay?pa=${encodeURIComponent(paymentSettings.upiId)}&pn=${encodeURIComponent("V K Traders and Hardware")}&am=${encodeURIComponent(data.total.toFixed(2))}&cu=INR&tn=${encodeURIComponent("Order "+data.invoiceNo)}`;
+    new QRCode(el,{text:upiUrl,width:150,height:150});
+  }catch(e){console.error("Bill QR generation failed:",e)}
 }
 function generateBill(){
   const data=buildInvoiceData();if(!data)return;
+  window.currentBillData=data;
   document.getElementById("billPreview").innerHTML=buildBillHTML(data);
-  document.getElementById("billPanel").style.display="block";document.body.style.overflow="hidden";
+  renderBillQr(data,"billQrCode");
+  const payBtn=document.getElementById("billPayNowBtn");
+  const ssBox=document.getElementById("paymentScreenshotBox");
+  if(payBtn)payBtn.style.display=paymentSettings.upiId?"inline-block":"none";
+  if(ssBox)ssBox.style.display=paymentSettings.upiId?"block":"none";
+  document.getElementById("billPanel").style.display="flex";document.body.style.overflow="hidden";
+}
+function payNowFromBill(){
+  const data=window.currentBillData;
+  if(!data){toast("Please generate the bill first.","error");return;}
+  if(!paymentSettings.upiId){toast("Payment UPI ID is not set up yet.","error");return;}
+  const upiUrl=`upi://pay?pa=${encodeURIComponent(paymentSettings.upiId)}&pn=${encodeURIComponent("V K Traders and Hardware")}&am=${encodeURIComponent(data.total.toFixed(2))}&cu=INR&tn=${encodeURIComponent("Order "+data.invoiceNo)}`;
+  window.location.href=upiUrl;
+}
+let paymentScreenshotFileObj=null;
+function handlePaymentScreenshotChange(input){
+  const f=input.files&&input.files[0];
+  if(!f)return;
+  paymentScreenshotFileObj=f;
+  const preview=document.getElementById("paymentScreenshotPreview");
+  const reader=new FileReader();
+  reader.onload=e=>{preview.innerHTML=`<img src="${e.target.result}" alt="Payment screenshot">`;};
+  reader.readAsDataURL(f);
+}
+async function sendPaymentScreenshot(){
+  if(!paymentScreenshotFileObj){toast("Please choose a screenshot first.","error");return;}
+  const data=window.currentBillData||pendingOrderData;
+  const text=`Payment screenshot for ${data?("Invoice "+data.invoiceNo):"my order"} — V K Traders & Hardware`;
+  if(navigator.canShare&&navigator.canShare({files:[paymentScreenshotFileObj]})){
+    try{
+      await navigator.share({files:[paymentScreenshotFileObj],text,title:"Payment Screenshot"});
+      toast("✅ Screenshot shared!","success");
+    }catch(e){console.error(e)}
+  }else{
+    toast("Please open WhatsApp and attach the screenshot manually.","info");
+    window.open("https://wa.me/919623009626?text="+encodeURIComponent(text),"_blank");
+  }
 }
 async function buildBillPDFFile(data){
   const wrap=document.createElement("div");
@@ -1091,6 +1522,8 @@ async function buildBillPDFFile(data){
   wrap.innerHTML=`<div class="bill-wrap">${buildBillHTML(data)}</div>`;
   document.body.appendChild(wrap);
   try{
+    const qrEl=wrap.querySelector("#billQrCode");
+    if(qrEl&&paymentSettings.upiId){try{const upiUrl=`upi://pay?pa=${encodeURIComponent(paymentSettings.upiId)}&pn=${encodeURIComponent("V K Traders and Hardware")}&am=${encodeURIComponent(data.total.toFixed(2))}&cu=INR&tn=${encodeURIComponent("Order "+data.invoiceNo)}`;new QRCode(qrEl,{text:upiUrl,width:150,height:150});await new Promise(r=>setTimeout(r,150));}catch(e){console.error(e)}}
     const canvas=await html2canvas(wrap,{scale:2,backgroundColor:"#ffffff"});
     const imgData=canvas.toDataURL("image/jpeg",0.92);
     const {jsPDF}=window.jspdf;
@@ -1108,16 +1541,26 @@ let pendingOrderData=null;
 function reviewOrder(){
   const data=buildInvoiceData();if(!data)return;
   pendingOrderData=data;
+  closeBill();
   const type=data.customer.orderType==="delivery"?"Home Delivery":"Self Pickup";
   document.getElementById("orderReviewBody").innerHTML=`
     <div class="totals-row"><span>Name</span><span><b>${escapeHtml(data.customer.name)}</b></span></div>
     <div class="totals-row"><span>Mobile</span><span><b>${escapeHtml(data.customer.phone)}</b></span></div>
     ${data.customer.address?`<div class="totals-row"><span>Address</span><span style="text-align:right">${escapeHtml(data.customer.address)}</span></div>`:""}
     <div class="totals-row"><span>Order Type</span><span><b>${type}</b></span></div>
-    <div class="totals-row"><span>Items</span><span>${data.items.reduce((a,x)=>a+x.qty,0)}</span></div>
+    <div class="totals-row"><span>Items</span><span>${fmtQty(data.items.reduce((a,x)=>a+x.qty,0))}</span></div>
     <div class="totals-row" style="border-top:1px solid #e3e8f0;padding-top:8px;margin-top:4px"><span>Grand Total</span><span><b>${money(data.total)}</b></span></div>
   `;
-  document.getElementById("orderReviewPanel").style.display="block";
+  const qrBox=document.getElementById("orderReviewQr");
+  qrBox.innerHTML="";
+  if(paymentSettings.upiId){
+    qrBox.innerHTML=`<p style="font-weight:800;margin:6px 0">📲 Scan &amp; Pay via UPI</p><div id="upiQrCode" style="display:inline-block;padding:8px;background:#fff;border-radius:10px"></div><p style="color:var(--muted);font-size:12px">Pay after confirming, then send the order on WhatsApp</p>`;
+    try{
+      const upiUrl=`upi://pay?pa=${encodeURIComponent(paymentSettings.upiId)}&pn=${encodeURIComponent("V K Traders and Hardware")}&am=${encodeURIComponent(data.total.toFixed(2))}&cu=INR&tn=${encodeURIComponent("Order "+data.invoiceNo)}`;
+      new QRCode(document.getElementById("upiQrCode"),{text:upiUrl,width:150,height:150});
+    }catch(e){console.error("QR generation failed:",e)}
+  }
+  document.getElementById("orderReviewPanel").style.display="flex";
   document.body.style.overflow="hidden";
 }
 function closeOrderReview(){document.getElementById("orderReviewPanel").style.display="none";document.body.style.overflow="";}
@@ -1127,8 +1570,9 @@ async function confirmSendOrder(){
   pendingOrderData=null;
   closeOrderReview();
   const type=data.customer.orderType==="delivery"?"Home Delivery":"Self Pickup";
-  const lines=data.items.map(x=>`${x.p.name} x ${x.qty} = ${money(finalPrice(x.p)*x.qty)}`);
-  const message=["*V K Traders and Hardware*",`Invoice: ${data.invoiceNo}`,"","*Customer Details*",`Name: ${data.customer.name}`,`Mobile: ${data.customer.phone}`,`Order Type: ${type}`,data.customer.address?`Address: ${data.customer.address}`:"","", "*Order Items*",...lines,"",`Subtotal: ${money(data.subtotal)}`,data.discount>0?`Coupon (${data.couponCode}): -${money(data.discount)}`:"",`Grand Total: ${money(data.total)}`,type==="Home Delivery"?"Delivery charges: Additional charges apply":"Pickup: Free","","Please confirm my order."].filter(Boolean).join("\n");
+  const lines=data.items.map(x=>`${x.p.name} x ${fmtQty(x.qty)} ${x.p.unit||"Nos"} = ${money(finalPrice(x.p)*x.qty)}`);
+  const trackLink="https://vk-traders-hardware.web.app/?track="+encodeURIComponent(data.customer.phone);
+  const message=["*V K Traders and Hardware*",`Invoice: ${data.invoiceNo}`,"","*Customer Details*",`Name: ${data.customer.name}`,`Mobile: ${data.customer.phone}`,`Order Type: ${type}`,data.customer.address?`Address: ${data.customer.address}`:"","", "*Order Items*",...lines,"",`Subtotal: ${money(data.subtotal)}`,data.discount>0?`Coupon (${data.couponCode}): -${money(data.discount)}`:"",data.loyaltyDiscount>0?`Loyal Customer Discount: -${money(data.loyaltyDiscount)}`:"",`Grand Total: ${money(data.total)}`,type==="Home Delivery"?"Delivery charges: Additional charges apply":"Pickup: Free","",`📦 Track your order: ${trackLink}`,paymentSettings.upiId?"📸 After payment, please send a screenshot of your payment here for confirmation.":"","","Please confirm my order."].filter(Boolean).join("\n");
 
   const saved=await saveOrderToFirebase(data);
   if(!saved){
@@ -1139,16 +1583,210 @@ async function confirmSendOrder(){
     try{await couponsRef.doc(appliedCoupon.id).delete();await loadCoupons();}catch(e){console.error("Could not delete used coupon:",e)}
   }
 
-  cart={};appliedCoupon=null;saveCart();render();closeBill();closeCart();
+  cart={};appliedCoupon=null;loyaltyDiscountPct=0;saveCart();render();closeBill();closeCart();
   window.location.href="https://wa.me/919623009626?text="+encodeURIComponent(message);
 }
 
-window.openCart=openCart;window.closeCart=closeCart;window.openOrders=openOrders;window.closeOrders=closeOrders;window.loadOrderHistory=loadOrderHistory;window.reorderFromHistory=reorderFromHistory;window.showOrderDetails=showOrderDetails;window.openAdmin=openAdmin;window.openGallery=openGallery;window.closeGallery=closeGallery;window.updateOrderStatus=updateOrderStatus;window.closeAdmin=closeAdmin;window.addProduct=addProduct;window.manage=manage;window.editProduct=editProduct;window.saveEdit=saveEdit;window.closeEdit=closeEdit;window.deleteProduct=deleteProduct;window.addById=addById;window.removeFromCart=removeFromCart;window.changeQty=changeQty;window.loadMore=loadMore;window.generateBill=generateBill;window.printBill=printBill;window.closeBill=closeBill;window.orderWhatsApp=confirmSendOrder;window.reviewOrder=reviewOrder;window.closeOrderReview=closeOrderReview;window.confirmSendOrder=confirmSendOrder;window.toggleWishlist=toggleWishlist;window.openWishlist=openWishlist;window.closeWishlist=closeWishlist;window.openRequest=openRequest;window.closeRequest=closeRequest;window.sendProductRequest=sendProductRequest;window.openImageGalleryById=openImageGalleryById;window.nextGallery=nextGallery;window.prevGallery=prevGallery;window.closeGallery=closeGallery;window.removeExistingPhoto=removeExistingPhoto;window.applyCoupon=applyCoupon;window.removeCoupon=removeCoupon;window.addCoupon=addCoupon;window.toggleCouponActive=toggleCouponActive;window.deleteCoupon=deleteCoupon;window.closeOfferBanner=closeOfferBanner;window.saveOfferBanner=saveOfferBanner;window.deleteOrder=deleteOrder;
+/* ===== V12: Language toggle ===== */
+const translations={
+  en:{
+    brandSub:"Quality Hardware • Plumbing • Sanitary • Tools", myOrders:"My Orders", cart:"Cart",
+    chipDelivery:"Home Delivery", chipPickup:"Self Pickup", chipQuality:"Good Quality Material",
+    heroHeading:"Hardware & Plumbing Products You Can Trust",
+    heroPara:"Shop hardware, plumbing, sanitary products, construction material and tools from V K Traders & Hardware.",
+    browseProducts:"Browse Products", getDirections:"Get Directions",
+    heroBoxDays:"Open Monday–Friday & Sunday", heroBoxSat:"Saturday: Closed",
+    heroBoxAddr:"A/P Retre Karkhana, Shivnagar, Maharashtra",
+    deliveryCheckLabel:"📍 Check delivery at your pincode", pincodePlaceholder:"e.g. 415109", checkBtn:"Check",
+    featuredTitle:"Featured Products", featuredSub:"Our highlighted products",
+    popularTitle:"Popular Products", popularSub:"Popular choices from our store",
+    searchPlaceholder:"Search products, plumbing, tools...", allCategories:"All Categories",
+    wishlistBtn:"Wishlist", requestBtn:"Request Product", loadMoreBtn:"Show More Products",
+    businessInfoTag:"Hardware and plumbing store in Retre Karkhana, Shivnagar, Maharashtra.",
+    businessInfoDesc:"Hardware, plumbing, sanitary products, construction material and tools with good quality material and home delivery availability.",
+    phoneLabel:"Phone:", addressLabel2:"Address:", hoursLabel:"Hours:", satClosed:"Saturday Closed", sunOpen:"Sunday Open",
+    contactHeading:"Need a product that you don't see here?", contactWhatsapp:"Ask us on WhatsApp",
+    footerAbout:"Quality hardware and construction materials for your needs.", footerQuickLinks:"Quick Links",
+    footerHome:"Home", footerProducts:"Products", footerAboutLink:"About", footerContact:"Contact", footerContactHeading:"Contact",
+    callBtn:"Call",
+    cartTitle:"Your Cart", couponLabel:"🎟️ Have a Coupon Code?", couponPlaceholder:"Enter coupon code",
+    applyBtn:"Apply", removeBtn:"Remove", customerDetails:"Customer Details",
+    nameLabel:"Name *", namePlaceholder:"Your name", mobileLabel:"Mobile Number *", mobilePlaceholder:"10-digit mobile number",
+    confirmMobileLabel:"Confirm Mobile Number *", confirmMobilePlaceholder:"Re-enter mobile number",
+    deliveryAddressLabel:"Delivery Address", addressPlaceholder:"Address (required for home delivery)",
+    orderTypeLabel:"Order Type", deliveryOpt:"🏠 Home Delivery", pickupOpt:"🏪 Self Pickup (Free)",
+    deliveryNotice:"🏠 Home Delivery: Additional Charges Apply<br>🏪 Self Pickup: Free",
+    generateBillBtn:"Generate Bill", orderWhatsappBtn:"Order on WhatsApp",
+    myOrdersTitle:"My Orders", myOrdersSub:"Enter the mobile number used for your order to see your order history.",
+    viewOrdersBtn:"View Orders", orderHistoryEmpty:"Your previous WhatsApp orders will appear here after they are saved."
+  },
+  hi:{
+    brandSub:"अच्छी क्वालिटी हार्डवेयर • प्लंबिंग • सैनिटरी • टूल्स", myOrders:"मेरे ऑर्डर", cart:"कार्ट",
+    chipDelivery:"होम डिलीवरी", chipPickup:"सेल्फ पिकअप", chipQuality:"अच्छी क्वालिटी मटेरियल",
+    heroHeading:"भरोसेमंद हार्डवेयर और प्लंबिंग प्रोडक्ट्स",
+    heroPara:"V K Traders & Hardware से हार्डवेयर, प्लंबिंग, सैनिटरी प्रोडक्ट्स, कंस्ट्रक्शन मटेरियल और टूल्स खरीदें।",
+    browseProducts:"प्रोडक्ट्स देखें", getDirections:"दिशा-निर्देश पाएं",
+    heroBoxDays:"सोमवार–शुक्रवार और रविवार खुला", heroBoxSat:"शनिवार: बंद",
+    heroBoxAddr:"A/P रेत्रे कारखाना, शिवनगर, महाराष्ट्र",
+    deliveryCheckLabel:"📍 अपने पिनकोड पर डिलीवरी चेक करें", pincodePlaceholder:"जैसे 415109", checkBtn:"चेक करें",
+    featuredTitle:"फीचर्ड प्रोडक्ट्स", featuredSub:"हमारे खास प्रोडक्ट्स",
+    popularTitle:"पॉपुलर प्रोडक्ट्स", popularSub:"हमारी दुकान की पसंदीदा चीज़ें",
+    searchPlaceholder:"प्रोडक्ट्स, प्लंबिंग, टूल्स खोजें...", allCategories:"सभी कैटेगरी",
+    wishlistBtn:"विशलिस्ट", requestBtn:"प्रोडक्ट रिक्वेस्ट करें", loadMoreBtn:"और प्रोडक्ट्स दिखाएं",
+    businessInfoTag:"रेत्रे कारखाना, शिवनगर, महाराष्ट्र में हार्डवेयर और प्लंबिंग की दुकान।",
+    businessInfoDesc:"अच्छी क्वालिटी मटेरियल और होम डिलीवरी के साथ हार्डवेयर, प्लंबिंग, सैनिटरी प्रोडक्ट्स, कंस्ट्रक्शन मटेरियल और टूल्स।",
+    phoneLabel:"फोन:", addressLabel2:"पता:", hoursLabel:"समय:", satClosed:"शनिवार बंद", sunOpen:"रविवार खुला",
+    contactHeading:"कोई प्रोडक्ट यहां नहीं दिख रहा?", contactWhatsapp:"हमसे WhatsApp पर पूछें",
+    footerAbout:"आपकी ज़रूरतों के लिए अच्छी क्वालिटी हार्डवेयर और कंस्ट्रक्शन मटेरियल।", footerQuickLinks:"क्विक लिंक्स",
+    footerHome:"होम", footerProducts:"प्रोडक्ट्स", footerAboutLink:"हमारे बारे में", footerContact:"संपर्क करें", footerContactHeading:"संपर्क",
+    callBtn:"कॉल करें",
+    cartTitle:"आपका कार्ट", couponLabel:"🎟️ कूपन कोड है?", couponPlaceholder:"कूपन कोड डालें",
+    applyBtn:"लागू करें", removeBtn:"हटाएं", customerDetails:"ग्राहक जानकारी",
+    nameLabel:"नाम *", namePlaceholder:"आपका नाम", mobileLabel:"मोबाइल नंबर *", mobilePlaceholder:"10 अंकों का मोबाइल नंबर",
+    confirmMobileLabel:"मोबाइल नंबर पुष्टि करें *", confirmMobilePlaceholder:"मोबाइल नंबर दोबारा डालें",
+    deliveryAddressLabel:"डिलीवरी पता", addressPlaceholder:"पता (होम डिलीवरी के लिए ज़रूरी)",
+    orderTypeLabel:"ऑर्डर टाइप", deliveryOpt:"🏠 होम डिलीवरी", pickupOpt:"🏪 सेल्फ पिकअप (मुफ्त)",
+    deliveryNotice:"🏠 होम डिलीवरी: अतिरिक्त शुल्क लागू<br>🏪 सेल्फ पिकअप: मुफ्त",
+    generateBillBtn:"बिल बनाएं", orderWhatsappBtn:"WhatsApp पर ऑर्डर करें",
+    myOrdersTitle:"मेरे ऑर्डर", myOrdersSub:"अपने ऑर्डर हिस्ट्री देखने के लिए वही मोबाइल नंबर डालें।",
+    viewOrdersBtn:"ऑर्डर देखें", orderHistoryEmpty:"आपके पिछले WhatsApp ऑर्डर यहां सेव होने के बाद दिखेंगे।"
+  },
+  mr:{
+    brandSub:"चांगल्या दर्जाचे हार्डवेअर • प्लंबिंग • सॅनिटरी • टूल्स", myOrders:"माझे ऑर्डर", cart:"कार्ट",
+    chipDelivery:"होम डिलिव्हरी", chipPickup:"सेल्फ पिकअप", chipQuality:"चांगल्या दर्जाचे मटेरियल",
+    heroHeading:"विश्वासार्ह हार्डवेअर आणि प्लंबिंग प्रोडक्ट्स",
+    heroPara:"V K Traders & Hardware कडून हार्डवेअर, प्लंबिंग, सॅनिटरी प्रोडक्ट्स, बांधकाम साहित्य आणि टूल्स खरेदी करा.",
+    browseProducts:"प्रोडक्ट्स पहा", getDirections:"दिशा मिळवा",
+    heroBoxDays:"सोमवार–शुक्रवार आणि रविवार सुरू", heroBoxSat:"शनिवार: बंद",
+    heroBoxAddr:"A/P रेत्रे कारखाना, शिवनगर, महाराष्ट्र",
+    deliveryCheckLabel:"📍 तुमच्या पिनकोडवर डिलिव्हरी तपासा", pincodePlaceholder:"उदा. 415109", checkBtn:"तपासा",
+    featuredTitle:"फीचर्ड प्रोडक्ट्स", featuredSub:"आमचे खास प्रोडक्ट्स",
+    popularTitle:"लोकप्रिय प्रोडक्ट्स", popularSub:"आमच्या दुकानातील लोकप्रिय निवड",
+    searchPlaceholder:"प्रोडक्ट्स, प्लंबिंग, टूल्स शोधा...", allCategories:"सर्व कॅटेगरी",
+    wishlistBtn:"विशलिस्ट", requestBtn:"प्रोडक्ट विनंती करा", loadMoreBtn:"आणखी प्रोडक्ट्स दाखवा",
+    businessInfoTag:"रेत्रे कारखाना, शिवनगर, महाराष्ट्र येथील हार्डवेअर आणि प्लंबिंग दुकान.",
+    businessInfoDesc:"चांगल्या दर्जाचे मटेरियल आणि होम डिलिव्हरीसह हार्डवेअर, प्लंबिंग, सॅनिटरी प्रोडक्ट्स, बांधकाम साहित्य आणि टूल्स.",
+    phoneLabel:"फोन:", addressLabel2:"पत्ता:", hoursLabel:"वेळ:", satClosed:"शनिवार बंद", sunOpen:"रविवार सुरू",
+    contactHeading:"इथे न दिसणारा प्रोडक्ट हवाय का?", contactWhatsapp:"आम्हाला WhatsApp वर विचारा",
+    footerAbout:"तुमच्या गरजांसाठी चांगल्या दर्जाचे हार्डवेअर आणि बांधकाम साहित्य.", footerQuickLinks:"क्विक लिंक्स",
+    footerHome:"होम", footerProducts:"प्रोडक्ट्स", footerAboutLink:"आमच्याबद्दल", footerContact:"संपर्क", footerContactHeading:"संपर्क",
+    callBtn:"कॉल करा",
+    cartTitle:"तुमचा कार्ट", couponLabel:"🎟️ कूपन कोड आहे?", couponPlaceholder:"कूपन कोड टाका",
+    applyBtn:"लागू करा", removeBtn:"काढा", customerDetails:"ग्राहक माहिती",
+    nameLabel:"नाव *", namePlaceholder:"तुमचे नाव", mobileLabel:"मोबाइल नंबर *", mobilePlaceholder:"10 अंकी मोबाइल नंबर",
+    confirmMobileLabel:"मोबाइल नंबर पुन्हा टाका *", confirmMobilePlaceholder:"मोबाइल नंबर पुन्हा टाका",
+    deliveryAddressLabel:"डिलिव्हरी पत्ता", addressPlaceholder:"पत्ता (होम डिलिव्हरीसाठी आवश्यक)",
+    orderTypeLabel:"ऑर्डर प्रकार", deliveryOpt:"🏠 होम डिलिव्हरी", pickupOpt:"🏪 सेल्फ पिकअप (मोफत)",
+    deliveryNotice:"🏠 होम डिलिव्हरी: अतिरिक्त शुल्क लागू<br>🏪 सेल्फ पिकअप: मोफत",
+    generateBillBtn:"बिल तयार करा", orderWhatsappBtn:"WhatsApp वर ऑर्डर करा",
+    myOrdersTitle:"माझे ऑर्डर", myOrdersSub:"तुमचा ऑर्डर इतिहास पाहण्यासाठी तोच मोबाइल नंबर टाका.",
+    viewOrdersBtn:"ऑर्डर पहा", orderHistoryEmpty:"तुमचे आधीचे WhatsApp ऑर्डर सेव्ह झाल्यावर इथे दिसतील."
+  }
+};
+function applyLanguage(lang){
+  const dict=translations[lang]||translations.en;
+  document.querySelectorAll("[data-i18n]").forEach(el=>{
+    const key=el.getAttribute("data-i18n");
+    if(dict[key]!==undefined) el.innerHTML=dict[key];
+  });
+  document.querySelectorAll("[data-i18n-ph]").forEach(el=>{
+    const key=el.getAttribute("data-i18n-ph");
+    if(dict[key]!==undefined) el.setAttribute("placeholder",dict[key]);
+  });
+  const sel=document.getElementById("langSelect"); if(sel) sel.value=lang;
+}
+function setLanguage(lang){
+  localStorage.setItem("vk_lang",lang);
+  applyLanguage(lang);
+}
+function initLanguage(){
+  applyLanguage(localStorage.getItem("vk_lang")||"en");
+}
+
+/* ===== V12: Social share ===== */
+function shareProduct(id){
+  const p=products.find(x=>x.id===id); if(!p)return;
+  const url="https://vk-traders-hardware.web.app/#products";
+  const text=`${p.name} — ${money(finalPrice(p))}\nV K Traders & Hardware, Shivnagar, Maharashtra\n${url}`;
+  if(navigator.share){
+    navigator.share({title:p.name,text,url}).catch(()=>{});
+  }else{
+    window.open("https://wa.me/?text="+encodeURIComponent(text),"_blank");
+  }
+}
+
+/* ===== V12: Nearby delivery pincode check =====
+   Edit this list from the admin's own known serviceable pincodes (Shivnagar / Retre Karkhana and nearby areas). */
+const SERVICEABLE_PINCODES=["415109","415110","415539","415607"];
+function checkDeliveryPincode(){
+  const box=document.getElementById("deliveryResult");
+  const val=(document.getElementById("pincodeInput").value||"").trim();
+  if(!/^\d{6}$/.test(val)){box.className="delivery-result no";box.textContent="Please enter a valid 6-digit pincode.";return;}
+  if(SERVICEABLE_PINCODES.includes(val)){
+    box.className="delivery-result ok";box.textContent="✅ Delivery available in your area!";
+  }else{
+    box.className="delivery-result no";box.textContent="Not listed yet — please WhatsApp us to confirm delivery for your area.";
+  }
+}
+
+/* ===== V12: Festival theme ===== */
+let festivalTheme="none";
+const festivalBannerText={
+  diwali:"🪔 Happy Diwali! Special festive offers in store.",
+  holi:"🎨 Happy Holi! Colourful savings this season.",
+  independence:"🇮🇳 Happy Independence Day!",
+  newyear:"🎉 Happy New Year!"
+};
+async function loadFestivalTheme(){
+  try{
+    const doc=await settingsRef.doc("festival").get();
+    festivalTheme=doc.exists?(doc.data().theme||"none"):"none";
+  }catch(e){console.error("Could not load festival theme:",e);festivalTheme="none"}
+  applyFestivalTheme();
+  const sel=document.getElementById("festivalSelect"); if(sel) sel.value=festivalTheme;
+}
+function applyFestivalTheme(){
+  document.body.classList.remove("festival-diwali","festival-holi","festival-independence","festival-newyear");
+  const banner=document.getElementById("festivalBanner");
+  if(festivalTheme&&festivalTheme!=="none"){
+    document.body.classList.add("festival-"+festivalTheme);
+    if(banner) banner.textContent=festivalBannerText[festivalTheme]||"";
+  }else if(banner){
+    banner.textContent="";
+  }
+}
+async function saveFestivalTheme(){
+  try{
+    const theme=document.getElementById("festivalSelect").value;
+    await settingsRef.doc("festival").set({theme,updatedAt:new Date().toISOString()});
+    festivalTheme=theme;
+    applyFestivalTheme();
+    toast("✅ Festival theme updated!","success");
+  }catch(e){toast("Could not save festival theme: "+e.message,"error")}
+}
+
+/* ===== V12: WhatsApp order tracking link auto-open ===== */
+function checkTrackingLink(){
+  const params=new URLSearchParams(window.location.search);
+  const phone=params.get("track");
+  if(phone&&/^\d{10}$/.test(phone)){
+    openOrders();
+    const input=document.getElementById("historyPhone");
+    if(input){input.value=phone;loadOrderHistory();}
+  }
+}
+
+window.setLanguage=setLanguage;window.shareProduct=shareProduct;window.checkDeliveryPincode=checkDeliveryPincode;window.saveFestivalTheme=saveFestivalTheme;window.payNowFromBill=payNowFromBill;window.handlePaymentScreenshotChange=handlePaymentScreenshotChange;window.sendPaymentScreenshot=sendPaymentScreenshot;
+window.openCart=openCart;window.closeCart=closeCart;window.openOrders=openOrders;window.closeOrders=closeOrders;window.loadOrderHistory=loadOrderHistory;window.reorderFromHistory=reorderFromHistory;window.showOrderDetails=showOrderDetails;window.openAdmin=openAdmin;window.openGallery=openGallery;window.closeGallery=closeGallery;window.updateOrderStatus=updateOrderStatus;window.closeAdmin=closeAdmin;window.addProduct=addProduct;window.manage=manage;window.toggleProductHidden=toggleProductHidden;window.editProduct=editProduct;window.saveEdit=saveEdit;window.closeEdit=closeEdit;window.deleteProduct=deleteProduct;window.addById=addById;window.removeFromCart=removeFromCart;window.changeQty=changeQty;window.setQty=setQty;window.loadMore=loadMore;window.generateBill=generateBill;window.printBill=printBill;window.closeBill=closeBill;window.orderWhatsApp=confirmSendOrder;window.reviewOrder=reviewOrder;window.closeOrderReview=closeOrderReview;window.confirmSendOrder=confirmSendOrder;window.toggleWishlist=toggleWishlist;window.openWishlist=openWishlist;window.closeWishlist=closeWishlist;window.openRequest=openRequest;window.closeRequest=closeRequest;window.sendProductRequest=sendProductRequest;window.openImageGalleryById=openImageGalleryById;window.nextGallery=nextGallery;window.prevGallery=prevGallery;window.closeGallery=closeGallery;window.removeExistingPhoto=removeExistingPhoto;window.applyCoupon=applyCoupon;window.removeCoupon=removeCoupon;window.addCoupon=addCoupon;window.toggleCouponActive=toggleCouponActive;window.deleteCoupon=deleteCoupon;window.closeOfferBanner=closeOfferBanner;window.saveOfferBanner=saveOfferBanner;window.deleteOrder=deleteOrder;window.submitReview=submitReview;window.saveUpiSettings=saveUpiSettings;window.checkLoyalCustomer=checkLoyalCustomer;window.cancelMyOrder=cancelMyOrder;window.bulkUpdatePrices=bulkUpdatePrices;window.loadSalesReport=loadSalesReport;
 
 window.addEventListener("DOMContentLoaded",async()=>{
+  initLanguage();
   try{await loadProducts()}catch(e){console.error(e);document.getElementById("productsGrid").innerHTML=`<div class="notice" style="grid-column:1/-1">❌ Could not load products from Firebase.<br><button onclick="location.reload()">Retry</button></div>`}
   try{await loadCoupons()}catch(e){console.error(e)}
   try{await loadOfferBannerSettings()}catch(e){console.error(e)}
+  try{await loadPaymentSettings()}catch(e){console.error(e)}
+  try{await loadFestivalTheme()}catch(e){console.error(e)}
+  checkTrackingLink();
 });
 let backToTopTicking=false;
 window.addEventListener("scroll",()=>{
